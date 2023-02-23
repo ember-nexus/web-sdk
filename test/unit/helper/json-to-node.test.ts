@@ -33,10 +33,7 @@ describe('jsonToNode tests', () => {
           some: 'data',
         },
       }),
-    ).to.be.rejectedWith(
-      Error,
-      "Data object does not contain property with name 'type'",
-    );
+    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'type'");
   });
 
   it('should throw error when id is missing', async () => {
@@ -47,10 +44,7 @@ describe('jsonToNode tests', () => {
           some: 'data',
         },
       }),
-    ).to.be.rejectedWith(
-      Error,
-      "Data object does not contain property with name 'id'",
-    );
+    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'id'");
   });
 
   it('should throw error when data is missing', async () => {
@@ -59,16 +53,10 @@ describe('jsonToNode tests', () => {
         type: 'Node',
         id: 'c52569b7-1dd8-4018-9c3b-a710abd6982d',
       }),
-    ).to.be.rejectedWith(
-      Error,
-      "Data object does not contain property with name 'data'",
-    );
+    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'data'");
   });
 
   it('should throw error when data is empty', async () => {
-    await expect(jsonToNode({})).to.be.rejectedWith(
-      Error,
-      "Data object does not contain property with name 'type'",
-    );
+    await expect(jsonToNode({})).to.be.rejectedWith(Error, "Data object does not contain property with name 'type'");
   });
 });

@@ -168,10 +168,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       }),
-    ).to.be.rejectedWith(
-      Error,
-      "Data object does not contain property with name 'type'",
-    );
+    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'type'");
   });
 
   it('should throw error when type is incorrect', async () => {
@@ -189,10 +186,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       }),
-    ).to.be.rejectedWith(
-      Error,
-      "Data object is not of type '_PartialCollection'",
-    );
+    ).to.be.rejectedWith(Error, "Data object is not of type '_PartialCollection'");
   });
 
   it('should throw error when id is missing', async () => {
@@ -209,10 +203,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       }),
-    ).to.be.rejectedWith(
-      Error,
-      "Data object does not contain property with name 'id'",
-    );
+    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'id'");
   });
 
   it('should throw error when totalNodes is missing', async () => {
@@ -229,10 +220,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       }),
-    ).to.be.rejectedWith(
-      Error,
-      "Data object does not contain property with name 'totalNodes'",
-    );
+    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'totalNodes'");
   });
 
   it('should throw error when links is missing', async () => {
@@ -244,10 +232,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       }),
-    ).to.be.rejectedWith(
-      Error,
-      "Data object does not contain property with name 'links'",
-    );
+    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'links'");
   });
 
   it('should throw error when links.first is missing', async () => {
@@ -264,10 +249,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       }),
-    ).to.be.rejectedWith(
-      Error,
-      "Data object does not contain property with name 'links.first'",
-    );
+    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'links.first'");
   });
 
   it('should throw error when links.previous is missing', async () => {
@@ -284,10 +266,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       }),
-    ).to.be.rejectedWith(
-      Error,
-      "Data object does not contain property with name 'links.previous'",
-    );
+    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'links.previous'");
   });
 
   it('should throw error when links.next is missing', async () => {
@@ -304,10 +283,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       }),
-    ).to.be.rejectedWith(
-      Error,
-      "Data object does not contain property with name 'links.next'",
-    );
+    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'links.next'");
   });
 
   it('should throw error when links.last is missing', async () => {
@@ -324,10 +300,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       }),
-    ).to.be.rejectedWith(
-      Error,
-      "Data object does not contain property with name 'links.last'",
-    );
+    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'links.last'");
   });
 
   it('should throw error when nodes are missing', async () => {
@@ -344,10 +317,7 @@ describe('jsonToPartialCollection tests', () => {
         },
         relations: [],
       }),
-    ).to.be.rejectedWith(
-      Error,
-      "Data object does not contain property with name 'nodes'",
-    );
+    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'nodes'");
   });
 
   it('should throw error when relations are missing', async () => {
@@ -364,10 +334,7 @@ describe('jsonToPartialCollection tests', () => {
         },
         nodes: [],
       }),
-    ).to.be.rejectedWith(
-      Error,
-      "Data object does not contain property with name 'relations'",
-    );
+    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'relations'");
   });
 
   it('should pass error when node has error', async () => {

@@ -4,14 +4,10 @@ import { jsonToNode } from './json-to-node.js';
 import { jsonToRelation } from './json-to-relation.js';
 import { Relation } from '../type/relation.js';
 
-export async function jsonToPartialCollection(
-  data: any,
-): Promise<PartialCollection> {
+export async function jsonToPartialCollection(data: any): Promise<PartialCollection> {
   return new Promise(async function (resolve, reject) {
     if (!data.hasOwnProperty('type')) {
-      reject(
-        new Error("Data object does not contain property with name 'type'"),
-      );
+      reject(new Error("Data object does not contain property with name 'type'"));
     }
     if (data.type !== '_PartialCollection') {
       reject(new Error("Data object is not of type '_PartialCollection'"));
@@ -20,56 +16,28 @@ export async function jsonToPartialCollection(
       reject(new Error("Data object does not contain property with name 'id'"));
     }
     if (!data.hasOwnProperty('totalNodes')) {
-      reject(
-        new Error(
-          "Data object does not contain property with name 'totalNodes'",
-        ),
-      );
+      reject(new Error("Data object does not contain property with name 'totalNodes'"));
     }
     if (!data.hasOwnProperty('links')) {
-      reject(
-        new Error("Data object does not contain property with name 'links'"),
-      );
+      reject(new Error("Data object does not contain property with name 'links'"));
     }
     if (!data.links.hasOwnProperty('first')) {
-      reject(
-        new Error(
-          "Data object does not contain property with name 'links.first'",
-        ),
-      );
+      reject(new Error("Data object does not contain property with name 'links.first'"));
     }
     if (!data.links.hasOwnProperty('previous')) {
-      reject(
-        new Error(
-          "Data object does not contain property with name 'links.previous'",
-        ),
-      );
+      reject(new Error("Data object does not contain property with name 'links.previous'"));
     }
     if (!data.links.hasOwnProperty('next')) {
-      reject(
-        new Error(
-          "Data object does not contain property with name 'links.next'",
-        ),
-      );
+      reject(new Error("Data object does not contain property with name 'links.next'"));
     }
     if (!data.links.hasOwnProperty('last')) {
-      reject(
-        new Error(
-          "Data object does not contain property with name 'links.last'",
-        ),
-      );
+      reject(new Error("Data object does not contain property with name 'links.last'"));
     }
     if (!data.hasOwnProperty('nodes')) {
-      reject(
-        new Error("Data object does not contain property with name 'nodes'"),
-      );
+      reject(new Error("Data object does not contain property with name 'nodes'"));
     }
     if (!data.hasOwnProperty('relations')) {
-      reject(
-        new Error(
-          "Data object does not contain property with name 'relations'",
-        ),
-      );
+      reject(new Error("Data object does not contain property with name 'relations'"));
     }
     const nodes: Node[] = [];
     for (let i = 0; i < data.nodes.length; i++) {
@@ -78,13 +46,7 @@ export async function jsonToPartialCollection(
           nodes.push(nodeElement);
         })
         .catch((rejectObject: Error) => {
-          reject(
-            new Error(
-              `Error returned for node ${i + 1} of data object: ${
-                rejectObject.message
-              }`,
-            ),
-          );
+          reject(new Error(`Error returned for node ${i + 1} of data object: ${rejectObject.message}`));
         });
     }
     const relations: Relation[] = [];
@@ -94,13 +56,7 @@ export async function jsonToPartialCollection(
           relations.push(relationElement);
         })
         .catch((rejectObject: Error) => {
-          reject(
-            new Error(
-              `Error returned for relation ${i + 1} of data object: ${
-                rejectObject.message
-              }`,
-            ),
-          );
+          reject(new Error(`Error returned for relation ${i + 1} of data object: ${rejectObject.message}`));
         });
     }
     const partialCollection: PartialCollection = {
