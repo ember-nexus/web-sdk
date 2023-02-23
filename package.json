@@ -1,0 +1,61 @@
+{
+  "name": "node-typescript-boilerplate",
+  "version": "0.0.0",
+  "description": "Minimalistic boilerplate to quick-start Node.js development in TypeScript.",
+  "type": "module",
+  "engines": {
+    "node": ">= 18.12 <19"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.4",
+    "@types/chai-as-promised": "^7.1.5",
+    "@types/jest": "~29.2",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.13.0",
+    "@types/sinon": "^10.0.13",
+    "@typescript-eslint/eslint-plugin": "~5.44",
+    "@typescript-eslint/parser": "~5.44",
+    "chai": "^4.3.7",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "~8.28",
+    "eslint-config-prettier": "~8.5",
+    "eslint-plugin-jest": "~27.1",
+    "jest": "~29.3",
+    "jest-runner-groups": "^2.2.0",
+    "mocha": "^10.2.0",
+    "pino-pretty": "^9.2.0",
+    "prettier": "~2.8",
+    "rimraf": "~3.0",
+    "sinon": "^15.0.1",
+    "ts-jest": "~29.0",
+    "ts-node": "^10.9.1",
+    "tsutils": "~3.21",
+    "typescript": "~4.9"
+  },
+  "scripts": {
+    "start": "node build/src/main.js",
+    "clean": "rimraf coverage build tmp",
+    "prebuild": "npm run lint",
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -w -p tsconfig.json",
+    "build:release": "npm run clean && tsc -p tsconfig.release.json",
+    "lint": "eslint . --ext .ts --ext .mts",
+    "test:unit": "mocha --config .mocharc.unit.json",
+    "test:feature": "mocha --config .mocharc.feature.json",
+    "test:jest:unit": "jest --coverage --group=unit",
+    "test:jest:feature": "jest --coverage --group=feature",
+    "prettier": "prettier --config .prettierrc --write .",
+    "test:watch": "jest --watch"
+  },
+  "author": "Jakub Synowiec <jsynowiec@users.noreply.github.com>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "axios": "^1.3.2",
+    "pino": "^8.10.0",
+    "tslib": "~2.4",
+    "uuid": "^9.0.0"
+  },
+  "volta": {
+    "node": "18.12.1"
+  }
+}
