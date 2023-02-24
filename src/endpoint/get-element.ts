@@ -20,7 +20,6 @@ export async function getElement(uuid: typeof uuidv4): Promise<Node | Relation> 
             resolve(element);
           })
           .catch((rejectObject) => {
-            logger.fatal(rejectObject);
             logger.error(rejectObject);
             reject(rejectObject);
           });
