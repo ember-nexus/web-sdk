@@ -4,22 +4,20 @@ import { jsonToRelation } from './json-to-relation.js';
 import { jsonToNode } from './json-to-node.js';
 
 export async function jsonToElement(data: any): Promise<Node | Relation> {
-  return new Promise(async function (resolve, reject) {
-    if (Object.getOwnPropertyDescriptor(data, 'start') || Object.getOwnPropertyDescriptor(data, 'end')) {
-      await jsonToRelation(data)
-        .then((relation) => {
-          resolve(relation);
-        })
-        .catch((rejectObject) => {
-          reject(rejectObject);
-        });
-    }
-    await jsonToNode(data)
-      .then((node) => {
-        resolve(node);
+  if (Object.getOwnPropertyDescriptor(data, 'start') || Object.getOwnPropertyDescriptor(data, 'end')) {
+    return await jsonToRelation(data)
+      .then((relation) => {
+        return relation;
       })
       .catch((rejectObject) => {
-        reject(rejectObject);
+        throw rejectObject;
       });
-  });
+  }
+  return await jsonToNode(data)
+    .then((node) => {
+      return node;
+    })
+    .catch((rejectObject) => {
+      throw rejectObject;
+    });
 }
