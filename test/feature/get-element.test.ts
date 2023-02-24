@@ -4,7 +4,7 @@ import { expect } from 'chai';
 describe('getElement tests', () => {
   it('should load an existing element from the api', async () => {
     const testUuid = '439dc91f-10c2-4da2-babb-41fa33e52f26';
-    let node = await getElement(testUuid).then((node) => {
+    const node = await getElement(testUuid).then((node) => {
       return node;
     });
 

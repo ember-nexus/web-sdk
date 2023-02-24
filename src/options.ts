@@ -1,11 +1,9 @@
 export class Options {
   private static instance: Options;
 
-  private _isCacheActive: boolean = true;
-  private _apiHost: string = 'http://neo4j-php-nginx/';
-  private _pageSize: number = 25;
-
-  private constructor() {}
+  private _isCacheActive = true;
+  private _apiHost = 'http://neo4j-php-nginx/';
+  private _pageSize = 25;
 
   public static getInstance(): Options {
     if (!Options.instance) {

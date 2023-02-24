@@ -17,7 +17,6 @@
     "chai-as-promised": "^7.1.1",
     "eslint": "~8.28",
     "eslint-config-prettier": "~8.5",
-    "eslint-plugin-jest": "~27.1",
     "mocha": "^10.2.0",
     "pino-pretty": "^9.2.0",
     "prettier": "~2.8",
@@ -37,10 +36,7 @@
     "lint": "eslint . --ext .ts --ext .mts",
     "test:unit": "mocha --config .mocharc.unit.json",
     "test:feature": "mocha --config .mocharc.feature.json",
-    "test:jest:unit": "jest --coverage --group=unit",
-    "test:jest:feature": "jest --coverage --group=feature",
-    "prettier": "prettier --config .prettierrc --write .",
-    "test:watch": "jest --watch"
+    "prettier": "prettier --config .prettierrc --write ."
   },
   "author": "Jakub Synowiec <jsynowiec@users.noreply.github.com>",
   "license": "Apache-2.0",

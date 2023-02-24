@@ -6,7 +6,7 @@ import { jsonToPartialCollection } from '../helper/json-to-partial-collection.js
 
 export async function getIndex(
   uuid: typeof uuidv4,
-  page: number = 1,
+  page = 1,
   pageSize: null | number = null,
 ): Promise<PartialCollection> {
   const options = Options.getInstance();

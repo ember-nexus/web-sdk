@@ -5,7 +5,7 @@ import { jsonToNode } from './json-to-node.js';
 
 export async function jsonToElement(data: any): Promise<Node | Relation> {
   return new Promise(async function (resolve, reject) {
-    if (data.hasOwnProperty('start') || data.hasOwnProperty('end')) {
+    if (Object.getOwnPropertyDescriptor(data, 'start') || Object.getOwnPropertyDescriptor(data, 'end')) {
       await jsonToRelation(data)
         .then((relation) => {
           resolve(relation);

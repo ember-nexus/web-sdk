@@ -6,37 +6,37 @@ import { Relation } from '../type/relation.js';
 
 export async function jsonToPartialCollection(data: any): Promise<PartialCollection> {
   return new Promise(async function (resolve, reject) {
-    if (!data.hasOwnProperty('type')) {
+    if (!Object.getOwnPropertyDescriptor(data, 'type')) {
       reject(new Error("Data object does not contain property with name 'type'"));
     }
     if (data.type !== '_PartialCollection') {
       reject(new Error("Data object is not of type '_PartialCollection'"));
     }
-    if (!data.hasOwnProperty('id')) {
+    if (!Object.getOwnPropertyDescriptor(data, 'id')) {
       reject(new Error("Data object does not contain property with name 'id'"));
     }
-    if (!data.hasOwnProperty('totalNodes')) {
+    if (!Object.getOwnPropertyDescriptor(data, 'totalNodes')) {
       reject(new Error("Data object does not contain property with name 'totalNodes'"));
     }
-    if (!data.hasOwnProperty('links')) {
+    if (!Object.getOwnPropertyDescriptor(data, 'links')) {
       reject(new Error("Data object does not contain property with name 'links'"));
     }
-    if (!data.links.hasOwnProperty('first')) {
+    if (!Object.getOwnPropertyDescriptor(data.links, 'first')) {
       reject(new Error("Data object does not contain property with name 'links.first'"));
     }
-    if (!data.links.hasOwnProperty('previous')) {
+    if (!Object.getOwnPropertyDescriptor(data.links, 'previous')) {
       reject(new Error("Data object does not contain property with name 'links.previous'"));
     }
-    if (!data.links.hasOwnProperty('next')) {
+    if (!Object.getOwnPropertyDescriptor(data.links, 'next')) {
       reject(new Error("Data object does not contain property with name 'links.next'"));
     }
-    if (!data.links.hasOwnProperty('last')) {
+    if (!Object.getOwnPropertyDescriptor(data.links, 'last')) {
       reject(new Error("Data object does not contain property with name 'links.last'"));
     }
-    if (!data.hasOwnProperty('nodes')) {
+    if (!Object.getOwnPropertyDescriptor(data, 'nodes')) {
       reject(new Error("Data object does not contain property with name 'nodes'"));
     }
-    if (!data.hasOwnProperty('relations')) {
+    if (!Object.getOwnPropertyDescriptor(data, 'relations')) {
       reject(new Error("Data object does not contain property with name 'relations'"));
     }
     const nodes: Node[] = [];
