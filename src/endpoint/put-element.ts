@@ -2,8 +2,8 @@ import { Options } from '../options.js';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-export async function putElement(uuid: typeof uuidv4, data: any): Promise<void> {
-  return new Promise(function (resolve, reject) {
+export async function putElement(uuid: typeof uuidv4, data: Record<string, unknown>): Promise<void> {
+  return new Promise((resolve, reject) => {
     const options = Options.getInstance();
     axios
       .put(`${options.apiHost}${uuid.toString()}`, data)

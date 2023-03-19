@@ -13,16 +13,10 @@ export async function getElement(uuid: typeof uuidv4): Promise<Node | Relation> 
     uuid = uuid.toString();
     axios
       .get(`${options.apiHost}${uuid}`)
-      .then(async function (response) {
-        await jsonToElement(response.data)
-          .then((element) => {
-            logger.debug(`Loaded element with identifier ${uuid}`, element);
-            resolve(element);
-          })
-          .catch((rejectObject) => {
-            logger.error(rejectObject);
-            reject(rejectObject);
-          });
+      .then((response) => {
+        const element = jsonToElement(response.data);
+        logger.debug(`Loaded element with identifier ${uuid}`, element);
+        resolve(element);
       })
       .catch(function (error: AxiosError) {
         logger.error(error.message, axiosErrorToSummaryObject(error));

@@ -16,14 +16,8 @@ export async function getChildren(
   return new Promise(function (resolve, reject) {
     axios
       .get(`${options.apiHost}${uuid.toString()}/children?page=${page}&pageSize=${pageSize}`)
-      .then(async function (response) {
-        await jsonToPartialCollection(response.data)
-          .then((partialCollection) => {
-            resolve(partialCollection);
-          })
-          .catch((rejectObject) => {
-            reject(rejectObject);
-          });
+      .then((response) => {
+        resolve(jsonToPartialCollection(response.data));
       })
       .catch(function (error) {
         reject(error);

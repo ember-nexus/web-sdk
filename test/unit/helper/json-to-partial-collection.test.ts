@@ -1,13 +1,9 @@
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { jsonToPartialCollection } from '../../../src/helper/json-to-partial-collection.js';
-
-chai.use(chaiAsPromised);
-const expect = chai.expect;
+import { expect } from 'chai';
 
 describe('jsonToPartialCollection tests', () => {
-  it('should create valid partial collection from valid data', async () => {
-    const resultPartialCollection = await jsonToPartialCollection({
+  it('should create valid partial collection from valid data', () => {
+    const resultPartialCollection = jsonToPartialCollection({
       type: '_PartialCollection',
       id: '/',
       totalNodes: 3,
@@ -60,8 +56,6 @@ describe('jsonToPartialCollection tests', () => {
           },
         },
       ],
-    }).then((partialCollection) => {
-      return partialCollection;
     });
     expect(resultPartialCollection).to.eql({
       type: '_PartialCollection',
@@ -121,8 +115,8 @@ describe('jsonToPartialCollection tests', () => {
     expect(resultPartialCollection.relations).to.be.length(2);
   });
 
-  it('should create valid empty partial collection from valid empty data', async () => {
-    const resultPartialCollection = await jsonToPartialCollection({
+  it('should create valid empty partial collection from valid empty data', () => {
+    const resultPartialCollection = jsonToPartialCollection({
       type: '_PartialCollection',
       id: '/',
       totalNodes: 0,
@@ -134,8 +128,6 @@ describe('jsonToPartialCollection tests', () => {
       },
       nodes: [],
       relations: [],
-    }).then((partialCollection) => {
-      return partialCollection;
     });
     expect(resultPartialCollection).to.eql({
       type: '_PartialCollection',
@@ -154,8 +146,8 @@ describe('jsonToPartialCollection tests', () => {
     expect(resultPartialCollection.relations).to.be.length(0);
   });
 
-  it('should throw error when type is missing', async () => {
-    await expect(
+  it('should throw error when type is missing', () => {
+    expect(() => {
       jsonToPartialCollection({
         id: '/',
         totalNodes: 0,
@@ -167,12 +159,12 @@ describe('jsonToPartialCollection tests', () => {
         },
         nodes: [],
         relations: [],
-      }),
-    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'type'");
+      });
+    }).to.throw(Error, "Data object does not contain property with name 'type'");
   });
 
-  it('should throw error when type is incorrect', async () => {
-    await expect(
+  it('should throw error when type is incorrect', () => {
+    expect(() => {
       jsonToPartialCollection({
         type: '_PartialCollectionTest',
         id: '/',
@@ -185,12 +177,12 @@ describe('jsonToPartialCollection tests', () => {
         },
         nodes: [],
         relations: [],
-      }),
-    ).to.be.rejectedWith(Error, "Data object is not of type '_PartialCollection'");
+      });
+    }).to.throw(Error, "Data object is not of type '_PartialCollection'");
   });
 
-  it('should throw error when id is missing', async () => {
-    await expect(
+  it('should throw error when id is missing', () => {
+    expect(() => {
       jsonToPartialCollection({
         type: '_PartialCollection',
         totalNodes: 0,
@@ -202,12 +194,12 @@ describe('jsonToPartialCollection tests', () => {
         },
         nodes: [],
         relations: [],
-      }),
-    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'id'");
+      });
+    }).to.throw(Error, "Data object does not contain property with name 'id'");
   });
 
-  it('should throw error when totalNodes is missing', async () => {
-    await expect(
+  it('should throw error when totalNodes is missing', () => {
+    expect(() => {
       jsonToPartialCollection({
         type: '_PartialCollection',
         id: '/',
@@ -219,24 +211,24 @@ describe('jsonToPartialCollection tests', () => {
         },
         nodes: [],
         relations: [],
-      }),
-    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'totalNodes'");
+      });
+    }).to.throw(Error, "Data object does not contain property with name 'totalNodes'");
   });
 
-  it('should throw error when links is missing', async () => {
-    await expect(
+  it('should throw error when links is missing', () => {
+    expect(() => {
       jsonToPartialCollection({
         type: '_PartialCollection',
         id: '/',
         totalNodes: 0,
         nodes: [],
         relations: [],
-      }),
-    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'links'");
+      });
+    }).to.throw(Error, "Data object does not contain property with name 'links'");
   });
 
-  it('should throw error when links.first is missing', async () => {
-    await expect(
+  it('should throw error when links.first is missing', () => {
+    expect(() => {
       jsonToPartialCollection({
         type: '_PartialCollection',
         id: '/',
@@ -248,12 +240,12 @@ describe('jsonToPartialCollection tests', () => {
         },
         nodes: [],
         relations: [],
-      }),
-    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'links.first'");
+      });
+    }).to.throw(Error, "Data object does not contain property with name 'links.first'");
   });
 
-  it('should throw error when links.previous is missing', async () => {
-    await expect(
+  it('should throw error when links.previous is missing', () => {
+    expect(() => {
       jsonToPartialCollection({
         type: '_PartialCollection',
         id: '/',
@@ -265,12 +257,12 @@ describe('jsonToPartialCollection tests', () => {
         },
         nodes: [],
         relations: [],
-      }),
-    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'links.previous'");
+      });
+    }).to.throw(Error, "Data object does not contain property with name 'links.previous'");
   });
 
-  it('should throw error when links.next is missing', async () => {
-    await expect(
+  it('should throw error when links.next is missing', () => {
+    expect(() => {
       jsonToPartialCollection({
         type: '_PartialCollection',
         id: '/',
@@ -282,12 +274,12 @@ describe('jsonToPartialCollection tests', () => {
         },
         nodes: [],
         relations: [],
-      }),
-    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'links.next'");
+      });
+    }).to.throw(Error, "Data object does not contain property with name 'links.next'");
   });
 
-  it('should throw error when links.last is missing', async () => {
-    await expect(
+  it('should throw error when links.last is missing', () => {
+    expect(() => {
       jsonToPartialCollection({
         type: '_PartialCollection',
         id: '/',
@@ -299,12 +291,12 @@ describe('jsonToPartialCollection tests', () => {
         },
         nodes: [],
         relations: [],
-      }),
-    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'links.last'");
+      });
+    }).to.throw(Error, "Data object does not contain property with name 'links.last'");
   });
 
-  it('should throw error when nodes are missing', async () => {
-    await expect(
+  it('should throw error when nodes are missing', () => {
+    expect(() => {
       jsonToPartialCollection({
         type: '_PartialCollection',
         id: '/',
@@ -316,12 +308,12 @@ describe('jsonToPartialCollection tests', () => {
           last: '/',
         },
         relations: [],
-      }),
-    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'nodes'");
+      });
+    }).to.throw(Error, "Data object does not contain property with name 'nodes'");
   });
 
-  it('should throw error when relations are missing', async () => {
-    await expect(
+  it('should throw error when relations are missing', () => {
+    expect(() => {
       jsonToPartialCollection({
         type: '_PartialCollection',
         id: '/',
@@ -333,12 +325,12 @@ describe('jsonToPartialCollection tests', () => {
           last: '/',
         },
         nodes: [],
-      }),
-    ).to.be.rejectedWith(Error, "Data object does not contain property with name 'relations'");
+      });
+    }).to.throw(Error, "Data object does not contain property with name 'relations'");
   });
 
-  it('should pass error when node has error', async () => {
-    await expect(
+  it('should pass error when node has error', () => {
+    expect(() => {
       jsonToPartialCollection({
         type: '_PartialCollection',
         id: '/',
@@ -358,15 +350,12 @@ describe('jsonToPartialCollection tests', () => {
           },
         ],
         relations: [],
-      }),
-    ).to.be.rejectedWith(
-      Error,
-      "Error returned for node 1 of data object: Data object does not contain property with name 'type'",
-    );
+      });
+    }).to.throw(Error, "Data object does not contain property with name 'type'");
   });
 
-  it('should pass error when relation has error', async () => {
-    await expect(
+  it('should pass error when relation has error', () => {
+    expect(() => {
       jsonToPartialCollection({
         type: '_PartialCollection',
         id: '/',
@@ -388,10 +377,7 @@ describe('jsonToPartialCollection tests', () => {
             },
           },
         ],
-      }),
-    ).to.be.rejectedWith(
-      Error,
-      "Error returned for relation 1 of data object: Data object does not contain property with name 'type'",
-    );
+      });
+    }).to.throw(Error, "Data object does not contain property with name 'type'");
   });
 });

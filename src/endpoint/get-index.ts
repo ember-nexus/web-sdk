@@ -16,14 +16,8 @@ export async function getIndex(
   return new Promise(function (resolve, reject) {
     axios
       .get(`${options.apiHost}${uuid.toString()}?page=${page}&pageSize=${pageSize}`)
-      .then(async function (response) {
-        await jsonToPartialCollection(response.data)
-          .then((partialCollection) => {
-            resolve(partialCollection);
-          })
-          .catch((rejectObject) => {
-            reject(rejectObject);
-          });
+      .then((response) => {
+        resolve(jsonToPartialCollection(response.data));
       })
       .catch(function (error) {
         reject(error);
