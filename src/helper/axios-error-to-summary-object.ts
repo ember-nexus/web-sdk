@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
+import { AxiosSummaryObject } from '../type/axios-summary-object.js';
 
-export function axiosErrorToSummaryObject(error: AxiosError): Object {
+export function axiosErrorToSummaryObject(error: AxiosError): AxiosSummaryObject {
   return {
     request: {
       method: error.request.method ?? null,
