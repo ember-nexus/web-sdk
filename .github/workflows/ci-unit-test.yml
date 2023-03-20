@@ -1,4 +1,4 @@
-name: Code Style
+name: Unit Test
 
 on:
   - push
@@ -6,9 +6,9 @@ on:
   - pull_request
 
 jobs:
-  code-style:
+  unit-test:
     runs-on: ubuntu-latest
-    name: "Check code style for Node.js v${{ matrix.node-version }}"
+    name: "Running unit tests for Node.js v${{ matrix.node-version }}"
     strategy:
       fail-fast: false
       matrix:
@@ -27,5 +27,5 @@ jobs:
             ${{ runner.os }}-node-v${{ matrix.node-version }}-
       - name: Install dependencies
         run: yarn install --dev
-      - name: Run syntax linter
-        run: yarn run lint
+      - name: Run unit tests
+        run: yarn run test:unit
