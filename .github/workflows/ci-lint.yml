@@ -1,5 +1,5 @@
 name: Tests
-'on':
+on:
   push:
   pull_request:
     types:
@@ -10,7 +10,7 @@ name: Tests
     - cron: '0 6 * * 0'
 
 jobs:
-  test:
+  lint:
     name: 'Node.js v${{ matrix.node }}'
     runs-on: ubuntu-latest
     strategy:
@@ -34,5 +34,3 @@ jobs:
         run: yarn install --dev
       - name: Run syntax linter
         run: yarn run lint
-      - name: Run unit tests
-        run: yarn run test:unit
