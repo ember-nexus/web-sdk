@@ -8,8 +8,8 @@ It provides the following features:
 - Optional caching
 - Every API call is covered by a separate method
 
-- [Documentation](https://neo4j-php.github.io/cypher-data-structures)
-- [NPM](/#todo)
+- [Documentation](https://ember-nexus.github.io/web-sdk)
+- [NPM](/#todo1)
 
 ## Installation
 
