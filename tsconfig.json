@@ -3,13 +3,12 @@
     "target": "ES2022",
     "module": "Node16",
     "lib": ["ES2021"],
-    "moduleResolution": "Node16",
+    "moduleResolution": "nodenext",
     "rootDir": ".",
-    "outDir": "build",
+    "outDir": "dist",
     "allowSyntheticDefaultImports": true,
     "importHelpers": true,
     "alwaysStrict": true,
-    "inlineSourceMap": true,
     "sourceMap": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
@@ -18,7 +17,8 @@
     "noUnusedParameters": true,
     "noImplicitAny": false,
     "noImplicitThis": false,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "declaration": true
   },
   "include": ["src/**/*", "test/**/*"]
 }
