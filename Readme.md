@@ -1,6 +1,6 @@
-# EON-SDK
+# Ember-Nexus: Web-SDK
 
-This library is a wrapper for the EON API.  
+This library is a wrapper for the Ember-Nexus API.  
 It provides the following features:
 
 - Session management

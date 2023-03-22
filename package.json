@@ -1,6 +1,6 @@
 {
-  "name": "eon-sdk",
-  "version": "0.0.1",
+  "name": "@ember-nexus/web-sdk",
+  "version": "0.0.0",
   "type": "module",
   "engines": {
     "node": ">= 18.12"
@@ -27,8 +27,8 @@
     "typescript": "~4.9"
   },
   "scripts": {
-    "start": "node build/src/main.js",
-    "clean": "rimraf coverage build tmp",
+    "start": "node dist/src/main.js",
+    "clean": "rimraf coverage dist tmp",
     "prebuild": "npm run lint",
     "build": "tsc -p tsconfig.json",
     "build:watch": "tsc -w -p tsconfig.json",
@@ -38,8 +38,8 @@
     "test:feature": "mocha --config .mocharc.feature.json",
     "prettier": "prettier --config .prettierrc --write ."
   },
-  "author": "Jakub Synowiec <jsynowiec@users.noreply.github.com>",
-  "license": "Apache-2.0",
+  "author": "Syndesi <info@ember-nexus.dev>",
+  "license": "MIT",
   "dependencies": {
     "axios": "^1.3.2",
     "pino": "^8.10.0",

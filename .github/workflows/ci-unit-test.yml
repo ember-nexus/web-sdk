@@ -8,7 +8,7 @@ on:
 jobs:
   unit-test:
     runs-on: ubuntu-latest
-    name: "Running unit tests for Node.js v${{ matrix.node-version }}"
+    name: 'Running unit tests for Node.js v${{ matrix.node-version }}'
     strategy:
       fail-fast: false
       matrix:
