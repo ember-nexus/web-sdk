@@ -12,3 +12,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changelog
 - CI: Markdown linter
 - Added docs folder
+- WIP: Signed commits
