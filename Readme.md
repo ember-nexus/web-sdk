@@ -9,7 +9,7 @@ It provides the following features:
 - Every API call is covered by a separate method
 
 - [Documentation](https://ember-nexus.github.io/web-sdk)
-- [NPM](/#todo)
+- [NPM](/#todo1)
 
 ## Installation
 
