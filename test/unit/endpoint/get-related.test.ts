@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import sinon, { SinonSandbox } from 'sinon';
 
 import { getRelated } from '../../../src/endpoint/get-related.js';
+import { logger } from '../../../src/logger.js';
 
 describe('getRelated tests', () => {
   let sandbox: SinonSandbox;
@@ -77,13 +78,15 @@ describe('getRelated tests', () => {
       config: {},
     });
 
+    const debugLogger = sandbox.stub(logger, 'debug');
+
     const resultPartialCollection = await getRelated('038d928d-717e-4615-a52b-b48ad9aaf50b').then(
       (partialCollection) => {
         return partialCollection;
       },
     );
 
-    expect(resultPartialCollection).to.eql({
+    const collection = {
       type: '_PartialCollection',
       id: '/038d928d-717e-4615-a52b-b48ad9aaf50b/related?page=1&pageSize=25',
       totalNodes: 3,
@@ -136,6 +139,18 @@ describe('getRelated tests', () => {
           },
         },
       ],
-    });
+    };
+
+    expect(resultPartialCollection).to.eql(collection);
+
+    sinon.assert.calledOnceWithExactly(
+      debugLogger,
+      'Loaded related elements to node with identifier 038d928d-717e-4615-a52b-b48ad9aaf50b.',
+      {
+        page: 1,
+        pageSize: 25,
+        collection: collection,
+      },
+    );
   });
 });

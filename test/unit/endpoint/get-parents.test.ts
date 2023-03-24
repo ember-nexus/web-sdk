@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import sinon, { SinonSandbox } from 'sinon';
 
 import { getParents } from '../../../src/endpoint/get-parents.js';
+import { logger } from '../../../src/logger.js';
 
 describe('getParents tests', () => {
   let sandbox: SinonSandbox;
@@ -77,13 +78,15 @@ describe('getParents tests', () => {
       config: {},
     });
 
+    const debugLogger = sandbox.stub(logger, 'debug');
+
     const resultPartialCollection = await getParents('038d928d-717e-4615-a52b-b48ad9aaf50b').then(
       (partialCollection) => {
         return partialCollection;
       },
     );
 
-    expect(resultPartialCollection).to.eql({
+    const collection = {
       type: '_PartialCollection',
       id: '/038d928d-717e-4615-a52b-b48ad9aaf50b/parents?page=1&pageSize=25',
       totalNodes: 3,
@@ -136,6 +139,18 @@ describe('getParents tests', () => {
           },
         },
       ],
-    });
+    };
+
+    expect(resultPartialCollection).to.eql(collection);
+
+    sinon.assert.calledOnceWithExactly(
+      debugLogger,
+      'Loaded parents from child with identifier 038d928d-717e-4615-a52b-b48ad9aaf50b.',
+      {
+        page: 1,
+        pageSize: 25,
+        collection: collection,
+      },
+    );
   });
 });

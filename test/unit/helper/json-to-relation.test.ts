@@ -34,7 +34,7 @@ describe('jsonToRelation tests', () => {
           some: 'data',
         },
       });
-    }).to.throw(Error, "Data object does not contain property with name 'type'");
+    }).to.throw(Error, "Data object does not contain property with name 'type'.");
   });
 
   it('should throw error when id is missing', () => {
@@ -47,7 +47,7 @@ describe('jsonToRelation tests', () => {
           some: 'data',
         },
       });
-    }).to.throw(Error, "Data object does not contain property with name 'id'");
+    }).to.throw(Error, "Data object does not contain property with name 'id'.");
   });
 
   it('should throw error when start is missing', () => {
@@ -60,7 +60,7 @@ describe('jsonToRelation tests', () => {
           some: 'data',
         },
       });
-    }).to.throw(Error, "Data object does not contain property with name 'start'");
+    }).to.throw(Error, "Data object does not contain property with name 'start'.");
   });
 
   it('should throw error when end is missing', () => {
@@ -73,7 +73,7 @@ describe('jsonToRelation tests', () => {
           some: 'data',
         },
       });
-    }).to.throw(Error, "Data object does not contain property with name 'end'");
+    }).to.throw(Error, "Data object does not contain property with name 'end'.");
   });
 
   it('should throw error when data is missing', () => {
@@ -84,12 +84,12 @@ describe('jsonToRelation tests', () => {
         start: 'b6224020-8e04-43d8-b9ae-71f11587405b',
         end: '78223fa3-e20c-4952-99c3-ca6b814af6b9',
       });
-    }).to.throw(Error, "Data object does not contain property with name 'data'");
+    }).to.throw(Error, "Data object does not contain property with name 'data'.");
   });
 
   it('should throw error when data is empty', () => {
     expect(() => {
       jsonToRelation({});
-    }).to.throw(Error, "Data object does not contain property with name 'type'");
+    }).to.throw(Error, "Data object does not contain property with name 'type'.");
   });
 });

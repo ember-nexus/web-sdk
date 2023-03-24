@@ -161,7 +161,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       });
-    }).to.throw(Error, "Data object does not contain property with name 'type'");
+    }).to.throw(Error, "Data object does not contain property with name 'type'.");
   });
 
   it('should throw error when type is incorrect', () => {
@@ -179,7 +179,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       });
-    }).to.throw(Error, "Data object is not of type '_PartialCollection'");
+    }).to.throw(Error, "Data object is not of type '_PartialCollection'.");
   });
 
   it('should throw error when id is missing', () => {
@@ -196,7 +196,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       });
-    }).to.throw(Error, "Data object does not contain property with name 'id'");
+    }).to.throw(Error, "Data object does not contain property with name 'id'.");
   });
 
   it('should throw error when totalNodes is missing', () => {
@@ -213,7 +213,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       });
-    }).to.throw(Error, "Data object does not contain property with name 'totalNodes'");
+    }).to.throw(Error, "Data object does not contain property with name 'totalNodes'.");
   });
 
   it('should throw error when links is missing', () => {
@@ -225,7 +225,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       });
-    }).to.throw(Error, "Data object does not contain property with name 'links'");
+    }).to.throw(Error, "Data object does not contain property with name 'links'.");
   });
 
   it('should throw error when links.first is missing', () => {
@@ -242,7 +242,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       });
-    }).to.throw(Error, "Data object does not contain property with name 'links.first'");
+    }).to.throw(Error, "Data object does not contain property with name 'links.first'.");
   });
 
   it('should throw error when links.previous is missing', () => {
@@ -259,7 +259,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       });
-    }).to.throw(Error, "Data object does not contain property with name 'links.previous'");
+    }).to.throw(Error, "Data object does not contain property with name 'links.previous'.");
   });
 
   it('should throw error when links.next is missing', () => {
@@ -276,7 +276,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       });
-    }).to.throw(Error, "Data object does not contain property with name 'links.next'");
+    }).to.throw(Error, "Data object does not contain property with name 'links.next'.");
   });
 
   it('should throw error when links.last is missing', () => {
@@ -293,7 +293,7 @@ describe('jsonToPartialCollection tests', () => {
         nodes: [],
         relations: [],
       });
-    }).to.throw(Error, "Data object does not contain property with name 'links.last'");
+    }).to.throw(Error, "Data object does not contain property with name 'links.last'.");
   });
 
   it('should throw error when nodes are missing', () => {
@@ -310,7 +310,7 @@ describe('jsonToPartialCollection tests', () => {
         },
         relations: [],
       });
-    }).to.throw(Error, "Data object does not contain property with name 'nodes'");
+    }).to.throw(Error, "Data object does not contain property with name 'nodes'.");
   });
 
   it('should throw error when relations are missing', () => {
@@ -327,7 +327,7 @@ describe('jsonToPartialCollection tests', () => {
         },
         nodes: [],
       });
-    }).to.throw(Error, "Data object does not contain property with name 'relations'");
+    }).to.throw(Error, "Data object does not contain property with name 'relations'.");
   });
 
   it('should pass error when node has error', () => {
@@ -352,7 +352,7 @@ describe('jsonToPartialCollection tests', () => {
         ],
         relations: [],
       });
-    }).to.throw(Error, "Data object does not contain property with name 'type'");
+    }).to.throw(Error, "Data object does not contain property with name 'type'.");
   });
 
   it('should pass error when relation has error', () => {
@@ -379,6 +379,6 @@ describe('jsonToPartialCollection tests', () => {
           },
         ],
       });
-    }).to.throw(Error, "Data object does not contain property with name 'type'");
+    }).to.throw(Error, "Data object does not contain property with name 'type'.");
   });
 });

@@ -1,7 +1,9 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
+import { axiosErrorToSummaryObject } from '../helper/axios-error-to-summary-object.js';
 import { jsonToPartialCollection } from '../helper/json-to-partial-collection.js';
+import { logger } from '../logger.js';
 import { Options } from '../options.js';
 import { PartialCollection } from '../type/partial-collection.js';
 
@@ -11,16 +13,24 @@ export async function getChildren(
   pageSize: null | number = null,
 ): Promise<PartialCollection> {
   const options = Options.getInstance();
+  uuid = uuid.toString();
   if (pageSize === null) {
     pageSize = options.pageSize;
   }
   return new Promise(function (resolve, reject) {
     axios
-      .get(`${options.apiHost}${uuid.toString()}/children?page=${page}&pageSize=${pageSize}`)
+      .get(`${options.apiHost}${uuid}/children?page=${page}&pageSize=${pageSize}`)
       .then((response) => {
-        resolve(jsonToPartialCollection(response.data));
+        const collection = jsonToPartialCollection(response.data);
+        logger.debug(`Loaded children from parent with identifier ${uuid}.`, {
+          page: page,
+          pageSize: pageSize,
+          collection: collection,
+        });
+        resolve(collection);
       })
-      .catch(function (error) {
+      .catch(function (error: AxiosError) {
+        logger.error(error.message, axiosErrorToSummaryObject(error));
         reject(error);
       });
   });

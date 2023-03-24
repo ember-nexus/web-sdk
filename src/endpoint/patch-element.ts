@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Options } from '../options.js';
@@ -11,7 +11,7 @@ export async function patchElement(uuid: typeof uuidv4, data: Record<string, unk
       .then(function () {
         resolve();
       })
-      .catch(function (error) {
+      .catch(function (error: AxiosError) {
         reject(error);
       });
   });

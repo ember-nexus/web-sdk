@@ -28,7 +28,7 @@ describe('jsonToNode tests', () => {
           some: 'data',
         },
       });
-    }).to.throw(Error, "Data object does not contain property with name 'type'");
+    }).to.throw(Error, "Data object does not contain property with name 'type'.");
   });
 
   it('should throw error when id is missing', () => {
@@ -39,7 +39,7 @@ describe('jsonToNode tests', () => {
           some: 'data',
         },
       });
-    }).to.throw(Error, "Data object does not contain property with name 'id'");
+    }).to.throw(Error, "Data object does not contain property with name 'id'.");
   });
 
   it('should throw error when data is missing', () => {
@@ -48,12 +48,12 @@ describe('jsonToNode tests', () => {
         type: 'Node',
         id: 'c52569b7-1dd8-4018-9c3b-a710abd6982d',
       });
-    }).to.throw(Error, "Data object does not contain property with name 'data'");
+    }).to.throw(Error, "Data object does not contain property with name 'data'.");
   });
 
   it('should throw error when data is empty', () => {
     expect(() => {
       jsonToNode({});
-    }).to.throw(Error, "Data object does not contain property with name 'type'");
+    }).to.throw(Error, "Data object does not contain property with name 'type'.");
   });
 });
