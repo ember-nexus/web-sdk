@@ -1,8 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
+
+import { getElement } from './endpoint/get-element.js';
+import { Cache } from './type/cache.js';
 import { Node } from './type/node.js';
 import { Relation } from './type/relation.js';
-import { Cache } from './type/cache.js';
-import { getElement } from './endpoint/get-element.js';
 
 export class EmberNexus {
   private _cache: Cache<Node | Relation>;

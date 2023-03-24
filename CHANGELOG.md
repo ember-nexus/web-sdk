@@ -13,3 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI: Markdown linter
 - Added docs folder
 - Signed commits enabled, see also [tutorial](https://docs.gitlab.com/ee/user/project/repository/ssh_signed_commits/)
+- Changed code style commands
+  - Support for sorted includes
+  - Tests are now included too

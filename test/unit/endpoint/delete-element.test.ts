@@ -1,6 +1,7 @@
-import { deleteElement } from '../../../src/endpoint/delete-element.js';
-import sinon, { SinonSandbox } from 'sinon';
 import axios from 'axios';
+import sinon, { SinonSandbox } from 'sinon';
+
+import { deleteElement } from '../../../src/endpoint/delete-element.js';
 
 describe('deleteElement tests', () => {
   let sandbox: SinonSandbox;

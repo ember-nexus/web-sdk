@@ -1,8 +1,9 @@
-import { Options } from '../options.js';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { PartialCollection } from '../type/partial-collection.js';
+
 import { jsonToPartialCollection } from '../helper/json-to-partial-collection.js';
+import { Options } from '../options.js';
+import { PartialCollection } from '../type/partial-collection.js';
 
 export async function getIndex(
   uuid: typeof uuidv4,

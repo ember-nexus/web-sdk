@@ -11,15 +11,18 @@
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.13.0",
     "@types/sinon": "^10.0.13",
-    "@typescript-eslint/eslint-plugin": "~5.44",
-    "@typescript-eslint/parser": "~5.44",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
     "eslint": "~8.28",
-    "eslint-config-prettier": "~8.5",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.5.3",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
     "mocha": "^10.2.0",
     "pino-pretty": "^9.2.0",
-    "prettier": "~2.8",
+    "prettier": "^2.8.7",
     "rimraf": "~3.0",
     "sinon": "^15.0.1",
     "ts-node": "^10.9.1",
@@ -29,14 +32,13 @@
   "scripts": {
     "start": "node dist/src/main.js",
     "clean": "rimraf coverage dist tmp",
-    "prebuild": "npm run lint",
     "build": "tsc -p tsconfig.json",
     "build:watch": "tsc -w -p tsconfig.json",
     "build:release": "npm run clean && tsc -p tsconfig.release.json",
-    "lint": "eslint . --ext .ts --ext .mts",
+    "cs": "eslint . --ext .ts ./src ./test",
+    "cs:fix": "eslint --ext .ts ./src ./test --fix",
     "test:unit": "mocha --config .mocharc.unit.json",
-    "test:feature": "mocha --config .mocharc.feature.json",
-    "prettier": "prettier --config .prettierrc --write ."
+    "test:feature": "mocha --config .mocharc.feature.json"
   },
   "author": "Syndesi <info@ember-nexus.dev>",
   "license": "MIT",
@@ -46,8 +48,5 @@
     "tslib": "~2.4",
     "tslog": "^4.7.5",
     "uuid": "^9.0.0"
-  },
-  "volta": {
-    "node": "18.12.1"
   }
 }

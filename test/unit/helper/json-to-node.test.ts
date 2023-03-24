@@ -1,5 +1,6 @@
-import { jsonToNode } from '../../../src/helper/json-to-node.js';
 import { expect } from 'chai';
+
+import { jsonToNode } from '../../../src/helper/json-to-node.js';
 
 describe('jsonToNode tests', () => {
   it('should create valid node from valid data', () => {

@@ -1,12 +1,13 @@
-import { getElement } from '../../../src/endpoint/get-element.js';
+import axios from 'axios';
 import * as chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
+import sinon, { SinonSandbox } from 'sinon';
+
+import { getElement } from '../../../src/endpoint/get-element.js';
+import { logger } from '../../../src/logger.js';
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
-import sinon, { SinonSandbox } from 'sinon';
-import axios from 'axios';
-import { logger } from '../../../src/logger.js';
 
 describe('getElement tests', () => {
   let sandbox: SinonSandbox;

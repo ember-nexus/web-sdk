@@ -28,4 +28,4 @@ jobs:
       - name: Install dependencies
         run: yarn install --dev
       - name: Run syntax linter
-        run: yarn run lint
+        run: yarn run cs

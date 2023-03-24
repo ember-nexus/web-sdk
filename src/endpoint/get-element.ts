@@ -1,11 +1,12 @@
 import axios, { AxiosError } from 'axios';
-import { Node } from '../type/node.d.js';
-import { Relation } from '../type/relation.d.js';
 import { v4 as uuidv4 } from 'uuid';
-import { Options } from '../options.js';
+
+import { axiosErrorToSummaryObject } from '../helper/axios-error-to-summary-object.js';
 import { jsonToElement } from '../helper/json-to-element.js';
 import { logger } from '../logger.js';
-import { axiosErrorToSummaryObject } from '../helper/axios-error-to-summary-object.js';
+import { Options } from '../options.js';
+import { Node } from '../type/node.d.js';
+import { Relation } from '../type/relation.d.js';
 
 export async function getElement(uuid: typeof uuidv4): Promise<Node | Relation> {
   return new Promise(function (resolve, reject) {

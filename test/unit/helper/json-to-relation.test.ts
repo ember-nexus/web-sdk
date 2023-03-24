@@ -1,5 +1,6 @@
-import { jsonToRelation } from '../../../src/helper/json-to-relation.js';
 import { expect } from 'chai';
+
+import { jsonToRelation } from '../../../src/helper/json-to-relation.js';
 
 describe('jsonToRelation tests', () => {
   it('should create valid relation from valid data', () => {

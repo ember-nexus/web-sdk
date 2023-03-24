@@ -1,6 +1,7 @@
+import axios from 'axios';
 import { expect } from 'chai';
 import sinon, { SinonSandbox } from 'sinon';
-import axios from 'axios';
+
 import { getParents } from '../../../src/endpoint/get-parents.js';
 
 describe('getParents tests', () => {
