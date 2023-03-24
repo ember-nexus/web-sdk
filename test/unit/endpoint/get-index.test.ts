@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import sinon, { SinonSandbox } from 'sinon';
 
 import { getIndex } from '../../../src/endpoint/get-index.js';
+import { logger } from '../../../src/logger.js';
 
 describe('getIndex tests', () => {
   let sandbox: SinonSandbox;
@@ -19,13 +20,13 @@ describe('getIndex tests', () => {
     sandbox.stub(axios, 'get').resolves({
       data: {
         type: '_PartialCollection',
-        id: '/038d928d-717e-4615-a52b-b48ad9aaf50b?page=1&pageSize=25',
+        id: '/?page=1&pageSize=25',
         totalNodes: 3,
         links: {
-          first: '/038d928d-717e-4615-a52b-b48ad9aaf50b?page=1&pageSize=25',
+          first: '/?page=1&pageSize=25',
           previous: null,
           next: null,
-          last: '/038d928d-717e-4615-a52b-b48ad9aaf50b?page=1&pageSize=25',
+          last: '/?page=1&pageSize=25',
         },
         nodes: [
           {
@@ -77,19 +78,21 @@ describe('getIndex tests', () => {
       config: {},
     });
 
-    const resultPartialCollection = await getIndex('038d928d-717e-4615-a52b-b48ad9aaf50b').then((partialCollection) => {
+    const debugLogger = sandbox.stub(logger, 'debug');
+
+    const resultPartialCollection = await getIndex().then((partialCollection) => {
       return partialCollection;
     });
 
-    expect(resultPartialCollection).to.eql({
+    const collection = {
       type: '_PartialCollection',
-      id: '/038d928d-717e-4615-a52b-b48ad9aaf50b?page=1&pageSize=25',
+      id: '/?page=1&pageSize=25',
       totalNodes: 3,
       links: {
-        first: '/038d928d-717e-4615-a52b-b48ad9aaf50b?page=1&pageSize=25',
+        first: '/?page=1&pageSize=25',
         previous: null,
         next: null,
-        last: '/038d928d-717e-4615-a52b-b48ad9aaf50b?page=1&pageSize=25',
+        last: '/?page=1&pageSize=25',
       },
       nodes: [
         {
@@ -134,6 +137,14 @@ describe('getIndex tests', () => {
           },
         },
       ],
+    };
+
+    expect(resultPartialCollection).to.eql(collection);
+
+    sinon.assert.calledOnceWithExactly(debugLogger, 'Loaded index.', {
+      page: 1,
+      pageSize: 25,
+      collection: collection,
     });
   });
 });

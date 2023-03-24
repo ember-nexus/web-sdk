@@ -51,7 +51,7 @@ describe('getElement tests', () => {
 
     sinon.assert.calledOnceWithExactly(
       debugLogger,
-      'Loaded element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d',
+      'Loaded element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.',
       {
         type: 'Node',
         id: 'c52569b7-1dd8-4018-9c3b-a710abd6982d',

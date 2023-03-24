@@ -12,7 +12,7 @@ export async function deleteElement(uuid: typeof uuidv4): Promise<void> {
     axios
       .delete(`${options.apiHost}${uuid}`)
       .then(function () {
-        logger.debug(`Deleted element with identifier ${uuid}`);
+        logger.debug(`Deleted element with identifier ${uuid}.`);
         resolve();
       })
       .catch(function (error: AxiosError) {

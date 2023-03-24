@@ -51,7 +51,7 @@ describe('jsonToElement tests', () => {
           some: 'data',
         },
       });
-    }).to.throw(Error, "Data object does not contain property with name 'type'");
+    }).to.throw(Error, "Data object does not contain property with name 'type'.");
   });
 
   it('should pass error when id is missing', () => {
@@ -64,7 +64,7 @@ describe('jsonToElement tests', () => {
           some: 'data',
         },
       });
-    }).to.throw(Error, "Data object does not contain property with name 'id'");
+    }).to.throw(Error, "Data object does not contain property with name 'id'.");
   });
 
   it('should pass error when start is missing', () => {
@@ -77,7 +77,7 @@ describe('jsonToElement tests', () => {
           some: 'data',
         },
       });
-    }).to.throw(Error, "Data object does not contain property with name 'start'");
+    }).to.throw(Error, "Data object does not contain property with name 'start'.");
   });
 
   it('should pass error when end is missing', () => {
@@ -90,7 +90,7 @@ describe('jsonToElement tests', () => {
           some: 'data',
         },
       });
-    }).to.throw(Error, "Data object does not contain property with name 'end'");
+    }).to.throw(Error, "Data object does not contain property with name 'end'.");
   });
 
   it('should pass error when data is missing', () => {
@@ -101,12 +101,12 @@ describe('jsonToElement tests', () => {
         start: 'b6224020-8e04-43d8-b9ae-71f11587405b',
         end: '78223fa3-e20c-4952-99c3-ca6b814af6b9',
       });
-    }).to.throw(Error, "Data object does not contain property with name 'data'");
+    }).to.throw(Error, "Data object does not contain property with name 'data'.");
   });
 
   it('should pass error when data is empty', () => {
     expect(() => {
       jsonToElement({});
-    }).to.throw(Error, "Data object does not contain property with name 'type'");
+    }).to.throw(Error, "Data object does not contain property with name 'type'.");
   });
 });

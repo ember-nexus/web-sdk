@@ -16,7 +16,7 @@ export async function getElement(uuid: typeof uuidv4): Promise<Node | Relation> 
       .get(`${options.apiHost}${uuid}`)
       .then((response) => {
         const element = jsonToElement(response.data);
-        logger.debug(`Loaded element with identifier ${uuid}`, element);
+        logger.debug(`Loaded element with identifier ${uuid}.`, element);
         resolve(element);
       })
       .catch(function (error: AxiosError) {
