@@ -1,6 +1,7 @@
+import axios from 'axios';
 import { expect } from 'chai';
 import sinon, { SinonSandbox } from 'sinon';
-import axios from 'axios';
+
 import { getIndex } from '../../../src/endpoint/get-index.js';
 
 describe('getIndex tests', () => {

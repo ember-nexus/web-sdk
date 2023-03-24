@@ -1,5 +1,6 @@
-import { Cache } from '../../../src/type/cache.js';
 import { expect } from 'chai';
+
+import { Cache } from '../../../src/type/cache.js';
 
 describe('cache tests', () => {
   it('should be able to perform basic operations', async () => {
