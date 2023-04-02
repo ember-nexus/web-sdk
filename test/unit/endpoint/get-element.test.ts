@@ -30,7 +30,7 @@ describe('getElement tests', () => {
   it('should load an existing element from the api', async () => {
     const debugLogger = sandbox.stub(logger, 'debug');
 
-    const resultNode = await getElement('c52569b7-1dd8-4018-9c3b-a710abd6982d').then((node) => {
+    const resultNode = await getElement(ElementUuid.DataNode).then((node) => {
       return node;
     });
 
@@ -74,7 +74,7 @@ describe('getElement tests', () => {
     sinon.assert.calledOnceWithExactly(errorLogger, sinon.match(expectedErr));
   });
 
-  it('should throw detailed error when element is not found', async () => {
+  it('should throw error when element is not found', async () => {
     const errorLogger = sandbox.stub(logger, 'error');
 
     await expect(getElement(ElementUuid.NotFoundElement)).to.be.rejectedWith(
@@ -83,5 +83,16 @@ describe('getElement tests', () => {
     );
 
     sinon.assert.calledOnceWithExactly(errorLogger, 'Request failed with status code 404', sinon.match.any);
+  });
+
+  it('should throw error when element is forbidden', async () => {
+    const errorLogger = sandbox.stub(logger, 'error');
+
+    await expect(getElement(ElementUuid.ForbiddenElement)).to.be.rejectedWith(
+      Error,
+      'Request failed with status code 403',
+    );
+
+    sinon.assert.calledOnceWithExactly(errorLogger, 'Request failed with status code 403', sinon.match.any);
   });
 });
