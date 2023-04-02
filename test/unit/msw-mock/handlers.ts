@@ -1,5 +1,6 @@
 import { RestHandler } from 'msw';
 
+import { childrenHandler } from './handlers/children-handler.js';
 import { dataNodeHandlers } from './handlers/data-node-handler.js';
 import { forbiddenHandlers } from './handlers/forbidden-handler.js';
 import { malformedDataNodeHandlers } from './handlers/malformed-data-node-handler.js';
@@ -10,4 +11,5 @@ export const handlers: RestHandler[] = [
   ...malformedDataNodeHandlers,
   ...notFoundHandlers,
   ...forbiddenHandlers,
+  ...childrenHandler,
 ];

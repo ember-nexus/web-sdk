@@ -21,6 +21,17 @@ export async function getElement(uuid: typeof uuidv4): Promise<Node | Relation> 
       })
       .catch(function (error) {
         if (error instanceof AxiosError) {
+          let messageDetail = error.message;
+          try {
+            if (error.response) {
+              if (error.response.headers['content-type'] === 'application/problem+json') {
+                messageDetail = `${error.response.data.title} - ${error.response.data.detail}`;
+              }
+            }
+          } catch (error) {
+            logger.error(`Encountered error while building error message: ${error.message}`);
+          }
+          error.message = `Encountered error while loading element with identifier ${uuid}: ${messageDetail}`;
           logger.error(error.message, axiosErrorToSummaryObject(error));
         } else {
           error.message = `Encountered error while loading element with identifier ${uuid}: ${error.message}`;

@@ -23,10 +23,6 @@ describe('getElement tests', () => {
     server.resetHandlers();
   });
 
-  after(() => {
-    server.close();
-  });
-
   it('should load an existing element from the api', async () => {
     const debugLogger = sandbox.stub(logger, 'debug');
 
@@ -74,25 +70,33 @@ describe('getElement tests', () => {
     sinon.assert.calledOnceWithExactly(errorLogger, sinon.match(expectedErr));
   });
 
-  it('should throw error when element is not found', async () => {
+  it('should throw detailed error when element is not found', async () => {
     const errorLogger = sandbox.stub(logger, 'error');
 
     await expect(getElement(ElementUuid.NotFoundElement)).to.be.rejectedWith(
       Error,
-      'Request failed with status code 404',
+      'Encountered error while loading element with identifier ca443647-e292-4f2b-838f-95f24a60ea02: Not Found - The requested resource was not found.',
     );
 
-    sinon.assert.calledOnceWithExactly(errorLogger, 'Request failed with status code 404', sinon.match.any);
+    sinon.assert.calledOnceWithExactly(
+      errorLogger,
+      'Encountered error while loading element with identifier ca443647-e292-4f2b-838f-95f24a60ea02: Not Found - The requested resource was not found.',
+      sinon.match.any,
+    );
   });
 
-  it('should throw error when element is forbidden', async () => {
+  it('should throw detailed error when element is forbidden', async () => {
     const errorLogger = sandbox.stub(logger, 'error');
 
     await expect(getElement(ElementUuid.ForbiddenElement)).to.be.rejectedWith(
       Error,
-      'Request failed with status code 403',
+      'Encountered error while loading element with identifier ab6b0bbb-1523-44d8-9d8a-af4d630fa7ed: Forbidden - Client does not have permissions to perform action.',
     );
 
-    sinon.assert.calledOnceWithExactly(errorLogger, 'Request failed with status code 403', sinon.match.any);
+    sinon.assert.calledOnceWithExactly(
+      errorLogger,
+      'Encountered error while loading element with identifier ab6b0bbb-1523-44d8-9d8a-af4d630fa7ed: Forbidden - Client does not have permissions to perform action.',
+      sinon.match.any,
+    );
   });
 });
