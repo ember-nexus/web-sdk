@@ -67,4 +67,52 @@ export const forbiddenHandlers: RestHandler[] = [
       ),
     );
   }),
+  rest.delete(`http://localhost/${ElementUuid.ForbiddenDeletableElement}`, (_req, res, ctx) => {
+    return res(
+      ctx.status(403),
+      ctx.set({
+        'content-type': 'application/problem+json',
+      }),
+      ctx.body(
+        JSON.stringify({
+          type: '403-forbidden',
+          title: 'Forbidden',
+          status: 403,
+          detail: 'Client does not have permissions to perform action.',
+        }),
+      ),
+    );
+  }),
+  rest.put(`http://localhost/${ElementUuid.ForbiddenUpdateableElement}`, (_req, res, ctx) => {
+    return res(
+      ctx.status(403),
+      ctx.set({
+        'content-type': 'application/problem+json',
+      }),
+      ctx.body(
+        JSON.stringify({
+          type: '403-forbidden',
+          title: 'Forbidden',
+          status: 403,
+          detail: 'Client does not have permissions to perform action.',
+        }),
+      ),
+    );
+  }),
+  rest.patch(`http://localhost/${ElementUuid.ForbiddenPatchableElement}`, (_req, res, ctx) => {
+    return res(
+      ctx.status(403),
+      ctx.set({
+        'content-type': 'application/problem+json',
+      }),
+      ctx.body(
+        JSON.stringify({
+          type: '403-forbidden',
+          title: 'Forbidden',
+          status: 403,
+          detail: 'Client does not have permissions to perform action.',
+        }),
+      ),
+    );
+  }),
 ];

@@ -12,6 +12,15 @@ enum ElementUuid {
   ElementWithRelatedElements = 'c7fab8e1-5d32-4887-b466-2a7581d8a43b',
   ForbiddenElementWithRelatedElements = '68c1c83e-0b44-4340-b04b-c50eff55d08f',
   NotFoundElementWithRelatedElements = '1740a1b5-0e93-4f25-9fed-d3e54081d359',
+  DeletableElement = '41f4557f-0d3e-416f-a5d1-09d02433432d',
+  ForbiddenDeletableElement = 'a0b82441-d830-44bc-8b58-a5709ca0fd32',
+  NotFoundDeletableElement = '7ecf787a-2c68-4817-816c-7328a7df0c2b',
+  PatchableElement = 'f6b65db1-ab01-40b2-9adf-cf32ce4c7c92',
+  ForbiddenPatchableElement = 'ed8415c9-8c27-4869-9832-44e94c6eb127',
+  NotFoundPatchableElement = '88e08c26-709e-49d6-b8cc-99662c42f692',
+  UpdateableElement = '360cfa23-86f0-4673-82e3-5b0b091814ec',
+  ForbiddenUpdateableElement = 'a0e5a97a-ac9a-4a96-921b-549df4a92e46',
+  NotFoundUpdateableElement = '7e8ff369-9f5c-4c9f-8343-5dc3498b650c',
 }
 
 export default ElementUuid;
