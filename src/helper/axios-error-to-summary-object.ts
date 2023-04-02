@@ -3,18 +3,28 @@ import { AxiosError } from 'axios';
 import { AxiosSummaryObject } from '../type/axios-summary-object.js';
 
 export function axiosErrorToSummaryObject(error: AxiosError): AxiosSummaryObject {
-  return {
-    request: {
-      method: error.request.method ?? null,
-      path: error.request.path ?? null,
-      params: error.request.params ?? null,
-      headers: error.request.getHeaders() ?? null,
-      data: error.request.data ?? null,
-    },
-    response: {
-      status: error.response.status ?? null,
-      headers: error.response.headers ?? null,
-      data: error.response.data ?? null,
-    },
+  const errorObject = {
+    request: null,
+    response: null,
   };
+  if (!(error instanceof AxiosError)) {
+    return errorObject;
+  }
+  if (error.request) {
+    errorObject.request = {
+      method: error.request.method,
+      path: error.request.path,
+      params: error.request.params,
+      headers: error.request.headers,
+      data: error.request.data,
+    };
+  }
+  if (error.response) {
+    errorObject.response = {
+      status: error.response.status,
+      headers: error.response.headers,
+      data: error.response.data,
+    };
+  }
+  return errorObject;
 }

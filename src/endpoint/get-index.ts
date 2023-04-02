@@ -23,8 +23,24 @@ export async function getIndex(page = 1, pageSize: null | number = null): Promis
         });
         resolve(collection);
       })
-      .catch(function (error: AxiosError) {
-        logger.error(error.message, axiosErrorToSummaryObject(error));
+      .catch(function (error: Error) {
+        if (error instanceof AxiosError) {
+          let messageDetail = error.message;
+          try {
+            if (error.response) {
+              if (error.response.headers['content-type'] === 'application/problem+json') {
+                messageDetail = `${error.response.data.title} - ${error.response.data.detail}`;
+              }
+            }
+          } catch (error) {
+            logger.error(`Encountered error while building error message: ${error.message}`);
+          }
+          error.message = `Encountered error while loading index: ${messageDetail}`;
+          logger.error(error.message, axiosErrorToSummaryObject(error));
+        } else {
+          error.message = `Encountered error while loading index: ${error.message}`;
+          logger.error(error);
+        }
         reject(error);
       });
   });
