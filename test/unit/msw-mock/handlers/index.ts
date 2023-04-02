@@ -9,6 +9,9 @@ enum ElementUuid {
   ChildWithParents = '70d1e8a6-58a7-4a24-b05a-5552e035c8dc',
   ForbiddenChildWithParents = 'e823cadf-bf8d-4719-a2d5-807462e1fcd7',
   NotFoundChildWithParents = '6a7d5759-b977-4dd5-ad3b-5fbf975696c8',
+  ElementWithRelatedElements = 'c7fab8e1-5d32-4887-b466-2a7581d8a43b',
+  ForbiddenElementWithRelatedElements = '68c1c83e-0b44-4340-b04b-c50eff55d08f',
+  NotFoundElementWithRelatedElements = '1740a1b5-0e93-4f25-9fed-d3e54081d359',
 }
 
 export default ElementUuid;
