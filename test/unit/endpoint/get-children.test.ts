@@ -27,7 +27,9 @@ describe('getChildren tests', () => {
     });
 
     const collection = {
+      type: '_PartialCollection',
       id: '/8ea07cfe-a99f-4daa-b8e4-39d59adc9ed2/children?page=1&pageSize=25',
+      totalNodes: 2,
       links: {
         first: '/8ea07cfe-a99f-4daa-b8e4-39d59adc9ed2/children?page=1&pageSize=25',
         last: '/8ea07cfe-a99f-4daa-b8e4-39d59adc9ed2/children?page=1&pageSize=25',
@@ -66,8 +68,6 @@ describe('getChildren tests', () => {
           data: {},
         },
       ],
-      totalNodes: 3,
-      type: '_PartialCollection',
     };
 
     expect(resultPartialCollection).to.eql(collection);
@@ -83,7 +83,11 @@ describe('getChildren tests', () => {
     );
   });
 
-  it('should throw detailed error when parent is not found', async () => {
+  it.skip('should throw detailed error when content is malformed', async () => {
+    // todo implement test in future
+  });
+
+  it('should throw detailed error when element is not found', async () => {
     const errorLogger = sandbox.stub(logger, 'error');
 
     await expect(getChildren(ElementUuid.NotFoundParentWithChildren)).to.be.rejectedWith(
@@ -98,7 +102,7 @@ describe('getChildren tests', () => {
     );
   });
 
-  it('should throw detailed error when parent is forbidden', async () => {
+  it('should throw detailed error when element is forbidden', async () => {
     const errorLogger = sandbox.stub(logger, 'error');
 
     await expect(getChildren(ElementUuid.ForbiddenParentWithChildren)).to.be.rejectedWith(

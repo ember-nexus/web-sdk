@@ -1,109 +1,42 @@
-import axios from 'axios';
 import { expect } from 'chai';
 import sinon, { SinonSandbox } from 'sinon';
 
 import { getParents } from '../../../src/endpoint/get-parents.js';
 import { logger } from '../../../src/logger.js';
+import ElementUuid from '../msw-mock/handlers/index.js';
+import { server } from '../msw-mock/server.js';
 
 describe('getParents tests', () => {
   let sandbox: SinonSandbox;
 
   beforeEach(() => {
+    server.listen();
     sandbox = sinon.createSandbox();
   });
 
   afterEach(() => {
     sandbox.restore();
+    server.resetHandlers();
   });
 
   it('should load existing elements from the api', async () => {
-    sandbox.stub(axios, 'get').resolves({
-      data: {
-        type: '_PartialCollection',
-        id: '/038d928d-717e-4615-a52b-b48ad9aaf50b/parents?page=1&pageSize=25',
-        totalNodes: 3,
-        links: {
-          first: '/038d928d-717e-4615-a52b-b48ad9aaf50b/parents?page=1&pageSize=25',
-          previous: null,
-          next: null,
-          last: '/038d928d-717e-4615-a52b-b48ad9aaf50b/parents?page=1&pageSize=25',
-        },
-        nodes: [
-          {
-            type: 'Node',
-            id: '2ac398e7-f2e2-44a7-a041-bc45b3f88358',
-            data: {
-              some: 'data',
-            },
-          },
-          {
-            type: 'Node',
-            id: '81771a82-b82b-407a-a7a6-ceec5835f260',
-            data: {
-              some: 'data',
-            },
-          },
-          {
-            type: 'Node',
-            id: 'ba9fceb7-32f0-476e-af47-0e69396cf674',
-            data: {
-              some: 'data',
-            },
-          },
-        ],
-        relations: [
-          {
-            type: 'RELATION',
-            id: '58f87378-bf72-40c4-a89f-d3d86c29a241',
-            start: '2ac398e7-f2e2-44a7-a041-bc45b3f88358',
-            end: '81771a82-b82b-407a-a7a6-ceec5835f260',
-            data: {
-              some: 'data',
-            },
-          },
-          {
-            type: 'RELATION',
-            id: '40ce6aec-0dad-4ebf-8963-db1512c02274',
-            start: '2ac398e7-f2e2-44a7-a041-bc45b3f88358',
-            end: 'ba9fceb7-32f0-476e-af47-0e69396cf674',
-            data: {
-              some: 'data',
-            },
-          },
-        ],
-      },
-      status: 200,
-      statusText: 'Ok',
-      headers: {},
-      config: {},
-    });
-
     const debugLogger = sandbox.stub(logger, 'debug');
 
-    const resultPartialCollection = await getParents('038d928d-717e-4615-a52b-b48ad9aaf50b').then(
-      (partialCollection) => {
-        return partialCollection;
-      },
-    );
+    const resultPartialCollection = await getParents(ElementUuid.ChildWithParents).then((partialCollection) => {
+      return partialCollection;
+    });
 
     const collection = {
       type: '_PartialCollection',
-      id: '/038d928d-717e-4615-a52b-b48ad9aaf50b/parents?page=1&pageSize=25',
-      totalNodes: 3,
+      id: '/70d1e8a6-58a7-4a24-b05a-5552e035c8dc/parents?page=1&pageSize=25',
+      totalNodes: 2,
       links: {
-        first: '/038d928d-717e-4615-a52b-b48ad9aaf50b/parents?page=1&pageSize=25',
+        first: '/70d1e8a6-58a7-4a24-b05a-5552e035c8dc/parents?page=1&pageSize=25',
         previous: null,
         next: null,
-        last: '/038d928d-717e-4615-a52b-b48ad9aaf50b/parents?page=1&pageSize=25',
+        last: '/70d1e8a6-58a7-4a24-b05a-5552e035c8dc/parents?page=1&pageSize=25',
       },
       nodes: [
-        {
-          type: 'Node',
-          id: '2ac398e7-f2e2-44a7-a041-bc45b3f88358',
-          data: {
-            some: 'data',
-          },
-        },
         {
           type: 'Node',
           id: '81771a82-b82b-407a-a7a6-ceec5835f260',
@@ -121,19 +54,19 @@ describe('getParents tests', () => {
       ],
       relations: [
         {
-          type: 'RELATION',
+          type: 'OWNS',
           id: '58f87378-bf72-40c4-a89f-d3d86c29a241',
-          start: '2ac398e7-f2e2-44a7-a041-bc45b3f88358',
-          end: '81771a82-b82b-407a-a7a6-ceec5835f260',
+          start: '81771a82-b82b-407a-a7a6-ceec5835f260',
+          end: '70d1e8a6-58a7-4a24-b05a-5552e035c8dc',
           data: {
             some: 'data',
           },
         },
         {
-          type: 'RELATION',
+          type: 'OWNS',
           id: '40ce6aec-0dad-4ebf-8963-db1512c02274',
-          start: '2ac398e7-f2e2-44a7-a041-bc45b3f88358',
-          end: 'ba9fceb7-32f0-476e-af47-0e69396cf674',
+          start: 'ba9fceb7-32f0-476e-af47-0e69396cf674',
+          end: '70d1e8a6-58a7-4a24-b05a-5552e035c8dc',
           data: {
             some: 'data',
           },
@@ -145,12 +78,46 @@ describe('getParents tests', () => {
 
     sinon.assert.calledOnceWithExactly(
       debugLogger,
-      'Loaded parents from child with identifier 038d928d-717e-4615-a52b-b48ad9aaf50b.',
+      'Loaded parents from child with identifier 70d1e8a6-58a7-4a24-b05a-5552e035c8dc.',
       {
         page: 1,
         pageSize: 25,
         collection: collection,
       },
+    );
+  });
+
+  it.skip('should throw detailed error when content is malformed', async () => {
+    // todo implement test in future
+  });
+
+  it('should throw detailed error when element is not found', async () => {
+    const errorLogger = sandbox.stub(logger, 'error');
+
+    await expect(getParents(ElementUuid.NotFoundChildWithParents)).to.be.rejectedWith(
+      Error,
+      'Encountered error while loading parents from child with identifier 6a7d5759-b977-4dd5-ad3b-5fbf975696c8: Not Found - The requested resource was not found.',
+    );
+
+    sinon.assert.calledOnceWithExactly(
+      errorLogger,
+      'Encountered error while loading parents from child with identifier 6a7d5759-b977-4dd5-ad3b-5fbf975696c8: Not Found - The requested resource was not found.',
+      sinon.match.any,
+    );
+  });
+
+  it('should throw detailed error when element is forbidden', async () => {
+    const errorLogger = sandbox.stub(logger, 'error');
+
+    await expect(getParents(ElementUuid.ForbiddenChildWithParents)).to.be.rejectedWith(
+      Error,
+      'Encountered error while loading parents from child with identifier e823cadf-bf8d-4719-a2d5-807462e1fcd7: Forbidden - Client does not have permissions to perform action.',
+    );
+
+    sinon.assert.calledOnceWithExactly(
+      errorLogger,
+      'Encountered error while loading parents from child with identifier e823cadf-bf8d-4719-a2d5-807462e1fcd7: Forbidden - Client does not have permissions to perform action.',
+      sinon.match.any,
     );
   });
 });
