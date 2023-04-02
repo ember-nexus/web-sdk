@@ -6,23 +6,23 @@ import { Node } from './type/node.js';
 import { Relation } from './type/relation.js';
 
 export class EmberNexus {
-  private _cache: Cache<Node | Relation>;
+  private _elementCache: Cache<Node | Relation>;
 
   constructor() {
-    this._cache = new Cache<Node | Relation>();
+    this._elementCache = new Cache<Node | Relation>();
   }
 
   async getElement(uuid: typeof uuidv4, cacheOnly = false): Promise<Node | Relation> {
     return new Promise((resolve, reject) => {
-      if (this._cache.has(uuid)) {
-        resolve(this._cache.get(uuid));
+      if (this._elementCache.has(uuid)) {
+        resolve(this._elementCache.get(uuid));
       }
       if (cacheOnly) {
         reject();
       }
       getElement(uuid)
         .then((element) => {
-          this._cache.set(uuid, element);
+          this._elementCache.set(uuid, element);
           resolve(element);
         })
         .catch((error) => {
