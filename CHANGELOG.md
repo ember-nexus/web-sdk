@@ -18,3 +18,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Tests are now included too
 - Add logs to existing endpoints
 - Change exception messages to include trailing dot, see also [Microsoft's best practices for exceptions](https://learn.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions#use-grammatically-correct-error-messages)
+- Add [MSW](https://mswjs.io/) for better unit tests, wip

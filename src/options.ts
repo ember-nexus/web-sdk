@@ -2,7 +2,7 @@ export class Options {
   private static instance: Options;
 
   private _isCacheActive = true;
-  private _apiHost = 'http://neo4j-php-nginx/';
+  private _apiHost = 'http://localhost/';
   private _pageSize = 25;
 
   public static getInstance(): Options {
