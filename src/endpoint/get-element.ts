@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError, default as axios } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import axiosErrorToSummaryObject from '../helper/axios-error-to-summary-object.js';

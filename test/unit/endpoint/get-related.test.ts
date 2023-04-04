@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import sinon, { SinonSandbox } from 'sinon';
+import { SinonSandbox, assert, createSandbox, match } from 'sinon';
 
 import getRelated from '../../../src/endpoint/get-related.js';
 import logger from '../../../src/logger.js';
@@ -11,7 +11,7 @@ describe('getRelated tests', () => {
 
   beforeEach(() => {
     server.listen();
-    sandbox = sinon.createSandbox();
+    sandbox = createSandbox();
   });
 
   afterEach(() => {
@@ -102,7 +102,7 @@ describe('getRelated tests', () => {
 
     expect(resultPartialCollection).to.eql(collection);
 
-    sinon.assert.calledOnceWithExactly(
+    assert.calledOnceWithExactly(
       debugLogger,
       'Loaded related elements to node with identifier c7fab8e1-5d32-4887-b466-2a7581d8a43b.',
       {
@@ -125,10 +125,10 @@ describe('getRelated tests', () => {
       'Encountered error while loading related elements from element with identifier 1740a1b5-0e93-4f25-9fed-d3e54081d359: Not Found - The requested resource was not found.',
     );
 
-    sinon.assert.calledOnceWithExactly(
+    assert.calledOnceWithExactly(
       errorLogger,
       'Encountered error while loading related elements from element with identifier 1740a1b5-0e93-4f25-9fed-d3e54081d359: Not Found - The requested resource was not found.',
-      sinon.match.any,
+      match.any,
     );
   });
 
@@ -140,10 +140,10 @@ describe('getRelated tests', () => {
       'Encountered error while loading related elements from element with identifier 68c1c83e-0b44-4340-b04b-c50eff55d08f: Forbidden - Client does not have permissions to perform action.',
     );
 
-    sinon.assert.calledOnceWithExactly(
+    assert.calledOnceWithExactly(
       errorLogger,
       'Encountered error while loading related elements from element with identifier 68c1c83e-0b44-4340-b04b-c50eff55d08f: Forbidden - Client does not have permissions to perform action.',
-      sinon.match.any,
+      match.any,
     );
   });
 });

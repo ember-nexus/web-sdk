@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError, default as axios } from 'axios';
 
 import axiosErrorToSummaryObject from '../helper/axios-error-to-summary-object.js';
 import jsonToPartialCollection from '../helper/json-to-partial-collection.js';

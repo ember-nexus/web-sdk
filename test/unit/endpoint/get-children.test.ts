@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import sinon, { SinonSandbox } from 'sinon';
+import { SinonSandbox, assert, createSandbox, match } from 'sinon';
 
 import getChildren from '../../../src/endpoint/get-children.js';
 import logger from '../../../src/logger.js';
@@ -11,7 +11,7 @@ describe('getChildren tests', () => {
 
   beforeEach(() => {
     server.listen();
-    sandbox = sinon.createSandbox();
+    sandbox = createSandbox();
   });
 
   afterEach(() => {
@@ -72,7 +72,7 @@ describe('getChildren tests', () => {
 
     expect(resultPartialCollection).to.eql(collection);
 
-    sinon.assert.calledOnceWithExactly(
+    assert.calledOnceWithExactly(
       debugLogger,
       'Loaded children from parent with identifier 8ea07cfe-a99f-4daa-b8e4-39d59adc9ed2.',
       {
@@ -95,10 +95,10 @@ describe('getChildren tests', () => {
       'Encountered error while loading children from parent with identifier 44402423-4305-4eab-b139-c363e8bd6b98: Not Found - The requested resource was not found.',
     );
 
-    sinon.assert.calledOnceWithExactly(
+    assert.calledOnceWithExactly(
       errorLogger,
       'Encountered error while loading children from parent with identifier 44402423-4305-4eab-b139-c363e8bd6b98: Not Found - The requested resource was not found.',
-      sinon.match.any,
+      match.any,
     );
   });
 
@@ -110,10 +110,10 @@ describe('getChildren tests', () => {
       'Encountered error while loading children from parent with identifier 36ae7d79-49e3-41a3-841c-424dc1706d9e: Forbidden - Client does not have permissions to perform action.',
     );
 
-    sinon.assert.calledOnceWithExactly(
+    assert.calledOnceWithExactly(
       errorLogger,
       'Encountered error while loading children from parent with identifier 36ae7d79-49e3-41a3-841c-424dc1706d9e: Forbidden - Client does not have permissions to perform action.',
-      sinon.match.any,
+      match.any,
     );
   });
 });

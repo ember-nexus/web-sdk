@@ -1,6 +1,6 @@
 import { GlobalRegistrator } from '@happy-dom/global-registrator';
 import { expect } from 'chai';
-import sinon, { SinonSandbox } from 'sinon';
+import { SinonSandbox, assert, createSandbox, match } from 'sinon';
 
 import ElementUuid from './msw-mock/handlers/index.js';
 import server from './msw-mock/server.js';
@@ -13,7 +13,7 @@ describe('ember nexus tests', () => {
 
   beforeEach(() => {
     server.listen();
-    sandbox = sinon.createSandbox();
+    sandbox = createSandbox();
     GlobalRegistrator.register();
     document.body.innerHTML = `<html>
          <body>
@@ -52,10 +52,10 @@ describe('ember nexus tests', () => {
         some: 'data',
       },
     });
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Loaded element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.',
-      sinon.match.any,
+      match.any,
     );
   });
 });

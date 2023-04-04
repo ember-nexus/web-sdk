@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import sinon, { SinonSandbox } from 'sinon';
+import { SinonSandbox, assert, createSandbox, match } from 'sinon';
 
 import putElement from '../../../src/endpoint/put-element.js';
 import logger from '../../../src/logger.js';
@@ -11,7 +11,7 @@ describe('putElement tests', () => {
 
   beforeEach(() => {
     server.listen();
-    sandbox = sinon.createSandbox();
+    sandbox = createSandbox();
   });
 
   afterEach(() => {
@@ -24,7 +24,7 @@ describe('putElement tests', () => {
 
     await putElement(ElementUuid.UpdateableElement, { some: 'data' });
 
-    sinon.assert.calledOnceWithExactly(
+    assert.calledOnceWithExactly(
       debugLogger,
       'Replaced data of element with identifier 360cfa23-86f0-4673-82e3-5b0b091814ec.',
       {
@@ -41,10 +41,10 @@ describe('putElement tests', () => {
       'Encountered error while updating element with identifier 7e8ff369-9f5c-4c9f-8343-5dc3498b650c: Not Found - The requested resource was not found.',
     );
 
-    sinon.assert.calledOnceWithExactly(
+    assert.calledOnceWithExactly(
       errorLogger,
       'Encountered error while updating element with identifier 7e8ff369-9f5c-4c9f-8343-5dc3498b650c: Not Found - The requested resource was not found.',
-      sinon.match.any,
+      match.any,
     );
   });
 
@@ -56,10 +56,10 @@ describe('putElement tests', () => {
       'Encountered error while updating element with identifier a0e5a97a-ac9a-4a96-921b-549df4a92e46: Forbidden - Client does not have permissions to perform action.',
     );
 
-    sinon.assert.calledOnceWithExactly(
+    assert.calledOnceWithExactly(
       errorLogger,
       'Encountered error while updating element with identifier a0e5a97a-ac9a-4a96-921b-549df4a92e46: Forbidden - Client does not have permissions to perform action.',
-      sinon.match.any,
+      match.any,
     );
   });
 });

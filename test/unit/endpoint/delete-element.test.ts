@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import sinon, { SinonSandbox } from 'sinon';
+import { SinonSandbox, assert, createSandbox, match } from 'sinon';
 
 import deleteElement from '../../../src/endpoint/delete-element.js';
 import logger from '../../../src/logger.js';
@@ -11,7 +11,7 @@ describe('deleteElement tests', () => {
 
   beforeEach(() => {
     server.listen();
-    sandbox = sinon.createSandbox();
+    sandbox = createSandbox();
   });
 
   afterEach(() => {
@@ -24,10 +24,7 @@ describe('deleteElement tests', () => {
 
     await deleteElement(ElementUuid.DeletableElement);
 
-    sinon.assert.calledOnceWithExactly(
-      debugLogger,
-      'Deleted element with identifier 41f4557f-0d3e-416f-a5d1-09d02433432d.',
-    );
+    assert.calledOnceWithExactly(debugLogger, 'Deleted element with identifier 41f4557f-0d3e-416f-a5d1-09d02433432d.');
   });
 
   it('should throw detailed error when element is not found', async () => {
@@ -38,10 +35,10 @@ describe('deleteElement tests', () => {
       'Encountered error while deleting element with identifier 7ecf787a-2c68-4817-816c-7328a7df0c2b: Not Found - The requested resource was not found.',
     );
 
-    sinon.assert.calledOnceWithExactly(
+    assert.calledOnceWithExactly(
       errorLogger,
       'Encountered error while deleting element with identifier 7ecf787a-2c68-4817-816c-7328a7df0c2b: Not Found - The requested resource was not found.',
-      sinon.match.any,
+      match.any,
     );
   });
 
@@ -53,10 +50,10 @@ describe('deleteElement tests', () => {
       'Encountered error while deleting element with identifier a0b82441-d830-44bc-8b58-a5709ca0fd32: Forbidden - Client does not have permissions to perform action.',
     );
 
-    sinon.assert.calledOnceWithExactly(
+    assert.calledOnceWithExactly(
       errorLogger,
       'Encountered error while deleting element with identifier a0b82441-d830-44bc-8b58-a5709ca0fd32: Forbidden - Client does not have permissions to perform action.',
-      sinon.match.any,
+      match.any,
     );
   });
 });
