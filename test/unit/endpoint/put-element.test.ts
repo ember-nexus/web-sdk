@@ -26,7 +26,7 @@ describe('putElement tests', () => {
 
     sinon.assert.calledOnceWithExactly(
       debugLogger,
-      'Replaced element data with identifier 360cfa23-86f0-4673-82e3-5b0b091814ec.',
+      'Replaced data of element with identifier 360cfa23-86f0-4673-82e3-5b0b091814ec.',
       {
         some: 'data',
       },
