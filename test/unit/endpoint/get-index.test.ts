@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 import sinon, { SinonSandbox } from 'sinon';
 
-import { getIndex } from '../../../src/endpoint/get-index.js';
-import { logger } from '../../../src/logger.js';
-import { server } from '../msw-mock/server.js';
+import getIndex from '../../../src/endpoint/get-index.js';
+import logger from '../../../src/logger.js';
+import server from '../msw-mock/server.js';
 
 describe('getIndex tests', () => {
   let sandbox: SinonSandbox;

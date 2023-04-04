@@ -1,17 +1,17 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { deleteElement } from './endpoint/delete-element.js';
-import { getElement } from './endpoint/get-element.js';
-import { patchElement } from './endpoint/patch-element.js';
-import { putElement } from './endpoint/put-element.js';
+import deleteElement from './endpoint/delete-element.js';
+import getElement from './endpoint/get-element.js';
+import patchElement from './endpoint/patch-element.js';
+import putElement from './endpoint/put-element.js';
 import GetElementEvent from './event/get-element-event.js';
 import Event from './event/index.js';
-import { logger } from './logger.js';
-import { Cache } from './type/cache.js';
-import { Node } from './type/node.js';
-import { Relation } from './type/relation.js';
+import logger from './logger.js';
+import Cache from './type/cache.js';
+import Node from './type/node.js';
+import Relation from './type/relation.js';
 
-export class EmberNexus {
+class EmberNexus {
   private _elementCache: Cache<Node | Relation> = new Cache<Node | Relation>();
   private _domElement: HTMLElement | null = null;
 
@@ -127,3 +127,5 @@ export class EmberNexus {
     });
   }
 }
+
+export default EmberNexus;

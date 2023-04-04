@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 import sinon, { SinonSandbox } from 'sinon';
 
-import { patchElement } from '../../../src/endpoint/patch-element.js';
-import { logger } from '../../../src/logger.js';
+import patchElement from '../../../src/endpoint/patch-element.js';
+import logger from '../../../src/logger.js';
 import ElementUuid from '../msw-mock/handlers/index.js';
-import { server } from '../msw-mock/server.js';
+import server from '../msw-mock/server.js';
 
 describe('patchElement tests', () => {
   let sandbox: SinonSandbox;

@@ -1,7 +1,7 @@
-import { Node } from './node.js';
-import { Relation } from './relation.js';
+import Node from './node.js';
+import Relation from './relation.js';
 
-export type PartialCollection = {
+type PartialCollection = {
   type: '_PartialCollection';
   id: string;
   totalNodes: number;
@@ -14,3 +14,5 @@ export type PartialCollection = {
   nodes: Node[];
   relations: Relation[];
 };
+
+export default PartialCollection;

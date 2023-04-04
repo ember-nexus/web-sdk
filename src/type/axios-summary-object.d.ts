@@ -1,4 +1,4 @@
-export type AxiosSummaryObject = {
+type AxiosSummaryObject = {
   request: null | {
     method: string | null;
     path: string | null;
@@ -12,3 +12,5 @@ export type AxiosSummaryObject = {
     data: unknown;
   };
 };
+
+export default AxiosSummaryObject;

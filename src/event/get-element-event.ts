@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { GetElementEventDetails } from '../type/get-element-event-details.js';
-import { Node } from '../type/node.js';
-import { Relation } from '../type/relation.js';
+import GetElementEventDetails from '../type/get-element-event-details.js';
+import Node from '../type/node.js';
+import Relation from '../type/relation.js';
 
 import Event from './index.js';
 

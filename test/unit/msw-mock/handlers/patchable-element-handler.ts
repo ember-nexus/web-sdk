@@ -2,7 +2,7 @@ import { RestHandler, rest } from 'msw';
 
 import ElementUuid from './index.js';
 
-export const patchableElementHandlers: RestHandler[] = [
+const patchableElementHandlers: RestHandler[] = [
   rest.patch(`http://localhost/${ElementUuid.PatchableElement}`, (_req, res, ctx) => {
     return res(ctx.status(204));
   }),
@@ -10,3 +10,4 @@ export const patchableElementHandlers: RestHandler[] = [
     return res(ctx.status(204));
   }),
 ];
+export default patchableElementHandlers;

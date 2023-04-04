@@ -2,7 +2,7 @@ import { RestHandler, rest } from 'msw';
 
 import ElementUuid from './index.js';
 
-export const forbiddenHandlers: RestHandler[] = [
+const forbiddenHandlers: RestHandler[] = [
   rest.get(`http://localhost/${ElementUuid.ForbiddenElement}`, (_req, res, ctx) => {
     return res(
       ctx.status(403),
@@ -116,3 +116,4 @@ export const forbiddenHandlers: RestHandler[] = [
     );
   }),
 ];
+export default forbiddenHandlers;

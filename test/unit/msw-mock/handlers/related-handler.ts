@@ -2,7 +2,7 @@ import { RestHandler, rest } from 'msw';
 
 import ElementUuid from './index.js';
 
-export const relatedHandler: RestHandler[] = [
+const relatedHandler: RestHandler[] = [
   rest.get(`http://localhost/${ElementUuid.ElementWithRelatedElements}/related`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
@@ -80,3 +80,4 @@ export const relatedHandler: RestHandler[] = [
     );
   }),
 ];
+export default relatedHandler;

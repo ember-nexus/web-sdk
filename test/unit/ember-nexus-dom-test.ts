@@ -3,10 +3,10 @@ import { expect } from 'chai';
 import sinon, { SinonSandbox } from 'sinon';
 
 import ElementUuid from './msw-mock/handlers/index.js';
-import { server } from './msw-mock/server.js';
-import { EmberNexus } from '../../src/ember-nexus.js';
+import server from './msw-mock/server.js';
+import EmberNexus from '../../src/ember-nexus.js';
 import GetElementEvent from '../../src/event/get-element-event.js';
-import { logger } from '../../src/logger.js';
+import logger from '../../src/logger.js';
 
 describe('ember nexus tests', () => {
   let sandbox: SinonSandbox;

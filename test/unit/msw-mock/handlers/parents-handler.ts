@@ -2,7 +2,7 @@ import { RestHandler, rest } from 'msw';
 
 import ElementUuid from './index.js';
 
-export const parentsHandler: RestHandler[] = [
+const parentsHandler: RestHandler[] = [
   rest.get(`http://localhost/${ElementUuid.ChildWithParents}/parents`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
@@ -56,3 +56,4 @@ export const parentsHandler: RestHandler[] = [
     );
   }),
 ];
+export default parentsHandler;

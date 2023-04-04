@@ -1,4 +1,4 @@
-export class Options {
+export default class Options {
   private static instance: Options;
 
   private _isCacheActive = true;

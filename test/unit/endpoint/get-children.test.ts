@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 import sinon, { SinonSandbox } from 'sinon';
 
-import { getChildren } from '../../../src/endpoint/get-children.js';
-import { logger } from '../../../src/logger.js';
+import getChildren from '../../../src/endpoint/get-children.js';
+import logger from '../../../src/logger.js';
 import ElementUuid from '../msw-mock/handlers/index.js';
-import { server } from '../msw-mock/server.js';
+import server from '../msw-mock/server.js';
 
 describe('getChildren tests', () => {
   let sandbox: SinonSandbox;

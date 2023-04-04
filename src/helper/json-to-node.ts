@@ -1,6 +1,6 @@
-import { Node } from '../type/node.js';
+import Node from '../type/node.js';
 
-export function jsonToNode(data: Record<string, unknown>): Node {
+export default function jsonToNode(data: Record<string, unknown>): Node {
   if (!Object.getOwnPropertyDescriptor(data, 'type')) {
     throw new Error("Data object does not contain property with name 'type'.");
   }
