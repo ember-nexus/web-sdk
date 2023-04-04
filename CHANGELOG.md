@@ -24,3 +24,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add functions EmberNexus.getElement(), .patchElement(), .putElement() and .deleteElement(), add tests for these
   functions
 - Update GitHub actions
+- Add first events
