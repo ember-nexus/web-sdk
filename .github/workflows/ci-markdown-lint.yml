@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     name: 'Markdown lint'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: docker pull tmknom/markdownlint
       - run: docker run --rm -v $(pwd):/work tmknom/markdownlint '**/*.md' --ignore node_modules
         shell: bash
