@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "type": "module",
   "engines": {
-    "node": ">= 18.12"
+    "node": ">= 19.0"
   },
   "devDependencies": {
     "@happy-dom/global-registrator": "^9.1.1",
