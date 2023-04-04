@@ -12,7 +12,7 @@ export async function putElement(uuid: typeof uuidv4, data: Record<string, unkno
     axios
       .put(`${options.apiHost}${uuid}`, data)
       .then(function () {
-        logger.debug(`Replaced element data with identifier ${uuid}.`, data);
+        logger.debug(`Replaced data of element with identifier ${uuid}.`, data);
         resolve();
       })
       .catch(function (error: Error) {
