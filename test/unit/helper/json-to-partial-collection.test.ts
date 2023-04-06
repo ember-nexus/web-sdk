@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { jsonToPartialCollection } from '../../../src/helper/json-to-partial-collection.js';
+import jsonToPartialCollection from '../../../src/helper/json-to-partial-collection.js';
 
 describe('jsonToPartialCollection tests', () => {
   it('should create valid partial collection from valid data', () => {

@@ -2,7 +2,7 @@ import { RestHandler, rest } from 'msw';
 
 import ElementUuid from './index.js';
 
-export const notFoundHandlers: RestHandler[] = [
+const notFoundHandlers: RestHandler[] = [
   rest.get(`http://localhost/${ElementUuid.NotFoundElement}`, (_req, res, ctx) => {
     return res(
       ctx.status(404),
@@ -116,3 +116,4 @@ export const notFoundHandlers: RestHandler[] = [
     );
   }),
 ];
+export default notFoundHandlers;

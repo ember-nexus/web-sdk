@@ -1,17 +1,17 @@
 import { expect } from 'chai';
-import sinon, { SinonSandbox } from 'sinon';
+import { SinonSandbox, assert, createSandbox, match } from 'sinon';
 
-import { patchElement } from '../../../src/endpoint/patch-element.js';
-import { logger } from '../../../src/logger.js';
+import patchElement from '../../../src/endpoint/patch-element.js';
+import logger from '../../../src/logger.js';
 import ElementUuid from '../msw-mock/handlers/index.js';
-import { server } from '../msw-mock/server.js';
+import server from '../msw-mock/server.js';
 
 describe('patchElement tests', () => {
   let sandbox: SinonSandbox;
 
   beforeEach(() => {
     server.listen();
-    sandbox = sinon.createSandbox();
+    sandbox = createSandbox();
   });
 
   afterEach(() => {
@@ -24,13 +24,9 @@ describe('patchElement tests', () => {
 
     await patchElement(ElementUuid.PatchableElement, { some: 'data' });
 
-    sinon.assert.calledOnceWithExactly(
-      debugLogger,
-      'Patched element with identifier f6b65db1-ab01-40b2-9adf-cf32ce4c7c92.',
-      {
-        some: 'data',
-      },
-    );
+    assert.calledOnceWithExactly(debugLogger, 'Patched element with identifier f6b65db1-ab01-40b2-9adf-cf32ce4c7c92.', {
+      some: 'data',
+    });
   });
 
   it('should throw detailed error when element is not found', async () => {
@@ -41,10 +37,10 @@ describe('patchElement tests', () => {
       'Encountered error while patching element with identifier 88e08c26-709e-49d6-b8cc-99662c42f692: Not Found - The requested resource was not found.',
     );
 
-    sinon.assert.calledOnceWithExactly(
+    assert.calledOnceWithExactly(
       errorLogger,
       'Encountered error while patching element with identifier 88e08c26-709e-49d6-b8cc-99662c42f692: Not Found - The requested resource was not found.',
-      sinon.match.any,
+      match.any,
     );
   });
 
@@ -56,10 +52,10 @@ describe('patchElement tests', () => {
       'Encountered error while patching element with identifier ed8415c9-8c27-4869-9832-44e94c6eb127: Forbidden - Client does not have permissions to perform action.',
     );
 
-    sinon.assert.calledOnceWithExactly(
+    assert.calledOnceWithExactly(
       errorLogger,
       'Encountered error while patching element with identifier ed8415c9-8c27-4869-9832-44e94c6eb127: Forbidden - Client does not have permissions to perform action.',
-      sinon.match.any,
+      match.any,
     );
   });
 });

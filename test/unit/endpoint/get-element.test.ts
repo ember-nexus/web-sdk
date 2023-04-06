@@ -1,21 +1,17 @@
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
-import sinon, { SinonSandbox } from 'sinon';
+import { expect } from 'chai';
+import { SinonSandbox, assert, createSandbox, match } from 'sinon';
 
-import { getElement } from '../../../src/endpoint/get-element.js';
-import { logger } from '../../../src/logger.js';
+import getElement from '../../../src/endpoint/get-element.js';
+import logger from '../../../src/logger.js';
 import ElementUuid from '../msw-mock/handlers/index.js';
-import { server } from '../msw-mock/server.js';
-
-chai.use(chaiAsPromised);
-const expect = chai.expect;
+import server from '../msw-mock/server.js';
 
 describe('getElement tests', () => {
   let sandbox: SinonSandbox;
 
   beforeEach(() => {
     server.listen();
-    sandbox = sinon.createSandbox();
+    sandbox = createSandbox();
   });
 
   afterEach(() => {
@@ -38,17 +34,13 @@ describe('getElement tests', () => {
       },
     });
 
-    sinon.assert.calledOnceWithExactly(
-      debugLogger,
-      'Loaded element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.',
-      {
-        type: 'Node',
-        id: 'c52569b7-1dd8-4018-9c3b-a710abd6982d',
-        data: {
-          some: 'data',
-        },
+    assert.calledOnceWithExactly(debugLogger, 'Loaded element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.', {
+      type: 'Node',
+      id: 'c52569b7-1dd8-4018-9c3b-a710abd6982d',
+      data: {
+        some: 'data',
       },
-    );
+    });
   });
 
   it('should throw detailed error when content is malformed', async () => {
@@ -59,15 +51,15 @@ describe('getElement tests', () => {
       "Data object does not contain property with name 'type'",
     );
 
-    const expectedErr = sinon.match
+    const expectedErr = match
       .instanceOf(Error)
       .and(
-        sinon.match.has(
+        match.has(
           'message',
           "Encountered error while loading element with identifier a770f244-d2fc-4a32-8aa5-d8c9204e2f01: Data object does not contain property with name 'type'.",
         ),
       );
-    sinon.assert.calledOnceWithExactly(errorLogger, sinon.match(expectedErr));
+    assert.calledOnceWithExactly(errorLogger, match(expectedErr));
   });
 
   it('should throw detailed error when element is not found', async () => {
@@ -78,10 +70,10 @@ describe('getElement tests', () => {
       'Encountered error while loading element with identifier ca443647-e292-4f2b-838f-95f24a60ea02: Not Found - The requested resource was not found.',
     );
 
-    sinon.assert.calledOnceWithExactly(
+    assert.calledOnceWithExactly(
       errorLogger,
       'Encountered error while loading element with identifier ca443647-e292-4f2b-838f-95f24a60ea02: Not Found - The requested resource was not found.',
-      sinon.match.any,
+      match.any,
     );
   });
 
@@ -93,10 +85,10 @@ describe('getElement tests', () => {
       'Encountered error while loading element with identifier ab6b0bbb-1523-44d8-9d8a-af4d630fa7ed: Forbidden - Client does not have permissions to perform action.',
     );
 
-    sinon.assert.calledOnceWithExactly(
+    assert.calledOnceWithExactly(
       errorLogger,
       'Encountered error while loading element with identifier ab6b0bbb-1523-44d8-9d8a-af4d630fa7ed: Forbidden - Client does not have permissions to perform action.',
-      sinon.match.any,
+      match.any,
     );
   });
 });

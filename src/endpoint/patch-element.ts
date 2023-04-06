@@ -1,11 +1,11 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError, default as axios } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-import { axiosErrorToSummaryObject } from '../helper/axios-error-to-summary-object.js';
-import { logger } from '../logger.js';
-import { Options } from '../options.js';
+import axiosErrorToSummaryObject from '../helper/axios-error-to-summary-object.js';
+import logger from '../logger.js';
+import Options from '../options.js';
 
-export async function patchElement(uuid: typeof uuidv4, data: Record<string, unknown>): Promise<void> {
+export default async function patchElement(uuid: typeof uuidv4, data: Record<string, unknown>): Promise<void> {
   return new Promise((resolve, reject) => {
     const options = Options.getInstance();
     uuid = uuid.toString();

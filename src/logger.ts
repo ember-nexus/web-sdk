@@ -8,4 +8,4 @@ const logger = new Logger({
 logger.settings.minLevel = 2;
 // logger.settings.minLevel = 6;
 
-export { logger };
+export default logger;

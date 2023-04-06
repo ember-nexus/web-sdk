@@ -1,6 +1,6 @@
 import { RestHandler, rest } from 'msw';
 
-export const indexHandler: RestHandler[] = [
+const indexHandler: RestHandler[] = [
   rest.get('http://localhost/', (_req, res, ctx) => {
     return res(
       ctx.status(200),
@@ -35,3 +35,4 @@ export const indexHandler: RestHandler[] = [
     );
   }),
 ];
+export default indexHandler;

@@ -1,6 +1,6 @@
-import { Relation } from '../type/relation.js';
+import Relation from '../type/relation.js';
 
-export function jsonToRelation(data: Record<string, unknown>): Relation {
+export default function jsonToRelation(data: Record<string, unknown>): Relation {
   if (!Object.getOwnPropertyDescriptor(data, 'type')) {
     throw new Error("Data object does not contain property with name 'type'.");
   }

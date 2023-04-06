@@ -1,3 +1,4 @@
-import { Element } from './element.js';
+import Element from './element.js';
 
-export type Node = Element;
+type Node = Element;
+export default Node;

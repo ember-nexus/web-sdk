@@ -2,7 +2,7 @@ import { RestHandler, rest } from 'msw';
 
 import ElementUuid from './index.js';
 
-export const malformedDataNodeHandlers: RestHandler[] = [
+const malformedDataNodeHandlers: RestHandler[] = [
   rest.get(`http://localhost/${ElementUuid.MalformedDataNode}`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
@@ -15,3 +15,4 @@ export const malformedDataNodeHandlers: RestHandler[] = [
     );
   }),
 ];
+export default malformedDataNodeHandlers;

@@ -1,10 +1,10 @@
-import { jsonToNode } from './json-to-node.js';
-import { jsonToRelation } from './json-to-relation.js';
-import { Node } from '../type/node.js';
-import { PartialCollection } from '../type/partial-collection.js';
-import { Relation } from '../type/relation.js';
+import jsonToNode from './json-to-node.js';
+import jsonToRelation from './json-to-relation.js';
+import Node from '../type/node.js';
+import PartialCollection from '../type/partial-collection.js';
+import Relation from '../type/relation.js';
 
-export function jsonToPartialCollection(data: Record<string, unknown>): PartialCollection {
+export default function jsonToPartialCollection(data: Record<string, unknown>): PartialCollection {
   if (!Object.getOwnPropertyDescriptor(data, 'type')) {
     throw new Error("Data object does not contain property with name 'type'.");
   }

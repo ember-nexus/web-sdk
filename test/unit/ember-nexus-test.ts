@@ -1,17 +1,17 @@
 import { expect } from 'chai';
-import sinon, { SinonSandbox } from 'sinon';
+import { SinonSandbox, assert, createSandbox, match } from 'sinon';
 
 import ElementUuid from './msw-mock/handlers/index.js';
-import { server } from './msw-mock/server.js';
-import { EmberNexus } from '../../src/ember-nexus.js';
-import { logger } from '../../src/logger.js';
+import server from './msw-mock/server.js';
+import EmberNexus from '../../src/ember-nexus.js';
+import logger from '../../src/logger.js';
 
 describe('ember nexus tests', () => {
   let sandbox: SinonSandbox;
 
   beforeEach(() => {
     server.listen();
-    sandbox = sinon.createSandbox();
+    sandbox = createSandbox();
   });
 
   afterEach(() => {
@@ -36,12 +36,12 @@ describe('ember nexus tests', () => {
     });
     const cachedNode = await emberNexus.getElement(ElementUuid.DataNode, true);
     expect(cachedNode).to.eql(node);
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Loaded element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.',
-      sinon.match.any,
+      match.any,
     );
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Returned element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d from cache.',
     );
@@ -71,17 +71,17 @@ describe('ember nexus tests', () => {
       'Unable to find element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d in cache.',
     );
 
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Loaded element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.',
-      sinon.match.any,
+      match.any,
     );
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Replaced data of element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.',
-      sinon.match.any,
+      match.any,
     );
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Removed element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d from cache as it was updated.',
     );
@@ -109,26 +109,26 @@ describe('ember nexus tests', () => {
     const newDataFromCache = await emberNexus.getElement(ElementUuid.DataNode);
     expect(newDataFromCache).to.not.be.empty;
 
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Loaded element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.',
-      sinon.match.any,
+      match.any,
     );
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Replaced data of element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.',
-      sinon.match.any,
+      match.any,
     );
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Removed element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d from cache as it was updated.',
     );
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Loaded element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.',
-      sinon.match.any,
+      match.any,
     );
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Returned element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d from cache.',
     );
@@ -158,17 +158,17 @@ describe('ember nexus tests', () => {
       'Unable to find element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d in cache.',
     );
 
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Loaded element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.',
-      sinon.match.any,
+      match.any,
     );
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Patched element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.',
-      sinon.match.any,
+      match.any,
     );
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Removed element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d from cache as it was patched.',
     );
@@ -196,26 +196,26 @@ describe('ember nexus tests', () => {
     const newDataFromCache = await emberNexus.getElement(ElementUuid.DataNode);
     expect(newDataFromCache).to.not.be.empty;
 
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Loaded element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.',
-      sinon.match.any,
+      match.any,
     );
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Patched element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.',
-      sinon.match.any,
+      match.any,
     );
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Removed element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d from cache as it was patched.',
     );
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Loaded element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.',
-      sinon.match.any,
+      match.any,
     );
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Returned element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d from cache.',
     );
@@ -245,16 +245,13 @@ describe('ember nexus tests', () => {
       'Unable to find element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d in cache.',
     );
 
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(
       debugLogger,
       'Loaded element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.',
-      sinon.match.any,
+      match.any,
     );
-    sinon.assert.calledWithExactly(
-      debugLogger,
-      'Deleted element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.',
-    );
-    sinon.assert.calledWithExactly(
+    assert.calledWithExactly(debugLogger, 'Deleted element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.');
+    assert.calledWithExactly(
       debugLogger,
       'Removed element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d from cache as it was deleted.',
     );

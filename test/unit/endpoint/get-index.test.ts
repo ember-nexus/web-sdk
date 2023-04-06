@@ -1,16 +1,16 @@
 import { expect } from 'chai';
-import sinon, { SinonSandbox } from 'sinon';
+import { SinonSandbox, assert, createSandbox } from 'sinon';
 
-import { getIndex } from '../../../src/endpoint/get-index.js';
-import { logger } from '../../../src/logger.js';
-import { server } from '../msw-mock/server.js';
+import getIndex from '../../../src/endpoint/get-index.js';
+import logger from '../../../src/logger.js';
+import server from '../msw-mock/server.js';
 
 describe('getIndex tests', () => {
   let sandbox: SinonSandbox;
 
   beforeEach(() => {
     server.listen();
-    sandbox = sinon.createSandbox();
+    sandbox = createSandbox();
   });
 
   afterEach(() => {
@@ -56,7 +56,7 @@ describe('getIndex tests', () => {
 
     expect(resultPartialCollection).to.eql(collection);
 
-    sinon.assert.calledOnceWithExactly(debugLogger, 'Loaded index.', {
+    assert.calledOnceWithExactly(debugLogger, 'Loaded index.', {
       page: 1,
       pageSize: 25,
       collection: collection,

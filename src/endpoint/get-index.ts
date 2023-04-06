@@ -1,12 +1,12 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError, default as axios } from 'axios';
 
-import { axiosErrorToSummaryObject } from '../helper/axios-error-to-summary-object.js';
-import { jsonToPartialCollection } from '../helper/json-to-partial-collection.js';
-import { logger } from '../logger.js';
-import { Options } from '../options.js';
-import { PartialCollection } from '../type/partial-collection.js';
+import axiosErrorToSummaryObject from '../helper/axios-error-to-summary-object.js';
+import jsonToPartialCollection from '../helper/json-to-partial-collection.js';
+import logger from '../logger.js';
+import Options from '../options.js';
+import PartialCollection from '../type/partial-collection.js';
 
-export async function getIndex(page = 1, pageSize: null | number = null): Promise<PartialCollection> {
+export default async function getIndex(page = 1, pageSize: null | number = null): Promise<PartialCollection> {
   const options = Options.getInstance();
   if (pageSize === null) {
     pageSize = options.pageSize;

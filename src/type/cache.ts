@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { TimeToLifeReference } from './time-to-life-reference.js';
+import TimeToLifeReference from './time-to-life-reference.js';
 
 interface ICache<T> {
   set(uuid: typeof uuidv4, data: T): void;
@@ -15,7 +15,7 @@ type UuidMappedObject<T> = {
   [key: string]: T;
 };
 
-export class Cache<T> implements ICache<T> {
+class Cache<T> implements ICache<T> {
   private _maxAgeInSeconds: number;
   private _cache: UuidMappedObject<T>;
   private _timeToLifeStack: TimeToLifeReference[];
@@ -78,3 +78,5 @@ export class Cache<T> implements ICache<T> {
     }
   }
 }
+
+export default Cache;

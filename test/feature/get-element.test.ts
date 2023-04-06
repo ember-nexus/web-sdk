@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { getElement } from '../../src/endpoint/get-element.js';
+import getElement from '../../src/endpoint/get-element.js';
 
 describe('getElement tests', () => {
   it('should load an existing element from the api', async () => {
