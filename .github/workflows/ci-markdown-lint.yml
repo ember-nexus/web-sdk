@@ -12,5 +12,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: docker pull tmknom/markdownlint
-      - run: docker run --rm -v $(pwd):/work tmknom/markdownlint '**/*.md' --ignore node_modules
+      - run: docker run --rm -v $(pwd):/work tmknom/markdownlint '**/*.md' --ignore node_modules --ignore CHANGELOG.md
         shell: bash
