@@ -26,3 +26,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update GitHub actions
 - Add first events
 - Clean up import style
+- Temporarily change project name to @ember-nexus-tmp/web-sdk, as name conflict is still not resolved
