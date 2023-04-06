@@ -13,6 +13,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      # Import GPG
+      # see also https://github.com/Nautilus-Cyberneering/pygithub
+      - name: Import GPG key
+        id: import-gpg
+        uses: crazy-max/ghaction-import-gpg@v4
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+
+      # Debug GPG
+      - name: GPG user IDs
+        run: |
+          echo "fingerprint: ${{ steps.import-gpg.outputs.fingerprint }}"
+          echo "keyid:       ${{ steps.import-gpg.outputs.keyid }}"
+          echo "name:        ${{ steps.import-gpg.outputs.name }}"
+          echo "email:       ${{ steps.import-gpg.outputs.email }}"
+
       # Setup Node.js environment
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -23,8 +42,8 @@ jobs:
       # Configure Git
       - name: Git configuration
         run: |
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "GitHub Actions"
+          git config --global user.email "${{ steps.import-gpg.outputs.email }}"
+          git config --global user.name "${{ steps.import-gpg.outputs.name }}"
 
       # Bump package version
       # Use tag latest

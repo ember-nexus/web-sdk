@@ -7,8 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Add bot account for signed release commits via CI
+
 ## 0.0.5 - 2023-04-06
+
 ### Added
+
 - Changelog
 - CI: Markdown linter
 - Add docs folder
