@@ -117,4 +117,4 @@ jobs:
       - uses: JasonEtco/create-an-issue@v2
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-          NEW_VERSION: ${{ NEW_VERSION }}
+          NEW_VERSION: ${{ env.NEW_VERSION }}
