@@ -113,3 +113,8 @@ jobs:
           body: ${{ steps.get-changelog.outputs.changelog }}
           prerelease: ${{ startsWith(github.event.inputs.release-type, 'pre') }}
           token: ${{ secrets.RELEASE_TOKEN }}
+
+      - uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          NEW_VERSION: ${{ NEW_VERSION }}
