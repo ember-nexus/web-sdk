@@ -118,3 +118,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           NEW_VERSION: ${{ env.NEW_VERSION }}
+        with:
+          filename: .github/ISSUE_TEMPLATE_POST_RELEASE_TASK.md
