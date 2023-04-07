@@ -121,12 +121,11 @@ jobs:
             -H "Authorization: ${{ secrets.ORIGINSTAMP_AUTH_TOKEN }}" \
             -d \
             "{
-              \"comment\": \"Release ${{ env.NEW_VERSION }} of ${{ env.GITHUB_REPOSITORY }}\",
-              \"hash\": \"${{ env.GITHUB_SHA }}\"
+              \"comment\": \"Release ${{ env.NEW_VERSION }} of ember-nexus/web-sdk\",
+              \"hash\": \"${{ env.SHA }}\"
             }"
         env:
-          GITHUB_SHA: ${{ env.GITHUB_SHA }}
-          GITHUB_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
+          SHA: ${{ github.sha }}
 
       - uses: JasonEtco/create-an-issue@v2
         env:
