@@ -124,6 +124,9 @@ jobs:
               \"comment\": \"Release ${{ env.NEW_VERSION }} of ${{ env.GITHUB_REPOSITORY }}\",
               \"hash\": \"${{ env.GITHUB_SHA }}\"
             }"
+        env:
+          GITHUB_SHA: ${{ env.GITHUB_SHA }}
+          GITHUB_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
 
       - uses: JasonEtco/create-an-issue@v2
         env:
