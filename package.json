@@ -1,6 +1,6 @@
 {
   "name": "@ember-nexus-tmp/web-sdk",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "type": "module",
   "engines": {
     "node": ">= 19.0"
