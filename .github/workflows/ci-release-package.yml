@@ -116,10 +116,14 @@ jobs:
 
       - name: Initiate Originstamp certificate
         run: |
-          curl -X POST "http://api.originstamp.com/v4/timestamp/create"\
-            -H "Content-Type: application/json"\
-            -H "Authorization: ${{ secrets.ORIGINSTAMP_AUTH_TOKEN }}"\
-            -d '{"comment": "test", "hash": "${{ env.GITHUB_SHA }}"}'
+          curl -X POST "http://api.originstamp.com/v4/timestamp/create" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: ${{ secrets.ORIGINSTAMP_AUTH_TOKEN }}" \
+            -d \
+            "{
+              \"comment\": \"Release ${{ env.NEW_VERSION }} of ${{ env.GITHUB_REPOSITORY }}\",
+              \"hash\": \"${{ env.GITHUB_SHA }}\"
+            }"
 
       - uses: JasonEtco/create-an-issue@v2
         env:
