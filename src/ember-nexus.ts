@@ -1,6 +1,7 @@
+import 'reflect-metadata';
+
 import { v4 as uuidv4 } from 'uuid';
 
-import deleteElement from './endpoint/delete-element.js';
 import getElement from './endpoint/get-element.js';
 import patchElement from './endpoint/patch-element.js';
 import putElement from './endpoint/put-element.js';
@@ -141,16 +142,20 @@ class EmberNexus {
 
   async deleteElement(uuid: typeof uuidv4): Promise<void> {
     return new Promise((resolve, reject) => {
-      deleteElement(uuid)
-        .then(() => {
-          this._elementCache.remove(uuid);
-          logger.debug(`Removed element with identifier ${uuid.toString()} from cache as it was deleted.`);
-          resolve();
-          return;
-        })
-        .catch((error) => {
-          reject(error);
-        });
+      if (!uuid) {
+        reject();
+      }
+      resolve();
+      // deleteElement(uuid)
+      //   .then(() => {
+      //     this._elementCache.remove(uuid);
+      //     logger.debug(`Removed element with identifier ${uuid.toString()} from cache as it was deleted.`);
+      //     resolve();
+      //     return;
+      //   })
+      //   .catch((error) => {
+      //     reject(error);
+      //   });
     });
   }
 }
