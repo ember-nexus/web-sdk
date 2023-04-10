@@ -1,11 +1,12 @@
 import { expect } from 'chai';
 import { SinonSandbox, assert, createSandbox } from 'sinon';
 
-import getIndex from '../../../src/endpoint/get-index.js';
-import logger from '../../../src/logger.js';
+import GetIndexEndpoint from '../../../src/Endpoint/GetIndexEndpoint.js';
+import Options from '../../../src/Options.js';
+import testLogger from '../../testLogger.js';
 import server from '../msw-mock/server.js';
 
-describe('getIndex tests', () => {
+describe('GetIndexEndpoint tests', () => {
   let sandbox: SinonSandbox;
 
   beforeEach(() => {
@@ -19,9 +20,12 @@ describe('getIndex tests', () => {
   });
 
   it('should load existing elements from the api', async () => {
-    const debugLogger = sandbox.stub(logger, 'debug');
+    const debugLogger = sandbox.stub(testLogger, 'debug');
+    const options = new Options();
 
-    const resultPartialCollection = await getIndex().then((partialCollection) => {
+    const getIndexEndpoint = new GetIndexEndpoint(testLogger, options);
+
+    const resultPartialCollection = await getIndexEndpoint.getIndex().then((partialCollection) => {
       return partialCollection;
     });
 

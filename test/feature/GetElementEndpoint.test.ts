@@ -1,11 +1,17 @@
 import { expect } from 'chai';
 
-import getElement from '../../src/endpoint/get-element.js';
+import GetElementEndpoint from '../../src/Endpoint/GetElementEndpoint.js';
+import Options from '../../src/Options.js';
+import testLogger from '../testLogger.js';
 
-describe('getElement tests', () => {
+describe('GetElementEndpoint tests', () => {
   it('should load an existing element from the api', async () => {
     const testUuid = '439dc91f-10c2-4da2-babb-41fa33e52f26';
-    const node = await getElement(testUuid).then((node) => {
+
+    const options = new Options();
+    const getElementEndpoint = new GetElementEndpoint(testLogger, options);
+
+    const node = await getElementEndpoint.getElement(testUuid).then((node) => {
       return node;
     });
 

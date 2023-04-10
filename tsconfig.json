@@ -21,9 +21,7 @@
     "noImplicitAny": false,
     "noImplicitThis": false,
     "strictNullChecks": false,
-    "declaration": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "declaration": true
   },
   "include": ["src/**/*", "test/**/*"]
 }

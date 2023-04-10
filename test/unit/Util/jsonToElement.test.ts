@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import jsonToElement from '../../../src/helper/json-to-element.js';
+import jsonToElement from '../../../src/Util/jsonToElement.js';
 
 describe('jsonToElement tests', () => {
   it('should create valid node from valid data', () => {

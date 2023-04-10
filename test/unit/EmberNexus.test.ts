@@ -1,10 +1,11 @@
 import { expect } from 'chai';
 import { SinonSandbox, assert, createSandbox, match } from 'sinon';
+// import { SinonSandbox, createSandbox } from 'sinon';
 
 import ElementUuid from './msw-mock/handlers/index.js';
 import server from './msw-mock/server.js';
-import EmberNexus from '../../src/ember-nexus.js';
-import logger from '../../src/logger.js';
+import EmberNexus from '../../src/EmberNexus.js';
+import testLogger from '../testLogger.js';
 
 describe('ember nexus tests', () => {
   let sandbox: SinonSandbox;
@@ -20,8 +21,9 @@ describe('ember nexus tests', () => {
   });
 
   it('should be able to get elements from the API and cache', async () => {
-    const debugLogger = sandbox.stub(logger, 'debug');
-    const emberNexus = new EmberNexus();
+    const debugLogger = sandbox.stub(testLogger, 'debug');
+    const emberNexus = EmberNexus.create(testLogger);
+
     await expect(emberNexus.getElement(ElementUuid.DataNode, true)).to.be.rejectedWith(
       Error,
       'Unable to find element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d in cache.',
@@ -48,8 +50,8 @@ describe('ember nexus tests', () => {
   });
 
   it('should be able to update elements to the API and clears the cache', async () => {
-    const debugLogger = sandbox.stub(logger, 'debug');
-    const emberNexus = new EmberNexus();
+    const debugLogger = sandbox.stub(testLogger, 'debug');
+    const emberNexus = EmberNexus.create(testLogger);
 
     // verify that the cache is initially empty
     await expect(emberNexus.getElement(ElementUuid.DataNode, true)).to.be.rejectedWith(
@@ -88,8 +90,8 @@ describe('ember nexus tests', () => {
   });
 
   it('should be able to update elements to the API and refreshes the cache', async () => {
-    const debugLogger = sandbox.stub(logger, 'debug');
-    const emberNexus = new EmberNexus();
+    const debugLogger = sandbox.stub(testLogger, 'debug');
+    const emberNexus = EmberNexus.create(testLogger);
 
     // verify that the cache is initially empty
     await expect(emberNexus.getElement(ElementUuid.DataNode, true)).to.be.rejectedWith(
@@ -135,8 +137,8 @@ describe('ember nexus tests', () => {
   });
 
   it('should be able to patch elements to the API and clears the cache', async () => {
-    const debugLogger = sandbox.stub(logger, 'debug');
-    const emberNexus = new EmberNexus();
+    const debugLogger = sandbox.stub(testLogger, 'debug');
+    const emberNexus = EmberNexus.create(testLogger);
 
     // verify that the cache is initially empty
     await expect(emberNexus.getElement(ElementUuid.DataNode, true)).to.be.rejectedWith(
@@ -175,8 +177,8 @@ describe('ember nexus tests', () => {
   });
 
   it('should be able to patch elements to the API and refreshes the cache', async () => {
-    const debugLogger = sandbox.stub(logger, 'debug');
-    const emberNexus = new EmberNexus();
+    const debugLogger = sandbox.stub(testLogger, 'debug');
+    const emberNexus = EmberNexus.create(testLogger);
 
     // verify that the cache is initially empty
     await expect(emberNexus.getElement(ElementUuid.DataNode, true)).to.be.rejectedWith(
@@ -222,8 +224,8 @@ describe('ember nexus tests', () => {
   });
 
   it('should be able to delete elements from the API and clears the cache', async () => {
-    const debugLogger = sandbox.stub(logger, 'debug');
-    const emberNexus = new EmberNexus();
+    const debugLogger = sandbox.stub(testLogger, 'debug');
+    const emberNexus = EmberNexus.create(testLogger);
 
     // verify that the cache is initially empty
     await expect(emberNexus.getElement(ElementUuid.DataNode, true)).to.be.rejectedWith(

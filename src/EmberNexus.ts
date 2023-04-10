@@ -1,23 +1,60 @@
-import 'reflect-metadata';
-
 import { v4 as uuidv4 } from 'uuid';
 
-import getElement from './endpoint/get-element.js';
-import patchElement from './endpoint/patch-element.js';
-import putElement from './endpoint/put-element.js';
-import DeleteElementEvent from './event/delete-element-event.js';
-import GetElementEvent from './event/get-element-event.js';
-import Event from './event/index.js';
-import PatchElementEvent from './event/patch-element-event.js';
-import PutElementEvent from './event/put-element-event.js';
-import logger from './logger.js';
-import Cache from './type/cache.js';
-import Node from './type/node.js';
-import Relation from './type/relation.js';
+import DefaultLogger from './DefaultLogger.js';
+import DeleteElementEndpoint from './Endpoint/DeleteElementEndpoint.js';
+import GetElementEndpoint from './Endpoint/GetElementEndpoint.js';
+import PatchElementEndpoint from './Endpoint/PatchElementEndpoint.js';
+import PutElementEndpoint from './Endpoint/PutElementEndpoint.js';
+import DeleteElementEvent from './Event/DeleteElementEvent.js';
+import GetElementEvent from './Event/GetElementEvent.js';
+import Event from './Event/index.js';
+import PatchElementEvent from './Event/PatchElementEvent.js';
+import PutElementEvent from './Event/PutElementEvent.js';
+import Options from './Options.js';
+import Cache from './Type/Cache.js';
+import LoggerInterface from './Type/LoggerInterface.js';
+import Node from './Type/Node.js';
+import OptionsInterface from './Type/OptionsInterface.js';
+import Relation from './Type/Relation.js';
 
 class EmberNexus {
   private _elementCache: Cache<Node | Relation> = new Cache<Node | Relation>();
   private _domElement: HTMLElement | null = null;
+
+  constructor(
+    private logger: LoggerInterface,
+    private options: OptionsInterface,
+    private getElementEndpoint: GetElementEndpoint,
+    private patchElementEndpoint: PatchElementEndpoint,
+    private putElementEndpoint: PutElementEndpoint,
+    private deleteElementEndpoint: DeleteElementEndpoint,
+  ) {}
+
+  static create(logger: LoggerInterface | null = null, options: OptionsInterface | null = null): EmberNexus {
+    if (logger === null) {
+      logger = new DefaultLogger();
+    }
+    if (options === null) {
+      options = new Options();
+    }
+    return new EmberNexus(
+      logger,
+      options,
+      new GetElementEndpoint(logger, options),
+      new PatchElementEndpoint(logger, options),
+      new PutElementEndpoint(logger, options),
+      new DeleteElementEndpoint(logger, options),
+    );
+  }
+
+  debug(): { options: OptionsInterface; elementCache: Cache<Node | Relation> } {
+    const debugData = {
+      options: this.options,
+      elementCache: this._elementCache,
+    };
+    this.logger.debug(debugData);
+    return debugData;
+  }
 
   bindToDomElement(domElement: HTMLElement): void {
     if (this._domElement) {
@@ -32,6 +69,10 @@ class EmberNexus {
     this._domElement.addEventListener(Event.PutElementEvent, this.handlePutElementEvent.bind(this));
     this._domElement.addEventListener(Event.PatchElementEvent, this.handlePatchElementEvent.bind(this));
     this._domElement.addEventListener(Event.DeleteElementEvent, this.handleDeleteElementEvent.bind(this));
+  }
+
+  getOptions(): OptionsInterface {
+    return this.options;
   }
 
   handleGetElementEvent(event: GetElementEvent): void {
@@ -61,7 +102,7 @@ class EmberNexus {
   async getElement(uuid: typeof uuidv4, cacheOnly = false): Promise<Node | Relation> {
     return new Promise((resolve, reject) => {
       if (this._elementCache.has(uuid)) {
-        logger.debug(`Returned element with identifier ${uuid.toString()} from cache.`);
+        this.logger.debug(`Returned element with identifier ${uuid.toString()} from cache.`);
         resolve(this._elementCache.get(uuid));
         return;
       }
@@ -69,7 +110,8 @@ class EmberNexus {
         reject(new Error(`Unable to find element with identifier ${uuid.toString()} in cache.`));
         return;
       }
-      getElement(uuid)
+      this.getElementEndpoint
+        .getElement(uuid)
         .then((element) => {
           this._elementCache.set(uuid, element);
           resolve(element);
@@ -86,10 +128,11 @@ class EmberNexus {
     loadNewData = false,
   ): Promise<void | Node | Relation> {
     return new Promise((resolve, reject) => {
-      putElement(uuid, data)
+      this.putElementEndpoint
+        .putElement(uuid, data)
         .then(async () => {
           this._elementCache.remove(uuid);
-          logger.debug(`Removed element with identifier ${uuid.toString()} from cache as it was updated.`);
+          this.logger.debug(`Removed element with identifier ${uuid.toString()} from cache as it was updated.`);
           if (loadNewData) {
             await this.getElement(uuid)
               .then((element) => {
@@ -116,10 +159,11 @@ class EmberNexus {
     loadNewData = false,
   ): Promise<void | Node | Relation> {
     return new Promise((resolve, reject) => {
-      patchElement(uuid, data)
+      this.patchElementEndpoint
+        .patchElement(uuid, data)
         .then(async () => {
           this._elementCache.remove(uuid);
-          logger.debug(`Removed element with identifier ${uuid.toString()} from cache as it was patched.`);
+          this.logger.debug(`Removed element with identifier ${uuid.toString()} from cache as it was patched.`);
           if (loadNewData) {
             await this.getElement(uuid)
               .then((element) => {
@@ -142,20 +186,17 @@ class EmberNexus {
 
   async deleteElement(uuid: typeof uuidv4): Promise<void> {
     return new Promise((resolve, reject) => {
-      if (!uuid) {
-        reject();
-      }
-      resolve();
-      // deleteElement(uuid)
-      //   .then(() => {
-      //     this._elementCache.remove(uuid);
-      //     logger.debug(`Removed element with identifier ${uuid.toString()} from cache as it was deleted.`);
-      //     resolve();
-      //     return;
-      //   })
-      //   .catch((error) => {
-      //     reject(error);
-      //   });
+      this.deleteElementEndpoint
+        .deleteElement(uuid)
+        .then(() => {
+          this._elementCache.remove(uuid);
+          this.logger.debug(`Removed element with identifier ${uuid.toString()} from cache as it was deleted.`);
+          resolve();
+          return;
+        })
+        .catch((error) => {
+          reject(error);
+        });
     });
   }
 }

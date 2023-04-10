@@ -1,5 +1,4 @@
 import { AxiosError, default as axios } from 'axios';
-import { Service } from 'typedi';
 import { v4 as uuidv4 } from 'uuid';
 
 import LoggerInterface from '../Type/LoggerInterface.js';
@@ -9,7 +8,6 @@ import Relation from '../Type/Relation.d.js';
 import axiosErrorToSummaryObject from '../Util/axiosErrorToSummaryObject.js';
 import jsonToElement from '../Util/jsonToElement.js';
 
-@Service()
 class GetElementEndpoint {
   constructor(private logger: LoggerInterface, private options: OptionsInterface) {}
 

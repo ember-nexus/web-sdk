@@ -10,32 +10,36 @@ export default class Options implements OptionsInterface {
     return this.apiHost;
   }
 
-  setApiHost(apiHost: string) {
+  setApiHost(apiHost: string): Options {
     this.apiHost = apiHost;
+    return this;
   }
 
   getPageSize(): number {
     return this.pageSize;
   }
 
-  setPageSize(pageSize: number) {
+  setPageSize(pageSize: number): Options {
     this.pageSize = pageSize;
+    return this;
   }
 
   getToken(): string | null {
     return this.token;
   }
 
-  setToken(token: string | null) {
+  setToken(token: string | null): Options {
     this.token = token;
+    return this;
   }
 
   isCacheActive(): boolean {
     return this.cacheActive;
   }
 
-  setCacheActive(isCacheActive: boolean) {
+  setCacheActive(isCacheActive: boolean): Options {
     this.cacheActive = isCacheActive;
+    return this;
   }
 
   isLoggedIn(): boolean {

@@ -1,5 +1,4 @@
 import { AxiosError, default as axios } from 'axios';
-import { Service } from 'typedi';
 import { v4 as uuidv4 } from 'uuid';
 
 import LoggerInterface from '../Type/LoggerInterface.js';
@@ -8,7 +7,6 @@ import PartialCollection from '../Type/PartialCollection.js';
 import axiosErrorToSummaryObject from '../Util/axiosErrorToSummaryObject.js';
 import jsonToPartialCollection from '../Util/jsonToPartialCollection.js';
 
-@Service()
 class GetRelatedEndpoint {
   constructor(private logger: LoggerInterface, private options: OptionsInterface) {}
 
