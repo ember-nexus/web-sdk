@@ -83,11 +83,15 @@ jobs:
           git commit -m "chore: release ${{ env.NEW_VERSION }}"
           git tag ${{ env.NEW_VERSION }}
 
-      # Publish version to public repository
+      # Build library
       - name: Publish
         run: |
+          yarn install --dev
           yarn build:release
-          yarn publish --verbose --access public --tag ${{ env.RELEASE_TAG }}
+
+      # Publish version to public repository
+      - name: Publish
+        run: yarn publish --verbose --access public --tag ${{ env.RELEASE_TAG }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
