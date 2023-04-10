@@ -1,8 +1,27 @@
 {
-  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "sourceMap": false,
-    "removeComments": true
+    "target": "ES2022",
+    "module": "Node16",
+    "lib": [
+      "ES2021",
+      "dom"
+    ],
+    "moduleResolution": "nodenext",
+    "outDir": "dist",
+    "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "alwaysStrict": true,
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "strictNullChecks": false,
+    "declaration": true
   },
   "include": ["src/**/*"]
 }
