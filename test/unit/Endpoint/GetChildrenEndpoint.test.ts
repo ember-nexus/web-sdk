@@ -20,7 +20,7 @@ describe('GetChildrenEndpoint tests', () => {
     server.resetHandlers();
   });
 
-  it('should load existing elements from the api', async () => {
+  it('should load existing elements from the api without token', async () => {
     const debugLogger = sandbox.stub(testLogger, 'debug');
     const options = new Options();
 
@@ -81,6 +81,76 @@ describe('GetChildrenEndpoint tests', () => {
     assert.calledOnceWithExactly(
       debugLogger,
       'Loaded children from parent with identifier 8ea07cfe-a99f-4daa-b8e4-39d59adc9ed2.',
+      {
+        page: 1,
+        pageSize: 25,
+        collection: collection,
+      },
+    );
+  });
+
+  it('should load existing elements from the api with token', async () => {
+    const debugLogger = sandbox.stub(testLogger, 'debug');
+    const options = new Options();
+    options.setToken('secret-token:gRDDumwGJbb');
+
+    const getChildrenEndpoint = new GetChildrenEndpoint(testLogger, options);
+
+    const resultPartialCollection = await getChildrenEndpoint
+      .getChildren(ElementUuid.AuthenticatedDataNode)
+      .then((partialCollection) => {
+        return partialCollection;
+      });
+
+    const collection = {
+      type: '_PartialCollection',
+      id: '/844d2d68-9cba-41c4-91b5-1dd76cc757d7/children?page=1&pageSize=25',
+      totalNodes: 2,
+      links: {
+        first: '/844d2d68-9cba-41c4-91b5-1dd76cc757d7/children?page=1&pageSize=25',
+        last: '/844d2d68-9cba-41c4-91b5-1dd76cc757d7/children?page=1&pageSize=25',
+        next: null,
+        previous: null,
+      },
+      nodes: [
+        {
+          type: 'Node',
+          id: '81771a82-b82b-407a-a7a6-ceec5835f260',
+          data: {
+            some: 'data',
+          },
+        },
+        {
+          type: 'Node',
+          id: 'ba9fceb7-32f0-476e-af47-0e69396cf674',
+          data: {
+            some: 'data',
+          },
+        },
+      ],
+      relations: [
+        {
+          type: 'OWNS',
+          id: '58f87378-bf72-40c4-a89f-d3d86c29a241',
+          start: '844d2d68-9cba-41c4-91b5-1dd76cc757d7',
+          end: '81771a82-b82b-407a-a7a6-ceec5835f260',
+          data: {},
+        },
+        {
+          type: 'OWNS',
+          id: '40ce6aec-0dad-4ebf-8963-db1512c02274',
+          start: '844d2d68-9cba-41c4-91b5-1dd76cc757d7',
+          end: 'ba9fceb7-32f0-476e-af47-0e69396cf674',
+          data: {},
+        },
+      ],
+    };
+
+    expect(resultPartialCollection).to.eql(collection);
+
+    assert.calledOnceWithExactly(
+      debugLogger,
+      'Loaded children from parent with identifier 844d2d68-9cba-41c4-91b5-1dd76cc757d7.',
       {
         page: 1,
         pageSize: 25,

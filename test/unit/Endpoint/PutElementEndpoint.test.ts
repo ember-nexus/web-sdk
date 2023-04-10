@@ -20,7 +20,7 @@ describe('PutElementEndpoint tests', () => {
     server.resetHandlers();
   });
 
-  it('should replace data of an existing element from the api', async () => {
+  it('should replace data of an existing element from the api without token', async () => {
     const debugLogger = sandbox.stub(testLogger, 'debug');
     const options = new Options();
 
@@ -31,6 +31,24 @@ describe('PutElementEndpoint tests', () => {
     assert.calledOnceWithExactly(
       debugLogger,
       'Replaced data of element with identifier 360cfa23-86f0-4673-82e3-5b0b091814ec.',
+      {
+        some: 'data',
+      },
+    );
+  });
+
+  it('should replace data of an existing element from the  with token', async () => {
+    const debugLogger = sandbox.stub(testLogger, 'debug');
+    const options = new Options();
+    options.setToken('secret-token:gRDDumwGJbb');
+
+    const putElementEndpoint = new PutElementEndpoint(testLogger, options);
+
+    await putElementEndpoint.putElement(ElementUuid.AuthenticatedDataNode, { some: 'data' });
+
+    assert.calledOnceWithExactly(
+      debugLogger,
+      'Replaced data of element with identifier 844d2d68-9cba-41c4-91b5-1dd76cc757d7.',
       {
         some: 'data',
       },

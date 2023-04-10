@@ -20,7 +20,7 @@ describe('PatchElementEndpoint tests', () => {
     server.resetHandlers();
   });
 
-  it('should patch an existing element from the api', async () => {
+  it('should patch an existing element from the api without token', async () => {
     const debugLogger = sandbox.stub(testLogger, 'debug');
     const options = new Options();
 
@@ -29,6 +29,20 @@ describe('PatchElementEndpoint tests', () => {
     await patchElementEndpoint.patchElement(ElementUuid.PatchableElement, { some: 'data' });
 
     assert.calledOnceWithExactly(debugLogger, 'Patched element with identifier f6b65db1-ab01-40b2-9adf-cf32ce4c7c92.', {
+      some: 'data',
+    });
+  });
+
+  it('should patch an existing element from the api with token', async () => {
+    const debugLogger = sandbox.stub(testLogger, 'debug');
+    const options = new Options();
+    options.setToken('secret-token:gRDDumwGJbb');
+
+    const patchElementEndpoint = new PatchElementEndpoint(testLogger, options);
+
+    await patchElementEndpoint.patchElement(ElementUuid.AuthenticatedDataNode, { some: 'data' });
+
+    assert.calledOnceWithExactly(debugLogger, 'Patched element with identifier 844d2d68-9cba-41c4-91b5-1dd76cc757d7.', {
       some: 'data',
     });
   });

@@ -20,7 +20,7 @@ describe('GetElementEndpoint tests', () => {
     server.resetHandlers();
   });
 
-  it('should load an existing element from the api', async () => {
+  it('should load an existing element from the api without token', async () => {
     const debugLogger = sandbox.stub(testLogger, 'debug');
     const options = new Options();
 
@@ -41,6 +41,34 @@ describe('GetElementEndpoint tests', () => {
     assert.calledOnceWithExactly(debugLogger, 'Loaded element with identifier c52569b7-1dd8-4018-9c3b-a710abd6982d.', {
       type: 'Node',
       id: 'c52569b7-1dd8-4018-9c3b-a710abd6982d',
+      data: {
+        some: 'data',
+      },
+    });
+  });
+
+  it('should load an existing element from the api with token', async () => {
+    const debugLogger = sandbox.stub(testLogger, 'debug');
+    const options = new Options();
+    options.setToken('secret-token:gRDDumwGJbb');
+
+    const getElementEndpoint = new GetElementEndpoint(testLogger, options);
+
+    const resultNode = await getElementEndpoint.getElement(ElementUuid.AuthenticatedDataNode).then((node) => {
+      return node;
+    });
+
+    expect(resultNode).to.eql({
+      type: 'Node',
+      id: '844d2d68-9cba-41c4-91b5-1dd76cc757d7',
+      data: {
+        some: 'data',
+      },
+    });
+
+    assert.calledOnceWithExactly(debugLogger, 'Loaded element with identifier 844d2d68-9cba-41c4-91b5-1dd76cc757d7.', {
+      type: 'Node',
+      id: '844d2d68-9cba-41c4-91b5-1dd76cc757d7',
       data: {
         some: 'data',
       },
