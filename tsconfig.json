@@ -7,8 +7,8 @@
       "dom"
     ],
     "moduleResolution": "nodenext",
-    "rootDir": ".",
     "outDir": "dist",
+    "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
     "importHelpers": true,
     "alwaysStrict": true,
