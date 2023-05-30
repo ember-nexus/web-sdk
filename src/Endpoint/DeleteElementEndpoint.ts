@@ -35,11 +35,13 @@ class DeleteElementEndpoint {
             } catch (error) {
               this.logger.error(`Encountered error while building error message: ${error.message}`);
             }
-            error.message = `Encountered error while deleting element with identifier ${uuid}: ${messageDetail}`;
-            this.logger.error(error.message, axiosErrorToSummaryObject(error));
+            let newError = Object.assign({}, error);
+            newError.message = `Encountered error while deleting element with identifier ${uuid}: ${messageDetail}`;
+            this.logger.error(newError);
           } else {
-            error.message = `Encountered error while deleting element with identifier ${uuid}: ${error.message}`;
-            this.logger.error(error);
+            let newError = Object.assign({}, error);
+            newError.message = `Encountered error while deleting element with identifier ${uuid}: ${error.message}`;
+            this.logger.error(newError);
           }
           reject(error);
         });
