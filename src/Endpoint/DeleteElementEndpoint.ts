@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 import LoggerInterface from '../Type/LoggerInterface.js';
 import OptionsInterface from '../Type/OptionsInterface.js';
-import axiosErrorToSummaryObject from '../Util/axiosErrorToSummaryObject.js';
 
 class DeleteElementEndpoint {
   constructor(private logger: LoggerInterface, private options: OptionsInterface) {}
@@ -35,11 +34,11 @@ class DeleteElementEndpoint {
             } catch (error) {
               this.logger.error(`Encountered error while building error message: ${error.message}`);
             }
-            let newError = Object.assign({}, error);
+            const newError = Object.assign({}, error);
             newError.message = `Encountered error while deleting element with identifier ${uuid}: ${messageDetail}`;
             this.logger.error(newError);
           } else {
-            let newError = Object.assign({}, error);
+            const newError = Object.assign({}, error);
             newError.message = `Encountered error while deleting element with identifier ${uuid}: ${error.message}`;
             this.logger.error(newError);
           }
