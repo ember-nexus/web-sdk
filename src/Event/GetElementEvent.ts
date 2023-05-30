@@ -15,6 +15,7 @@ export default class GetElementEvent extends CustomEvent<GetElementEventDetails>
         element: null,
       },
       bubbles: true,
+      composed: true,
       cancelable: true,
     });
   }

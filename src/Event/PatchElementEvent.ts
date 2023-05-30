@@ -16,6 +16,7 @@ export default class PatchElementEvent extends CustomEvent<PatchElementEventDeta
         element: null,
       },
       bubbles: true,
+      composed: true,
       cancelable: true,
     });
   }

@@ -12,6 +12,7 @@ export default class DeleteElementEvent extends CustomEvent<DeleteElementEventDe
         element: null,
       },
       bubbles: true,
+      composed: true,
       cancelable: true,
     });
   }
