@@ -5,7 +5,6 @@ import LoggerInterface from '../Type/LoggerInterface.js';
 import Node from '../Type/Node.d.js';
 import OptionsInterface from '../Type/OptionsInterface.js';
 import Relation from '../Type/Relation.d.js';
-import axiosErrorToSummaryObject from '../Util/axiosErrorToSummaryObject.js';
 import jsonToElement from '../Util/jsonToElement.js';
 
 class GetElementEndpoint {
@@ -39,11 +38,13 @@ class GetElementEndpoint {
             } catch (error) {
               this.logger.error(`Encountered error while building error message: ${error.message}`);
             }
-            error.message = `Encountered error while loading element with identifier ${uuid}: ${messageDetail}`;
-            this.logger.error(error.message, axiosErrorToSummaryObject(error));
+            const newError = Object.assign({}, error);
+            newError.message = `Encountered error while loading element with identifier ${uuid}: ${messageDetail}`;
+            this.logger.error(newError);
           } else {
-            error.message = `Encountered error while loading element with identifier ${uuid}: ${error.message}`;
-            this.logger.error(error);
+            const newError = Object.assign({}, error);
+            newError.message = `Encountered error while loading element with identifier ${uuid}: ${error.message}`;
+            this.logger.error(newError);
           }
           reject(error);
         });
