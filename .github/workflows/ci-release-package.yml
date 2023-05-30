@@ -84,7 +84,7 @@ jobs:
           git tag ${{ env.NEW_VERSION }}
 
       # Build library
-      - name: Publish
+      - name: Build
         run: |
           yarn install --dev
           yarn build:release

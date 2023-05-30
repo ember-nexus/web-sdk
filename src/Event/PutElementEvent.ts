@@ -16,6 +16,7 @@ export default class PutElementEvent extends CustomEvent<PutElementEventDetails>
         element: null,
       },
       bubbles: true,
+      composed: true,
       cancelable: true,
     });
   }
