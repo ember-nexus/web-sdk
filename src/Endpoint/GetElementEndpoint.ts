@@ -1,10 +1,11 @@
-import { AxiosError, default as axios } from 'axios';
+import { default as axios } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import LoggerInterface from '../Type/LoggerInterface.js';
 import Node from '../Type/Node.d.js';
 import OptionsInterface from '../Type/OptionsInterface.js';
 import Relation from '../Type/Relation.d.js';
+import handleEndpointError from '../Util/handleEndpointError.js';
 import jsonToElement from '../Util/jsonToElement.js';
 
 class GetElementEndpoint {
@@ -27,26 +28,12 @@ class GetElementEndpoint {
           resolve(element);
         })
         .catch((error) => {
-          if (error instanceof AxiosError) {
-            let messageDetail = error.message;
-            try {
-              if (error.response) {
-                if (error.response.headers['content-type'] === 'application/problem+json') {
-                  messageDetail = `${error.response.data.title} - ${error.response.data.detail}`;
-                }
-              }
-            } catch (error) {
-              this.logger.error(`Encountered error while building error message: ${error.message}`);
-            }
-            const newError = Object.assign({}, error);
-            newError.message = `Encountered error while loading element with identifier ${uuid}: ${messageDetail}`;
-            this.logger.error(newError);
-          } else {
-            const newError = Object.assign({}, error);
-            newError.message = `Encountered error while loading element with identifier ${uuid}: ${error.message}`;
-            this.logger.error(newError);
-          }
-          reject(error);
+          const newError = handleEndpointError(
+            `Encountered error while loading element with identifier ${uuid}`,
+            error,
+          );
+          this.logger.error(newError.message, newError);
+          reject(newError);
         });
     });
   }

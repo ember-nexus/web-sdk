@@ -86,15 +86,11 @@ describe('GetElementEndpoint tests', () => {
       "Data object does not contain property with name 'type'",
     );
 
-    const expectedErr = match
-      .instanceOf(Error)
-      .and(
-        match.has(
-          'message',
-          "Encountered error while loading element with identifier a770f244-d2fc-4a32-8aa5-d8c9204e2f01: Data object does not contain property with name 'type'.",
-        ),
-      );
-    assert.calledOnceWithExactly(errorLogger, match(expectedErr));
+    assert.calledOnceWithExactly(
+      errorLogger,
+      'Encountered error while loading element with identifier a770f244-d2fc-4a32-8aa5-d8c9204e2f01: Data object does not contain property with name \'type\'.',
+      match.any,
+    );
   });
 
   it('should throw detailed error when element is not found', async () => {
@@ -105,12 +101,12 @@ describe('GetElementEndpoint tests', () => {
 
     await expect(getElementEndpoint.getElement(ElementUuid.NotFoundElement)).to.be.rejectedWith(
       Error,
-      'Encountered error while loading element with identifier ca443647-e292-4f2b-838f-95f24a60ea02: Not Found - The requested resource was not found.',
+      'Encountered error while loading element with identifier ca443647-e292-4f2b-838f-95f24a60ea02: 404 Not Found - The requested resource was not found.',
     );
 
     assert.calledOnceWithExactly(
       errorLogger,
-      'Encountered error while loading element with identifier ca443647-e292-4f2b-838f-95f24a60ea02: Not Found - The requested resource was not found.',
+      'Encountered error while loading element with identifier ca443647-e292-4f2b-838f-95f24a60ea02: 404 Not Found - The requested resource was not found.',
       match.any,
     );
   });
@@ -123,12 +119,12 @@ describe('GetElementEndpoint tests', () => {
 
     await expect(getElementEndpoint.getElement(ElementUuid.ForbiddenElement)).to.be.rejectedWith(
       Error,
-      'Encountered error while loading element with identifier ab6b0bbb-1523-44d8-9d8a-af4d630fa7ed: Forbidden - Client does not have permissions to perform action.',
+      'Encountered error while loading element with identifier ab6b0bbb-1523-44d8-9d8a-af4d630fa7ed: 403 Forbidden - Client does not have permissions to perform action.',
     );
 
     assert.calledOnceWithExactly(
       errorLogger,
-      'Encountered error while loading element with identifier ab6b0bbb-1523-44d8-9d8a-af4d630fa7ed: Forbidden - Client does not have permissions to perform action.',
+      'Encountered error while loading element with identifier ab6b0bbb-1523-44d8-9d8a-af4d630fa7ed: 403 Forbidden - Client does not have permissions to perform action.',
       match.any,
     );
   });
