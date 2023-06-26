@@ -88,7 +88,7 @@ describe('GetElementEndpoint tests', () => {
 
     assert.calledOnceWithExactly(
       errorLogger,
-      'Encountered error while loading element with identifier a770f244-d2fc-4a32-8aa5-d8c9204e2f01: Data object does not contain property with name \'type\'.',
+      "Encountered error while loading element with identifier a770f244-d2fc-4a32-8aa5-d8c9204e2f01: Data object does not contain property with name 'type'.",
       match.any,
     );
   });
