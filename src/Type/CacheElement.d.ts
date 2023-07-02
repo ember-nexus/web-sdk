@@ -7,13 +7,13 @@ type CacheElement = {
   element: Node | Relation | null;
 
   parents: Array<typeof uuidv4>;
-  nextParentsPage: null | number;
+  allParentsLoaded: boolean;
 
   children: Array<typeof uuidv4>;
-  nextChildrenPage: null | number;
+  allChildrenLoaded: boolean;
 
   related: Array<typeof uuidv4>;
-  nextRelatedPage: null | number;
+  allRelatedLoaded: boolean;
 
   firstLoaded: Date;
   lastUpdated: Date;

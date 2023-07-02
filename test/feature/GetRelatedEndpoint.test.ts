@@ -5,7 +5,7 @@ import EmberNexus from '../../src/EmberNexus.js';
 import Options from '../../src/Options.js';
 import testLogger from '../testLogger.js';
 
-describe('GetElementEndpoint tests', () => {
+describe('GetRelatedEndpoint tests', () => {
   let sandbox: SinonSandbox;
 
   beforeEach(() => {
@@ -17,34 +17,28 @@ describe('GetElementEndpoint tests', () => {
   });
 
   it('should pass exception along', async () => {
-    const testUuid = '6776aa5c-63a0-455e-8fab-3bf19cc9a157';
+    const testUuid = '1ab54e88-a9cc-481a-b371-8873ca56c51b';
 
     const options = new Options();
     options.setApiHost('http://ember-nexus-app-api/');
     options.setToken('secret-token:token-does-not-exist');
     const cache = EmberNexus.create(testLogger, options);
 
-    await expect(cache.getElement(testUuid)).to.be.rejectedWith(
+    await expect(cache.getRelated(testUuid)).to.be.rejectedWith(
       Error,
-      'Encountered error while loading element with identifier 6776aa5c-63a0-455e-8fab-3bf19cc9a157: 401 Unauthorized - Request requires authorization.',
+      'Encountered error while loading related elements from element with identifier 1ab54e88-a9cc-481a-b371-8873ca56c51b: Unauthorized - Request requires authorization.',
     );
   });
 
-  it('should load element', async () => {
-    const testUuid = '6776aa5c-63a0-455e-8fab-3bf19cc9a157';
+  it('should load related', async () => {
+    const testUuid = '1ab54e88-a9cc-481a-b371-8873ca56c51b';
 
     const options = new Options();
     options.setApiHost('http://ember-nexus-app-api/');
     options.setToken('secret-token:FcXR4LsliYfWkYFKhTVovA');
     const cache = EmberNexus.create(testLogger, options);
 
-    const res = await cache.getElement(testUuid);
-    const data = res.data as { name: string };
-
-    if (!Object.prototype.hasOwnProperty.call(data, 'name')) {
-      throw new Error('Property name not found in data.');
-    }
-
-    expect(data.name).to.equal('Data 54');
+    const res = await cache.getRelated(testUuid);
+    expect(res).to.be.length(126);
   });
 });
