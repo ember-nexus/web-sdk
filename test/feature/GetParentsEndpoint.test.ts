@@ -18,7 +18,7 @@ describe('GetParentsEndpoint tests', () => {
     sandbox.restore();
   });
 
-  it.only('should load parents from the api, when all cacheFirstThenAPI is active', async () => {
+  it('should load parents from the api, when all cacheFirstThenAPI is active', async () => {
     const testUuid = 'eecc9563-fa77-4d0f-9300-d75a976aacf6';
 
     const options = new Options();
@@ -33,7 +33,7 @@ describe('GetParentsEndpoint tests', () => {
     expect(res).to.be.length(2);
   });
 
-  it.only('should load parents from the api, when any cacheFirstThenAPI is active', async () => {
+  it('should load parents from the api, when any cacheFirstThenAPI is active', async () => {
     const testUuid = 'eecc9563-fa77-4d0f-9300-d75a976aacf6';
 
     const options = new Options();
@@ -48,7 +48,7 @@ describe('GetParentsEndpoint tests', () => {
     expect(res).to.be.length(2);
   });
 
-  it.only('should fail if cache empty, when all cacheOnly is active', async () => {
+  it('should fail if cache empty, when all cacheOnly is active', async () => {
     const testUuid = 'eecc9563-fa77-4d0f-9300-d75a976aacf6';
 
     const options = new Options();
@@ -61,7 +61,7 @@ describe('GetParentsEndpoint tests', () => {
     );
   });
 
-  it.only('should fail if cache empty, when any cacheOnly is active', async () => {
+  it('should fail if cache empty, when any cacheOnly is active', async () => {
     const testUuid = 'eecc9563-fa77-4d0f-9300-d75a976aacf6';
 
     const options = new Options();
@@ -74,7 +74,7 @@ describe('GetParentsEndpoint tests', () => {
     );
   });
 
-  it.only('should load all parents from the api, when all API is active', async () => {
+  it('should load all parents from the api, when all API is active', async () => {
     const testUuid = 'eecc9563-fa77-4d0f-9300-d75a976aacf6';
 
     const options = new Options();
@@ -87,7 +87,7 @@ describe('GetParentsEndpoint tests', () => {
     expect(res).to.be.length(2);
   });
 
-  it.only('should load all parents from the api, when any API is active', async () => {
+  it('should load all parents from the api, when any API is active', async () => {
     const testUuid = 'eecc9563-fa77-4d0f-9300-d75a976aacf6';
 
     const options = new Options();

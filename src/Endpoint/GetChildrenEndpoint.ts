@@ -18,7 +18,7 @@ class GetChildrenEndpoint {
     return new Promise((resolve, reject) => {
       const headers = {};
       if (this.options.isLoggedIn()) {
-        headers['Authorization'] = this.options.getToken();
+        headers['Authorization'] = `Bearer ${this.options.getToken()}`;
       }
       axios
         .get(`${this.options.getApiHost()}${uuid}/children?page=${page}&pageSize=${pageSize}`, {

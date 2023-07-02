@@ -194,7 +194,7 @@ class EmberNexusCache {
     collectionAccessStrategy: CollectionAccessStrategy = CollectionAccessStrategy.All,
   ): Promise<Array<Node | Relation>> {
     const uuidAsString = uuid.toString();
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       const isInCache = uuidAsString in this._cache;
       const cacheElement = isInCache ? this._cache[uuidAsString] : this.createNewCacheElement();
       const hasSomeChildren = isInCache ? cacheElement.parents.length > 0 || cacheElement.nextChildrenPage != 0 : false;
@@ -232,34 +232,37 @@ class EmberNexusCache {
         return;
       }
 
-      while (page != null) {
-        const res = await this.getChildrenEndpoint.getChildren(uuid, page);
-        const nodesAndRelations = [...res.nodes, ...res.relations];
-        for (const i in nodesAndRelations) {
-          const tmpElement = nodesAndRelations[i];
-          const tmpElementId = tmpElement.id;
-          const tmpElementIdAsString = tmpElementId.toString();
-          if (tmpElementIdAsString in this._cache) {
-            this._cache[tmpElementIdAsString].element = tmpElement;
-            this._cache[tmpElementIdAsString].lastUpdated = new Date();
+      const fetchChildren = async (): Promise<void> => {
+        while (page != null) {
+          const res = await this.getChildrenEndpoint.getChildren(uuid, page);
+          const nodesAndRelations = [...res.nodes, ...res.relations];
+          for (const i in nodesAndRelations) {
+            const tmpElement = nodesAndRelations[i];
+            const tmpElementId = tmpElement.id;
+            const tmpElementIdAsString = tmpElementId.toString();
+            if (tmpElementIdAsString in this._cache) {
+              this._cache[tmpElementIdAsString].element = tmpElement;
+              this._cache[tmpElementIdAsString].lastUpdated = new Date();
+            } else {
+              this._cache[tmpElementIdAsString] = this.createNewCacheElement(tmpElement);
+            }
+            this._cache[tmpElementIdAsString].parents.push(uuidAsString);
+            if (!(uuidAsString in this._cache)) {
+              this._cache[uuidAsString] = this.createNewCacheElement();
+            }
+            if (!this._cache[uuidAsString].children.includes(tmpElementIdAsString)) {
+              this._cache[uuidAsString].children.push(tmpElementIdAsString);
+            }
+          }
+          if (res.links.next != null && collectionAccessStrategy == CollectionAccessStrategy.All) {
+            page++;
           } else {
-            this._cache[tmpElementIdAsString] = this.createNewCacheElement(tmpElement);
-          }
-          this._cache[tmpElementIdAsString].parents.push(uuidAsString);
-          if (!(uuidAsString in this._cache)) {
-            this._cache[uuidAsString] = this.createNewCacheElement();
-          }
-          if (!this._cache[uuidAsString].children.includes(tmpElementIdAsString)) {
-            this._cache[uuidAsString].children.push(tmpElementIdAsString);
+            page = null;
           }
         }
-        if (res.links.next != null) {
-          page++;
-        } else {
-          page = null;
-        }
-      }
-      resolve(this.getElementsFromCache(this._cache[uuidAsString].children));
+        resolve(this.getElementsFromCache(this._cache[uuidAsString].children));
+      };
+      fetchChildren();
     });
   }
 }

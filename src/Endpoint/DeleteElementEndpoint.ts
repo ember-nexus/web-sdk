@@ -12,7 +12,7 @@ class DeleteElementEndpoint {
       uuid = uuid.toString();
       const headers = {};
       if (this.options.isLoggedIn()) {
-        headers['Authorization'] = this.options.getToken();
+        headers['Authorization'] = `Bearer ${this.options.getToken()}`;
       }
       axios
         .delete(`${this.options.getApiHost()}${uuid}`, {
