@@ -1,17 +1,17 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import GetElementEventDetails from '../Type/GetElementEventDetails.js';
+import GetParentsEventDetails from '../Type/GetParentsEventDetails.js';
 import Node from '../Type/Node.js';
 import Relation from '../Type/Relation.js';
 
 import Event from './index.js';
 
-export default class GetElementEvent extends CustomEvent<GetElementEventDetails> {
+export default class GetParentsEvent extends CustomEvent<GetParentsEventDetails> {
   constructor(uuid: typeof uuidv4) {
     super(Event.GetElementEvent, {
       detail: {
         uuid: uuid,
-        element: null,
+        elements: null,
       },
       bubbles: true,
       composed: true,
@@ -19,12 +19,12 @@ export default class GetElementEvent extends CustomEvent<GetElementEventDetails>
     });
   }
 
-  setElement(element: Promise<Node | Relation>): void {
-    this.detail.element = element;
+  setElements(elements: Promise<Array<Node | Relation>>): void {
+    this.detail.elements = elements;
   }
 
-  getElement(): Promise<Node | Relation> | null {
-    return this.detail.element;
+  getElements(): Promise<Array<Node | Relation>> | null {
+    return this.detail.elements;
   }
 
   getUuid(): typeof uuidv4 {

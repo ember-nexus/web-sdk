@@ -3,9 +3,9 @@ import { v4 as uuidv4 } from 'uuid';
 import Node from './Node.js';
 import Relation from './Relation.js';
 
-type GetElementEventDetails = {
+type GetParentsEventDetails = {
   uuid: typeof uuidv4;
-  element: Promise<Node | Relation> | null;
+  elements: Promise<Array<Node | Relation>> | null;
 };
 
-export default GetElementEventDetails;
+export default GetParentsEventDetails;

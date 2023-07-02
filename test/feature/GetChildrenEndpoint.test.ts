@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { SinonSandbox, createSandbox } from 'sinon';
 
-import EmberNexus from '../../src/EmberNexus.js';
+import EmberNexusCache from '../../src/EmberNexusCache.js';
 import Options from '../../src/Options.js';
 import testLogger from '../testLogger.js';
 
@@ -22,7 +22,7 @@ describe('GetChildrenEndpoint tests', () => {
     const options = new Options();
     options.setApiHost('http://ember-nexus-app-api/');
     options.setToken('secret-token:token-does-not-exist');
-    const cache = EmberNexus.create(testLogger, options);
+    const cache = EmberNexusCache.create(testLogger, options);
 
     await expect(cache.getChildren(testUuid)).to.be.rejectedWith(
       Error,
@@ -36,7 +36,7 @@ describe('GetChildrenEndpoint tests', () => {
     const options = new Options();
     options.setApiHost('http://ember-nexus-app-api/');
     options.setToken('secret-token:FcXR4LsliYfWkYFKhTVovA');
-    const cache = EmberNexus.create(testLogger, options);
+    const cache = EmberNexusCache.create(testLogger, options);
 
     const res = await cache.getChildren(testUuid);
     expect(res).to.be.length(124);
