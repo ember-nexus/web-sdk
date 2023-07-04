@@ -8,7 +8,7 @@ import Event from './index.js';
 
 export default class GetChildrenEvent extends CustomEvent<GetChildrenEventDetails> {
   constructor(uuid: typeof uuidv4) {
-    super(Event.GetElementEvent, {
+    super(Event.GetChildrenEvent, {
       detail: {
         uuid: uuid,
         elements: null,
