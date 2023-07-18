@@ -8,6 +8,7 @@ import GetRelatedEvent from './Event/GetRelatedEvent.js';
 import Event from './Event/index.js';
 import PatchElementEvent from './Event/PatchElementEvent.js';
 import PutElementEvent from './Event/PutElementEvent.js';
+import SearchEvent from './Event/SearchEvent.js';
 import Options from './Options.js';
 import LoggerInterface from './Type/LoggerInterface.js';
 import OptionsInterface from './Type/OptionsInterface.js';
@@ -87,6 +88,12 @@ class EmberNexus {
 
   handleDeleteElementEvent(event: DeleteElementEvent): void {
     // event.setElement(this.deleteElement(event.getUuid()));
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  handleSearchEvent(event: SearchEvent): void {
+    event.setElements(this._cache.fetchSearchPage(event.getPayload(), event.getPage()));
     event.preventDefault();
     event.stopPropagation();
   }

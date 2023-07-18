@@ -8,7 +8,6 @@
   "main": "dist/EmberNexus.js",
   "types": "dist/EmberNexus.d.ts",
   "scripts": {
-    "start": "node dist/src/main.js",
     "clean": "rimraf coverage dist tmp",
     "build": "tsc -p tsconfig.json && yarn run copy-dts",
     "build:watch": "tsc -w -p tsconfig.json",

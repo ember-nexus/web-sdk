@@ -5,6 +5,7 @@ import GetChildrenEndpoint from './Endpoint/GetChildrenEndpoint.js';
 import GetElementEndpoint from './Endpoint/GetElementEndpoint.js';
 import GetParentsEndpoint from './Endpoint/GetParentsEndpoint.js';
 import GetRelatedEndpoint from './Endpoint/GetRelatedEndpoint.js';
+import SearchEndpoint from './Endpoint/SearchEndpoint.js';
 import Options from './Options.js';
 import CacheElement from './Type/CacheElement.js';
 import LoggerInterface from './Type/LoggerInterface.js';
@@ -26,6 +27,7 @@ class EmberNexusCache {
     private getParentsEndpoint: GetParentsEndpoint,
     private getChildrenEndpoint: GetChildrenEndpoint,
     private getRelatedEndpoint: GetRelatedEndpoint,
+    private searchEndpoint: SearchEndpoint,
   ) {}
 
   static create(logger: LoggerInterface | null = null, options: OptionsInterface | null = null): EmberNexusCache {
@@ -42,6 +44,7 @@ class EmberNexusCache {
       new GetParentsEndpoint(logger, options),
       new GetChildrenEndpoint(logger, options),
       new GetRelatedEndpoint(logger, options),
+      new SearchEndpoint(logger, options),
     );
   }
 
@@ -220,6 +223,17 @@ class EmberNexusCache {
       }
     });
     this._logger.debug(`Fetched all children for element with UUID ${uuid.toString()}.`);
+  }
+
+  async fetchSearchPage(payload: Record<string, unknown>, page = 1): Promise<Array<Node | Relation>> {
+    // load first page directly
+    this._logger.debug(`Fetching search page ${page}.`);
+    const res = await this.searchEndpoint.search(payload, page);
+    for (const element of res.elements) {
+      this.addElementToCache(element);
+    }
+    this._logger.debug(`Fetched search page ${page}.`);
+    return res.elements;
   }
 
   private markElementAsChild(elementUuid: typeof uuidv4, parentUuid: typeof uuidv4): void {

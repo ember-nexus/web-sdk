@@ -6,5 +6,6 @@ enum Event {
   PutElementEvent = 'ember-nexus-put-element',
   PatchElementEvent = 'ember-nexus-patch-element',
   DeleteElementEvent = 'ember-nexus-delete-element',
+  SearchEvent = 'ember-nexus-search',
 }
 export default Event;
