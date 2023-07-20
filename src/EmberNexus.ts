@@ -39,6 +39,7 @@ class EmberNexus {
       this._domElement.removeEventListener(Event.PutElementEvent, this.handlePutElementEvent.bind(this));
       this._domElement.removeEventListener(Event.PatchElementEvent, this.handlePatchElementEvent.bind(this));
       this._domElement.removeEventListener(Event.DeleteElementEvent, this.handleDeleteElementEvent.bind(this));
+      this._domElement.removeEventListener(Event.SearchEvent, this.handleSearchEvent.bind(this));
     }
     this._domElement = domElement;
     this._domElement.addEventListener(Event.GetElementEvent, this.handleGetElementEvent.bind(this));
@@ -48,6 +49,7 @@ class EmberNexus {
     this._domElement.addEventListener(Event.PutElementEvent, this.handlePutElementEvent.bind(this));
     this._domElement.addEventListener(Event.PatchElementEvent, this.handlePatchElementEvent.bind(this));
     this._domElement.addEventListener(Event.DeleteElementEvent, this.handleDeleteElementEvent.bind(this));
+    this._domElement.addEventListener(Event.SearchEvent, this.handleSearchEvent.bind(this));
   }
 
   handleGetElementEvent(event: GetElementEvent): void {
