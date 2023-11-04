@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "Node16",
+    "module": "es2022",
     "lib": [
       "ES2022",
       "dom"
     ],
-    "moduleResolution": "nodenext",
+    "moduleResolution": "bundler",
     "outDir": "dist",
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
@@ -20,8 +20,21 @@
     "noUnusedParameters": true,
     "noImplicitAny": false,
     "noImplicitThis": false,
-    "strictNullChecks": false,
-    "declaration": true
+    "strictNullChecks": true,
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "plugins": [
+      {
+        "transform": "typia/lib/transform"
+      }
+    ],
+    "paths": {
+      "~*": ["./src/*"]
+    }
   },
-  "include": ["src/**/*", "test/**/*"]
+  "include": [
+    "src/**/*",
+    "test/**/*"
+  ]
 }
