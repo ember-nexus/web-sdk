@@ -1,6 +1,6 @@
 import type { v4 as uuidv4 } from 'uuid';
 
-import {Element} from './Element.js';
+import {Element} from '~/Type/Definition/Element';
 
 type Relation = Element & {
   start: uuidv4;

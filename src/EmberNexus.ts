@@ -2,8 +2,9 @@ import 'reflect-metadata';
 
 
 import { Container, Service } from 'typedi';
-import {GetElementEvent} from "./Event/Element/GetElementEvent.js";
+import {GetElementEvent} from "~/Event/Element/GetElementEvent";
 import { v4 as uuidv4 } from 'uuid';
+import GetElementEndpoint from "~/Endpoint/Element/GetElementEndpoint";
 
 @Service()
 class ExampleInjectedService {
@@ -17,6 +18,7 @@ class ExampleInjectedService {
     this.event = new GetElementEvent(uuidv4());
     console.log(this.event);
     console.log("End of print ^^");
+    console.log("edited 2");
   }
 }
 
@@ -35,3 +37,6 @@ const serviceInstance = Container.get(ExampleService);
 // we request an instance of ExampleService from TypeDI
 
 serviceInstance.injectedService.printMessage();
+
+const getElementEndpoint = Container.get(GetElementEndpoint);
+console.log(getElementEndpoint);

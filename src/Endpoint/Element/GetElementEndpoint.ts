@@ -1,10 +1,10 @@
 import type { v4 as uuidv4 } from 'uuid';
 import { Service } from 'typedi';
 
-import {LoggerInterface} from '../../Type/Definition/LoggerInterface.js';
-import {Node} from '../../Type/Definition/Node.d.js';
-import {Relation} from '../../Type/Definition/Relation.d.js';
-import {SdkConfigurationInterface} from "../../Type/Definition/SdkConfigurationInterface.js";
+import {LoggerInterface} from '~/Type/Definition/LoggerInterface';
+import {Node} from '~/Type/Definition/Node';
+import {Relation} from '~/Type/Definition/Relation';
+import {SdkConfigurationInterface} from "~/Type/Definition/SdkConfigurationInterface";
 
 @Service()
 class GetElementEndpoint {
