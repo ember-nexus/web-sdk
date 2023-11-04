@@ -6,4 +6,4 @@ type Element = {
   data: object;
 };
 
-export {Element};
+export { Element };

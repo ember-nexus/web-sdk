@@ -5,4 +5,4 @@ interface LoggerInterface {
   error(...args: unknown[]): unknown | undefined;
 }
 
-export {LoggerInterface};
+export { LoggerInterface };

@@ -1,4 +1,3 @@
-interface SdkConfigurationInterface {
-}
+interface SdkConfigurationInterface {}
 
-export {SdkConfigurationInterface};
+export { SdkConfigurationInterface };

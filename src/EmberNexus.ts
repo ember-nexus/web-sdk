@@ -1,24 +1,23 @@
 import 'reflect-metadata';
 
-
 import { Container, Service } from 'typedi';
-import {GetElementEvent} from "~/Event/Element/GetElementEvent";
 import { v4 as uuidv4 } from 'uuid';
-import GetElementEndpoint from "~/Endpoint/Element/GetElementEndpoint";
+
+import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
+import { GetElementEvent } from '~/Event/Element/GetElementEvent';
 
 @Service()
 class ExampleInjectedService {
-
   event: GetElementEvent;
 
-  printMessage() {
+  printMessage(): void {
     console.log('I am alive!');
-    console.log("Really :D");
-    console.log("Hi");
+    console.log('Really :D');
+    console.log('Hi');
     this.event = new GetElementEvent(uuidv4());
     console.log(this.event);
-    console.log("End of print ^^");
-    console.log("edited 2");
+    console.log('End of print ^^');
+    console.log('edited 2');
   }
 }
 
@@ -29,7 +28,7 @@ class ExampleService {
     // decorator TypeDI will automatically inject an instance of
     // ExampleInjectedService here when the ExampleService class is requested
     // from TypeDI.
-    public injectedService: ExampleInjectedService
+    public injectedService: ExampleInjectedService,
   ) {}
 }
 

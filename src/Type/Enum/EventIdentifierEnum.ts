@@ -1,5 +1,4 @@
 enum EventIdentifier {
-
   // user
   PostRegister = 'ember-nexus-post-register',
   PostChangePassword = 'ember-nexus-post-change-password',
@@ -42,4 +41,4 @@ enum EventIdentifier {
   GetInstanceConfiguration = 'ember-nexus-get-instance-configuration',
 }
 
-export {EventIdentifier};
+export { EventIdentifier };

@@ -1,4 +1,4 @@
-import {Element} from '~/Type/Definition/Element';
+import { Element } from '~/Type/Definition/Element';
 
 type Node = Element;
-export {Node};
+export { Node };

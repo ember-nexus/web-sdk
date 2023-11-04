@@ -1,7 +1,7 @@
 const customEventDefaultInit: EventInit = {
   bubbles: true,
   composed: true,
-  cancelable: true
+  cancelable: true,
 };
 
-export {customEventDefaultInit};
+export { customEventDefaultInit };

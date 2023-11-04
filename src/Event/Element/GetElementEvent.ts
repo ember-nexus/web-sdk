@@ -1,9 +1,9 @@
 import type { v4 as uuidv4 } from 'uuid';
 
-import type {Node} from '~/Type/Definition/Node';
-import type {Relation} from '~/Type/Definition/Relation';
-import {EventIdentifier} from '~/Type/Enum/EventIdentifierEnum';
-import {customEventDefaultInit} from "~/Type/Partial/CustomEventDefaultInit";
+import type { Node } from '~/Type/Definition/Node';
+import type { Relation } from '~/Type/Definition/Relation';
+import { EventIdentifier } from '~/Type/Enum/EventIdentifierEnum';
+import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type GetElementEventDetails = {
   uuid: typeof uuidv4;
@@ -34,4 +34,4 @@ class GetElementEvent extends CustomEvent<GetElementEventDetails> {
   }
 }
 
-export {GetElementEvent, GetElementEventDetails};
+export { GetElementEvent, GetElementEventDetails };
