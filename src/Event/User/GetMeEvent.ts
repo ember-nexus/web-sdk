@@ -16,11 +16,11 @@ class GetMeEvent extends CustomEvent<GetMeEventDetails> {
     });
   }
 
-  getElement(): Promise<Node> | null {
+  getMe(): Promise<Node> | null {
     return this.detail.me;
   }
 
-  setElement(me: Promise<Node>): void {
+  setMe(me: Promise<Node>): void {
     this.detail.me = me;
   }
 }
