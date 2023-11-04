@@ -6,12 +6,12 @@ import { EventIdentifier } from '~/Type/Enum/EventIdentifierEnum';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type GetElementEventDetails = {
-  uuid: typeof uuidv4;
+  uuid: uuidv4;
   element: Promise<Node | Relation> | null;
 };
 
 class GetElementEvent extends CustomEvent<GetElementEventDetails> {
-  constructor(uuid: typeof uuidv4) {
+  constructor(uuid: uuidv4) {
     super(EventIdentifier.GetElement, {
       ...customEventDefaultInit,
       detail: {
@@ -21,16 +21,16 @@ class GetElementEvent extends CustomEvent<GetElementEventDetails> {
     });
   }
 
-  setElement(element: Promise<Node | Relation>): void {
-    this.detail.element = element;
+  getUuid(): uuidv4 {
+    return this.detail.uuid;
   }
 
   getElement(): Promise<Node | Relation> | null {
     return this.detail.element;
   }
 
-  getUuid(): uuidv4 {
-    return this.detail.uuid;
+  setElement(element: Promise<Node | Relation>): void {
+    this.detail.element = element;
   }
 }
 

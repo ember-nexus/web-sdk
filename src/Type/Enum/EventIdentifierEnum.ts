@@ -17,6 +17,7 @@ enum EventIdentifier {
   PostElement = 'ember-nexus-post-element',
   PutElement = 'ember-nexus-put-element',
   PatchElement = 'ember-nexus-patch-element',
+  DeleteElement = 'ember-nexus-delete-element',
 
   // file
   GetElementFile = 'ember-nexus-get-element-file',
