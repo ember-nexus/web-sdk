@@ -24,7 +24,8 @@
     "reflect-metadata": "^0.1.13",
     "typedi": "^0.10.0",
     "typia": "^5.2.4",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "tslog": "^4.8.2"
   },
   "devDependencies": {
     "@happy-dom/global-registrator": "^12.10.3",
@@ -53,7 +54,6 @@
     "ts-mockito": "^2.6.1",
     "ts-node": "^10.9.1",
     "ts-patch": "^3.0.2",
-    "tslog": "^4.8.2",
     "tsutils": "~3.21",
     "typescript": "5.2.2",
     "webpack": "^5.89.0",

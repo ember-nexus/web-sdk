@@ -1,3 +1,0 @@
-interface SdkConfigurationInterface {}
-
-export { SdkConfigurationInterface };
