@@ -2,13 +2,13 @@ import { expect } from 'chai';
 import { SinonSandbox, SinonStubbedInstance, assert, createSandbox, match } from 'sinon';
 import { Container } from 'typedi';
 
-import GetElementParentsEndpoint from '~/Endpoint/Element/GetElementParentsEndpoint';
+import GetElementChildrenEndpoint from '~/Endpoint/Element/GetElementChildrenEndpoint';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { Token, validateTokenFromString } from '~/Type/Definition/Token';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
-describe('GetElementParentsEndpoint tests', () => {
+describe('GetElementChildrenEndpoint tests', () => {
   let sandbox: SinonSandbox;
   let mockedLogger: SinonStubbedInstance<Logger>;
 
@@ -28,28 +28,28 @@ describe('GetElementParentsEndpoint tests', () => {
     Container.reset();
   });
 
-  it('should load parents of a node', async () => {
+  it('should load children of a node', async () => {
     Container.get(WebSdkConfiguration).setToken(_token);
 
-    const childUuid = validateUuidFromString('45482998-274a-43d0-a466-f31d0b24cc0a');
-    const collection = await Container.get(GetElementParentsEndpoint).getElementParents(childUuid);
+    const parentUuid = validateUuidFromString('56fda20c-b238-4034-b555-1df47c47e17a');
+    const collection = await Container.get(GetElementChildrenEndpoint).getElementChildren(parentUuid);
 
     assert.calledOnceWithExactly(
       mockedLogger.debug,
-      'Executing HTTP GET request against url http://ember-nexus-dev-api/45482998-274a-43d0-a466-f31d0b24cc0a/parents?page=1&pageSize=25 .',
+      'Executing HTTP GET request against url http://ember-nexus-dev-api/56fda20c-b238-4034-b555-1df47c47e17a/children?page=1&pageSize=25 .',
     );
 
     expect(collection).to.have.keys('id', 'totalNodes', 'links', 'nodes', 'relations');
-    expect(collection.nodes).to.have.lengthOf(1);
-    expect(collection.relations).to.have.lengthOf(1);
+    expect(collection.nodes).to.have.lengthOf(6);
+    expect(collection.relations).to.have.lengthOf(6);
   });
 
   it('should throw error 401 if token is invalid', async () => {
     Container.get(WebSdkConfiguration).setToken(validateTokenFromString('secret-token:IdoNotWorkLol'));
-    const childUuid = validateUuidFromString('45482998-274a-43d0-a466-f31d0b24cc0a');
+    const parentUuid = validateUuidFromString('56fda20c-b238-4034-b555-1df47c47e17a');
 
     await expect(
-      Container.get(GetElementParentsEndpoint).getElementParents(childUuid),
+      Container.get(GetElementChildrenEndpoint).getElementChildren(parentUuid),
     ).to.eventually.be.rejected.and.deep.include({
       category: 'server',
       title: 'Unauthorized',
@@ -60,7 +60,7 @@ describe('GetElementParentsEndpoint tests', () => {
 
     assert.calledOnceWithExactly(
       mockedLogger.debug,
-      'Executing HTTP GET request against url http://ember-nexus-dev-api/45482998-274a-43d0-a466-f31d0b24cc0a/parents?page=1&pageSize=25 .',
+      'Executing HTTP GET request against url http://ember-nexus-dev-api/56fda20c-b238-4034-b555-1df47c47e17a/children?page=1&pageSize=25 .',
     );
 
     assert.calledOnceWithExactly(mockedLogger.error, match.object);
@@ -71,7 +71,7 @@ describe('GetElementParentsEndpoint tests', () => {
     const uuidWhichDoesNotExist = validateUuidFromString('00000000-0000-4000-a000-000000000000');
 
     await expect(
-      Container.get(GetElementParentsEndpoint).getElementParents(uuidWhichDoesNotExist),
+      Container.get(GetElementChildrenEndpoint).getElementChildren(uuidWhichDoesNotExist),
     ).to.eventually.be.rejected.and.deep.include({
       category: 'server',
       title: 'Not found',
@@ -81,7 +81,7 @@ describe('GetElementParentsEndpoint tests', () => {
 
     assert.calledOnceWithExactly(
       mockedLogger.debug,
-      'Executing HTTP GET request against url http://ember-nexus-dev-api/00000000-0000-4000-a000-000000000000/parents?page=1&pageSize=25 .',
+      'Executing HTTP GET request against url http://ember-nexus-dev-api/00000000-0000-4000-a000-000000000000/children?page=1&pageSize=25 .',
     );
 
     assert.calledOnceWithExactly(mockedLogger.error, match.object);
