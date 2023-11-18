@@ -12,7 +12,7 @@
     "build": "webpack --mode production",
     "cs": "eslint . --ext .ts ./src ./test",
     "cs:fix": "eslint --ext .ts ./src ./test --fix",
-    "test:unit": "instant-mocha ---webpack-config webpack.config.cjs --mode development 'test/Feature/*.ts'",
+    "test:unit": "instant-mocha ---webpack-config webpack.config.cjs --mode development 'test/Feature/**/*.ts'",
     "test:unit:old": "mocha --config .mocharc.unit.json",
     "test:feature": "mocha --config .mocharc.feature.json",
     "prepare": "ts-patch install"
