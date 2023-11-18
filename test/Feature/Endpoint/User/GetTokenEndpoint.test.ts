@@ -2,12 +2,12 @@ import { expect } from 'chai';
 import { SinonSandbox, SinonStubbedInstance, assert, createSandbox, match } from 'sinon';
 import { Container } from 'typedi';
 
-import GetMeEndpoint from '~/Endpoint/User/GetMeEndpoint';
+import GetTokenEndpoint from '~/Endpoint/User/GetTokenEndpoint';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { Token, validateTokenFromString } from '~/Type/Definition/Token';
 
-describe('GetMeEndpoint tests', () => {
+describe('GetTokenEndpoint tests', () => {
   let sandbox: SinonSandbox;
   let mockedLogger: SinonStubbedInstance<Logger>;
 
@@ -27,27 +27,27 @@ describe('GetMeEndpoint tests', () => {
     Container.reset();
   });
 
-  it('should load me', async () => {
+  it('should load token', async () => {
     Container.get(WebSdkConfiguration).setToken(_token);
 
-    const me = await Container.get(GetMeEndpoint).getMe();
+    const token = await Container.get(GetTokenEndpoint).getToken();
 
     assert.calledOnceWithExactly(
       mockedLogger.debug,
-      'Executing HTTP GET request against url http://ember-nexus-dev-api/me .',
+      'Executing HTTP GET request against url http://ember-nexus-dev-api/token .',
     );
 
-    expect(me).to.have.keys('id', 'type', 'data');
-    expect(me).to.not.have.keys('start', 'end');
-    expect(me.id).to.equal('7e86b9ec-b1dc-4aed-a627-eb77b265e12c');
-    expect(me.type).to.equal('User');
-    expect(Object.keys(me.data)).to.have.lengthOf(4);
+    expect(token).to.have.keys('id', 'type', 'data');
+    expect(token).to.not.have.keys('start', 'end');
+    expect(token.id).to.equal('e3b81351-fe0c-4f8f-ad22-78b6157edde8');
+    expect(token.type).to.equal('Token');
+    expect(Object.keys(token.data)).to.have.lengthOf(3);
   });
 
   it('should throw error 401 if token is invalid', async () => {
     Container.get(WebSdkConfiguration).setToken(validateTokenFromString('secret-token:IdoNotWorkLol'));
 
-    await expect(Container.get(GetMeEndpoint).getMe()).to.eventually.be.rejected.and.deep.include({
+    await expect(Container.get(GetTokenEndpoint).getToken()).to.eventually.be.rejected.and.deep.include({
       category: 'server',
       title: 'Unauthorized',
       detail:
@@ -57,7 +57,7 @@ describe('GetMeEndpoint tests', () => {
 
     assert.calledOnceWithExactly(
       mockedLogger.debug,
-      'Executing HTTP GET request against url http://ember-nexus-dev-api/me .',
+      'Executing HTTP GET request against url http://ember-nexus-dev-api/token .',
     );
 
     assert.calledOnceWithExactly(mockedLogger.error, match.object);
