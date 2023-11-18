@@ -1,5 +1,5 @@
 import type { Node } from '~/Type/Definition/Node';
-import { EventIdentifier } from '~/Type/Enum/EventIdentifierEnum';
+import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type GetMeEventDetails = {

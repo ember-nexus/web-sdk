@@ -1,10 +1,9 @@
-import type { v4 as uuidv4 } from 'uuid';
-
 import { Element } from '~/Type/Definition/Element';
+import { Uuid } from '~/Type/Definition/Uuid';
 
 type Relation = Element & {
-  start: uuidv4;
-  end: uuidv4;
+  start: Uuid;
+  end: Uuid;
 };
 
 export { Relation };

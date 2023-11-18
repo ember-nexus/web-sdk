@@ -1,8 +1,11 @@
 import 'reflect-metadata';
 
 import { Container, Service } from 'typedi';
+// import { parse as uuidParse } from 'uuid';
 
 import { Logger } from '~/Service/Logger';
+// import GetElementEndpoint from "~/Endpoint/Element/GetElementEndpoint";
+import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 
 @Service()
 class TestService {
@@ -20,3 +23,10 @@ export { TestService };
 
 const service = Container.get(TestService);
 service.test();
+
+const webSdkConfiguration = Container.get(WebSdkConfiguration);
+webSdkConfiguration.setApiHost('http://localhost');
+
+// const getElementEndpoint = Container.get(GetElementEndpoint);
+// const res = await getElementEndpoint.getElement(uuidParse('6ec0bd7f-11c0-43da-975e-2a8ad9ebae0b'));
+// console.log(res);

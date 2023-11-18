@@ -1,6 +1,6 @@
 import { Data } from '~/Type/Definition/Data';
 import { ElementCollection } from '~/Type/Definition/ElementCollection';
-import { EventIdentifier } from '~/Type/Enum/EventIdentifierEnum';
+import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type PostSearchEventDetails = {

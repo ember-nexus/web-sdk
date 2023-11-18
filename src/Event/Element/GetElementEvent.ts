@@ -2,7 +2,7 @@ import type { v4 as uuidv4 } from 'uuid';
 
 import type { Node } from '~/Type/Definition/Node';
 import type { Relation } from '~/Type/Definition/Relation';
-import { EventIdentifier } from '~/Type/Enum/EventIdentifierEnum';
+import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type GetElementEventDetails = {

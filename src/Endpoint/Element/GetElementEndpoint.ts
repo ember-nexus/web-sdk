@@ -1,49 +1,49 @@
-import { AxiosHeaders, default as axios } from 'axios';
 import { Service } from 'typedi';
-import type { v4 as uuidv4 } from 'uuid';
 
-import { LoggerInterface } from '~/Type/Definition/LoggerInterface';
+import { ElementParser } from '~/Service/ElementParser';
+import { FetchHelper } from '~/Service/FetchHelper';
+import { Logger } from '~/Service/Logger';
+import { RequestProblemParser } from '~/Service/RequestProblemParser';
 import { Node } from '~/Type/Definition/Node';
 import { Relation } from '~/Type/Definition/Relation';
-import { WebSdkConfigurationInterface } from '~/Type/Definition/WebSdkConfigurationInterface';
+import { RequestProblem } from '~/Type/Definition/RequestProblem';
+import { Uuid } from '~/Type/Definition/Uuid';
+import { RequestProblemCategory } from '~/Type/Enum/RequestProblemCategory';
 
 @Service()
 class GetElementEndpoint {
   constructor(
-    private logger: LoggerInterface,
-    private sdkConfiguration: WebSdkConfigurationInterface,
+    private logger: Logger,
+    private fetchHelper: FetchHelper,
+    private elementParser: ElementParser,
+    private requestProblemParser: RequestProblemParser,
   ) {}
 
-  async getElement(uuid: uuidv4): Promise<Node | Relation> {
-    return new Promise((_resolve, reject) => {
-      const headers = new AxiosHeaders();
-      if (this.sdkConfiguration.hasToken()) {
-        headers.set('Authorization', `Bearer ${this.sdkConfiguration.getToken().token}`);
-      }
-      uuid = uuid.toString();
-
-      this.logger.debug('just before axios request...');
-      axios
-        .get(`${this.sdkConfiguration.getApiHost()}${uuid}`, {
-          headers: headers,
-        })
-        .then((response) => {
-          console.log(response.data);
-          // const element = jsonToElement(response.data);
-          // this.logger.debug(`Loaded element with identifier ${uuid}.`, element);
-          // resolve(element);
-          reject('rejected because not implemented');
+  async getElement(uuid: Uuid): Promise<Node | Relation> {
+    return new Promise((resolve, reject) => {
+      this.fetchHelper
+        .runWrappedFetch(`/${uuid}`, this.fetchHelper.getDefaultGetOptions())
+        .then(async (response) => {
+          const data = await response.json();
+          if (response.ok) {
+            const element = this.elementParser.rawElementToNodeOrRelation(data);
+            resolve(element);
+            return;
+          }
+          const requestProblem = this.requestProblemParser.rawRequestProblemToRequestProblem(data);
+          this.logger.error(requestProblem);
+          reject(requestProblem);
+          return;
         })
         .catch((error) => {
-          // const newError = handleEndpointError(
-          //   `Encountered error while loading element with identifier ${uuid}`,
-          //   error,
-          // );
-          // this.logger.error(newError.message, newError);
-          // reject(newError);
-
-          console.log(error);
-          reject('rejected because not implemented');
+          const requestProblem = {
+            category: RequestProblemCategory.ClientSide,
+            title: `Encountered network problem`,
+            detail: `See exception for details.`,
+            exception: error,
+          } as RequestProblem;
+          this.logger.error(requestProblem);
+          reject(requestProblem);
         });
     });
   }

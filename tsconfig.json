@@ -24,11 +24,6 @@
     "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "plugins": [
-      {
-        "transform": "typia/lib/transform"
-      }
-    ],
     "paths": {
       "~/*": ["./src/*"]
     }

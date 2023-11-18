@@ -1,5 +1,5 @@
 import { InstanceConfiguration } from '~/Type/Definition/InstanceConfiguration';
-import { EventIdentifier } from '~/Type/Enum/EventIdentifierEnum';
+import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type GetInstanceConfigurationEventDetails = {

@@ -1,6 +1,6 @@
 import { Data } from '~/Type/Definition/Data';
 import { Token } from '~/Type/Definition/Token';
-import { EventIdentifier } from '~/Type/Enum/EventIdentifierEnum';
+import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type PostTokenEventDetails = {

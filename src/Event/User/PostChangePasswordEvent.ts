@@ -1,5 +1,5 @@
 import { Data } from '~/Type/Definition/Data';
-import { EventIdentifier } from '~/Type/Enum/EventIdentifierEnum';
+import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type PostChangePasswordEventDetails = {

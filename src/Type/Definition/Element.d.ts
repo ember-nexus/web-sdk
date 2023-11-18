@@ -1,8 +1,8 @@
-import type { v4 as uuidv4 } from 'uuid';
+import { Uuid } from '~/Type/Definition/Uuid';
 
 type Element = {
   type: string;
-  id: uuidv4;
+  id: Uuid;
   data: object;
 };
 

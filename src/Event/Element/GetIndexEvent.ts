@@ -1,5 +1,5 @@
 import { Collection } from '~/Type/Definition/Collection';
-import { EventIdentifier } from '~/Type/Enum/EventIdentifierEnum';
+import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type GetIndexEventDetails = {

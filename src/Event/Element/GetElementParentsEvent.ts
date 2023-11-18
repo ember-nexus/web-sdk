@@ -1,7 +1,7 @@
 import type { v4 as uuidv4 } from 'uuid';
 
 import { Collection } from '~/Type/Definition/Collection';
-import { EventIdentifier } from '~/Type/Enum/EventIdentifierEnum';
+import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type GetElementParentsEventDetails = {

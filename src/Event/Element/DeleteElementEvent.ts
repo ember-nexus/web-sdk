@@ -1,6 +1,6 @@
 import type { v4 as uuidv4 } from 'uuid';
 
-import { EventIdentifier } from '~/Type/Enum/EventIdentifierEnum';
+import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type DeleteElementEventDetails = {
