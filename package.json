@@ -12,17 +12,19 @@
     "build": "webpack --mode production",
     "cs": "eslint . --ext .ts ./src ./test",
     "cs:fix": "eslint --ext .ts ./src ./test --fix",
-    "test:unit": "instant-mocha ---webpack-config webpack.config.cjs --mode development 'test/Feature/**/*.ts'",
+    "test:unit": "instant-mocha ---webpack-config webpack.config.cjs --mode development 'test/Unit/**/*.ts'",
+    "test:feature": "instant-mocha ---webpack-config webpack.config.cjs --mode development 'test/Feature/**/*.ts'",
     "test:unit:old": "mocha --config .mocharc.unit.json",
-    "test:feature": "mocha --config .mocharc.feature.json",
+    "test:feature:old": "mocha --config .mocharc.feature.json",
     "prepare": "ts-patch install"
   },
   "author": "Syndesi <info@ember-nexus.dev>",
   "license": "MIT",
   "dependencies": {
+    "@types/luxon": "^3.3.4",
     "lru-cache": "^10.0.1",
+    "luxon": "^3.4.4",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.1",
     "tslog": "^4.8.2",
     "typedi": "^0.10.0",
     "uuid": "^9.0.0"

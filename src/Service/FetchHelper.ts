@@ -21,6 +21,10 @@ class FetchHelper {
     headers['Accept'] = 'application/json, application/problem+json';
   }
 
+  addContentTypeJsonHeader(headers: HeadersInit): void {
+    headers['Content-Type'] = 'application/json';
+  }
+
   getDefaultGetOptions(): RequestInit {
     const headers = {};
     this.addAuthorizationHeader(headers);
@@ -30,6 +34,20 @@ class FetchHelper {
       headers: headers,
       redirect: 'follow',
       referrerPolicy: 'no-referrer',
+    };
+  }
+
+  getDefaultPostOptions(body: string): RequestInit {
+    const headers = {};
+    this.addAuthorizationHeader(headers);
+    this.addAcceptJsonAndProblemJsonHeader(headers);
+    this.addContentTypeJsonHeader(headers);
+    return {
+      method: HttpRequestMethod.POST,
+      headers: headers,
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: body,
     };
   }
 
