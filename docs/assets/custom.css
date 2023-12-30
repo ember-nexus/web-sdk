@@ -1,13 +1,89 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap')
+
+/* required in order to load Fira Code instantly */
+{}
+
+:root {
+  --ember-nexus-background-lightest: #ffffff;
+  --ember-nexus-background-lighter: #f6f5f4;
+  --ember-nexus-background-light: #deddda;
+  --ember-nexus-text-red: #ff073a;
+  --ember-nexus-text-orange: #FFA726;
+  --ember-nexus-text-green: #4CAF50;
+  --ember-nexus-text-blue: #0074E4;
+  --ember-nexus-text-purple: #7E57C2;
+}
+
+.text-red {
+  color: var(--ember-nexus-text-red);
+}
+
+.text-green {
+  color: var(--ember-nexus-text-green);
+}
+
+.markdown-section pre,
+.markdown-section pre > code,
+.markdown-section code {
+  background-color: var(--ember-nexus-background-lighter);
+}
 
 .markdown-section code,
 .markdown-section pre,
-.markdown-section output::after {
+.markdown-section output::after,
+.code-title-path,
+aside code {
   font-family: 'Fira Code', 'Roboto Mono', Monaco, courier, monospace;
+}
+
+body,
+.anchor span,
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section h4,
+.markdown-section h5,
+.markdown-section h6,
+.markdown-section strong {
+  color: #1a1a1a;
+}
+
+/*.anchor span {*/
+/*  color: orange;*/
+/*}*/
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+  color: inherit !important;
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+td code {
+  color: inherit !important;
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+table {
+  display: table !important;
+  width: 100%;
 }
 
 .app-sub-sidebar li::before {
   display: none;
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    overflow-x: auto !important;
+  }
 }
 
 .markdown-section p.tip {
@@ -20,4 +96,92 @@
 
 .sidebar-nav li {
   font-size: 14px;
+}
+
+.graph-container {
+  width: 100%;
+  height: 500px;
+  background-color: var(--ember-nexus-background-lighter);
+  margin-bottom: 1rem;
+}
+
+.method-get,
+.method-post,
+.method-put,
+.method-patch,
+.method-delete,
+.method-copy,
+.method-lock,
+.method-unlock,
+.method-mkcol,
+.method-move,
+.method-propfind,
+.method-proppatch,
+.type-read,
+.type-create,
+.type-update,
+.type-delete {
+  font-weight: 700 !important;
+  font-family: 'Fira Code', 'Roboto Mono', Monaco, courier, monospace !important;
+}
+
+.method-get,
+.type-read {
+  color: var(--ember-nexus-text-blue) !important;
+}
+
+.method-post,
+.type-create {
+  color: var(--ember-nexus-text-green) !important;
+}
+
+.method-put,
+.method-patch,
+.type-update {
+  color: var(--ember-nexus-text-orange) !important;
+}
+
+.method-delete,
+.type-delete {
+  color: var(--ember-nexus-text-red) !important;
+}
+
+.method-copy,
+.method-lock,
+.method-unlock,
+.method-mkcol,
+.method-move,
+.method-propfind,
+.method-proppatch {
+  color: var(--ember-nexus-text-purple) !important;
+}
+
+.code-title {
+  margin-top: 1.2em;
+  margin-bottom: -1.2em;
+  background-color: var(--ember-nexus-background-light);
+  padding: 0.5rem 1.4rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.code-title.auto-refresh::after {
+  content: url(./refresh-auto.svg);
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+pre + .code-title {
+  margin-top: -1.2em;
+}
+
+.markdown-section pre > code {
+  padding: 2.2em 0;
+}
+
+pre + iframe {
+  margin-top: -1.2em !important;
 }

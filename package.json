@@ -58,6 +58,9 @@
     "ts-node": "^10.9.1",
     "ts-patch": "^3.0.2",
     "tsutils": "~3.21",
+    "typedoc": "^0.25.4",
+    "typedoc-plugin-mdn-links": "^3.1.9",
+    "typedoc-theme-hierarchy": "^4.0.0",
     "typescript": "5.2.2",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"

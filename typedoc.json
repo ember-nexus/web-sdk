@@ -1,0 +1,11 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPointStrategy": "expand",
+  "entryPoints": ["./src"],
+  "out": "./docs/type",
+  "plugin": [
+    "typedoc-theme-hierarchy",
+    "typedoc-plugin-mdn-links"
+  ],
+  "theme": "hierarchy"
+}
