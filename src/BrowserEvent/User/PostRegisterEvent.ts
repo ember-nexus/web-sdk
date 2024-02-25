@@ -1,13 +1,12 @@
-import type { v4 as uuidv4 } from 'uuid';
-
 import { Data } from '~/Type/Definition/Data';
+import { Uuid } from '~/Type/Definition/Uuid';
 import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type PostRegisterEventDetails = {
   password: string;
   data: Data;
-  result: Promise<uuidv4> | null;
+  result: Promise<Uuid> | null;
 };
 
 class PostRegisterEvent extends CustomEvent<PostRegisterEventDetails> {
@@ -30,11 +29,11 @@ class PostRegisterEvent extends CustomEvent<PostRegisterEventDetails> {
     return this.detail.data;
   }
 
-  getResult(): Promise<uuidv4> | null {
+  getResult(): Promise<Uuid> | null {
     return this.detail.result;
   }
 
-  setResult(result: Promise<uuidv4> | null): PostRegisterEvent {
+  setResult(result: Promise<Uuid> | null): PostRegisterEvent {
     this.detail.result = result;
     return this;
   }
