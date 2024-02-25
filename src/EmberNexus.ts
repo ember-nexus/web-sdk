@@ -3,11 +3,10 @@ import 'reflect-metadata';
 import { Container, Service } from 'typedi';
 // import { parse as uuidParse } from 'uuid';
 
+import { GetElementEvent } from '~/BrowserEvent/Element/GetElementEvent';
 import { Logger } from '~/Service/Logger';
 // import GetElementEndpoint from "~/Endpoint/Element/GetElementEndpoint";
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
-
-import {GetElementEvent} from "~/Event/Element/GetElementEvent";
 
 @Service()
 class TestService {

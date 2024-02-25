@@ -1,15 +1,14 @@
-import type { v4 as uuidv4 } from 'uuid';
-
+import { Uuid } from '~/Type/Definition/Uuid';
 import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type DeleteElementEventDetails = {
-  uuid: uuidv4;
+  uuid: Uuid;
   result: Promise<void> | null;
 };
 
 class DeleteElementEvent extends CustomEvent<DeleteElementEventDetails> {
-  constructor(uuid: uuidv4) {
+  constructor(uuid: Uuid) {
     super(EventIdentifier.DeleteElement, {
       ...customEventDefaultInit,
       detail: {
@@ -19,7 +18,7 @@ class DeleteElementEvent extends CustomEvent<DeleteElementEventDetails> {
     });
   }
 
-  getUuid(): uuidv4 {
+  getUuid(): Uuid {
     return this.detail.uuid;
   }
 

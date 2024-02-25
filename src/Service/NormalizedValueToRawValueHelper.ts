@@ -14,7 +14,7 @@ class FetchHelper {
     if (this.sdkConfiguration.hasToken()) {
       headers['Authorization'] = `Bearer ${this.sdkConfiguration.getToken()}`;
     }
-    this.logger.debug("lol");
+    this.logger.debug('lol');
   }
 }
 
