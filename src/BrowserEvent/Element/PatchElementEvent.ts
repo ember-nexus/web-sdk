@@ -1,17 +1,16 @@
-import type { v4 as uuidv4 } from 'uuid';
-
 import { Data } from '~/Type/Definition/Data';
+import { Uuid } from '~/Type/Definition/Uuid';
 import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type PatchElementEventDetails = {
-  id: uuidv4;
+  id: Uuid;
   data: Data;
   result: Promise<void> | null;
 };
 
 class PatchElementEvent extends CustomEvent<PatchElementEventDetails> {
-  constructor(id: uuidv4, data: Data = {}) {
+  constructor(id: Uuid, data: Data = {}) {
     super(EventIdentifier.PatchElement, {
       ...customEventDefaultInit,
       detail: {
@@ -22,7 +21,7 @@ class PatchElementEvent extends CustomEvent<PatchElementEventDetails> {
     });
   }
 
-  getId(): uuidv4 {
+  getId(): Uuid {
     return this.detail.id;
   }
 

@@ -1,24 +1,23 @@
-import type { v4 as uuidv4 } from 'uuid';
-
 import { Data } from '~/Type/Definition/Data';
+import { Uuid } from '~/Type/Definition/Uuid';
 import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type PostIndexEventDetails = {
   type: string;
-  id: uuidv4 | null;
-  start: uuidv4 | null;
-  end: uuidv4 | null;
+  id: Uuid | null;
+  start: Uuid | null;
+  end: Uuid | null;
   data: Data;
-  result: Promise<uuidv4> | null;
+  result: Promise<Uuid> | null;
 };
 
 class PostIndexEvent extends CustomEvent<PostIndexEventDetails> {
   constructor(
     type: string,
-    id: uuidv4 | null = null,
-    start: uuidv4 | null = null,
-    end: uuidv4 | null = null,
+    id: Uuid | null = null,
+    start: Uuid | null = null,
+    end: Uuid | null = null,
     data: Data = {},
   ) {
     super(EventIdentifier.PostIndex, {
@@ -38,15 +37,15 @@ class PostIndexEvent extends CustomEvent<PostIndexEventDetails> {
     return this.detail.type;
   }
 
-  getId(): uuidv4 | null {
+  getId(): Uuid | null {
     return this.detail.id;
   }
 
-  getStart(): uuidv4 | null {
+  getStart(): Uuid | null {
     return this.detail.start;
   }
 
-  getEnd(): uuidv4 | null {
+  getEnd(): Uuid | null {
     return this.detail.end;
   }
 
@@ -54,11 +53,11 @@ class PostIndexEvent extends CustomEvent<PostIndexEventDetails> {
     return this.detail.data;
   }
 
-  getResult(): Promise<uuidv4> | null {
+  getResult(): Promise<Uuid> | null {
     return this.detail.result;
   }
 
-  setResult(result: Promise<uuidv4> | null): PostIndexEvent {
+  setResult(result: Promise<Uuid> | null): PostIndexEvent {
     this.detail.result = result;
     return this;
   }

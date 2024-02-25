@@ -1,17 +1,16 @@
-import type { v4 as uuidv4 } from 'uuid';
-
 import { Data } from '~/Type/Definition/Data';
+import { Uuid } from '~/Type/Definition/Uuid';
 import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type PutElementEventDetails = {
-  id: uuidv4;
+  id: Uuid;
   data: Data;
   result: Promise<void> | null;
 };
 
 class PutElementEvent extends CustomEvent<PutElementEventDetails> {
-  constructor(id: uuidv4, data: Data = {}) {
+  constructor(id: Uuid, data: Data = {}) {
     super(EventIdentifier.PutElement, {
       ...customEventDefaultInit,
       detail: {
@@ -22,7 +21,7 @@ class PutElementEvent extends CustomEvent<PutElementEventDetails> {
     });
   }
 
-  getId(): uuidv4 {
+  getId(): Uuid {
     return this.detail.id;
   }
 

@@ -7,6 +7,7 @@ import { GetElementEvent } from '~/BrowserEvent/Element/GetElementEvent';
 import { Logger } from '~/Service/Logger';
 // import GetElementEndpoint from "~/Endpoint/Element/GetElementEndpoint";
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
+import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
 @Service()
 class TestService {
@@ -17,7 +18,7 @@ class TestService {
     this.logger.info('level is info');
     this.logger.warn('level is warn');
     this.logger.error('level is error');
-    console.log(new GetElementEvent('b63a3196-7373-4d44-b590-f94e31021bf3'));
+    console.log(new GetElementEvent(validateUuidFromString('b63a3196-7373-4d44-b590-f94e31021bf3')));
   }
 }
 

@@ -1,17 +1,16 @@
-import type { v4 as uuidv4 } from 'uuid';
-
 import type { Node } from '~/Type/Definition/Node';
 import type { Relation } from '~/Type/Definition/Relation';
+import { Uuid } from '~/Type/Definition/Uuid';
 import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type GetElementEventDetails = {
-  uuid: uuidv4;
+  uuid: Uuid;
   element: Promise<Node | Relation> | null;
 };
 
 class GetElementEvent extends CustomEvent<GetElementEventDetails> {
-  constructor(uuid: uuidv4) {
+  constructor(uuid: Uuid) {
     super(EventIdentifier.GetElement, {
       ...customEventDefaultInit,
       detail: {
@@ -21,7 +20,7 @@ class GetElementEvent extends CustomEvent<GetElementEventDetails> {
     });
   }
 
-  getUuid(): uuidv4 {
+  getUuid(): Uuid {
     return this.detail.uuid;
   }
 
