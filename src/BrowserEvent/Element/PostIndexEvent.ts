@@ -15,11 +15,17 @@ type PostIndexEventDetails = {
 class PostIndexEvent extends CustomEvent<PostIndexEventDetails> {
   constructor(
     type: string,
-    id: Uuid | null = null,
+    id: Uuid | null = null, // todo: should variable be renamed to uuid?
     start: Uuid | null = null,
     end: Uuid | null = null,
     data: Data = {},
   ) {
+    if (start == null && end != null) {
+      throw Error('When creating relations, both start and end must be defined.');
+    }
+    if (start != null && end == null) {
+      throw Error('When creating relations, both start and end must be defined.');
+    }
     super(EventIdentifier.PostIndex, {
       ...customEventDefaultInit,
       detail: {
