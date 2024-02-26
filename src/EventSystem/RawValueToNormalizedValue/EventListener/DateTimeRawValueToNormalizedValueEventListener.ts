@@ -12,9 +12,6 @@ class DateTimeRawValueToNormalizedValueEventListener implements EventListener {
 
   triggerOnEvent(event: RawValueToNormalizedValueEvent): void {
     const rawValue = event.getRawValue();
-    if (!(rawValue instanceof Date)) {
-      return;
-    }
     if (typeof rawValue !== 'string') {
       return;
     }

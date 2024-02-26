@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
 
-import { NormalizedValueToRawValueEvent } from '~/EventSystem/NormalizedValueToRawValue/Event/NormalizedValueToRawValueEvent';
+import { RawValueToNormalizedValueEvent } from '~/EventSystem/RawValueToNormalizedValue/Event/RawValueToNormalizedValueEvent';
 import { RawValueToNormalizedValueEventManager } from '~/EventSystem/RawValueToNormalizedValue/RawValueToNormalizedValueEventManager';
 import { EventListener } from '~/Type/Definition/EventListener';
 
@@ -10,16 +10,16 @@ class GenericRawValueToNormalizedValueEventListener implements EventListener {
     rawValueToNormalizedValueEventManager.registerEventListener(this, 0);
   }
 
-  triggerOnEvent(event: NormalizedValueToRawValueEvent): void {
-    const normalizedValue = event.getNormalizedValue();
+  triggerOnEvent(event: RawValueToNormalizedValueEvent): void {
+    const rawValue = event.getRawValue();
     if (
-      Array.isArray(normalizedValue) ||
-      typeof normalizedValue === 'number' ||
-      typeof normalizedValue === 'boolean' ||
-      typeof normalizedValue === 'string' ||
-      normalizedValue === null
+      Array.isArray(rawValue) ||
+      typeof rawValue === 'number' ||
+      typeof rawValue === 'boolean' ||
+      typeof rawValue === 'string' ||
+      rawValue === null
     ) {
-      event.setRawValue(normalizedValue);
+      event.setNormalizedValue(rawValue);
       event.stopPropagation();
     }
   }
