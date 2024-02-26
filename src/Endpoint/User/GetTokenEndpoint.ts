@@ -18,7 +18,7 @@ class GetTokenEndpoint {
   ) {}
 
   async getToken(): Promise<Node> {
-    return new Promise((resolve, reject) => {
+    return new Promise<Node>((resolve, reject) => {
       this.fetchHelper
         .runWrappedFetch('/token', this.fetchHelper.getDefaultGetOptions())
         .then(async (response) => {

@@ -20,7 +20,7 @@ class GetElementEndpoint {
   ) {}
 
   async getElement(uuid: Uuid): Promise<Node | Relation> {
-    return new Promise((resolve, reject) => {
+    return new Promise<Node | Relation>((resolve, reject) => {
       this.fetchHelper
         .runWrappedFetch(`/${uuid}`, this.fetchHelper.getDefaultGetOptions())
         .then(async (response) => {

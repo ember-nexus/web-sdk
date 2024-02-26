@@ -18,7 +18,7 @@ class GetMeEndpoint {
   ) {}
 
   async getMe(): Promise<Node> {
-    return new Promise((resolve, reject) => {
+    return new Promise<Node>((resolve, reject) => {
       this.fetchHelper
         .runWrappedFetch('/me', this.fetchHelper.getDefaultGetOptions())
         .then(async (response) => {

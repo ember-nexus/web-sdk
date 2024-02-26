@@ -17,7 +17,7 @@ class PostIndexEndpoint {
   ) {}
 
   async postIndex(element: NodeWithOptionalId | RelationWithOptionalId): Promise<string> {
-    return new Promise((resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
       this.fetchHelper
         .runWrappedFetch(`/`, this.fetchHelper.getDefaultPostOptions(JSON.stringify(element)))
         .then(async (response) => {

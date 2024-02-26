@@ -19,7 +19,7 @@ class GetElementChildrenEndpoint {
   ) {}
 
   async getElementChildren(uuid: Uuid, page: number = 1, pageSize: number = 25): Promise<Collection> {
-    return new Promise((resolve, reject) => {
+    return new Promise<Collection>((resolve, reject) => {
       this.fetchHelper
         .runWrappedFetch(`/${uuid}/children?page=${page}&pageSize=${pageSize}`, this.fetchHelper.getDefaultGetOptions())
         .then(async (response) => {

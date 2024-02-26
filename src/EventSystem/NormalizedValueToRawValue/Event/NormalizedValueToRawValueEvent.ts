@@ -9,8 +9,9 @@ class NormalizedValueToRawValueEvent implements StoppableEvent {
   isPropagationStopped(): boolean {
     return this.propagationStopped;
   }
-  stopPropagation(): void {
+  stopPropagation(): NormalizedValueToRawValueEvent {
     this.propagationStopped = true;
+    return this;
   }
 
   getNormalizedValue(): unknown {
