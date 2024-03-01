@@ -1,15 +1,10 @@
 import { Service } from 'typedi';
 
 import { RawValueToNormalizedValueEvent } from '~/EventSystem/RawValueToNormalizedValue/Event/RawValueToNormalizedValueEvent';
-import { RawValueToNormalizedValueEventManager } from '~/EventSystem/RawValueToNormalizedValue/RawValueToNormalizedValueEventManager';
 import { EventListener } from '~/Type/Definition/EventListener';
 
 @Service()
 class DateTimeRawValueToNormalizedValueEventListener implements EventListener {
-  constructor(normalizedValueToRawValueEventManager: RawValueToNormalizedValueEventManager) {
-    normalizedValueToRawValueEventManager.registerEventListener(this, 1);
-  }
-
   triggerOnEvent(event: RawValueToNormalizedValueEvent): void {
     const rawValue = event.getRawValue();
     if (typeof rawValue !== 'string') {

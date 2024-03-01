@@ -3,7 +3,6 @@ import { SinonSandbox, createSandbox } from 'sinon';
 
 import { RawValueToNormalizedValueEvent } from '~/EventSystem/RawValueToNormalizedValue/Event/RawValueToNormalizedValueEvent';
 import { GenericRawValueToNormalizedValueEventListener } from '~/EventSystem/RawValueToNormalizedValue/EventListener/GenericRawValueToNormalizedValueEventListener';
-import { RawValueToNormalizedValueEventManager } from '~/EventSystem/RawValueToNormalizedValue/RawValueToNormalizedValueEventManager';
 
 describe('GenericRawValueToNormalizedValueEventListener tests', () => {
   let sandbox: SinonSandbox;
@@ -17,10 +16,7 @@ describe('GenericRawValueToNormalizedValueEventListener tests', () => {
   });
 
   it('should normalize a string', async () => {
-    const rawValueToNormalizedValueEventManager = sandbox.createStubInstance(RawValueToNormalizedValueEventManager);
-    const genericRawValueToNormalizedValueEventListener = new GenericRawValueToNormalizedValueEventListener(
-      rawValueToNormalizedValueEventManager,
-    );
+    const genericRawValueToNormalizedValueEventListener = new GenericRawValueToNormalizedValueEventListener();
 
     const input = 'Hello world';
     const rawValueToNormalizedValueEvent = new RawValueToNormalizedValueEvent(input);
@@ -34,10 +30,7 @@ describe('GenericRawValueToNormalizedValueEventListener tests', () => {
   });
 
   it('should normalize a number', async () => {
-    const rawValueToNormalizedValueEventManager = sandbox.createStubInstance(RawValueToNormalizedValueEventManager);
-    const genericRawValueToNormalizedValueEventListener = new GenericRawValueToNormalizedValueEventListener(
-      rawValueToNormalizedValueEventManager,
-    );
+    const genericRawValueToNormalizedValueEventListener = new GenericRawValueToNormalizedValueEventListener();
 
     const input = 1234;
     const rawValueToNormalizedValueEvent = new RawValueToNormalizedValueEvent(input);
@@ -51,10 +44,7 @@ describe('GenericRawValueToNormalizedValueEventListener tests', () => {
   });
 
   it('should normalize a boolean', async () => {
-    const rawValueToNormalizedValueEventManager = sandbox.createStubInstance(RawValueToNormalizedValueEventManager);
-    const genericRawValueToNormalizedValueEventListener = new GenericRawValueToNormalizedValueEventListener(
-      rawValueToNormalizedValueEventManager,
-    );
+    const genericRawValueToNormalizedValueEventListener = new GenericRawValueToNormalizedValueEventListener();
 
     const input = true;
     const rawValueToNormalizedValueEvent = new RawValueToNormalizedValueEvent(input);
@@ -68,10 +58,7 @@ describe('GenericRawValueToNormalizedValueEventListener tests', () => {
   });
 
   it('should normalize null', async () => {
-    const rawValueToNormalizedValueEventManager = sandbox.createStubInstance(RawValueToNormalizedValueEventManager);
-    const genericRawValueToNormalizedValueEventListener = new GenericRawValueToNormalizedValueEventListener(
-      rawValueToNormalizedValueEventManager,
-    );
+    const genericRawValueToNormalizedValueEventListener = new GenericRawValueToNormalizedValueEventListener();
 
     const input = null;
     const rawValueToNormalizedValueEvent = new RawValueToNormalizedValueEvent(input);
@@ -85,10 +72,7 @@ describe('GenericRawValueToNormalizedValueEventListener tests', () => {
   });
 
   it('should normalize an array', async () => {
-    const rawValueToNormalizedValueEventManager = sandbox.createStubInstance(RawValueToNormalizedValueEventManager);
-    const genericRawValueToNormalizedValueEventListener = new GenericRawValueToNormalizedValueEventListener(
-      rawValueToNormalizedValueEventManager,
-    );
+    const genericRawValueToNormalizedValueEventListener = new GenericRawValueToNormalizedValueEventListener();
 
     const input = [1, 4, 3];
     const rawValueToNormalizedValueEvent = new RawValueToNormalizedValueEvent(input);
@@ -102,10 +86,7 @@ describe('GenericRawValueToNormalizedValueEventListener tests', () => {
   });
 
   it('should not normalize an object', async () => {
-    const rawValueToNormalizedValueEventManager = sandbox.createStubInstance(RawValueToNormalizedValueEventManager);
-    const genericRawValueToNormalizedValueEventListener = new GenericRawValueToNormalizedValueEventListener(
-      rawValueToNormalizedValueEventManager,
-    );
+    const genericRawValueToNormalizedValueEventListener = new GenericRawValueToNormalizedValueEventListener();
 
     const input = { hello: 'world' };
     const rawValueToNormalizedValueEvent = new RawValueToNormalizedValueEvent(input);

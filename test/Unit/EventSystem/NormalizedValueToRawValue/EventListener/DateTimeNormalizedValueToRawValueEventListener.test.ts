@@ -3,7 +3,6 @@ import { SinonSandbox, createSandbox } from 'sinon';
 
 import { NormalizedValueToRawValueEvent } from '~/EventSystem/NormalizedValueToRawValue/Event/NormalizedValueToRawValueEvent';
 import { DateTimeNormalizedValueToRawValueEventListener } from '~/EventSystem/NormalizedValueToRawValue/EventListener/DateTimeNormalizedValueToRawValueEventListener';
-import { NormalizedValueToRawValueEventManager } from '~/EventSystem/NormalizedValueToRawValue/NormalizedValueToRawValueEventManager';
 
 describe('DateTimeNormalizedValueToRawValueEventListener tests', () => {
   let sandbox: SinonSandbox;
@@ -17,10 +16,7 @@ describe('DateTimeNormalizedValueToRawValueEventListener tests', () => {
   });
 
   it('should denormalize a date', async () => {
-    const normalizedValueToRawValueEventManager = sandbox.createStubInstance(NormalizedValueToRawValueEventManager);
-    const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener(
-      normalizedValueToRawValueEventManager,
-    );
+    const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener();
 
     const input = new Date('2023-11-21T16:20:19+00:00');
     const normalizedValueToRawValueEvent = new NormalizedValueToRawValueEvent(input);
@@ -34,10 +30,7 @@ describe('DateTimeNormalizedValueToRawValueEventListener tests', () => {
   });
 
   it('should not denormalize a string', async () => {
-    const normalizedValueToRawValueEventManager = sandbox.createStubInstance(NormalizedValueToRawValueEventManager);
-    const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener(
-      normalizedValueToRawValueEventManager,
-    );
+    const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener();
 
     const input = 'test';
     const normalizedValueToRawValueEvent = new NormalizedValueToRawValueEvent(input);
@@ -51,10 +44,7 @@ describe('DateTimeNormalizedValueToRawValueEventListener tests', () => {
   });
 
   it('should not denormalize a number', async () => {
-    const normalizedValueToRawValueEventManager = sandbox.createStubInstance(NormalizedValueToRawValueEventManager);
-    const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener(
-      normalizedValueToRawValueEventManager,
-    );
+    const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener();
 
     const input = 1234;
     const normalizedValueToRawValueEvent = new NormalizedValueToRawValueEvent(input);
@@ -68,10 +58,7 @@ describe('DateTimeNormalizedValueToRawValueEventListener tests', () => {
   });
 
   it('should not denormalize a boolean', async () => {
-    const normalizedValueToRawValueEventManager = sandbox.createStubInstance(NormalizedValueToRawValueEventManager);
-    const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener(
-      normalizedValueToRawValueEventManager,
-    );
+    const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener();
 
     const input = true;
     const normalizedValueToRawValueEvent = new NormalizedValueToRawValueEvent(input);
@@ -85,10 +72,7 @@ describe('DateTimeNormalizedValueToRawValueEventListener tests', () => {
   });
 
   it('should not denormalize null', async () => {
-    const normalizedValueToRawValueEventManager = sandbox.createStubInstance(NormalizedValueToRawValueEventManager);
-    const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener(
-      normalizedValueToRawValueEventManager,
-    );
+    const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener();
 
     const input = null;
     const normalizedValueToRawValueEvent = new NormalizedValueToRawValueEvent(input);
@@ -102,10 +86,7 @@ describe('DateTimeNormalizedValueToRawValueEventListener tests', () => {
   });
 
   it('should not denormalize an array', async () => {
-    const normalizedValueToRawValueEventManager = sandbox.createStubInstance(NormalizedValueToRawValueEventManager);
-    const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener(
-      normalizedValueToRawValueEventManager,
-    );
+    const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener();
 
     const input = [1, 2, 3];
     const normalizedValueToRawValueEvent = new NormalizedValueToRawValueEvent(input);
@@ -119,10 +100,7 @@ describe('DateTimeNormalizedValueToRawValueEventListener tests', () => {
   });
 
   it('should not denormalize an object', async () => {
-    const normalizedValueToRawValueEventManager = sandbox.createStubInstance(NormalizedValueToRawValueEventManager);
-    const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener(
-      normalizedValueToRawValueEventManager,
-    );
+    const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener();
 
     const input = { hello: 'world' };
     const normalizedValueToRawValueEvent = new NormalizedValueToRawValueEvent(input);
