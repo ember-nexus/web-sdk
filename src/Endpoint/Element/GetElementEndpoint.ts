@@ -20,6 +20,18 @@ class GetElementEndpoint {
   ) {}
 
   async getElement(uuid: Uuid): Promise<Node | Relation> {
+    return this.fetchHelper
+      .runWrappedFetch(`/${uuid}`, this.fetchHelper.getDefaultGetOptions())
+      .then((response) => {
+        if (!response.ok) return Promise.reject(new Error('Problem with request.'));
+        return response.json();
+      })
+      .then<Node | Relation>((jsonResponse) => {
+        return this.elementParser.rawElementToNodeOrRelation(jsonResponse);
+      });
+  }
+
+  async getElementOld(uuid: Uuid): Promise<Node | Relation> {
     return new Promise<Node | Relation>((resolve, reject) => {
       this.fetchHelper
         .runWrappedFetch(`/${uuid}`, this.fetchHelper.getDefaultGetOptions())

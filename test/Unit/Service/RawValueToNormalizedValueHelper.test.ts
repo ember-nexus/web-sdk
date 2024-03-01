@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import { expect } from 'chai';
 import { DateTime } from 'luxon';
 import { SinonSandbox, SinonStubbedInstance, createSandbox } from 'sinon';

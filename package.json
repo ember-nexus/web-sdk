@@ -13,7 +13,7 @@
     "cs": "eslint . --ext .ts ./src ./test",
     "cs:fix": "eslint --ext .ts ./src ./test --fix",
     "test:unit": "jest ./test/Unit",
-    "test:feature": "instant-mocha ---webpack-config webpack.config.cjs --mode development 'test/Feature/**/*.ts'",
+    "test:feature": "jest ./test/Feature",
     "test:unit:old": "mocha --config .mocharc.unit.json",
     "test:feature:old": "mocha --config .mocharc.feature.json",
     "prepare": "ts-patch install"
@@ -26,8 +26,7 @@
     "luxon": "^3.4.4",
     "reflect-metadata": "^0.1.13",
     "tslog": "^4.8.2",
-    "typedi": "^0.10.0",
-    "uuid": "^9.0.0"
+    "typedi": "^0.10.0"
   },
   "devDependencies": {
     "@happy-dom/global-registrator": "^12.10.3",
