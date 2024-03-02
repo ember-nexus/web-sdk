@@ -10,7 +10,7 @@
   "scripts": {
     "watch": "webpack --mode development --watch",
     "build": "webpack --mode production",
-    "cs": "eslint . --ext .ts ./src ./test",
+    "cs": "eslint --ext .ts ./src ./test",
     "cs:fix": "eslint --ext .ts ./src ./test --fix",
     "test:unit": "jest ./test/Unit",
     "test:feature": "jest ./test/Feature",
