@@ -3,7 +3,9 @@ import 'reflect-metadata';
 import { Container } from 'typedi';
 
 import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
+import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
+import { Node } from '~/Type/Definition/Node';
 import { Relation } from '~/Type/Definition/Relation';
 import { Uuid } from '~/Type/Definition/Uuid';
 
@@ -13,4 +15,4 @@ class EmberNexus {
   }
 }
 
-export { EmberNexus, Container, WebSdkConfiguration };
+export { EmberNexus, Container, WebSdkConfiguration, Logger };

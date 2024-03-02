@@ -3,18 +3,18 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   entry: './src/EmberNexus.ts',
-    mode: "production",
+  mode: "production",
   module: {
     rules: [
       {
         test: /\.ts?$/,
         use: [
-            {
-                loader: 'ts-loader',
-                options: {
-                    configFile: 'tsconfig.release.json'
-                }
+          {
+            loader: 'ts-loader',
+            options: {
+              configFile: 'tsconfig.release.json'
             }
+          }
         ],
         exclude: /node_modules/
       },
@@ -26,30 +26,33 @@ module.exports = {
       '~': path.resolve(__dirname, 'src/'),
     }
   },
+  experiments: {
+    outputModule: true,
+  },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
-      library: 'EmberNexusWebSDK',
-      libraryTarget: 'umd',
-      umdNamedDefine: true
+    library: {
+      type: 'module'
+    }
   },
   performance: {
     hints: false
   },
-    optimization: {
-        minimize: true,
-        minimizer: [
-            new TerserPlugin({
-                terserOptions: {
-                    format: {
-                        comments: false,
-                    },
-                    keep_classnames: true,
-                    keep_fnames: true,
-                },
-                extractComments: false,
-            }),
-        ],
-    },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          format: {
+            comments: false,
+          },
+          keep_classnames: true,
+          keep_fnames: true,
+        },
+        extractComments: false,
+      }),
+    ],
+  },
 };
