@@ -9,6 +9,7 @@ class LoggerFactory {
   create(): Logger {
     const tsLogger: TsLogger<ILogObj> = new TsLogger({
       minLevel: LogLevel.Debug,
+      stylePrettyLogs: false,
     });
     return new Logger(tsLogger);
   }

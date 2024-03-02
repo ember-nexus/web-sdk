@@ -8,14 +8,11 @@
   "main": "dist/EmberNexus.js",
   "types": "dist/EmberNexus.d.ts",
   "scripts": {
-    "watch": "webpack --mode development --watch",
-    "build": "webpack --mode production",
+    "build": "rm -rf ./dist && webpack --config webpack.release.config.cjs",
     "cs": "eslint --ext .ts ./src ./test",
     "cs:fix": "eslint --ext .ts ./src ./test --fix",
     "test:unit": "jest ./test/Unit",
     "test:feature": "jest ./test/Feature",
-    "test:unit:old": "mocha --config .mocharc.unit.json",
-    "test:feature:old": "mocha --config .mocharc.feature.json",
     "prepare": "ts-patch install"
   },
   "author": "Syndesi <info@ember-nexus.dev>",
@@ -51,6 +48,7 @@
     "prettier": "^3.0.3",
     "rimraf": "~5.0.5",
     "sinon": "^17.0.1",
+    "terser-webpack-plugin": "^5.3.10",
     "ts-jest": "^29.1.2",
     "ts-loader": "^9.5.1",
     "ts-mockito": "^2.6.1",
