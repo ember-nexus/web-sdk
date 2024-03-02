@@ -3,7 +3,7 @@
   "version": "0.0.38",
   "type": "module",
   "engines": {
-    "node": ">= 19.0"
+    "node": ">= 20.0"
   },
   "main": "dist/EmberNexus.js",
   "types": "dist/EmberNexus.d.ts",
