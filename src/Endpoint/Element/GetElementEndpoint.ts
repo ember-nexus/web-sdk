@@ -1,14 +1,13 @@
 import { Service } from 'typedi';
 
+import { NetworkError } from '~/Error/NetworkError';
+import { ParseError } from '~/Error/ParseError';
 import { ElementParser } from '~/Service/ElementParser';
 import { FetchHelper } from '~/Service/FetchHelper';
 import { Logger } from '~/Service/Logger';
-import { RequestProblemParser } from '~/Service/RequestProblemParser';
 import { Node } from '~/Type/Definition/Node';
 import { Relation } from '~/Type/Definition/Relation';
-import { RequestProblem } from '~/Type/Definition/RequestProblem';
 import { Uuid } from '~/Type/Definition/Uuid';
-import { RequestProblemCategory } from '~/Type/Enum/RequestProblemCategory';
 
 @Service()
 class GetElementEndpoint {
@@ -16,48 +15,45 @@ class GetElementEndpoint {
     private logger: Logger,
     private fetchHelper: FetchHelper,
     private elementParser: ElementParser,
-    private requestProblemParser: RequestProblemParser,
   ) {}
 
   async getElement(uuid: Uuid): Promise<Node | Relation> {
-    return this.fetchHelper
-      .runWrappedFetch(`/${uuid}`, this.fetchHelper.getDefaultGetOptions())
-      .then((response) => {
-        if (!response.ok) return Promise.reject(new Error('Problem with request.'));
-        return response.json();
-      })
-      .then<Node | Relation>((jsonResponse) => {
-        return this.elementParser.rawElementToNodeOrRelation(jsonResponse);
-      });
-  }
-
-  async getElementOld(uuid: Uuid): Promise<Node | Relation> {
-    return new Promise<Node | Relation>((resolve, reject) => {
-      this.fetchHelper
-        .runWrappedFetch(`/${uuid}`, this.fetchHelper.getDefaultGetOptions())
-        .then(async (response) => {
-          const data = await response.json();
-          if (response.ok) {
-            const element = this.elementParser.rawElementToNodeOrRelation(data);
-            resolve(element);
-            return;
+    const url = this.fetchHelper.buildUrl(`/${uuid}`);
+    this.logger.debug(`Executing HTTP GET request against url ${url} .`);
+    return (
+      fetch(url, this.fetchHelper.getDefaultGetOptions())
+        // .catch((networkError) => Promise.reject(new NetworkError(`Experienced generic network error during fetching resource.`, networkError)))
+        .catch((networkError) => {
+          return Promise.reject(
+            new NetworkError(`Experienced generic network error during fetching resource.`, networkError),
+          );
+        })
+        .then(async (response: Response) => {
+          const contentType = response.headers.get('Content-Type');
+          if (contentType == null) {
+            return Promise.reject(new ParseError('Response does not contain content type header.'));
           }
-          const requestProblem = this.requestProblemParser.rawRequestProblemToRequestProblem(data);
-          this.logger.error(requestProblem);
-          reject(requestProblem);
-          return;
+          if (!(contentType.includes('application/json') || contentType.includes('application/problem+json'))) {
+            return Promise.reject(
+              new ParseError(
+                "Unable to parse response as content type is neither 'application/json' nor 'application/problem+json'.",
+              ),
+            );
+          }
+          const data = await response.json();
+
+          if (!response.ok) return Promise.reject(this.fetchHelper.createResponseErrorFromBadResponse(response, data));
+
+          return data;
+        })
+        .then<Node | Relation>((jsonResponse) => {
+          return this.elementParser.rawElementToNodeOrRelation(jsonResponse);
         })
         .catch((error) => {
-          const requestProblem = {
-            category: RequestProblemCategory.ClientSide,
-            title: `Encountered network problem`,
-            detail: `See exception for details.`,
-            exception: error,
-          } as RequestProblem;
-          this.logger.error(requestProblem);
-          reject(requestProblem);
-        });
-    });
+          this.logger.error(error.message, error);
+          return Promise.reject(error);
+        })
+    );
   }
 }
 

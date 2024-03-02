@@ -3,7 +3,7 @@ import { Logger } from 'tslog';
 import type { LoggerInterface } from '~/Type/Definition/LoggerInterface';
 
 const testLogger = new Logger({
-  name: 'eon-sdk',
+  name: 'web-sdk',
   // type: "json"
   type: 'pretty',
 });
