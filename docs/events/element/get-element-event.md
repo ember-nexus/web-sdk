@@ -57,4 +57,3 @@ console.log(getElementEvent.getElement());
 ```
 
 <!-- tabs:end -->
-

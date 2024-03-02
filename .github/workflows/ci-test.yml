@@ -26,6 +26,9 @@ jobs:
   code-style:
     runs-on: ubuntu-latest
     name: 'Check code style for Node.js v${{ matrix.node-version }}'
+    needs:
+      - yml-lint
+      - markdown-lint
     strategy:
       fail-fast: false
       matrix:
@@ -50,6 +53,9 @@ jobs:
   test-unit:
     runs-on: ubuntu-latest
     name: 'Check unit tests for Node.js v${{ matrix.node-version }}'
+    needs:
+      - yml-lint
+      - markdown-lint
     strategy:
       fail-fast: false
       matrix:
@@ -74,6 +80,9 @@ jobs:
   test-feature:
     runs-on: ubuntu-latest
     name: 'Check feature tests for Node.js v${{ matrix.node-version }}'
+    needs:
+      - yml-lint
+      - markdown-lint
     strategy:
       fail-fast: false
       matrix:
