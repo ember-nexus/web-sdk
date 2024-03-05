@@ -1,5 +1,12 @@
 - [Home](/)
-- **Events**
+
+
+- **Browser Events**
   - **Element Events**
-    - [<span class="type-read">READ</span>` GetElementEvent -` Get Element Event](events/element/get-element-event)
-- <a href=".//type/index.html" target="_blank">TypeDoc</a>
+    - [GetElementEvent](/browser-events/element/get-element)
+
+
+
+- **Endpoints**
+  - **Element Endpoints**
+    - [<span class="method-get">GET</span>` /<uuid> -` Get Element](/endpoints/element/get-element)

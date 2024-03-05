@@ -1,31 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap')
-
-/* required in order to load Fira Code instantly */
-{}
-
 :root {
-  --ember-nexus-background-lightest: #ffffff;
-  --ember-nexus-background-lighter: #f6f5f4;
-  --ember-nexus-background-light: #deddda;
-  --ember-nexus-text-red: #ff073a;
-  --ember-nexus-text-orange: #FFA726;
-  --ember-nexus-text-green: #4CAF50;
-  --ember-nexus-text-blue: #0074E4;
-  --ember-nexus-text-purple: #7E57C2;
+    --ember-nexus-background-lightest: #ffffff;
+    --ember-nexus-background-lighter: #f6f5f4;
+    --ember-nexus-background-light: #deddda;
+    --ember-nexus-text-red: #ff073a;
+    --ember-nexus-text-orange: #FFA726;
+    --ember-nexus-text-green: #4CAF50;
+    --ember-nexus-text-blue: #0074E4;
+    --ember-nexus-text-purple: #7E57C2;
 }
 
 .text-red {
-  color: var(--ember-nexus-text-red);
+    color: var(--ember-nexus-text-red);
 }
 
 .text-green {
-  color: var(--ember-nexus-text-green);
+    color: var(--ember-nexus-text-green);
 }
 
 .markdown-section pre,
 .markdown-section pre > code,
 .markdown-section code {
-  background-color: var(--ember-nexus-background-lighter);
+    background-color: var(--ember-nexus-background-lighter);
 }
 
 .markdown-section code,
@@ -33,7 +28,7 @@
 .markdown-section output::after,
 .code-title-path,
 aside code {
-  font-family: 'Fira Code', 'Roboto Mono', Monaco, courier, monospace;
+    font-family: 'Fira Code', 'Roboto Mono', Monaco, courier, monospace;
 }
 
 body,
@@ -45,7 +40,7 @@ body,
 .markdown-section h5,
 .markdown-section h6,
 .markdown-section strong {
-  color: #1a1a1a;
+    color: #1a1a1a;
 }
 
 /*.anchor span {*/
@@ -58,51 +53,55 @@ h3 code,
 h4 code,
 h5 code,
 h6 code {
-  color: inherit !important;
-  background: transparent !important;
-  margin: 0 !important;
-  padding: 0 !important;
+    color: inherit !important;
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 td code {
-  color: inherit !important;
-  background: transparent !important;
-  margin: 0 !important;
-  padding: 0 !important;
+    color: inherit !important;
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 table {
-  display: table !important;
-  width: 100%;
+    display: table !important;
+    width: 100%;
+}
+
+table th {
+    text-align: left;
 }
 
 .app-sub-sidebar li::before {
-  display: none;
+    display: none;
 }
 
 @media screen and (max-width: 768px) {
-  main {
-    overflow-x: auto !important;
-  }
+    main {
+        overflow-x: auto !important;
+    }
 }
 
 .markdown-section p.tip {
-  border-left-color: var(--theme-color);
+    border-left-color: var(--theme-color);
 }
 
 .markdown-section p.tip::before {
-  background-color: var(--theme-color);
+    background-color: var(--theme-color);
 }
 
 .sidebar-nav li {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 .graph-container {
-  width: 100%;
-  height: 500px;
-  background-color: var(--ember-nexus-background-lighter);
-  margin-bottom: 1rem;
+    width: 100%;
+    height: 500px;
+    background-color: var(--ember-nexus-background-lighter);
+    margin-bottom: 1rem;
 }
 
 .method-get,
@@ -116,34 +115,26 @@ table {
 .method-mkcol,
 .method-move,
 .method-propfind,
-.method-proppatch,
-.type-read,
-.type-create,
-.type-update,
-.type-delete {
-  font-weight: 700 !important;
-  font-family: 'Fira Code', 'Roboto Mono', Monaco, courier, monospace !important;
+.method-proppatch {
+    font-weight: 700 !important;
+    font-family: 'Fira Code', 'Roboto Mono', Monaco, courier, monospace !important;
 }
 
-.method-get,
-.type-read {
-  color: var(--ember-nexus-text-blue) !important;
+.method-get {
+    color: var(--ember-nexus-text-blue) !important;
 }
 
-.method-post,
-.type-create {
-  color: var(--ember-nexus-text-green) !important;
+.method-post {
+    color: var(--ember-nexus-text-green) !important;
 }
 
 .method-put,
-.method-patch,
-.type-update {
-  color: var(--ember-nexus-text-orange) !important;
+.method-patch {
+    color: var(--ember-nexus-text-orange) !important;
 }
 
-.method-delete,
-.type-delete {
-  color: var(--ember-nexus-text-red) !important;
+.method-delete {
+    color: var(--ember-nexus-text-red) !important;
 }
 
 .method-copy,
@@ -153,35 +144,186 @@ table {
 .method-move,
 .method-propfind,
 .method-proppatch {
-  color: var(--ember-nexus-text-purple) !important;
+    color: var(--ember-nexus-text-purple) !important;
 }
 
 .code-title {
-  margin-top: 1.2em;
-  margin-bottom: -1.2em;
-  background-color: var(--ember-nexus-background-light);
-  padding: 0.5rem 1.4rem;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    margin-top: 1.2em;
+    margin-bottom: -1.2em;
+    background-color: var(--ember-nexus-background-light);
+    padding: 0.5rem 1.4rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .code-title.auto-refresh::after {
-  content: url(./refresh-auto.svg);
-  width: 24px;
-  height: 24px;
-  display: block;
+    content: url(./refresh-auto.svg);
+    width: 24px;
+    height: 24px;
+    display: block;
 }
 
 pre + .code-title {
-  margin-top: -1.2em;
+    margin-top: -1.2em;
 }
 
 .markdown-section pre > code {
-  padding: 2.2em 0;
+    padding: 2.2em 0;
 }
 
 pre + iframe {
-  margin-top: -1.2em !important;
+    margin-top: -1.2em !important;
 }
+
+.table-request-parameters,
+.table-request-headers,
+.table-response-headers {
+    margin-bottom: 1rem;
+    overflow-x: auto;
+}
+
+.table-request-parameters table,
+.table-request-headers table,
+.table-response-headers table {
+    margin-bottom: 0;
+}
+
+.table-request-parameters th:first-of-type {
+    width: 15%;
+    min-width: 5em;
+}
+
+.table-request-parameters th:nth-of-type(2) {
+    width: 65%;
+    min-width: 25em;
+}
+
+.table-request-parameters th:nth-of-type(3) {
+    width: 10%;
+    min-width: 5em;
+}
+
+.table-request-parameters th:nth-of-type(4) {
+    width: 10%;
+    min-width: 5em;
+}
+
+.table-request-headers th:first-of-type {
+    width: 15%;
+    min-width: 5em;
+}
+
+.table-request-headers th:nth-of-type(2) {
+    width: 65%;
+    min-width: 25em;
+}
+
+.table-request-headers th:nth-of-type(3) {
+    width: 10%;
+    min-width: 5em;
+}
+
+.table-request-headers th:nth-of-type(4) {
+    width: 10%;
+    min-width: 5em;
+}
+
+.table-response-headers th:first-of-type {
+    width: 15%;
+    min-width: 5em;
+}
+
+.table-response-headers th:nth-of-type(2) {
+    width: 75%;
+    min-width: 25em;
+}
+
+.table-response-headers th:nth-of-type(3) {
+    width: 10%;
+    min-width: 5em;
+}
+
+
+
+
+
+
+.alert.ember-nexus {
+    position: relative;
+    padding: .75rem 1.25rem !important;
+    color: black;
+    border-left: 3px solid black;
+}
+
+.alert.ember-nexus.warning {
+    border-left-color: var(--ember-nexus-text-red);
+}
+
+.alert.ember-nexus.security {
+    border-left-color: var(--ember-nexus-text-purple);
+}
+
+.alert.ember-nexus .btn {
+    display: flex;
+    width: auto;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    text-decoration: none;
+    padding: 0.5rem;
+    border: 1px solid black;
+    color: black;
+}
+
+.alert.ember-nexus .btn > img {
+    height: 2rem;
+    width: auto;
+    display: block;
+    margin-left: 0.5rem;
+}
+
+.blob-container {
+    position: relative;
+}
+
+.blob-container > * {
+    position: relative;
+}
+
+.blob-container > svg {
+    pointer-events: none;
+}
+
+.blob-container > svg .blob {
+    pointer-events: auto;
+}
+
+.blob {
+    fill: #34e58b;
+    pointer-events: auto;
+    transition: fill 0.2s ease-in-out;
+}
+.blob-container:hover .blob {
+    fill: #366dfe;
+}
+
+.icon {
+    height: 24px !important;
+    width: 24px !important;
+}
+
+.icon.icon-note {
+    background-image: url(./information-outline.svg);
+}
+
+.icon.icon-warning {
+    background-image: url(./alert-outline.svg);
+}
+
+.icon.icon-security {
+    background-image: url(./shield-alert-outline.svg);
+}
+
