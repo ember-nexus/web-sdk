@@ -3,14 +3,14 @@ import { SinonSandbox, SinonStubbedInstance, createSandbox } from 'sinon';
 import { Container } from 'typedi';
 
 import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
-import { Response401UnauthorizedError } from '~/Error/Response401UnauthorizedError';
+import { Response429TooManyRequestsError } from '~/Error/Response429TooManyRequestsError';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
 import { mockServer } from '../../../../MockServer/mockServer';
 
-describe('GetElementEndpoint unauthorized 401 tests', () => {
+describe('GetElementEndpoint too many requests 429 tests', () => {
   let sandbox: SinonSandbox;
   let mockedLogger: SinonStubbedInstance<Logger>;
 
@@ -31,9 +31,9 @@ describe('GetElementEndpoint unauthorized 401 tests', () => {
     mockServer.close();
   });
 
-  it('should handle unauthorized 401 error', async () => {
+  it('should handle too many requests 429 error', async () => {
     await expect(
-      Container.get(GetElementEndpoint).getElement(validateUuidFromString('5324396a-636a-4263-ac38-62fef3132ead')),
-    ).to.eventually.be.rejectedWith(Response401UnauthorizedError);
+      Container.get(GetElementEndpoint).getElement(validateUuidFromString('43d39932-2882-43c2-b526-1ab282bc145d')),
+    ).to.eventually.be.rejectedWith(Response429TooManyRequestsError);
   });
 });

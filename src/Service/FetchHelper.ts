@@ -3,6 +3,7 @@ import { Service } from 'typedi';
 import { Response401UnauthorizedError } from '~/Error/Response401UnauthorizedError';
 import { Response403ForbiddenError } from '~/Error/Response403ForbiddenError';
 import { Response404NotFoundError } from '~/Error/Response404NotFoundError';
+import { Response429TooManyRequestsError } from '~/Error/Response429TooManyRequestsError';
 import { ResponseError } from '~/Error/ResponseError';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
@@ -26,6 +27,9 @@ class FetchHelper {
     }
     if (response.status == 404) {
       errorInstance = new Response404NotFoundError('Sever returned 404 not found.');
+    }
+    if (response.status == 429) {
+      errorInstance = new Response429TooManyRequestsError('Sever returned 429 too many requests.');
     }
 
     if (errorInstance == null) errorInstance = new ResponseError('Generic response error.');

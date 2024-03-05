@@ -3,14 +3,14 @@ import { SinonSandbox, SinonStubbedInstance, createSandbox } from 'sinon';
 import { Container } from 'typedi';
 
 import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
-import { Response401UnauthorizedError } from '~/Error/Response401UnauthorizedError';
+import { Response404NotFoundError } from '~/Error/Response404NotFoundError';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
 import { mockServer } from '../../../../MockServer/mockServer';
 
-describe('GetElementEndpoint unauthorized 401 tests', () => {
+describe('GetElementEndpoint not found 404 tests', () => {
   let sandbox: SinonSandbox;
   let mockedLogger: SinonStubbedInstance<Logger>;
 
@@ -31,9 +31,9 @@ describe('GetElementEndpoint unauthorized 401 tests', () => {
     mockServer.close();
   });
 
-  it('should handle unauthorized 401 error', async () => {
+  it('should handle not found 404 error', async () => {
     await expect(
-      Container.get(GetElementEndpoint).getElement(validateUuidFromString('5324396a-636a-4263-ac38-62fef3132ead')),
-    ).to.eventually.be.rejectedWith(Response401UnauthorizedError);
+      Container.get(GetElementEndpoint).getElement(validateUuidFromString('2fe89dfb-ef1c-4964-99da-73161077e951')),
+    ).to.eventually.be.rejectedWith(Response404NotFoundError);
   });
 });

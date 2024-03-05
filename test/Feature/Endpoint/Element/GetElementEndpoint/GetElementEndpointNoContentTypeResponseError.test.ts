@@ -1,15 +1,16 @@
 import { expect } from 'chai';
-import { SinonSandbox, SinonStubbedInstance, assert, createSandbox } from 'sinon';
+import { SinonSandbox, SinonStubbedInstance, assert, createSandbox, match } from 'sinon';
 import { Container } from 'typedi';
 
 import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
+import { ParseError } from '~/Error/ParseError';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
 import { mockServer } from '../../../../MockServer/mockServer';
 
-describe('GetElementEndpoint normal node tests', () => {
+describe('GetElementEndpoint no content type response error tests', () => {
   let sandbox: SinonSandbox;
   let mockedLogger: SinonStubbedInstance<Logger>;
 
@@ -30,21 +31,16 @@ describe('GetElementEndpoint normal node tests', () => {
     mockServer.close();
   });
 
-  it('should load an accessible node', async () => {
-    const nodeUuid = validateUuidFromString('b1e85bf9-6a79-4e50-ae5a-ed49beac8cb5');
-    const node = await Container.get(GetElementEndpoint).getElement(nodeUuid);
+  it('should handle no content type response error', async () => {
+    await expect(
+      Container.get(GetElementEndpoint).getElement(validateUuidFromString('d00d3faf-5dc9-43f1-9efc-f78c2d7efa77')),
+    ).to.eventually.be.rejectedWith(ParseError);
 
     assert.calledOnceWithExactly(
       mockedLogger.debug,
-      'Executing HTTP GET request against url http://mock-api/b1e85bf9-6a79-4e50-ae5a-ed49beac8cb5 .',
+      'Executing HTTP GET request against url http://mock-api/d00d3faf-5dc9-43f1-9efc-f78c2d7efa77 .',
     );
 
-    expect(node).to.have.keys('id', 'type', 'data');
-    expect(node).to.not.have.keys('start', 'end');
-    expect(node.id).to.equal(nodeUuid);
-    expect(node.type).to.equal('Data');
-    expect(node.data.created).to.be.instanceof(Date);
-    expect(node.data.updated).to.be.instanceof(Date);
-    expect(Object.keys(node.data)).to.have.lengthOf(3);
+    assert.calledOnceWithExactly(mockedLogger.error, 'Response does not contain content type header.', match.any);
   });
 });

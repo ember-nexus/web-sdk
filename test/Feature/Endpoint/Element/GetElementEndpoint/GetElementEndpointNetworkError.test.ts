@@ -10,7 +10,7 @@ import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
 import { mockServer } from '../../../../MockServer/mockServer';
 
-describe('GetElementEndpoint tests', () => {
+describe('GetElementEndpoint network error tests', () => {
   let sandbox: SinonSandbox;
   let mockedLogger: SinonStubbedInstance<Logger>;
 
