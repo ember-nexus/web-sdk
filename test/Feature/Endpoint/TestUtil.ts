@@ -1,9 +1,10 @@
-import {createSandbox} from "sinon";
-import {Logger} from "~/Service/Logger";
-import {Container} from "typedi";
-import {WebSdkConfiguration} from "~/Service/WebSdkConfiguration";
+import { createSandbox } from 'sinon';
+import { Container } from 'typedi';
 
-function customSetup(sandbox, mockServer, mockedLogger){
+import { Logger } from '~/Service/Logger';
+import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
+
+function customSetup(sandbox, mockServer, mockedLogger) {
   beforeEach(() => {
     sandbox = createSandbox();
 
@@ -22,4 +23,4 @@ function customSetup(sandbox, mockServer, mockedLogger){
   });
 }
 
-export {customSetup};
+export { customSetup };
