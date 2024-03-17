@@ -1,5 +1,7 @@
 import { expect } from 'chai';
-import { SinonSandbox, SinonStubbedInstance, createSandbox } from 'sinon';
+import { HttpResponse, http } from 'msw';
+// eslint-disable-next-line import/no-unresolved
+import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
 import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
@@ -8,32 +10,46 @@ import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
-import { mockServer } from '../../../../MockServer/mockServer';
+import { TestLogger } from '../../../TestLogger';
 
-describe('GetElementEndpoint too many requests 429 tests', () => {
-  let sandbox: SinonSandbox;
-  let mockedLogger: SinonStubbedInstance<Logger>;
+const mockServer = setupServer(
+  http.get('http://mock-api/43d39932-2882-43c2-b526-1ab282bc145d', () => {
+    return HttpResponse.json(
+      {
+        type: 'http://ember-nexus-api/error/429/too-many-requests',
+        title: 'Unauthorized',
+        status: 429,
+        detail: 'wip',
+      },
+      {
+        status: 429,
+        headers: {
+          'Content-Type': 'application/problem+json; charset=utf-8',
+        },
+      },
+    );
+  }),
+);
 
-  beforeEach(() => {
-    sandbox = createSandbox();
+const testLogger: TestLogger = new TestLogger();
+Container.set(Logger, testLogger);
+Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
 
-    mockServer.listen();
+test('GetElementEndpoint should handle bad response error', async () => {
+  mockServer.listen();
+  const uuid = validateUuidFromString('43d39932-2882-43c2-b526-1ab282bc145d');
 
-    mockedLogger = sandbox.createStubInstance(Logger);
-    Container.set(Logger, mockedLogger);
+  await expect(Container.get(GetElementEndpoint).getElement(uuid)).to.eventually.be.rejectedWith(
+    Response429TooManyRequestsError,
+  );
 
-    Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
-  });
+  expect(
+    testLogger.assertDebugHappened(
+      'Executing HTTP GET request against url http://mock-api/43d39932-2882-43c2-b526-1ab282bc145d .',
+    ),
+  ).to.be.true;
 
-  afterEach(() => {
-    sandbox.restore();
-    Container.reset();
-    mockServer.close();
-  });
+  expect(testLogger.assertErrorHappened('Sever returned 429 too many requests.')).to.be.true;
 
-  it('should handle too many requests 429 error', async () => {
-    await expect(
-      Container.get(GetElementEndpoint).getElement(validateUuidFromString('43d39932-2882-43c2-b526-1ab282bc145d')),
-    ).to.eventually.be.rejectedWith(Response429TooManyRequestsError);
-  });
+  mockServer.close();
 });

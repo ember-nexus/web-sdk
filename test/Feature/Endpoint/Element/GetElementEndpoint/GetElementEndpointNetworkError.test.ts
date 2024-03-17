@@ -1,5 +1,7 @@
 import { expect } from 'chai';
-import { SinonSandbox, SinonStubbedInstance, assert, createSandbox, match } from 'sinon';
+import { http } from 'msw';
+// eslint-disable-next-line import/no-unresolved
+import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
 import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
@@ -8,43 +10,31 @@ import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
-import { mockServer } from '../../../../MockServer/mockServer';
+import { TestLogger } from '../../../TestLogger';
 
-describe('GetElementEndpoint network error tests', () => {
-  let sandbox: SinonSandbox;
-  let mockedLogger: SinonStubbedInstance<Logger>;
+const mockServer = setupServer(
+  http.get('http://mock-api/df6604fb-72a1-4616-90b1-e72eee3aca6c', () => {
+    return Response.error();
+  }),
+);
 
-  beforeEach(() => {
-    sandbox = createSandbox();
+const testLogger: TestLogger = new TestLogger();
+Container.set(Logger, testLogger);
+Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
 
-    mockServer.listen();
+test('GetElementEndpoint should handle network error', async () => {
+  mockServer.listen();
+  const uuid = validateUuidFromString('df6604fb-72a1-4616-90b1-e72eee3aca6c');
 
-    mockedLogger = sandbox.createStubInstance(Logger);
-    Container.set(Logger, mockedLogger);
+  await expect(Container.get(GetElementEndpoint).getElement(uuid)).to.eventually.be.rejectedWith(NetworkError);
 
-    Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
-  });
-
-  afterEach(() => {
-    sandbox.restore();
-    Container.reset();
-    mockServer.close();
-  });
-
-  it('should handle network error', async () => {
-    await expect(
-      Container.get(GetElementEndpoint).getElement(validateUuidFromString('df6604fb-72a1-4616-90b1-e72eee3aca6c')),
-    ).to.eventually.be.rejectedWith(NetworkError);
-
-    assert.calledOnceWithExactly(
-      mockedLogger.debug,
+  expect(
+    testLogger.assertDebugHappened(
       'Executing HTTP GET request against url http://mock-api/df6604fb-72a1-4616-90b1-e72eee3aca6c .',
-    );
+    ),
+  ).to.be.true;
 
-    assert.calledOnceWithExactly(
-      mockedLogger.error,
-      'Experienced generic network error during fetching resource.',
-      match.any,
-    );
-  });
+  expect(testLogger.assertErrorHappened('Experienced generic network error during fetching resource.')).to.be.true;
+
+  mockServer.close();
 });

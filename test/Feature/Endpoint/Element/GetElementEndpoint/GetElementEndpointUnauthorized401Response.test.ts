@@ -1,5 +1,7 @@
 import { expect } from 'chai';
-import { SinonSandbox, SinonStubbedInstance, createSandbox } from 'sinon';
+import { HttpResponse, http } from 'msw';
+// eslint-disable-next-line import/no-unresolved
+import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
 import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
@@ -8,32 +10,47 @@ import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
-import { mockServer } from '../../../../MockServer/mockServer';
+import { TestLogger } from '../../../TestLogger';
 
-describe('GetElementEndpoint unauthorized 401 tests', () => {
-  let sandbox: SinonSandbox;
-  let mockedLogger: SinonStubbedInstance<Logger>;
+const mockServer = setupServer(
+  http.get('http://mock-api/5324396a-636a-4263-ac38-62fef3132ead', () => {
+    return HttpResponse.json(
+      {
+        type: 'http://ember-nexus-api/error/401/unauthorized',
+        title: 'Unauthorized',
+        status: 401,
+        detail:
+          "Authorization for the request failed due to possible problems with the token (incorrect or expired), password (incorrect or changed), the user's unique identifier, or the user's status (e.g., missing, blocked, or deleted).",
+      },
+      {
+        status: 401,
+        headers: {
+          'Content-Type': 'application/problem+json; charset=utf-8',
+        },
+      },
+    );
+  }),
+);
 
-  beforeEach(() => {
-    sandbox = createSandbox();
+const testLogger: TestLogger = new TestLogger();
+Container.set(Logger, testLogger);
+Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
 
-    mockServer.listen();
+test('GetElementEndpoint should handle bad response error', async () => {
+  mockServer.listen();
+  const uuid = validateUuidFromString('5324396a-636a-4263-ac38-62fef3132ead');
 
-    mockedLogger = sandbox.createStubInstance(Logger);
-    Container.set(Logger, mockedLogger);
+  await expect(Container.get(GetElementEndpoint).getElement(uuid)).to.eventually.be.rejectedWith(
+    Response401UnauthorizedError,
+  );
 
-    Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
-  });
+  expect(
+    testLogger.assertDebugHappened(
+      'Executing HTTP GET request against url http://mock-api/5324396a-636a-4263-ac38-62fef3132ead .',
+    ),
+  ).to.be.true;
 
-  afterEach(() => {
-    sandbox.restore();
-    Container.reset();
-    mockServer.close();
-  });
+  expect(testLogger.assertErrorHappened('Sever returned 401 unauthorized.')).to.be.true;
 
-  it('should handle unauthorized 401 error', async () => {
-    await expect(
-      Container.get(GetElementEndpoint).getElement(validateUuidFromString('5324396a-636a-4263-ac38-62fef3132ead')),
-    ).to.eventually.be.rejectedWith(Response401UnauthorizedError);
-  });
+  mockServer.close();
 });

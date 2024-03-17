@@ -1,5 +1,7 @@
 import { expect } from 'chai';
-import { SinonSandbox, SinonStubbedInstance, createSandbox } from 'sinon';
+import { HttpResponse, http } from 'msw';
+// eslint-disable-next-line import/no-unresolved
+import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
 import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
@@ -8,32 +10,46 @@ import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
-import { mockServer } from '../../../../MockServer/mockServer';
+import { TestLogger } from '../../../TestLogger';
 
-describe('GetElementEndpoint not found 404 tests', () => {
-  let sandbox: SinonSandbox;
-  let mockedLogger: SinonStubbedInstance<Logger>;
+const mockServer = setupServer(
+  http.get('http://mock-api/2fe89dfb-ef1c-4964-99da-73161077e951', () => {
+    return HttpResponse.json(
+      {
+        type: 'http://ember-nexus-api/error/404/not-found',
+        title: 'NotFound',
+        status: 404,
+        detail: 'Requested element was not found.',
+      },
+      {
+        status: 404,
+        headers: {
+          'Content-Type': 'application/problem+json; charset=utf-8',
+        },
+      },
+    );
+  }),
+);
 
-  beforeEach(() => {
-    sandbox = createSandbox();
+const testLogger: TestLogger = new TestLogger();
+Container.set(Logger, testLogger);
+Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
 
-    mockServer.listen();
+test('GetElementEndpoint should handle bad response error', async () => {
+  mockServer.listen();
+  const uuid = validateUuidFromString('2fe89dfb-ef1c-4964-99da-73161077e951');
 
-    mockedLogger = sandbox.createStubInstance(Logger);
-    Container.set(Logger, mockedLogger);
+  await expect(Container.get(GetElementEndpoint).getElement(uuid)).to.eventually.be.rejectedWith(
+    Response404NotFoundError,
+  );
 
-    Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
-  });
+  expect(
+    testLogger.assertDebugHappened(
+      'Executing HTTP GET request against url http://mock-api/2fe89dfb-ef1c-4964-99da-73161077e951 .',
+    ),
+  ).to.be.true;
 
-  afterEach(() => {
-    sandbox.restore();
-    Container.reset();
-    mockServer.close();
-  });
+  expect(testLogger.assertErrorHappened('Sever returned 404 not found.')).to.be.true;
 
-  it('should handle not found 404 error', async () => {
-    await expect(
-      Container.get(GetElementEndpoint).getElement(validateUuidFromString('2fe89dfb-ef1c-4964-99da-73161077e951')),
-    ).to.eventually.be.rejectedWith(Response404NotFoundError);
-  });
+  mockServer.close();
 });

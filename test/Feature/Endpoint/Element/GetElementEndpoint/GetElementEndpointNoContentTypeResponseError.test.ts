@@ -1,5 +1,7 @@
 import { expect } from 'chai';
-import { SinonSandbox, SinonStubbedInstance, assert, createSandbox, match } from 'sinon';
+import { HttpResponse, http } from 'msw';
+// eslint-disable-next-line import/no-unresolved
+import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
 import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
@@ -8,39 +10,35 @@ import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
-import { mockServer } from '../../../../MockServer/mockServer';
+import { TestLogger } from '../../../TestLogger';
 
-describe('GetElementEndpoint no content type response error tests', () => {
-  let sandbox: SinonSandbox;
-  let mockedLogger: SinonStubbedInstance<Logger>;
+const mockServer = setupServer(
+  http.get('http://mock-api/d00d3faf-5dc9-43f1-9efc-f78c2d7efa77', () => {
+    const response = HttpResponse.text('Some content which can not be interpreted as JSON.', {
+      status: 200,
+    });
+    response.headers.delete('Content-Type');
+    return response;
+  }),
+);
 
-  beforeEach(() => {
-    sandbox = createSandbox();
+const testLogger: TestLogger = new TestLogger();
+Container.set(Logger, testLogger);
+Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
 
-    mockServer.listen();
+test('GetElementEndpoint should handle no content type response error', async () => {
+  mockServer.listen();
+  const uuid = validateUuidFromString('d00d3faf-5dc9-43f1-9efc-f78c2d7efa77');
 
-    mockedLogger = sandbox.createStubInstance(Logger);
-    Container.set(Logger, mockedLogger);
+  await expect(Container.get(GetElementEndpoint).getElement(uuid)).to.eventually.be.rejectedWith(ParseError);
 
-    Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
-  });
-
-  afterEach(() => {
-    sandbox.restore();
-    Container.reset();
-    mockServer.close();
-  });
-
-  it('should handle no content type response error', async () => {
-    await expect(
-      Container.get(GetElementEndpoint).getElement(validateUuidFromString('d00d3faf-5dc9-43f1-9efc-f78c2d7efa77')),
-    ).to.eventually.be.rejectedWith(ParseError);
-
-    assert.calledOnceWithExactly(
-      mockedLogger.debug,
+  expect(
+    testLogger.assertDebugHappened(
       'Executing HTTP GET request against url http://mock-api/d00d3faf-5dc9-43f1-9efc-f78c2d7efa77 .',
-    );
+    ),
+  ).to.be.true;
 
-    assert.calledOnceWithExactly(mockedLogger.error, 'Response does not contain content type header.', match.any);
-  });
+  expect(testLogger.assertErrorHappened('Response does not contain content type header.')).to.be.true;
+
+  mockServer.close();
 });
