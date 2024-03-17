@@ -6,10 +6,12 @@ import { Token } from '~/Type/Definition/Token';
 class WebSdkConfiguration {
   private token: Token | null;
   private apiHost: string;
+  private elementCacheMaxEntries: number;
 
   constructor() {
     this.token = null;
     this.apiHost = '';
+    this.elementCacheMaxEntries = 100;
   }
 
   hasToken(): boolean {
@@ -28,6 +30,15 @@ class WebSdkConfiguration {
   }
   setApiHost(apiHost: string): WebSdkConfiguration {
     this.apiHost = apiHost;
+    return this;
+  }
+
+  getElementCacheMaxEntries(): number {
+    return this.elementCacheMaxEntries;
+  }
+
+  setElementCacheMaxEntries(value: number): WebSdkConfiguration {
+    this.elementCacheMaxEntries = value;
     return this;
   }
 }

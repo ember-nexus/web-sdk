@@ -26,40 +26,44 @@ class TestLogger implements LoggerInterface {
     return undefined;
   }
 
-  assertDebugHappened(message: string): boolean {
+  assertDebugHappened(message: string, assertTimes: number = 1): boolean {
+    let timesHappened = 0;
     for (let i = 0; i < this.debugCalls.length; i++) {
       if (this.debugCalls[i][0] === message) {
-        return true;
+        timesHappened++;
       }
     }
-    return false;
+    return assertTimes === timesHappened;
   }
 
-  assertErrorHappened(message: string): boolean {
+  assertErrorHappened(message: string, assertTimes: number = 1): boolean {
+    let timesHappened = 0;
     for (let i = 0; i < this.errorCalls.length; i++) {
       if (this.errorCalls[i][0] === message) {
-        return true;
+        timesHappened++;
       }
     }
-    return false;
+    return assertTimes === timesHappened;
   }
 
-  assertInfoHappened(message: string): boolean {
+  assertInfoHappened(message: string, assertTimes: number = 1): boolean {
+    let timesHappened = 0;
     for (let i = 0; i < this.infoCalls.length; i++) {
       if (this.infoCalls[i][0] === message) {
-        return true;
+        timesHappened++;
       }
     }
-    return false;
+    return assertTimes === timesHappened;
   }
 
-  assertWarnHappened(message: string): boolean {
+  assertWarnHappened(message: string, assertTimes: number = 1): boolean {
+    let timesHappened = 0;
     for (let i = 0; i < this.warnCalls.length; i++) {
       if (this.warnCalls[i][0] === message) {
-        return true;
+        timesHappened++;
       }
     }
-    return false;
+    return assertTimes === timesHappened;
   }
 
   printAllCalls(): void {
