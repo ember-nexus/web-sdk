@@ -6,12 +6,14 @@ import { Container } from 'typedi';
 import GetElementChildrenEndpoint from '~/Endpoint/Element/GetElementChildrenEndpoint';
 import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
 import GetElementParentsEndpoint from '~/Endpoint/Element/GetElementParentsEndpoint';
+import GetElementRelatedEndpoint from '~/Endpoint/Element/GetElementRelatedEndpoint';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { createChildrenCollectionIdentifier } from '~/Type/Definition/ChildrenCollectionIdentifier';
 import { Collection } from '~/Type/Definition/Collection';
 import { Node } from '~/Type/Definition/Node';
 import { createParentsCollectionIdentifier } from '~/Type/Definition/ParentsCollectionIdentifier';
+import { createRelatedCollectionIdentifier } from '~/Type/Definition/RelatedCollectionIdentifier';
 import { Relation } from '~/Type/Definition/Relation';
 import { Uuid } from '~/Type/Definition/Uuid';
 
@@ -85,6 +87,29 @@ class EmberNexus {
       return resolve(
         Container.get(GetElementParentsEndpoint)
           .getElementParents(childUuid, page, pageSize as number)
+          .then((collection) => {
+            this.collectionCache.set(collectionCacheKey, collection);
+            return collection;
+          }),
+      );
+    });
+  }
+
+  getElementRelated(centerUuid: Uuid, page: number = 1, pageSize: number | null = null): Promise<Collection> {
+    if (pageSize === null) {
+      pageSize = Container.get(WebSdkConfiguration).getCollectionPageSize();
+    }
+    const collectionCacheKey = createRelatedCollectionIdentifier(centerUuid, page, pageSize);
+    return new Promise<Collection>((resolve) => {
+      if (this.collectionCache.has(collectionCacheKey)) {
+        const collection = this.collectionCache.get(collectionCacheKey);
+        if (collection !== undefined) {
+          return resolve(collection);
+        }
+      }
+      return resolve(
+        Container.get(GetElementRelatedEndpoint)
+          .getElementRelated(centerUuid, page, pageSize as number)
           .then((collection) => {
             this.collectionCache.set(collectionCacheKey, collection);
             return collection;

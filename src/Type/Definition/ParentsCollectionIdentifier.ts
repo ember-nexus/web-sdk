@@ -4,11 +4,11 @@ import { Uuid } from '~/Type/Definition/Uuid';
 type ParentsCollectionIdentifier = Branded<string, 'COLLECTION_IDENTIFIER'>;
 
 function createParentsCollectionIdentifier(
-  parentUuid: Uuid,
+  childUuid: Uuid,
   page: number,
   pageSize: number,
 ): ParentsCollectionIdentifier {
-  return `parents-collection-of-child-${parentUuid}-page-size-${pageSize}-page-${page}` as ParentsCollectionIdentifier;
+  return `parents-collection-of-child-${childUuid}-page-size-${pageSize}-page-${page}` as ParentsCollectionIdentifier;
 }
 
 export { ParentsCollectionIdentifier, createParentsCollectionIdentifier };
