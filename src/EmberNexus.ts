@@ -5,11 +5,13 @@ import { Container } from 'typedi';
 
 import GetElementChildrenEndpoint from '~/Endpoint/Element/GetElementChildrenEndpoint';
 import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
+import GetElementParentsEndpoint from '~/Endpoint/Element/GetElementParentsEndpoint';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { createChildrenCollectionIdentifier } from '~/Type/Definition/ChildrenCollectionIdentifier';
 import { Collection } from '~/Type/Definition/Collection';
 import { Node } from '~/Type/Definition/Node';
+import { createParentsCollectionIdentifier } from '~/Type/Definition/ParentsCollectionIdentifier';
 import { Relation } from '~/Type/Definition/Relation';
 import { Uuid } from '~/Type/Definition/Uuid';
 
@@ -60,6 +62,29 @@ class EmberNexus {
       return resolve(
         Container.get(GetElementChildrenEndpoint)
           .getElementChildren(parentUuid, page, pageSize as number)
+          .then((collection) => {
+            this.collectionCache.set(collectionCacheKey, collection);
+            return collection;
+          }),
+      );
+    });
+  }
+
+  getElementParents(childUuid: Uuid, page: number = 1, pageSize: number | null = null): Promise<Collection> {
+    if (pageSize === null) {
+      pageSize = Container.get(WebSdkConfiguration).getCollectionPageSize();
+    }
+    const collectionCacheKey = createParentsCollectionIdentifier(childUuid, page, pageSize);
+    return new Promise<Collection>((resolve) => {
+      if (this.collectionCache.has(collectionCacheKey)) {
+        const collection = this.collectionCache.get(collectionCacheKey);
+        if (collection !== undefined) {
+          return resolve(collection);
+        }
+      }
+      return resolve(
+        Container.get(GetElementParentsEndpoint)
+          .getElementParents(childUuid, page, pageSize as number)
           .then((collection) => {
             this.collectionCache.set(collectionCacheKey, collection);
             return collection;
