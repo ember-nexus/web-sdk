@@ -37,7 +37,7 @@ const testLogger: TestLogger = new TestLogger();
 Container.set(Logger, testLogger);
 Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
 
-test('GetElementEndpoint should handle normal node response', async () => {
+test('GetElementEndpoint should handle node response', async () => {
   mockServer.listen();
   const uuid = validateUuidFromString('b1e85bf9-6a79-4e50-ae5a-ed49beac8cb5');
 

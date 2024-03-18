@@ -1,10 +1,10 @@
 import { EmberNexusError } from '~/Error/EmberNexusError';
 
-class ParseError extends EmberNexusError {
+class ValidationError extends EmberNexusError {
   constructor(message) {
     super(message);
-    this.name = 'ParseError';
+    this.name = 'ValidationError';
   }
 }
 
-export { ParseError };
+export { ValidationError };

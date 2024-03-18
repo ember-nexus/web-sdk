@@ -1,4 +1,6 @@
-class ResponseError extends Error {
+import { EmberNexusError } from '~/Error/EmberNexusError';
+
+class ResponseError extends EmberNexusError {
   private _type: string | null = null;
   private _title: string | null = null;
   private _detail: string | null = null;

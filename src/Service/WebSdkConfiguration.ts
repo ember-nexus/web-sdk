@@ -7,11 +7,15 @@ class WebSdkConfiguration {
   private token: Token | null;
   private apiHost: string;
   private elementCacheMaxEntries: number;
+  private collectionCacheMaxEntries: number;
+  private collectionPageSize: number;
 
   constructor() {
     this.token = null;
     this.apiHost = '';
     this.elementCacheMaxEntries = 100;
+    this.collectionCacheMaxEntries = 50;
+    this.collectionPageSize = 25;
   }
 
   hasToken(): boolean {
@@ -39,6 +43,24 @@ class WebSdkConfiguration {
 
   setElementCacheMaxEntries(value: number): WebSdkConfiguration {
     this.elementCacheMaxEntries = value;
+    return this;
+  }
+
+  getCollectionCacheMaxEntries(): number {
+    return this.collectionCacheMaxEntries;
+  }
+
+  setCollectionCacheMaxEntries(value: number): WebSdkConfiguration {
+    this.collectionCacheMaxEntries = value;
+    return this;
+  }
+
+  getCollectionPageSize(): number {
+    return this.collectionPageSize;
+  }
+
+  setCollectionPageSize(value: number): WebSdkConfiguration {
+    this.collectionPageSize = value;
     return this;
   }
 }

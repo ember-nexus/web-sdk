@@ -66,6 +66,31 @@ class TestLogger implements LoggerInterface {
     return assertTimes === timesHappened;
   }
 
+  assertNoCallsHappened(): boolean {
+    return (
+      this.debugCalls.length === 0 &&
+      this.errorCalls.length === 0 &&
+      this.infoCalls.length === 0 &&
+      this.warnCalls.length === 0
+    );
+  }
+
+  assertNoDebugHappened(): boolean {
+    return this.debugCalls.length === 0;
+  }
+
+  assertNoErrorHappened(): boolean {
+    return this.errorCalls.length === 0;
+  }
+
+  assertNoInfoHappened(): boolean {
+    return this.infoCalls.length === 0;
+  }
+
+  assertNoWarnHappened(): boolean {
+    return this.warnCalls.length === 0;
+  }
+
   printAllCalls(): void {
     console.log(this.debugCalls);
     console.log(this.errorCalls);
