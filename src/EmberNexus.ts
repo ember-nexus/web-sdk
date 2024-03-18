@@ -7,10 +7,12 @@ import GetElementChildrenEndpoint from '~/Endpoint/Element/GetElementChildrenEnd
 import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
 import GetElementParentsEndpoint from '~/Endpoint/Element/GetElementParentsEndpoint';
 import GetElementRelatedEndpoint from '~/Endpoint/Element/GetElementRelatedEndpoint';
+import GetIndexEndpoint from '~/Endpoint/Element/GetIndexEndpoint';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { createChildrenCollectionIdentifier } from '~/Type/Definition/ChildrenCollectionIdentifier';
 import { Collection } from '~/Type/Definition/Collection';
+import { createIndexCollectionIdentifier } from '~/Type/Definition/IndexCollectionIdentifier';
 import { Node } from '~/Type/Definition/Node';
 import { createParentsCollectionIdentifier } from '~/Type/Definition/ParentsCollectionIdentifier';
 import { createRelatedCollectionIdentifier } from '~/Type/Definition/RelatedCollectionIdentifier';
@@ -110,6 +112,29 @@ class EmberNexus {
       return resolve(
         Container.get(GetElementRelatedEndpoint)
           .getElementRelated(centerUuid, page, pageSize as number)
+          .then((collection) => {
+            this.collectionCache.set(collectionCacheKey, collection);
+            return collection;
+          }),
+      );
+    });
+  }
+
+  getIndex(page: number = 1, pageSize: number | null = null): Promise<Collection> {
+    if (pageSize === null) {
+      pageSize = Container.get(WebSdkConfiguration).getCollectionPageSize();
+    }
+    const collectionCacheKey = createIndexCollectionIdentifier(page, pageSize);
+    return new Promise<Collection>((resolve) => {
+      if (this.collectionCache.has(collectionCacheKey)) {
+        const collection = this.collectionCache.get(collectionCacheKey);
+        if (collection !== undefined) {
+          return resolve(collection);
+        }
+      }
+      return resolve(
+        Container.get(GetIndexEndpoint)
+          .getIndex(page, pageSize as number)
           .then((collection) => {
             this.collectionCache.set(collectionCacheKey, collection);
             return collection;
