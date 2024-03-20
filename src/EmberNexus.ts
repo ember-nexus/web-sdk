@@ -1,104 +1,183 @@
-import DefaultLogger from './DefaultLogger.js';
-import EmberNexusCache from './EmberNexusCache.js';
-import DeleteElementEvent from './Event/DeleteElementEvent.js';
-import GetChildrenEvent from './Event/GetChildrenEvent.js';
-import GetElementEvent from './Event/GetElementEvent.js';
-import GetParentsEvent from './Event/GetParentsEvent.js';
-import GetRelatedEvent from './Event/GetRelatedEvent.js';
-import Event from './Event/index.js';
-import PatchElementEvent from './Event/PatchElementEvent.js';
-import PutElementEvent from './Event/PutElementEvent.js';
-import SearchEvent from './Event/SearchEvent.js';
-import Options from './Options.js';
-import LoggerInterface from './Type/LoggerInterface.js';
-import OptionsInterface from './Type/OptionsInterface.js';
+import 'reflect-metadata';
+
+import { LRUCache } from 'lru-cache';
+import { Container } from 'typedi';
+
+import GetElementChildrenEndpoint from '~/Endpoint/Element/GetElementChildrenEndpoint';
+import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
+import GetElementParentsEndpoint from '~/Endpoint/Element/GetElementParentsEndpoint';
+import GetElementRelatedEndpoint from '~/Endpoint/Element/GetElementRelatedEndpoint';
+import GetIndexEndpoint from '~/Endpoint/Element/GetIndexEndpoint';
+import PatchElementEndpoint from '~/Endpoint/Element/PatchElementEndpoint';
+import PostElementEndpoint from '~/Endpoint/Element/PostElementEndpoint';
+import PostIndexEndpoint from '~/Endpoint/Element/PostIndexEndpoint';
+import PutElementEndpoint from '~/Endpoint/Element/PutElementEndpoint';
+import { Logger } from '~/Service/Logger';
+import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
+import { createChildrenCollectionIdentifier } from '~/Type/Definition/ChildrenCollectionIdentifier';
+import { Collection } from '~/Type/Definition/Collection';
+import { Data } from '~/Type/Definition/Data';
+import { createIndexCollectionIdentifier } from '~/Type/Definition/IndexCollectionIdentifier';
+import { Node } from '~/Type/Definition/Node';
+import { NodeWithOptionalId } from '~/Type/Definition/NodeWithOptionalId';
+import { createParentsCollectionIdentifier } from '~/Type/Definition/ParentsCollectionIdentifier';
+import { createRelatedCollectionIdentifier } from '~/Type/Definition/RelatedCollectionIdentifier';
+import { Relation } from '~/Type/Definition/Relation';
+import { RelationWithOptionalId } from '~/Type/Definition/RelationWithOptionalId';
+import { Uuid } from '~/Type/Definition/Uuid';
 
 class EmberNexus {
-  private _domElement: HTMLElement | null = null;
+  private elementCache: LRUCache<Uuid, Node | Relation>;
+  private collectionCache: LRUCache<string, Collection>;
 
-  constructor(private _cache: EmberNexusCache) {}
+  constructor() {
+    this.elementCache = new LRUCache<Uuid, Node | Relation>({
+      max: Container.get(WebSdkConfiguration).getElementCacheMaxEntries(),
+    });
+    this.collectionCache = new LRUCache<string, Collection>({
+      max: Container.get(WebSdkConfiguration).getCollectionCacheMaxEntries(),
+    });
+  }
 
-  static create(logger: LoggerInterface | null = null, options: OptionsInterface | null = null): EmberNexus {
-    if (logger === null) {
-      logger = new DefaultLogger();
+  getElement(uuid: Uuid): Promise<Node | Relation> {
+    return new Promise<Node | Relation>((resolve) => {
+      if (this.elementCache.has(uuid)) {
+        const element = this.elementCache.get(uuid);
+        if (element !== undefined) {
+          return resolve(element);
+        }
+      }
+      return resolve(
+        Container.get(GetElementEndpoint)
+          .getElement(uuid)
+          .then((element) => {
+            this.elementCache.set(uuid, element);
+            return element;
+          }),
+      );
+    });
+  }
+
+  getElementChildren(parentUuid: Uuid, page: number = 1, pageSize: number | null = null): Promise<Collection> {
+    if (pageSize === null) {
+      pageSize = Container.get(WebSdkConfiguration).getCollectionPageSize();
     }
-    if (options === null) {
-      options = new Options();
+    const collectionCacheKey = createChildrenCollectionIdentifier(parentUuid, page, pageSize);
+    return new Promise<Collection>((resolve) => {
+      if (this.collectionCache.has(collectionCacheKey)) {
+        const collection = this.collectionCache.get(collectionCacheKey);
+        if (collection !== undefined) {
+          return resolve(collection);
+        }
+      }
+      return resolve(
+        Container.get(GetElementChildrenEndpoint)
+          .getElementChildren(parentUuid, page, pageSize as number)
+          .then((collection) => {
+            this.collectionCache.set(collectionCacheKey, collection);
+            return collection;
+          }),
+      );
+    });
+  }
+
+  getElementParents(childUuid: Uuid, page: number = 1, pageSize: number | null = null): Promise<Collection> {
+    if (pageSize === null) {
+      pageSize = Container.get(WebSdkConfiguration).getCollectionPageSize();
     }
-    const cache = EmberNexusCache.create(logger, options);
-    return new EmberNexus(cache);
+    const collectionCacheKey = createParentsCollectionIdentifier(childUuid, page, pageSize);
+    return new Promise<Collection>((resolve) => {
+      if (this.collectionCache.has(collectionCacheKey)) {
+        const collection = this.collectionCache.get(collectionCacheKey);
+        if (collection !== undefined) {
+          return resolve(collection);
+        }
+      }
+      return resolve(
+        Container.get(GetElementParentsEndpoint)
+          .getElementParents(childUuid, page, pageSize as number)
+          .then((collection) => {
+            this.collectionCache.set(collectionCacheKey, collection);
+            return collection;
+          }),
+      );
+    });
   }
 
-  bindToDomElement(domElement: HTMLElement): void {
-    if (this._domElement) {
-      // remove event listeners etc. from the element first
-      this._domElement.removeEventListener(Event.GetElementEvent, this.handleGetElementEvent.bind(this));
-      this._domElement.removeEventListener(Event.GetChildrenEvent, this.handleGetChildrenEvent.bind(this));
-      this._domElement.removeEventListener(Event.GetParentsEvent, this.handleGetParentsEvent.bind(this));
-      this._domElement.removeEventListener(Event.GetRelatedEvent, this.handleGetRelatedEvent.bind(this));
-      this._domElement.removeEventListener(Event.PutElementEvent, this.handlePutElementEvent.bind(this));
-      this._domElement.removeEventListener(Event.PatchElementEvent, this.handlePatchElementEvent.bind(this));
-      this._domElement.removeEventListener(Event.DeleteElementEvent, this.handleDeleteElementEvent.bind(this));
-      this._domElement.removeEventListener(Event.SearchEvent, this.handleSearchEvent.bind(this));
+  getElementRelated(centerUuid: Uuid, page: number = 1, pageSize: number | null = null): Promise<Collection> {
+    if (pageSize === null) {
+      pageSize = Container.get(WebSdkConfiguration).getCollectionPageSize();
     }
-    this._domElement = domElement;
-    this._domElement.addEventListener(Event.GetElementEvent, this.handleGetElementEvent.bind(this));
-    this._domElement.addEventListener(Event.GetChildrenEvent, this.handleGetChildrenEvent.bind(this));
-    this._domElement.addEventListener(Event.GetParentsEvent, this.handleGetParentsEvent.bind(this));
-    this._domElement.addEventListener(Event.GetRelatedEvent, this.handleGetRelatedEvent.bind(this));
-    this._domElement.addEventListener(Event.PutElementEvent, this.handlePutElementEvent.bind(this));
-    this._domElement.addEventListener(Event.PatchElementEvent, this.handlePatchElementEvent.bind(this));
-    this._domElement.addEventListener(Event.DeleteElementEvent, this.handleDeleteElementEvent.bind(this));
-    this._domElement.addEventListener(Event.SearchEvent, this.handleSearchEvent.bind(this));
+    const collectionCacheKey = createRelatedCollectionIdentifier(centerUuid, page, pageSize);
+    return new Promise<Collection>((resolve) => {
+      if (this.collectionCache.has(collectionCacheKey)) {
+        const collection = this.collectionCache.get(collectionCacheKey);
+        if (collection !== undefined) {
+          return resolve(collection);
+        }
+      }
+      return resolve(
+        Container.get(GetElementRelatedEndpoint)
+          .getElementRelated(centerUuid, page, pageSize as number)
+          .then((collection) => {
+            this.collectionCache.set(collectionCacheKey, collection);
+            return collection;
+          }),
+      );
+    });
   }
 
-  handleGetElementEvent(event: GetElementEvent): void {
-    event.setElement(this._cache.getElement(event.getUuid()));
-    event.preventDefault();
-    event.stopPropagation();
+  getIndex(page: number = 1, pageSize: number | null = null): Promise<Collection> {
+    if (pageSize === null) {
+      pageSize = Container.get(WebSdkConfiguration).getCollectionPageSize();
+    }
+    const collectionCacheKey = createIndexCollectionIdentifier(page, pageSize);
+    return new Promise<Collection>((resolve) => {
+      if (this.collectionCache.has(collectionCacheKey)) {
+        const collection = this.collectionCache.get(collectionCacheKey);
+        if (collection !== undefined) {
+          return resolve(collection);
+        }
+      }
+      return resolve(
+        Container.get(GetIndexEndpoint)
+          .getIndex(page, pageSize as number)
+          .then((collection) => {
+            this.collectionCache.set(collectionCacheKey, collection);
+            return collection;
+          }),
+      );
+    });
   }
 
-  handleGetChildrenEvent(event: GetChildrenEvent): void {
-    event.setElements(this._cache.getChildren(event.getUuid()));
-    event.preventDefault();
-    event.stopPropagation();
+  postIndex(element: NodeWithOptionalId | RelationWithOptionalId): Promise<Uuid> {
+    return new Promise<Uuid>((resolve) => {
+      return resolve(Container.get(PostIndexEndpoint).postIndex(element));
+    });
   }
 
-  handleGetParentsEvent(event: GetParentsEvent): void {
-    event.setElements(this._cache.getParents(event.getUuid()));
-    event.preventDefault();
-    event.stopPropagation();
+  postElement(parentUuid: Uuid, element: NodeWithOptionalId | RelationWithOptionalId): Promise<Uuid> {
+    return new Promise<Uuid>((resolve) => {
+      // todo: drop cached collections where created element is included
+      return resolve(Container.get(PostElementEndpoint).postElement(parentUuid, element));
+    });
   }
 
-  handleGetRelatedEvent(event: GetRelatedEvent): void {
-    event.setElements(this._cache.getRelated(event.getUuid()));
-    event.preventDefault();
-    event.stopPropagation();
+  patchElement(uuid: Uuid, data: Data): Promise<void> {
+    return new Promise<void>((resolve) => {
+      // todo: drop cached collections where patched element is included
+      this.elementCache.delete(uuid);
+      return resolve(Container.get(PatchElementEndpoint).patchElement(uuid, data));
+    });
   }
 
-  handlePutElementEvent(event: PutElementEvent): void {
-    // event.setElement(this.putElement(event.getUuid(), event.getData(), event.getLoadNewData()));
-    event.preventDefault();
-    event.stopPropagation();
-  }
-
-  handlePatchElementEvent(event: PatchElementEvent): void {
-    // event.setElement(this.patchElement(event.getUuid(), event.getData(), event.getLoadNewData()));
-    event.preventDefault();
-    event.stopPropagation();
-  }
-
-  handleDeleteElementEvent(event: DeleteElementEvent): void {
-    // event.setElement(this.deleteElement(event.getUuid()));
-    event.preventDefault();
-    event.stopPropagation();
-  }
-
-  handleSearchEvent(event: SearchEvent): void {
-    event.setElements(this._cache.fetchSearchPage(event.getPayload(), event.getPage()));
-    event.preventDefault();
-    event.stopPropagation();
+  putElement(uuid: Uuid, data: Data): Promise<void> {
+    return new Promise<void>((resolve) => {
+      // todo: drop cached collections where updated element is included
+      this.elementCache.delete(uuid);
+      return resolve(Container.get(PutElementEndpoint).putElement(uuid, data));
+    });
   }
 }
 
-export default EmberNexus;
+export { EmberNexus, Container, WebSdkConfiguration, Logger };

@@ -1,9 +1,9 @@
 import { Logger } from 'tslog';
 
-import LoggerInterface from '../src/Type/LoggerInterface.js';
+import type { LoggerInterface } from '~/Type/Definition/LoggerInterface';
 
 const testLogger = new Logger({
-  name: 'eon-sdk',
+  name: 'web-sdk',
   // type: "json"
   type: 'pretty',
 });
