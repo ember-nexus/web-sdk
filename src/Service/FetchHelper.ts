@@ -90,6 +90,34 @@ class FetchHelper {
     };
   }
 
+  getDefaultPatchOptions(body: string): RequestInit {
+    const headers = {};
+    this.addAuthorizationHeader(headers);
+    this.addAcceptJsonAndProblemJsonHeader(headers);
+    this.addContentTypeJsonHeader(headers);
+    return {
+      method: HttpRequestMethod.PATCH,
+      headers: headers,
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: body,
+    };
+  }
+
+  getDefaultPutOptions(body: string): RequestInit {
+    const headers = {};
+    this.addAuthorizationHeader(headers);
+    this.addAcceptJsonAndProblemJsonHeader(headers);
+    this.addContentTypeJsonHeader(headers);
+    return {
+      method: HttpRequestMethod.PUT,
+      headers: headers,
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: body,
+    };
+  }
+
   buildUrl(url: string): string {
     return `${this.sdkConfiguration.getApiHost()}${url}`;
   }

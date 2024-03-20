@@ -8,12 +8,14 @@ import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
 import GetElementParentsEndpoint from '~/Endpoint/Element/GetElementParentsEndpoint';
 import GetElementRelatedEndpoint from '~/Endpoint/Element/GetElementRelatedEndpoint';
 import GetIndexEndpoint from '~/Endpoint/Element/GetIndexEndpoint';
+import PatchElementEndpoint from '~/Endpoint/Element/PatchElementEndpoint';
 import PostElementEndpoint from '~/Endpoint/Element/PostElementEndpoint';
 import PostIndexEndpoint from '~/Endpoint/Element/PostIndexEndpoint';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { createChildrenCollectionIdentifier } from '~/Type/Definition/ChildrenCollectionIdentifier';
 import { Collection } from '~/Type/Definition/Collection';
+import { Data } from '~/Type/Definition/Data';
 import { createIndexCollectionIdentifier } from '~/Type/Definition/IndexCollectionIdentifier';
 import { Node } from '~/Type/Definition/Node';
 import { NodeWithOptionalId } from '~/Type/Definition/NodeWithOptionalId';
@@ -157,6 +159,14 @@ class EmberNexus {
     return new Promise<Uuid>((resolve) => {
       // todo: drop cached collections where created element is included
       return resolve(Container.get(PostElementEndpoint).postElement(parentUuid, element));
+    });
+  }
+
+  patchElement(uuid: Uuid, data: Data): Promise<void> {
+    return new Promise<void>((resolve) => {
+      // todo: drop cached collections where patched element is included
+      this.elementCache.delete(uuid);
+      return resolve(Container.get(PatchElementEndpoint).patchElement(uuid, data));
     });
   }
 }
