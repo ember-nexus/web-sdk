@@ -11,6 +11,7 @@ import GetIndexEndpoint from '~/Endpoint/Element/GetIndexEndpoint';
 import PatchElementEndpoint from '~/Endpoint/Element/PatchElementEndpoint';
 import PostElementEndpoint from '~/Endpoint/Element/PostElementEndpoint';
 import PostIndexEndpoint from '~/Endpoint/Element/PostIndexEndpoint';
+import PutElementEndpoint from '~/Endpoint/Element/PutElementEndpoint';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { createChildrenCollectionIdentifier } from '~/Type/Definition/ChildrenCollectionIdentifier';
@@ -24,7 +25,6 @@ import { createRelatedCollectionIdentifier } from '~/Type/Definition/RelatedColl
 import { Relation } from '~/Type/Definition/Relation';
 import { RelationWithOptionalId } from '~/Type/Definition/RelationWithOptionalId';
 import { Uuid } from '~/Type/Definition/Uuid';
-import PutElementEndpoint from "~/Endpoint/Element/PutElementEndpoint";
 
 class EmberNexus {
   private elementCache: LRUCache<Uuid, Node | Relation>;

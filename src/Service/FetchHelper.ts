@@ -76,6 +76,18 @@ class FetchHelper {
     };
   }
 
+  getDefaultDeleteOptions(): RequestInit {
+    const headers = {};
+    this.addAuthorizationHeader(headers);
+    this.addAcceptJsonAndProblemJsonHeader(headers);
+    return {
+      method: HttpRequestMethod.DELETE,
+      headers: headers,
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+    };
+  }
+
   getDefaultPostOptions(body: string): RequestInit {
     const headers = {};
     this.addAuthorizationHeader(headers);
