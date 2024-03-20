@@ -8,15 +8,19 @@ import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
 import GetElementParentsEndpoint from '~/Endpoint/Element/GetElementParentsEndpoint';
 import GetElementRelatedEndpoint from '~/Endpoint/Element/GetElementRelatedEndpoint';
 import GetIndexEndpoint from '~/Endpoint/Element/GetIndexEndpoint';
+import PostElementEndpoint from '~/Endpoint/Element/PostElementEndpoint';
+import PostIndexEndpoint from '~/Endpoint/Element/PostIndexEndpoint';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { createChildrenCollectionIdentifier } from '~/Type/Definition/ChildrenCollectionIdentifier';
 import { Collection } from '~/Type/Definition/Collection';
 import { createIndexCollectionIdentifier } from '~/Type/Definition/IndexCollectionIdentifier';
 import { Node } from '~/Type/Definition/Node';
+import { NodeWithOptionalId } from '~/Type/Definition/NodeWithOptionalId';
 import { createParentsCollectionIdentifier } from '~/Type/Definition/ParentsCollectionIdentifier';
 import { createRelatedCollectionIdentifier } from '~/Type/Definition/RelatedCollectionIdentifier';
 import { Relation } from '~/Type/Definition/Relation';
+import { RelationWithOptionalId } from '~/Type/Definition/RelationWithOptionalId';
 import { Uuid } from '~/Type/Definition/Uuid';
 
 class EmberNexus {
@@ -140,6 +144,19 @@ class EmberNexus {
             return collection;
           }),
       );
+    });
+  }
+
+  postIndex(element: NodeWithOptionalId | RelationWithOptionalId): Promise<Uuid> {
+    return new Promise<Uuid>((resolve) => {
+      return resolve(Container.get(PostIndexEndpoint).postIndex(element));
+    });
+  }
+
+  postElement(parentUuid: Uuid, element: NodeWithOptionalId | RelationWithOptionalId): Promise<Uuid> {
+    return new Promise<Uuid>((resolve) => {
+      // todo: drop cached collections where created element is included
+      return resolve(Container.get(PostElementEndpoint).postElement(parentUuid, element));
     });
   }
 }
