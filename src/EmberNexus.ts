@@ -24,6 +24,7 @@ import { createRelatedCollectionIdentifier } from '~/Type/Definition/RelatedColl
 import { Relation } from '~/Type/Definition/Relation';
 import { RelationWithOptionalId } from '~/Type/Definition/RelationWithOptionalId';
 import { Uuid } from '~/Type/Definition/Uuid';
+import PutElementEndpoint from "~/Endpoint/Element/PutElementEndpoint";
 
 class EmberNexus {
   private elementCache: LRUCache<Uuid, Node | Relation>;
@@ -167,6 +168,14 @@ class EmberNexus {
       // todo: drop cached collections where patched element is included
       this.elementCache.delete(uuid);
       return resolve(Container.get(PatchElementEndpoint).patchElement(uuid, data));
+    });
+  }
+
+  putElement(uuid: Uuid, data: Data): Promise<void> {
+    return new Promise<void>((resolve) => {
+      // todo: drop cached collections where updated element is included
+      this.elementCache.delete(uuid);
+      return resolve(Container.get(PutElementEndpoint).putElement(uuid, data));
     });
   }
 }
