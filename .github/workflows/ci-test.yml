@@ -74,7 +74,7 @@ jobs:
             ${{ runner.os }}-node-v${{ matrix.node-version }}-
       - name: Install dependencies
         run: yarn install --dev
-      - name: Run syntax linter
+      - name: Run unit tests
         run: yarn test:unit
 
   test-feature:
@@ -101,5 +101,5 @@ jobs:
             ${{ runner.os }}-node-v${{ matrix.node-version }}-
       - name: Install dependencies
         run: yarn install --dev
-      - name: Run syntax linter
+      - name: Run feature tests
         run: yarn test:feature
