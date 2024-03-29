@@ -5,7 +5,6 @@ import { ParseError } from '~/Error/ParseError';
 import { FetchHelper } from '~/Service/FetchHelper';
 import { Logger } from '~/Service/Logger';
 import { NodeWithOptionalId } from '~/Type/Definition/NodeWithOptionalId';
-import { RelationWithOptionalId } from '~/Type/Definition/RelationWithOptionalId';
 import { Uuid, validateUuidFromString } from '~/Type/Definition/Uuid';
 
 @Service()
@@ -15,7 +14,7 @@ class PostElementEndpoint {
     private fetchHelper: FetchHelper,
   ) {}
 
-  async postElement(parentUuid: Uuid, element: NodeWithOptionalId | RelationWithOptionalId): Promise<Uuid> {
+  async postElement(parentUuid: Uuid, element: NodeWithOptionalId): Promise<Uuid> {
     return Promise.resolve()
       .then(() => {
         const url = this.fetchHelper.buildUrl(`/${parentUuid}`);
