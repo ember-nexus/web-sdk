@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { Container } from 'typedi';
 
-import GetElementRelatedEndpoint from '~/Endpoint/Element/GetElementRelatedEndpoint';
+import { GetElementRelatedEndpoint } from '~/Endpoint/Element/GetElementRelatedEndpoint';
 import { ValidationError } from '~/Error/ValidationError';
 import { Logger } from '~/Service/Logger';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { Container } from 'typedi';
 
-import GetIndexEndpoint from '~/Endpoint/Element/GetIndexEndpoint';
+import { GetIndexEndpoint } from '~/Endpoint/Element/GetIndexEndpoint';
 import { ValidationError } from '~/Error/ValidationError';
 import { Logger } from '~/Service/Logger';
 

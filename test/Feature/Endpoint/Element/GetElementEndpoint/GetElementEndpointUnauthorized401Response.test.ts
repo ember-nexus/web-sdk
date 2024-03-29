@@ -4,7 +4,7 @@ import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
-import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
+import { GetElementEndpoint } from '~/Endpoint/Element/GetElementEndpoint';
 import { Response401UnauthorizedError } from '~/Error/Response401UnauthorizedError';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';

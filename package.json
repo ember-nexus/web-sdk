@@ -13,7 +13,8 @@
     "cs:fix": "eslint --ext .ts ./src ./test --fix",
     "test:unit": "jest ./test/Unit",
     "test:feature": "jest ./test/Feature",
-    "prepare": "ts-patch install"
+    "prepare": "ts-patch install",
+    "typedoc": "typedoc --tsconfig tsconfig.release.json"
   },
   "author": "Syndesi <info@ember-nexus.dev>",
   "license": "MIT",
@@ -55,7 +56,8 @@
     "ts-node": "^10.9.2",
     "ts-patch": "^3.0.2",
     "tsutils": "~3.21",
-    "typedoc": "^0.25.4",
+    "typedoc": "^0.25.12",
+    "typedoc-plugin-markdown": "^3.17.1",
     "typedoc-plugin-mdn-links": "^3.1.9",
     "typedoc-theme-hierarchy": "^4.0.0",
     "typescript": "5.2.2",

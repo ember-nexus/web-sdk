@@ -65,4 +65,4 @@ class GetElementRelatedEndpoint {
   }
 }
 
-export default GetElementRelatedEndpoint;
+export { GetElementRelatedEndpoint };

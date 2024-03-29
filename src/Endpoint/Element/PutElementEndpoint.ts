@@ -50,4 +50,4 @@ class PutElementEndpoint {
   }
 }
 
-export default PutElementEndpoint;
+export { PutElementEndpoint };

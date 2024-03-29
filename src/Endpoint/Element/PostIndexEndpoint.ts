@@ -52,4 +52,4 @@ class PostIndexEndpoint {
   }
 }
 
-export default PostIndexEndpoint;
+export { PostIndexEndpoint };

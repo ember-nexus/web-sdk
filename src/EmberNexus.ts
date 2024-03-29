@@ -3,15 +3,15 @@ import 'reflect-metadata';
 import { LRUCache } from 'lru-cache';
 import { Container } from 'typedi';
 
-import GetElementChildrenEndpoint from '~/Endpoint/Element/GetElementChildrenEndpoint';
-import GetElementEndpoint from '~/Endpoint/Element/GetElementEndpoint';
-import GetElementParentsEndpoint from '~/Endpoint/Element/GetElementParentsEndpoint';
-import GetElementRelatedEndpoint from '~/Endpoint/Element/GetElementRelatedEndpoint';
-import GetIndexEndpoint from '~/Endpoint/Element/GetIndexEndpoint';
-import PatchElementEndpoint from '~/Endpoint/Element/PatchElementEndpoint';
-import PostElementEndpoint from '~/Endpoint/Element/PostElementEndpoint';
-import PostIndexEndpoint from '~/Endpoint/Element/PostIndexEndpoint';
-import PutElementEndpoint from '~/Endpoint/Element/PutElementEndpoint';
+import { GetElementChildrenEndpoint } from '~/Endpoint/Element/GetElementChildrenEndpoint';
+import { GetElementEndpoint } from '~/Endpoint/Element/GetElementEndpoint';
+import { GetElementParentsEndpoint } from '~/Endpoint/Element/GetElementParentsEndpoint';
+import { GetElementRelatedEndpoint } from '~/Endpoint/Element/GetElementRelatedEndpoint';
+import { GetIndexEndpoint } from '~/Endpoint/Element/GetIndexEndpoint';
+import { PatchElementEndpoint } from '~/Endpoint/Element/PatchElementEndpoint';
+import { PostElementEndpoint } from '~/Endpoint/Element/PostElementEndpoint';
+import { PostIndexEndpoint } from '~/Endpoint/Element/PostIndexEndpoint';
+import { PutElementEndpoint } from '~/Endpoint/Element/PutElementEndpoint';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { createChildrenCollectionIdentifier } from '~/Type/Definition/ChildrenCollectionIdentifier';
@@ -39,25 +39,67 @@ class EmberNexus {
     });
   }
 
-  getElement(uuid: Uuid): Promise<Node | Relation> {
+  /**
+   * Returns one node or relation through its Uuid.
+   *
+   * The element is directly returned if it is already in the cache. Otherwise, a fetch call against Ember Nexus API is
+   * started.
+   *
+   * **Note**: The browser might also cache the API's response if it contains an ETag header.
+   *
+   * @param elementUuid The Uuid of the requested element.
+   *
+   * @example
+   * ```ts
+   * const emberNexus = new EmberNexus(...);
+   * const elementUuid = validateUuidFromString("a30d815f-943b-4784-8d84-85a3eec10f54");
+   * const element = await emberNexus.getElement(elementUuid);
+   * ```
+   *
+   * @see [Web SDK: Get element endpoint](https://ember-nexus.github.io/web-sdk/#/endpoints/element/get-element)
+   * @see [Ember Nexus API: Get element endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/get-element)
+   */
+  getElement(elementUuid: Uuid): Promise<Node | Relation> {
     return new Promise<Node | Relation>((resolve) => {
-      if (this.elementCache.has(uuid)) {
-        const element = this.elementCache.get(uuid);
+      if (this.elementCache.has(elementUuid)) {
+        const element = this.elementCache.get(elementUuid);
         if (element !== undefined) {
           return resolve(element);
         }
       }
       return resolve(
         Container.get(GetElementEndpoint)
-          .getElement(uuid)
+          .getElement(elementUuid)
           .then((element) => {
-            this.elementCache.set(uuid, element);
+            this.elementCache.set(elementUuid, element);
             return element;
           }),
       );
     });
   }
 
+  /**
+   * Returns children nodes and all relations between the specified parent and the returned children.
+   *
+   * The collection is directly returned if it is already in the cache. Otherwise, a fetch call against Ember Nexus API
+   * is started.
+   *
+   * **Note**: The browser might also cache the API's response, if it contains an ETag header.
+   *
+   * @param parentUuid The Uuid of the parent node.
+   * @param page The number of the page to be returned. The first page has the number 1.
+   * @param pageSize The maximum number of elements one page should contain. If null, the default size is used.
+   *
+   * @example
+   * ```ts
+   * const emberNexus = new EmberNexus(...);
+   * const parentUuid = validateUuidFromString("a30d815f-943b-4784-8d84-85a3eec10f54");
+   * const childrenCollection = await emberNexus.getElementChildren(parentUuid);
+   * ```
+   *
+   * @see [Web SDK: Get element children endpoint](https://ember-nexus.github.io/web-sdk/#/endpoints/element/get-element)
+   * @see [Ember Nexus API: Get element children endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/get-children)
+   */
   getElementChildren(parentUuid: Uuid, page: number = 1, pageSize: number | null = null): Promise<Collection> {
     if (pageSize === null) {
       pageSize = Container.get(WebSdkConfiguration).getCollectionPageSize();

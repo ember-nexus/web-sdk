@@ -52,4 +52,4 @@ class PostElementEndpoint {
   }
 }
 
-export default PostElementEndpoint;
+export { PostElementEndpoint };

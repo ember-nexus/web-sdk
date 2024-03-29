@@ -4,7 +4,7 @@ import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
-import PostElementEndpoint from '~/Endpoint/Element/PostElementEndpoint';
+import { PostElementEndpoint } from '~/Endpoint/Element/PostElementEndpoint';
 import { Response404NotFoundError } from '~/Error/Response404NotFoundError';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';

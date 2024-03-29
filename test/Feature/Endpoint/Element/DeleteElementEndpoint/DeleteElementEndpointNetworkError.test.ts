@@ -4,7 +4,7 @@ import { http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
-import DeleteElementEndpoint from '~/Endpoint/Element/DeleteElementEndpoint';
+import { DeleteElementEndpoint } from '~/Endpoint/Element/DeleteElementEndpoint';
 import { NetworkError } from '~/Error/NetworkError';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';

@@ -50,4 +50,4 @@ class PatchElementEndpoint {
   }
 }
 
-export default PatchElementEndpoint;
+export { PatchElementEndpoint };

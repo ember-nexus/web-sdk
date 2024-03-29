@@ -64,4 +64,4 @@ class GetIndexEndpoint {
   }
 }
 
-export default GetIndexEndpoint;
+export { GetIndexEndpoint };

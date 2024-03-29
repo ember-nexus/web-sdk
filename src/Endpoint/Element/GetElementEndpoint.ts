@@ -54,4 +54,4 @@ class GetElementEndpoint {
   }
 }
 
-export default GetElementEndpoint;
+export { GetElementEndpoint };

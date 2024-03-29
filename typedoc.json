@@ -7,5 +7,10 @@
     "typedoc-theme-hierarchy",
     "typedoc-plugin-mdn-links"
   ],
-  "theme": "hierarchy"
+  "theme": "hierarchy",
+  "navigationLinks": {
+    "Web SDK Documentation": "https://ember-nexus.github.io/web-sdk",
+    "NPM": "https://www.npmjs.com/package/@ember-nexus/web-sdk",
+    "GitHub": "https://github.com/ember-nexus/web-sdk"
+  }
 }

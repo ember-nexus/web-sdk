@@ -65,4 +65,4 @@ class GetElementChildrenEndpoint {
   }
 }
 
-export default GetElementChildrenEndpoint;
+export { GetElementChildrenEndpoint };

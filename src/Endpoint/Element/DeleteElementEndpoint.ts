@@ -45,4 +45,4 @@ class DeleteElementEndpoint {
   }
 }
 
-export default DeleteElementEndpoint;
+export { DeleteElementEndpoint };
