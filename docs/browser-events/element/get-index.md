@@ -5,7 +5,7 @@
 
 > [!NOTE]
 > The <span class="method-get">GetIndexEvent</span> internally calls the
-> <span class="method-get">GetIndexEndpoint</span>, which in turn executes a fetch request against the
+> <span class="method-get">GetIndexEndpoint</span>, which in turn executes a fetch request against
 > <a href="https://ember-nexus.github.io/api/#/api-endpoints/element/get-index">Ember Nexus API's get index endpoint</a>.
 > See their respective documentation for details on failure cases etc.
 

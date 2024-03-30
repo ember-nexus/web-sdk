@@ -5,9 +5,11 @@
 
 > [!NOTE]
 > The <span class="method-get">GetElementEvent</span> internally calls the
-> <span class="method-get">GetElementEndpoint</span>, which in turn executes a fetch request against the
+> <span class="method-get">GetElementEndpoint</span>, which in turn executes a fetch request against
 > <a href="https://ember-nexus.github.io/api/#/api-endpoints/element/get-element">Ember Nexus API's get element endpoint</a>.
 > See their respective documentation for details on failure cases etc.
+
+For the exact definition of the `GetElementEvent`, see its [TypeDoc page](https://ember-nexus.github.io/web-sdk/type/classes/BrowserEvent_Element_GetElementEvent.GetElementEvent.html).
 
 ## Example
 
