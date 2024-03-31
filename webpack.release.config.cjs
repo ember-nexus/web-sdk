@@ -30,7 +30,7 @@ module.exports = {
     outputModule: true,
   },
   output: {
-    filename: 'bundle.js',
+    filename: 'ember-nexus-web-sdk.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
     library: {
