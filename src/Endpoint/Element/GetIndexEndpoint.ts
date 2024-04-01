@@ -10,6 +10,9 @@ import { Logger } from '~/Service/Logger';
 import { Collection } from '~/Type/Definition/Collection';
 
 @Service()
+/**
+ * @internal
+ */
 class GetIndexEndpoint {
   constructor(
     private logger: Logger,

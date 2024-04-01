@@ -8,7 +8,7 @@ describe('DeleteElementEvent tests', () => {
     const uuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc94');
     const deleteElementEvent = new DeleteElementEvent(uuid);
 
-    expect(deleteElementEvent.getUuid()).to.equal(uuid);
+    expect(deleteElementEvent.getElementId()).to.equal(uuid);
     expect(deleteElementEvent.getResult()).to.be.null;
   });
 
@@ -22,7 +22,7 @@ describe('DeleteElementEvent tests', () => {
 
     deleteElementEvent.setResult(promise);
 
-    expect(deleteElementEvent.getUuid()).to.equal(uuid);
+    expect(deleteElementEvent.getElementId()).to.equal(uuid);
     expect(deleteElementEvent.getResult()).to.equal(promise);
   });
 });

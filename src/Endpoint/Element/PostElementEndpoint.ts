@@ -8,16 +8,19 @@ import { NodeWithOptionalId } from '~/Type/Definition/NodeWithOptionalId';
 import { Uuid, validateUuidFromString } from '~/Type/Definition/Uuid';
 
 @Service()
+/**
+ * @internal
+ */
 class PostElementEndpoint {
   constructor(
     private logger: Logger,
     private fetchHelper: FetchHelper,
   ) {}
 
-  async postElement(parentUuid: Uuid, element: NodeWithOptionalId): Promise<Uuid> {
+  async postElement(parentId: Uuid, element: NodeWithOptionalId): Promise<Uuid> {
     return Promise.resolve()
       .then(() => {
-        const url = this.fetchHelper.buildUrl(`/${parentUuid}`);
+        const url = this.fetchHelper.buildUrl(`/${parentId}`);
         this.logger.debug(`Executing HTTP POST request against url ${url} .`);
         return fetch(url, this.fetchHelper.getDefaultPostOptions(JSON.stringify(element)));
       })

@@ -5,7 +5,7 @@ import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type GetElementEventDetails = {
-  elementUuid: Uuid;
+  elementId: Uuid;
   element: Promise<Node | Relation> | null;
 };
 
@@ -21,13 +21,13 @@ class GetElementEvent extends CustomEvent<GetElementEventDetails> {
    *
    * Creates a new GetElementEvent.
    *
-   * @param elementUuid The Uuid of the element which should be returned.
+   * @param elementId The Uuid of the element which should be returned.
    */
-  constructor(elementUuid: Uuid) {
+  constructor(elementId: Uuid) {
     super(EventIdentifier.GetElement, {
       ...customEventDefaultInit,
       detail: {
-        elementUuid: elementUuid,
+        elementId: elementId,
         element: null,
       },
     });
@@ -36,8 +36,8 @@ class GetElementEvent extends CustomEvent<GetElementEventDetails> {
   /**
    * Returns the Uuid of the element which should be returned.
    */
-  getElementUuid(): Uuid {
-    return this.detail.elementUuid;
+  getElementId(): Uuid {
+    return this.detail.elementId;
   }
 
   /**

@@ -10,7 +10,7 @@ describe('PostElementEvent tests', () => {
 
     expect(postElementEvent.getParentId()).to.equal(parentUuid);
     expect(postElementEvent.getType()).to.equal('someType');
-    expect(postElementEvent.getId()).to.be.null;
+    expect(postElementEvent.getElementId()).to.be.null;
     expect(postElementEvent.getData()).to.be.empty;
     expect(postElementEvent.getResult()).to.be.null;
   });
@@ -25,7 +25,7 @@ describe('PostElementEvent tests', () => {
 
     expect(postElementEvent.getParentId()).to.equal(parentUuid);
     expect(postElementEvent.getType()).to.equal('someType');
-    expect(postElementEvent.getId()).to.equal(elementUuid);
+    expect(postElementEvent.getElementId()).to.equal(elementUuid);
     expect(postElementEvent.getData().some).to.equal('data');
     expect(postElementEvent.getResult()).to.be.null;
   });

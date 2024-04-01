@@ -6,19 +6,19 @@ import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 type PostElementEventDetails = {
   parentId: Uuid;
   type: string;
-  id: Uuid | null;
+  elementId: Uuid | null;
   data: Data;
   result: Promise<Uuid> | null;
 };
 
 class PostElementEvent extends CustomEvent<PostElementEventDetails> {
-  constructor(parentId: Uuid, type: string, id: Uuid | null = null, data: Data = {}) {
+  constructor(parentId: Uuid, type: string, elementId: Uuid | null = null, data: Data = {}) {
     super(EventIdentifier.PostElement, {
       ...customEventDefaultInit,
       detail: {
         parentId: parentId,
         type: type,
-        id: id,
+        elementId: elementId,
         data: data,
         result: null,
       },
@@ -33,8 +33,8 @@ class PostElementEvent extends CustomEvent<PostElementEventDetails> {
     return this.detail.type;
   }
 
-  getId(): Uuid | null {
-    return this.detail.id;
+  getElementId(): Uuid | null {
+    return this.detail.elementId;
   }
 
   getData(): Data {

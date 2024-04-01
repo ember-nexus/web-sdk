@@ -3,7 +3,7 @@ import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type DeleteElementEventDetails = {
-  elementUuid: Uuid;
+  elementId: Uuid;
   result: Promise<void> | null;
 };
 
@@ -18,13 +18,13 @@ class DeleteElementEvent extends CustomEvent<DeleteElementEventDetails> {
   /**
    * Creates a new DeleteElementEvent.
    *
-   * @param elementUuid The Uuid of the element which should be deleted.
+   * @param elementId The Uuid of the element which should be deleted.
    */
-  constructor(elementUuid: Uuid) {
+  constructor(elementId: Uuid) {
     super(EventIdentifier.DeleteElement, {
       ...customEventDefaultInit,
       detail: {
-        elementUuid: elementUuid,
+        elementId: elementId,
         result: null,
       },
     });
@@ -33,8 +33,8 @@ class DeleteElementEvent extends CustomEvent<DeleteElementEventDetails> {
   /**
    * Returns the Uuid of the element which should be deleted.
    */
-  getElementUuid(): Uuid {
-    return this.detail.elementUuid;
+  getElementId(): Uuid {
+    return this.detail.elementId;
   }
 
   /**

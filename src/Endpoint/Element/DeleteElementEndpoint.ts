@@ -7,14 +7,17 @@ import { Logger } from '~/Service/Logger';
 import { Uuid } from '~/Type/Definition/Uuid';
 
 @Service()
+/**
+ * @internal
+ */
 class DeleteElementEndpoint {
   constructor(
     private logger: Logger,
     private fetchHelper: FetchHelper,
   ) {}
 
-  async deleteElement(uuid: Uuid): Promise<void> {
-    const url = this.fetchHelper.buildUrl(`/${uuid}`);
+  async deleteElement(elementId: Uuid): Promise<void> {
+    const url = this.fetchHelper.buildUrl(`/${elementId}`);
     this.logger.debug(`Executing HTTP DELETE request against url ${url} .`);
     return fetch(url, this.fetchHelper.getDefaultDeleteOptions())
       .catch((networkError) => {

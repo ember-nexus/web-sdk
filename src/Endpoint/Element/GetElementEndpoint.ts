@@ -10,6 +10,9 @@ import { Relation } from '~/Type/Definition/Relation';
 import { Uuid } from '~/Type/Definition/Uuid';
 
 @Service()
+/**
+ * @internal
+ */
 class GetElementEndpoint {
   constructor(
     private logger: Logger,
@@ -17,8 +20,8 @@ class GetElementEndpoint {
     private elementParser: ElementParser,
   ) {}
 
-  async getElement(uuid: Uuid): Promise<Node | Relation> {
-    const url = this.fetchHelper.buildUrl(`/${uuid}`);
+  async getElement(elementId: Uuid): Promise<Node | Relation> {
+    const url = this.fetchHelper.buildUrl(`/${elementId}`);
     this.logger.debug(`Executing HTTP GET request against url ${url} .`);
     return fetch(url, this.fetchHelper.getDefaultGetOptions())
       .catch((networkError) => {

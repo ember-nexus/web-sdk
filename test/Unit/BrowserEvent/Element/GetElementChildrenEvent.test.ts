@@ -9,7 +9,7 @@ describe('GetElementChildrenEvent tests', () => {
     const uuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc94');
     const getElementChildrenEvent = new GetElementChildrenEvent(uuid);
 
-    expect(getElementChildrenEvent.getUuid()).to.equal(uuid);
+    expect(getElementChildrenEvent.getParentId()).to.equal(uuid);
     expect(getElementChildrenEvent.getChildren()).to.be.null;
   });
 
@@ -36,7 +36,7 @@ describe('GetElementChildrenEvent tests', () => {
 
     getElementChildrenEvent.setChildren(promise);
 
-    expect(getElementChildrenEvent.getUuid()).to.equal(uuid);
+    expect(getElementChildrenEvent.getParentId()).to.equal(uuid);
     expect(getElementChildrenEvent.getChildren()).to.equal(promise);
   });
 });

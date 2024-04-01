@@ -8,7 +8,7 @@ describe('PostIndexEvent tests', () => {
     const postIndexEvent = new PostIndexEvent('someType');
 
     expect(postIndexEvent.getType()).to.equal('someType');
-    expect(postIndexEvent.getId()).to.be.null;
+    expect(postIndexEvent.getElementId()).to.be.null;
     expect(postIndexEvent.getStart()).to.be.null;
     expect(postIndexEvent.getEnd()).to.be.null;
     expect(postIndexEvent.getData()).to.be.empty;
@@ -25,7 +25,7 @@ describe('PostIndexEvent tests', () => {
     });
 
     expect(postIndexEvent.getType()).to.equal('someType');
-    expect(postIndexEvent.getId()).to.equal(elementUuid);
+    expect(postIndexEvent.getElementId()).to.equal(elementUuid);
     expect(postIndexEvent.getStart()).to.equal(startUuid);
     expect(postIndexEvent.getEnd()).to.equal(endUuid);
     expect(postIndexEvent.getData().some).to.equal('data');

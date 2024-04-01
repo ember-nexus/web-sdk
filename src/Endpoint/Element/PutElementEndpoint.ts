@@ -8,19 +8,22 @@ import { Data } from '~/Type/Definition/Data';
 import { Uuid } from '~/Type/Definition/Uuid';
 
 @Service()
+/**
+ * @internal
+ */
 class PutElementEndpoint {
   constructor(
     private logger: Logger,
     private fetchHelper: FetchHelper,
   ) {}
 
-  async putElement(uuid: Uuid, data: Data): Promise<void> {
+  async putElement(elementId: Uuid, data: Data): Promise<void> {
     return Promise.resolve()
       .then(() => {
         this.logger.warn(
           'The endpoint put element will be changed in the next major version, expect changed interfaces.',
         );
-        const url = this.fetchHelper.buildUrl(`/${uuid}`);
+        const url = this.fetchHelper.buildUrl(`/${elementId}`);
         this.logger.debug(`Executing HTTP PUT request against url ${url} .`);
         return fetch(url, this.fetchHelper.getDefaultPutOptions(JSON.stringify(data)));
       })

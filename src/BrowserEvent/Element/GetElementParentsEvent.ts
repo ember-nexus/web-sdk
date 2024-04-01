@@ -4,23 +4,23 @@ import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type GetElementParentsEventDetails = {
-  uuid: Uuid;
+  childId: Uuid;
   parents: Promise<Collection> | null;
 };
 
 class GetElementParentsEvent extends CustomEvent<GetElementParentsEventDetails> {
-  constructor(uuid: Uuid) {
+  constructor(childId: Uuid) {
     super(EventIdentifier.GetElementParents, {
       ...customEventDefaultInit,
       detail: {
-        uuid: uuid,
+        childId: childId,
         parents: null,
       },
     });
   }
 
-  getUuid(): Uuid {
-    return this.detail.uuid;
+  getChildId(): Uuid {
+    return this.detail.childId;
   }
 
   getParents(): Promise<Collection> | null {

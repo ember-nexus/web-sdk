@@ -14,5 +14,4 @@
     - [<span class="method-delete">DeleteElementEvent</span>](/browser-events/element/delete-element)
 
 - **Endpoints**
-  - **Element Endpoints**
-    - [<span class="method-get">GET</span>` /<uuid> -` Get Element](/endpoints/element/get-element)
+  - [Element Endpoints](/endpoints/element)

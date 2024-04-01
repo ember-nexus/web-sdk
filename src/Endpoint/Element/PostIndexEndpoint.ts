@@ -9,6 +9,9 @@ import { RelationWithOptionalId } from '~/Type/Definition/RelationWithOptionalId
 import { Uuid, validateUuidFromString } from '~/Type/Definition/Uuid';
 
 @Service()
+/**
+ * @internal
+ */
 class PostIndexEndpoint {
   constructor(
     private logger: Logger,

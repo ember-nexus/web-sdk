@@ -8,19 +8,22 @@ import { Data } from '~/Type/Definition/Data';
 import { Uuid } from '~/Type/Definition/Uuid';
 
 @Service()
+/**
+ * @internal
+ */
 class PatchElementEndpoint {
   constructor(
     private logger: Logger,
     private fetchHelper: FetchHelper,
   ) {}
 
-  async patchElement(uuid: Uuid, data: Data): Promise<void> {
+  async patchElement(elementId: Uuid, data: Data): Promise<void> {
     return Promise.resolve()
       .then(() => {
         this.logger.warn(
           'The endpoint patch element will be changed in the next major version, expect changed interfaces.',
         );
-        const url = this.fetchHelper.buildUrl(`/${uuid}`);
+        const url = this.fetchHelper.buildUrl(`/${elementId}`);
         this.logger.debug(`Executing HTTP PATCH request against url ${url} .`);
         return fetch(url, this.fetchHelper.getDefaultPatchOptions(JSON.stringify(data)));
       })

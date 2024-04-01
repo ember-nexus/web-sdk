@@ -5,7 +5,7 @@ import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type PostIndexEventDetails = {
   type: string;
-  id: Uuid | null;
+  elementId: Uuid | null;
   start: Uuid | null;
   end: Uuid | null;
   data: Data;
@@ -15,7 +15,7 @@ type PostIndexEventDetails = {
 class PostIndexEvent extends CustomEvent<PostIndexEventDetails> {
   constructor(
     type: string,
-    id: Uuid | null = null, // todo: should variable be renamed to uuid?
+    elementId: Uuid | null = null,
     start: Uuid | null = null,
     end: Uuid | null = null,
     data: Data = {},
@@ -30,7 +30,7 @@ class PostIndexEvent extends CustomEvent<PostIndexEventDetails> {
       ...customEventDefaultInit,
       detail: {
         type: type,
-        id: id,
+        elementId: elementId,
         start: start,
         end: end,
         data: data,
@@ -43,8 +43,8 @@ class PostIndexEvent extends CustomEvent<PostIndexEventDetails> {
     return this.detail.type;
   }
 
-  getId(): Uuid | null {
-    return this.detail.id;
+  getElementId(): Uuid | null {
+    return this.detail.elementId;
   }
 
   getStart(): Uuid | null {

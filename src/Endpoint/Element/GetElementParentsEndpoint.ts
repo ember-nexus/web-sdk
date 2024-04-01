@@ -11,6 +11,9 @@ import { Collection } from '~/Type/Definition/Collection';
 import { Uuid } from '~/Type/Definition/Uuid';
 
 @Service()
+/**
+ * @internal
+ */
 class GetElementParentsEndpoint {
   constructor(
     private logger: Logger,
@@ -18,7 +21,7 @@ class GetElementParentsEndpoint {
     private collectionParser: CollectionParser,
   ) {}
 
-  async getElementParents(uuid: Uuid, page: number = 1, pageSize: number = 25): Promise<Collection> {
+  async getElementParents(childId: Uuid, page: number = 1, pageSize: number = 25): Promise<Collection> {
     return Promise.resolve()
       .then(() => {
         if (page < 1) {
@@ -27,7 +30,7 @@ class GetElementParentsEndpoint {
         if (pageSize < 1) {
           return Promise.reject(new ValidationError('Page size must be at least 1.'));
         }
-        const url = this.fetchHelper.buildUrl(`/${uuid}/parents?page=${page}&pageSize=${pageSize}`);
+        const url = this.fetchHelper.buildUrl(`/${childId}/parents?page=${page}&pageSize=${pageSize}`);
         this.logger.debug(`Executing HTTP GET request against url ${url} .`);
         return fetch(url, this.fetchHelper.getDefaultGetOptions());
       })

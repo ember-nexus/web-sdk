@@ -1,9 +1,10 @@
+import * as fs from 'fs';
+import * as path from 'path';
+
 import { expect } from 'chai';
-import puppeteer from 'puppeteer';
-import * as fs from "fs";
-import * as path from "path";
-import Handlebars from "handlebars";
+import Handlebars from 'handlebars';
 import * as util from 'node-inspect-extracted';
+import puppeteer from 'puppeteer';
 
 test('GetElementExample', async () => {
   // Launch the browser and open a new blank page
@@ -14,32 +15,32 @@ test('GetElementExample', async () => {
   const page = await browser.newPage();
 
   type ConsoleLogCall = {
-    message: string,
-    level: string,
-    url: string,
-    filename: string,
-    line: number,
-    column: number
+    message: string;
+    level: string;
+    url: string;
+    filename: string;
+    line: number;
+    column: number;
   };
 
-  let consoleLogCalls : ConsoleLogCall[] = [];
+  const consoleLogCalls: ConsoleLogCall[] = [];
 
   page.on('console', async (msg) => {
     // const allowedTypes : string[] = ['log', 'debug', 'info', 'error', 'warn'];
     // if (!(msg.type() in allowedTypes)) {
     //   return;
     // }
-    let consoleLogCall: ConsoleLogCall = {
+    const consoleLogCall: ConsoleLogCall = {
       message: msg.text(),
       level: msg.type(),
       url: msg.location().url ?? '',
       filename: path.basename(msg.location().url ?? ''),
       line: msg.location().lineNumber ?? 0,
-      column: msg.location().columnNumber ?? 0
+      column: msg.location().columnNumber ?? 0,
     };
     const args = msg.args();
     if (args.length === 0) {
-      console.log("args length equal zero");
+      console.log('args length equal zero');
       return;
     }
     const firstArg = args[0];
@@ -50,8 +51,8 @@ test('GetElementExample', async () => {
         return util.inspect(obj, {
           compact: false,
           stylize: util.stylizeWithHTML,
-          depth: 5
-        } as util.InspectOptions)
+          depth: 5,
+        } as util.InspectOptions);
       }, firstArg);
       // const data = JSON.parse(await page.evaluate((obj) => JSON.stringify(obj), firstArg));
       // consoleLogCall.message = util.inspect(data, {
@@ -95,7 +96,7 @@ test('GetElementExample', async () => {
   await page.waitForSelector('#finished');
   // await new Promise(resolve => setTimeout(resolve, 3000));
 
-  let consoleTemplate = fs.readFileSync(path.resolve(__dirname, './console.template.html')).toString();
+  const consoleTemplate = fs.readFileSync(path.resolve(__dirname, './console.template.html')).toString();
   // console.log(consoleTemplate);
 
   // console.log(Mustache);
@@ -103,7 +104,7 @@ test('GetElementExample', async () => {
 
   const template = Handlebars.compile(consoleTemplate);
   const consoleHtml = template({
-    rows: consoleLogCalls
+    rows: consoleLogCalls,
   });
 
   // let consoleLog = consoleLogEntries

@@ -8,7 +8,7 @@ describe('PutElementEvent tests', () => {
     const elementUuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc94');
     const postElementEvent = new PutElementEvent(elementUuid);
 
-    expect(postElementEvent.getId()).to.equal(elementUuid);
+    expect(postElementEvent.getElementId()).to.equal(elementUuid);
     expect(postElementEvent.getData()).to.be.empty;
     expect(postElementEvent.getResult()).to.be.null;
   });
@@ -20,7 +20,7 @@ describe('PutElementEvent tests', () => {
       some: 'data',
     });
 
-    expect(postElementEvent.getId()).to.equal(elementUuid);
+    expect(postElementEvent.getElementId()).to.equal(elementUuid);
     expect(postElementEvent.getData().some).to.equal('data');
     expect(postElementEvent.getResult()).to.be.null;
   });
