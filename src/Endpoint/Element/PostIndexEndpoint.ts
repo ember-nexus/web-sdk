@@ -8,10 +8,17 @@ import { NodeWithOptionalId } from '~/Type/Definition/NodeWithOptionalId';
 import { RelationWithOptionalId } from '~/Type/Definition/RelationWithOptionalId';
 import { Uuid, validateUuidFromString } from '~/Type/Definition/Uuid';
 
-@Service()
 /**
+ * The post index endpoint creates a single element.
+ *
+ * **Warning**: This is an internal class. You should not use it directly.
+ *
+ * @see [Further documentation](https://ember-nexus.github.io/web-sdk/#/endpoints/element?id=postindexendpoint)
+ * @see [Ember Nexus API: Create Root Level Element Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/post-index)
+ *
  * @internal
  */
+@Service()
 class PostIndexEndpoint {
   constructor(
     private logger: Logger,

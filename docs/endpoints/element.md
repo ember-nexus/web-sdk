@@ -61,7 +61,7 @@ bla bla bla
 
 ## <span class="method-get">GetElementParentsEndpoint</span>
 
-...
+The get element parents endpoint is used to retrieve all parent nodes from a node.
 
 Links:
 - [TypeDoc](https://ember-nexus.github.io/web-sdk/type/classes/Endpoint_Element_GetElementParentsEndpoint.GetElementParentsEndpoint.html)

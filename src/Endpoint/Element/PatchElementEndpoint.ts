@@ -7,10 +7,17 @@ import { Logger } from '~/Service/Logger';
 import { Data } from '~/Type/Definition/Data';
 import { Uuid } from '~/Type/Definition/Uuid';
 
-@Service()
 /**
+ * The patch element endpoint updates a single element.
+ *
+ * **Warning**: This is an internal class. You should not use it directly.
+ *
+ * @see [Further documentation](https://ember-nexus.github.io/web-sdk/#/endpoints/element?id=patchelementendpoint)
+ * @see [Ember Nexus API: Update Element Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/patch-element)
+ *
  * @internal
  */
+@Service()
 class PatchElementEndpoint {
   constructor(
     private logger: Logger,

@@ -10,10 +10,17 @@ import { Logger } from '~/Service/Logger';
 import { Collection } from '~/Type/Definition/Collection';
 import { Uuid } from '~/Type/Definition/Uuid';
 
-@Service()
 /**
+ * The get element children endpoint retrieves all child nodes of a single parent node.
+ *
+ * The child nodes are paginated. Within each page, all relations between the parent node and the child nodes contained
+ * on the page are returned.
+ *
+ * **Warning**: This is an internal class. You should not use it directly.
+ *
  * @internal
  */
+@Service()
 class GetElementChildrenEndpoint {
   constructor(
     private logger: Logger,

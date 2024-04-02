@@ -10,10 +10,20 @@ import { Logger } from '~/Service/Logger';
 import { Collection } from '~/Type/Definition/Collection';
 import { Uuid } from '~/Type/Definition/Uuid';
 
-@Service()
 /**
+ * The get element related endpoint retrieves all related nodes of a single center node.
+ *
+ * The related nodes are paginated. Within each page, all relations between the center node and the related nodes
+ * contained on the page are returned.
+ *
+ * **Warning**: This is an internal class. You should not use it directly.
+ *
+ * @see [Further documentation](https://ember-nexus.github.io/web-sdk/#/endpoints/element?id=getelementrelatedendpoint)
+ * @see [Ember Nexus API: Get Element Related Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/get-related)
+ *
  * @internal
  */
+@Service()
 class GetElementRelatedEndpoint {
   constructor(
     private logger: Logger,

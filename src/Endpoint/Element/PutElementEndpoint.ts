@@ -7,10 +7,17 @@ import { Logger } from '~/Service/Logger';
 import { Data } from '~/Type/Definition/Data';
 import { Uuid } from '~/Type/Definition/Uuid';
 
-@Service()
 /**
+ * The put element endpoint replaces a single element.
+ *
+ * **Warning**: This is an internal class. You should not use it directly.
+ *
+ * @see [Further documentation](https://ember-nexus.github.io/web-sdk/#/endpoints/element?id=putelementendpoint)
+ * @see [Ember Nexus API: Replace Element Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/put-element)
+ *
  * @internal
  */
+@Service()
 class PutElementEndpoint {
   constructor(
     private logger: Logger,

@@ -10,10 +10,20 @@ import { Logger } from '~/Service/Logger';
 import { Collection } from '~/Type/Definition/Collection';
 import { Uuid } from '~/Type/Definition/Uuid';
 
-@Service()
 /**
+ * The get element parents endpoint retrieves all parent nodes of a single child node.
+ *
+ * The parent nodes are paginated. Within each page, all relations between the child node and the parent nodes contained
+ * on the page are returned.
+ *
+ * **Warning**: This is an internal class. You should not use it directly.
+ *
+ * @see [Further documentation](https://ember-nexus.github.io/web-sdk/#/endpoints/element?id=getelementparentsendpoint)
+ * @see [Ember Nexus API: Get Element Parents Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/get-parents)
+ *
  * @internal
  */
+@Service()
 class GetElementParentsEndpoint {
   constructor(
     private logger: Logger,

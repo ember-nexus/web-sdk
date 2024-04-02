@@ -7,10 +7,17 @@ import { Logger } from '~/Service/Logger';
 import { NodeWithOptionalId } from '~/Type/Definition/NodeWithOptionalId';
 import { Uuid, validateUuidFromString } from '~/Type/Definition/Uuid';
 
-@Service()
 /**
+ * The post element endpoint creates a single child node.
+ *
+ * **Warning**: This is an internal class. You should not use it directly.
+ *
+ * @see [Further documentation](https://ember-nexus.github.io/web-sdk/#/endpoints/element?id=postelementendpoint)
+ * @see [Ember Nexus API: Create Element Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/post-element)
+ *
  * @internal
  */
+@Service()
 class PostElementEndpoint {
   constructor(
     private logger: Logger,
