@@ -5,6 +5,10 @@ import { EventListener } from '~/Type/Definition/EventListener';
 
 /**
  * Skips conversion of primitive data types and sets them directly.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @internal
  */
 @Service()
 class GenericRawValueToNormalizedValueEventListener implements EventListener<RawValueToNormalizedValueEvent> {

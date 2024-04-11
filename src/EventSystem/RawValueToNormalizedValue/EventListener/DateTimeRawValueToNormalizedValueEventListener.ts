@@ -5,6 +5,10 @@ import { EventListener } from '~/Type/Definition/EventListener';
 
 /**
  * Checks if a string returned by Ember Nexus API matches the date time format and tries to convert it to a date object.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @internal
  */
 @Service()
 class DateTimeRawValueToNormalizedValueEventListener implements EventListener<RawValueToNormalizedValueEvent> {

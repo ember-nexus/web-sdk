@@ -4,6 +4,9 @@ import { Service } from 'typedi';
 import { Logger } from '~/Service/Logger';
 import { LogLevel } from '~/Type/Enum/LogLevel';
 
+/**
+ * Factory for creating the default logger.
+ */
 @Service()
 class LoggerFactory {
   create(): Logger {

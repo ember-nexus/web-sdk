@@ -9,6 +9,13 @@ import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { HttpRequestMethod } from '~/Type/Enum/HttpRequestMethod';
 
+/**
+ * Collection of different fetch helper methods.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @internal
+ */
 @Service()
 class FetchHelper {
   constructor(

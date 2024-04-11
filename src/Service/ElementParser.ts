@@ -4,6 +4,13 @@ import { Node } from '~/Type/Definition/Node';
 import { Relation } from '~/Type/Definition/Relation';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
+/**
+ * Class which helps to parse elements.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @internal
+ */
 @Service()
 class ElementParser {
   rawElementToNodeOrRelation(element: object): Node | Relation {

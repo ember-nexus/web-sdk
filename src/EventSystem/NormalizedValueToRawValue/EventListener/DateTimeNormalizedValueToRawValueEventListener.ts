@@ -6,6 +6,10 @@ import { EventListener } from '~/Type/Definition/EventListener';
 
 /**
  * Converts JavaScript date objects to the time representation Ember Nexus API can understand.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @internal
  */
 @Service()
 class DateTimeNormalizedValueToRawValueEventListener implements EventListener<NormalizedValueToRawValueEvent> {

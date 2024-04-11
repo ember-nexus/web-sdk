@@ -1,6 +1,9 @@
 import { Branded } from '~/Type/Definition/Branded';
 import { Uuid } from '~/Type/Definition/Uuid';
 
+/**
+ * Branded type primarily used for keys.
+ */
 type ParentsCollectionIdentifier = Branded<string, 'COLLECTION_IDENTIFIER'>;
 
 function createParentsCollectionIdentifier(

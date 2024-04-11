@@ -4,6 +4,9 @@ import { Service } from 'typedi';
 import { LoggerFactory } from '~/Factory/LoggerFactory';
 import { LoggerInterface } from '~/Type/Definition/LoggerInterface';
 
+/**
+ * Default logger.
+ */
 @Service({ factory: [LoggerFactory, 'create'] })
 class Logger implements LoggerInterface {
   private logger: TsLogger<ILogObj>;

@@ -5,6 +5,13 @@ import { RawValueToNormalizedValueEventManager } from '~/EventSystem/RawValueToN
 import { Logger } from '~/Service/Logger';
 import { Data } from '~/Type/Definition/Data';
 
+/**
+ * Class which helps to parse values.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @internal
+ */
 @Service()
 class RawValueToNormalizedValueHelper {
   constructor(

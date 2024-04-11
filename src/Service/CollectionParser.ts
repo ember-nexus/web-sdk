@@ -5,6 +5,13 @@ import { Collection } from '~/Type/Definition/Collection';
 import { Node } from '~/Type/Definition/Node';
 import { Relation } from '~/Type/Definition/Relation';
 
+/**
+ * Class which helps to parse collections.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @internal
+ */
 @Service()
 class CollectionParser {
   constructor(private elementParser: ElementParser) {}

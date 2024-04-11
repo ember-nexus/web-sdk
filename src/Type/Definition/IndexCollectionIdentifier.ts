@@ -1,5 +1,8 @@
 import { Branded } from '~/Type/Definition/Branded';
 
+/**
+ * Branded type primarily used for keys.
+ */
 type IndexCollectionIdentifier = Branded<string, 'COLLECTION_IDENTIFIER'>;
 
 function createIndexCollectionIdentifier(page: number, pageSize: number): IndexCollectionIdentifier {
