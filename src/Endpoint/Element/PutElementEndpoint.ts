@@ -10,7 +10,7 @@ import { Uuid } from '~/Type/Definition/Uuid';
 /**
  * The put element endpoint replaces a single element.
  *
- * **Warning**: This is an internal class. You should not use it directly.
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
  *
  * @see [Further documentation](https://ember-nexus.github.io/web-sdk/#/endpoints/element?id=putelementendpoint)
  * @see [Ember Nexus API: Replace Element Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/put-element)

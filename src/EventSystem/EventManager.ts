@@ -1,10 +1,10 @@
 import { EventListener } from '~/Type/Definition/EventListener';
 import { StoppableEvent } from '~/Type/Definition/StoppableEvent';
 
-class EventManager {
-  private eventListeners: [number, EventListener][] = [];
+class EventManager<EventType extends StoppableEvent> {
+  private eventListeners: [number, EventListener<EventType>][] = [];
 
-  registerEventListener(eventListener: EventListener, priority: number = 0): void {
+  registerEventListener(eventListener: EventListener<EventType>, priority: number = 0): void {
     if (this.eventListeners.length == 0) {
       this.eventListeners.push([priority, eventListener]);
       return;
@@ -22,7 +22,7 @@ class EventManager {
     }
   }
 
-  handleEvent(event: StoppableEvent): void {
+  handleEvent(event: EventType): void {
     if (event.isPropagationStopped()) {
       return;
     }

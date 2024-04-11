@@ -12,7 +12,7 @@ import { Uuid } from '~/Type/Definition/Uuid';
 /**
  * The get element endpoint retrieves a single element.
  *
- * **Warning**: This is an internal class. You should not use it directly.
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
  *
  * @see [Further documentation](https://ember-nexus.github.io/web-sdk/#/endpoints/element?id=getelementendpoint)
  * @see [Ember Nexus API: Get Element Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/get-element)

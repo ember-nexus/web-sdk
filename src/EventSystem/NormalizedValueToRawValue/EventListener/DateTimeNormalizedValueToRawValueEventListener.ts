@@ -4,8 +4,11 @@ import { Service } from 'typedi';
 import { NormalizedValueToRawValueEvent } from '~/EventSystem/NormalizedValueToRawValue/Event/NormalizedValueToRawValueEvent';
 import { EventListener } from '~/Type/Definition/EventListener';
 
+/**
+ * Converts JavaScript date objects to the time representation Ember Nexus API can understand.
+ */
 @Service()
-class DateTimeNormalizedValueToRawValueEventListener implements EventListener {
+class DateTimeNormalizedValueToRawValueEventListener implements EventListener<NormalizedValueToRawValueEvent> {
   triggerOnEvent(event: NormalizedValueToRawValueEvent): void {
     const normalizedValue = event.getNormalizedValue();
     if (!(normalizedValue instanceof Date)) {

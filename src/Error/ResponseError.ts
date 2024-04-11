@@ -1,5 +1,8 @@
 import { EmberNexusError } from '~/Error/EmberNexusError';
 
+/**
+ * Base class for errors returned by the API.
+ */
 class ResponseError extends EmberNexusError {
   private _type: string | null = null;
   private _title: string | null = null;

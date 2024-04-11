@@ -16,7 +16,7 @@ import { Uuid } from '~/Type/Definition/Uuid';
  * The child nodes are paginated. Within each page, all relations between the parent node and the child nodes contained
  * on the page are returned.
  *
- * **Warning**: This is an internal class. You should not use it directly.
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
  *
  * @internal
  */

@@ -9,7 +9,7 @@ import { Uuid } from '~/Type/Definition/Uuid';
 /**
  * The delete element endpoint deletes a single element.
  *
- * **Warning**: This is an internal class. You should not use it directly.
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
  *
  * @see [Further documentation](https://ember-nexus.github.io/web-sdk/#/endpoints/element?id=deleteelementendpoint)
  * @see [Ember Nexus API: Delete Element Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/delete-element)

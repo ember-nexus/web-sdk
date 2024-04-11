@@ -1,5 +1,8 @@
 import { EmberNexusError } from '~/Error/EmberNexusError';
 
+/**
+ * Parse error class.
+ */
 class ParseError extends EmberNexusError {
   constructor(message) {
     super(message);

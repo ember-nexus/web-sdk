@@ -45,7 +45,7 @@ describe('DateTimeRawValueToNormalizedValueEventListener tests', () => {
     dateTimeRawValueToNormalizedValueEventListener.triggerOnEvent(rawValueToNormalizedValueEvent);
 
     expect(rawValueToNormalizedValueEvent.isPropagationStopped()).to.be.false;
-    expect(rawValueToNormalizedValueEvent.getNormalizedValue()).to.be.undefined;
+    expect(rawValueToNormalizedValueEvent.getNormalizedValue()).to.be.null;
   });
 
   it('should not denormalize a number', async () => {
@@ -59,7 +59,7 @@ describe('DateTimeRawValueToNormalizedValueEventListener tests', () => {
     dateTimeRawValueToNormalizedValueEventListener.triggerOnEvent(rawValueToNormalizedValueEvent);
 
     expect(rawValueToNormalizedValueEvent.isPropagationStopped()).to.be.false;
-    expect(rawValueToNormalizedValueEvent.getNormalizedValue()).to.be.undefined;
+    expect(rawValueToNormalizedValueEvent.getNormalizedValue()).to.be.null;
   });
 
   it('should not denormalize a boolean', async () => {
@@ -73,7 +73,7 @@ describe('DateTimeRawValueToNormalizedValueEventListener tests', () => {
     dateTimeRawValueToNormalizedValueEventListener.triggerOnEvent(rawValueToNormalizedValueEvent);
 
     expect(rawValueToNormalizedValueEvent.isPropagationStopped()).to.be.false;
-    expect(rawValueToNormalizedValueEvent.getNormalizedValue()).to.be.undefined;
+    expect(rawValueToNormalizedValueEvent.getNormalizedValue()).to.be.null;
   });
 
   it('should not denormalize null', async () => {
@@ -87,7 +87,7 @@ describe('DateTimeRawValueToNormalizedValueEventListener tests', () => {
     dateTimeRawValueToNormalizedValueEventListener.triggerOnEvent(rawValueToNormalizedValueEvent);
 
     expect(rawValueToNormalizedValueEvent.isPropagationStopped()).to.be.false;
-    expect(rawValueToNormalizedValueEvent.getNormalizedValue()).to.be.undefined;
+    expect(rawValueToNormalizedValueEvent.getNormalizedValue()).to.be.null;
   });
 
   it('should not denormalize an array', async () => {
@@ -101,7 +101,7 @@ describe('DateTimeRawValueToNormalizedValueEventListener tests', () => {
     dateTimeRawValueToNormalizedValueEventListener.triggerOnEvent(rawValueToNormalizedValueEvent);
 
     expect(rawValueToNormalizedValueEvent.isPropagationStopped()).to.be.false;
-    expect(rawValueToNormalizedValueEvent.getNormalizedValue()).to.be.undefined;
+    expect(rawValueToNormalizedValueEvent.getNormalizedValue()).to.be.null;
   });
 
   it('should not denormalize an object', async () => {
@@ -115,6 +115,6 @@ describe('DateTimeRawValueToNormalizedValueEventListener tests', () => {
     dateTimeRawValueToNormalizedValueEventListener.triggerOnEvent(rawValueToNormalizedValueEvent);
 
     expect(rawValueToNormalizedValueEvent.isPropagationStopped()).to.be.false;
-    expect(rawValueToNormalizedValueEvent.getNormalizedValue()).to.be.undefined;
+    expect(rawValueToNormalizedValueEvent.getNormalizedValue()).to.be.null;
   });
 });
