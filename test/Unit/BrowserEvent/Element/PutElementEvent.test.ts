@@ -4,6 +4,10 @@ import { PutElementEvent } from '~/BrowserEvent/Element/PutElementEvent';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
 describe('PutElementEvent tests', () => {
+  test('PutElementEvent returns correct type', () => {
+    expect(PutElementEvent.type).to.equal('ember-nexus-put-element');
+  });
+
   it('should set attributes to null if not explicitly defined', async () => {
     const elementUuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc94');
     const postElementEvent = new PutElementEvent(elementUuid);

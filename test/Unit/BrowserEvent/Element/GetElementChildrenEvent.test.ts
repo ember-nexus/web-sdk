@@ -5,6 +5,10 @@ import { Collection } from '~/Type/Definition/Collection';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
 describe('GetElementChildrenEvent tests', () => {
+  test('GetElementChildrenEvent returns correct type', () => {
+    expect(GetElementChildrenEvent.type).to.equal('ember-nexus-get-element-children');
+  });
+
   it('should return null when no element was set', async () => {
     const uuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc94');
     const getElementChildrenEvent = new GetElementChildrenEvent(uuid);

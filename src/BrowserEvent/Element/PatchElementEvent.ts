@@ -10,8 +10,9 @@ type PatchElementEventDetails = {
 };
 
 class PatchElementEvent extends CustomEvent<PatchElementEventDetails> {
+  public static type = EventIdentifier.PatchElement;
   constructor(elementId: Uuid, data: Data = {}) {
-    super(EventIdentifier.PatchElement, {
+    super(PatchElementEvent.type, {
       ...customEventDefaultInit,
       detail: {
         elementId: elementId,

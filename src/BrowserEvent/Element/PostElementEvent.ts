@@ -1,25 +1,23 @@
-import { Data } from '~/Type/Definition/Data';
+import { NodeWithOptionalId } from '~/Type/Definition/NodeWithOptionalId';
+import { RelationWithOptionalId } from '~/Type/Definition/RelationWithOptionalId';
 import { Uuid } from '~/Type/Definition/Uuid';
 import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type PostElementEventDetails = {
   parentId: Uuid;
-  type: string;
-  elementId: Uuid | null;
-  data: Data;
+  element: NodeWithOptionalId | RelationWithOptionalId;
   result: Promise<Uuid> | null;
 };
 
 class PostElementEvent extends CustomEvent<PostElementEventDetails> {
-  constructor(parentId: Uuid, type: string, elementId: Uuid | null = null, data: Data = {}) {
-    super(EventIdentifier.PostElement, {
+  public static type = EventIdentifier.PostElement;
+  constructor(parentId: Uuid, element: NodeWithOptionalId | RelationWithOptionalId) {
+    super(PostElementEvent.type, {
       ...customEventDefaultInit,
       detail: {
         parentId: parentId,
-        type: type,
-        elementId: elementId,
-        data: data,
+        element: element,
         result: null,
       },
     });
@@ -29,16 +27,8 @@ class PostElementEvent extends CustomEvent<PostElementEventDetails> {
     return this.detail.parentId;
   }
 
-  getType(): string {
-    return this.detail.type;
-  }
-
-  getElementId(): Uuid | null {
-    return this.detail.elementId;
-  }
-
-  getData(): Data {
-    return this.detail.data;
+  getElement(): NodeWithOptionalId | RelationWithOptionalId {
+    return this.detail.element;
   }
 
   getResult(): Promise<Uuid> | null {

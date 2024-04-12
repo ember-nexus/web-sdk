@@ -3,6 +3,7 @@ import 'reflect-metadata';
 import { LRUCache } from 'lru-cache';
 import { Container } from 'typedi';
 
+import { BrowserEventHandler } from '~/BrowserEvent/BrowserEventHandler';
 import { DeleteElementEndpoint } from '~/Endpoint/Element/DeleteElementEndpoint';
 import { GetElementChildrenEndpoint } from '~/Endpoint/Element/GetElementChildrenEndpoint';
 import { GetElementEndpoint } from '~/Endpoint/Element/GetElementEndpoint';
@@ -404,4 +405,4 @@ class EmberNexus {
   }
 }
 
-export { EmberNexus, Container, WebSdkConfiguration, Logger };
+export { EmberNexus, Container, WebSdkConfiguration, Logger, BrowserEventHandler };

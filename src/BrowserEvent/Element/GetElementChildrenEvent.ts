@@ -5,15 +5,20 @@ import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type GetElementChildrenEventDetails = {
   parentId: Uuid;
+  page: number;
+  pageSize: number | null;
   children: Promise<Collection> | null;
 };
 
 class GetElementChildrenEvent extends CustomEvent<GetElementChildrenEventDetails> {
-  constructor(parentId: Uuid) {
-    super(EventIdentifier.GetElementChildren, {
+  public static type = EventIdentifier.GetElementChildren;
+  constructor(parentId: Uuid, page = 1, pageSize: number | null = null) {
+    super(GetElementChildrenEvent.type, {
       ...customEventDefaultInit,
       detail: {
         parentId: parentId,
+        page: page,
+        pageSize: pageSize,
         children: null,
       },
     });
@@ -21,6 +26,14 @@ class GetElementChildrenEvent extends CustomEvent<GetElementChildrenEventDetails
 
   getParentId(): Uuid {
     return this.detail.parentId;
+  }
+
+  getPage(): number {
+    return this.detail.page;
+  }
+
+  getPageSize(): number | null {
+    return this.detail.pageSize;
   }
 
   getChildren(): Promise<Collection> | null {

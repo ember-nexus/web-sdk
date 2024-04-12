@@ -10,8 +10,9 @@ type PutElementEventDetails = {
 };
 
 class PutElementEvent extends CustomEvent<PutElementEventDetails> {
+  public static type = EventIdentifier.PutElement;
   constructor(elementId: Uuid, data: Data = {}) {
-    super(EventIdentifier.PutElement, {
+    super(PutElementEvent.type, {
       ...customEventDefaultInit,
       detail: {
         elementId: elementId,

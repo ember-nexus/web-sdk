@@ -15,13 +15,15 @@ type DeleteElementEventDetails = {
  * @see [Web SDK: Delete element event](https://ember-nexus.github.io/web-sdk/#/browser-events/element/delete-element)
  */
 class DeleteElementEvent extends CustomEvent<DeleteElementEventDetails> {
+  public static type = EventIdentifier.DeleteElement;
+
   /**
    * Creates a new DeleteElementEvent.
    *
    * @param elementId The Uuid of the element which should be deleted.
    */
   constructor(elementId: Uuid) {
-    super(EventIdentifier.DeleteElement, {
+    super(DeleteElementEvent.type, {
       ...customEventDefaultInit,
       detail: {
         elementId: elementId,

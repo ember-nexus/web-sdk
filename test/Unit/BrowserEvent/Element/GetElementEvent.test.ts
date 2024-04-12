@@ -6,6 +6,10 @@ import type { Relation } from '~/Type/Definition/Relation';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
 describe('GetElementEvent tests', () => {
+  test('GetElementEvent returns correct type', () => {
+    expect(GetElementEvent.type).to.equal('ember-nexus-get-element');
+  });
+
   it('should return null when no element was set', async () => {
     const uuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc94');
     const getElementEvent = new GetElementEvent(uuid);

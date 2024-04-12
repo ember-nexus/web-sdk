@@ -17,6 +17,8 @@ type GetElementEventDetails = {
  * @see [Web SDK: Get element event](https://ember-nexus.github.io/web-sdk/#/browser-events/element/get-element)
  */
 class GetElementEvent extends CustomEvent<GetElementEventDetails> {
+  public static type = EventIdentifier.GetElement;
+
   /**
    *
    * Creates a new GetElementEvent.
@@ -24,7 +26,7 @@ class GetElementEvent extends CustomEvent<GetElementEventDetails> {
    * @param elementId The Uuid of the element which should be returned.
    */
   constructor(elementId: Uuid) {
-    super(EventIdentifier.GetElement, {
+    super(GetElementEvent.type, {
       ...customEventDefaultInit,
       detail: {
         elementId: elementId,

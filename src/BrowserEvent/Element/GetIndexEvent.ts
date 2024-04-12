@@ -3,17 +3,30 @@ import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type GetIndexEventDetails = {
+  page: number;
+  pageSize: number | null;
   indexElements: Promise<Collection> | null;
 };
 
 class GetIndexEvent extends CustomEvent<GetIndexEventDetails> {
-  constructor() {
-    super(EventIdentifier.GetIndex, {
+  public static type = EventIdentifier.GetIndex;
+  constructor(page = 1, pageSize: number | null = null) {
+    super(GetIndexEvent.type, {
       ...customEventDefaultInit,
       detail: {
+        page: page,
+        pageSize: pageSize,
         indexElements: null,
       },
     });
+  }
+
+  getPage(): number {
+    return this.detail.page;
+  }
+
+  getPageSize(): number | null {
+    return this.detail.pageSize;
   }
 
   getIndexElements(): Promise<Collection> | null {

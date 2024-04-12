@@ -4,6 +4,10 @@ import { PatchElementEvent } from '~/BrowserEvent/Element/PatchElementEvent';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
 describe('PatchElementEvent tests', () => {
+  test('PatchElementEvent returns correct type', () => {
+    expect(PatchElementEvent.type).to.equal('ember-nexus-patch-element');
+  });
+
   it('should set attributes to null if not explicitly defined', async () => {
     const elementUuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc94');
     const postElementEvent = new PatchElementEvent(elementUuid);
