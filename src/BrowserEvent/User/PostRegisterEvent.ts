@@ -1,24 +1,32 @@
 import { Data } from '~/Type/Definition/Data';
+import { UniqueUserIdentifier } from '~/Type/Definition/UniqueUserIdentifier';
 import { Uuid } from '~/Type/Definition/Uuid';
 import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type PostRegisterEventDetails = {
+  uniqueUserIdentifier: UniqueUserIdentifier;
   password: string;
   data: Data;
   result: Promise<Uuid> | null;
 };
 
 class PostRegisterEvent extends CustomEvent<PostRegisterEventDetails> {
-  constructor(password: string, data: Data = {}) {
-    super(EventIdentifier.PostRegister, {
+  public static type = EventIdentifier.PostRegister;
+  constructor(uniqueUserIdentifier: UniqueUserIdentifier, password: string, data: Data = {}) {
+    super(PostRegisterEvent.type, {
       ...customEventDefaultInit,
       detail: {
+        uniqueUserIdentifier: uniqueUserIdentifier,
         password: password,
         data: data,
         result: null,
       },
     });
+  }
+
+  getUniqueUserIdentifier(): UniqueUserIdentifier {
+    return this.detail.uniqueUserIdentifier;
   }
 
   getPassword(): string {

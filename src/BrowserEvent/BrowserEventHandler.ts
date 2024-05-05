@@ -54,8 +54,8 @@ class BrowserEventHandler {
   /**
    * Adds new event subscriptions to the given DOM node.
    *
-   * Only one DOM node can hold event subscriptions at the same time, therefore this class will remove old subscriptions
-   * from other nodes automatically.
+   * Only one DOM node can hold event subscriptions at the same time, therefore this method will remove old
+   * subscriptions from other nodes automatically.
    *
    * @param node The DOM node which should receive the event listeners.
    */

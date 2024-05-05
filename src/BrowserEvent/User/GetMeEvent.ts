@@ -7,8 +7,9 @@ type GetMeEventDetails = {
 };
 
 class GetMeEvent extends CustomEvent<GetMeEventDetails> {
+  public static type = EventIdentifier.GetMe;
   constructor() {
-    super(EventIdentifier.GetMe, {
+    super(GetMeEvent.type, {
       ...customEventDefaultInit,
       detail: {
         me: null,
