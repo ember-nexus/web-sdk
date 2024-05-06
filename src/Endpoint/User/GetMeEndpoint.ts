@@ -55,9 +55,9 @@ class GetMeEndpoint {
       })
       .then<Node>((jsonResponse) => {
         const element = this.elementParser.rawElementToNodeOrRelation(jsonResponse);
-        if (!(element instanceof Node)) {
-          return Promise.reject(new LogicError('Expected node response from GET /me, got relation.'));
-        }
+        // if (!(element instanceof Node)) {
+        //   return Promise.reject(new LogicError('Expected node response from GET /me, got relation.'));
+        // }
         if (element.type !== 'User') {
           return Promise.reject(new LogicError("Expected node to be of type 'User'."));
         }
