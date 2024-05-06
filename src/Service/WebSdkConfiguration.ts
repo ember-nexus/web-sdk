@@ -2,6 +2,9 @@ import { Service } from 'typedi';
 
 import { Token } from '~/Type/Definition/Token';
 
+/**
+ * Configuration handler.
+ */
 @Service()
 class WebSdkConfiguration {
   private token: Token | null;

@@ -6,6 +6,16 @@ import { FetchHelper } from '~/Service/FetchHelper';
 import { Logger } from '~/Service/Logger';
 import { Uuid } from '~/Type/Definition/Uuid';
 
+/**
+ * The delete element endpoint deletes a single element.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @see [Further documentation](https://ember-nexus.github.io/web-sdk/#/endpoints/element?id=deleteelementendpoint)
+ * @see [Ember Nexus API: Delete Element Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/delete-element)
+ *
+ * @internal
+ */
 @Service()
 class DeleteElementEndpoint {
   constructor(
@@ -13,8 +23,8 @@ class DeleteElementEndpoint {
     private fetchHelper: FetchHelper,
   ) {}
 
-  async deleteElement(uuid: Uuid): Promise<void> {
-    const url = this.fetchHelper.buildUrl(`/${uuid}`);
+  async deleteElement(elementId: Uuid): Promise<void> {
+    const url = this.fetchHelper.buildUrl(`/${elementId}`);
     this.logger.debug(`Executing HTTP DELETE request against url ${url} .`);
     return fetch(url, this.fetchHelper.getDefaultDeleteOptions())
       .catch((networkError) => {

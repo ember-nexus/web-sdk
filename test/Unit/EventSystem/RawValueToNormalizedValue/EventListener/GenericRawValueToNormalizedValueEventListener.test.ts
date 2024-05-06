@@ -68,7 +68,7 @@ describe('GenericRawValueToNormalizedValueEventListener tests', () => {
     genericRawValueToNormalizedValueEventListener.triggerOnEvent(rawValueToNormalizedValueEvent);
 
     expect(rawValueToNormalizedValueEvent.isPropagationStopped()).to.be.true;
-    expect(rawValueToNormalizedValueEvent.getNormalizedValue()).to.equal(null);
+    expect(rawValueToNormalizedValueEvent.getNormalizedValue()).to.be.null;
   });
 
   it('should normalize an array', async () => {
@@ -96,6 +96,6 @@ describe('GenericRawValueToNormalizedValueEventListener tests', () => {
     genericRawValueToNormalizedValueEventListener.triggerOnEvent(rawValueToNormalizedValueEvent);
 
     expect(rawValueToNormalizedValueEvent.isPropagationStopped()).to.be.false;
-    expect(rawValueToNormalizedValueEvent.getNormalizedValue()).to.be.undefined;
+    expect(rawValueToNormalizedValueEvent.getNormalizedValue()).to.be.null;
   });
 });

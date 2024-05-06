@@ -1,5 +1,8 @@
 import { Branded } from '~/Type/Definition/Branded';
 
+/**
+ * Type safe variant of string containing single token.
+ */
 type Token = Branded<string, 'Token'>;
 
 const tokenRegex = /^secret-token:.+$/;

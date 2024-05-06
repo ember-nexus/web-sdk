@@ -1,25 +1,30 @@
-import { Data } from '~/Type/Definition/Data';
+import { UniqueUserIdentifier } from '~/Type/Definition/UniqueUserIdentifier';
 import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type PostChangePasswordEventDetails = {
+  uniqueUserIdentifier: UniqueUserIdentifier;
   currentPassword: string;
   newPassword: string;
-  data: Data;
   result: Promise<void> | null;
 };
 
 class PostChangePasswordEvent extends CustomEvent<PostChangePasswordEventDetails> {
-  constructor(currentPassword: string, newPassword: string, data: Data = {}) {
-    super(EventIdentifier.PostChangePassword, {
+  public static type = EventIdentifier.PostChangePassword;
+  constructor(uniqueUserIdentifier: UniqueUserIdentifier, currentPassword: string, newPassword: string) {
+    super(PostChangePasswordEvent.type, {
       ...customEventDefaultInit,
       detail: {
+        uniqueUserIdentifier: uniqueUserIdentifier,
         currentPassword: currentPassword,
         newPassword: newPassword,
-        data: data,
         result: null,
       },
     });
+  }
+
+  getUniqueUserIdentifier(): UniqueUserIdentifier {
+    return this.detail.uniqueUserIdentifier;
   }
 
   getCurrentPassword(): string {
@@ -28,10 +33,6 @@ class PostChangePasswordEvent extends CustomEvent<PostChangePasswordEventDetails
 
   getNewPassword(): string {
     return this.detail.newPassword;
-  }
-
-  getData(): Data {
-    return this.detail.data;
   }
 
   getResult(): Promise<void> | null {

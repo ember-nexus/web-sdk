@@ -4,23 +4,36 @@ import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type GetElementParentsEventDetails = {
-  uuid: Uuid;
+  childId: Uuid;
+  page: number;
+  pageSize: number | null;
   parents: Promise<Collection> | null;
 };
 
 class GetElementParentsEvent extends CustomEvent<GetElementParentsEventDetails> {
-  constructor(uuid: Uuid) {
-    super(EventIdentifier.GetElementParents, {
+  public static type = EventIdentifier.GetElementParents;
+  constructor(childId: Uuid, page = 1, pageSize: number | null = null) {
+    super(GetElementParentsEvent.type, {
       ...customEventDefaultInit,
       detail: {
-        uuid: uuid,
+        childId: childId,
+        page: page,
+        pageSize: pageSize,
         parents: null,
       },
     });
   }
 
-  getUuid(): Uuid {
-    return this.detail.uuid;
+  getChildId(): Uuid {
+    return this.detail.childId;
+  }
+
+  getPage(): number {
+    return this.detail.page;
+  }
+
+  getPageSize(): number | null {
+    return this.detail.pageSize;
   }
 
   getParents(): Promise<Collection> | null {

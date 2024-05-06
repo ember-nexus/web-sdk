@@ -7,6 +7,16 @@ import { Logger } from '~/Service/Logger';
 import { NodeWithOptionalId } from '~/Type/Definition/NodeWithOptionalId';
 import { Uuid, validateUuidFromString } from '~/Type/Definition/Uuid';
 
+/**
+ * The post element endpoint creates a single child node.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @see [Further documentation](https://ember-nexus.github.io/web-sdk/#/endpoints/element?id=postelementendpoint)
+ * @see [Ember Nexus API: Create Element Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/post-element)
+ *
+ * @internal
+ */
 @Service()
 class PostElementEndpoint {
   constructor(
@@ -14,10 +24,10 @@ class PostElementEndpoint {
     private fetchHelper: FetchHelper,
   ) {}
 
-  async postElement(parentUuid: Uuid, element: NodeWithOptionalId): Promise<Uuid> {
+  async postElement(parentId: Uuid, element: NodeWithOptionalId): Promise<Uuid> {
     return Promise.resolve()
       .then(() => {
-        const url = this.fetchHelper.buildUrl(`/${parentUuid}`);
+        const url = this.fetchHelper.buildUrl(`/${parentId}`);
         this.logger.debug(`Executing HTTP POST request against url ${url} .`);
         return fetch(url, this.fetchHelper.getDefaultPostOptions(JSON.stringify(element)));
       })

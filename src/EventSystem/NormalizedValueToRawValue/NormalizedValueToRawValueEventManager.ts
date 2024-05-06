@@ -1,11 +1,15 @@
 import { Service } from 'typedi';
 
 import { EventManager } from '~/EventSystem/EventManager';
+import { NormalizedValueToRawValueEvent } from '~/EventSystem/NormalizedValueToRawValue/Event/NormalizedValueToRawValueEvent';
 import { DateTimeNormalizedValueToRawValueEventListener } from '~/EventSystem/NormalizedValueToRawValue/EventListener/DateTimeNormalizedValueToRawValueEventListener';
 import { GenericNormalizedValueToRawValueEventListener } from '~/EventSystem/NormalizedValueToRawValue/EventListener/GenericNormalizedValueToRawValueEventListener';
 
+/**
+ * Event manager for NormalizedValueToRawValueEvent.
+ */
 @Service()
-class NormalizedValueToRawValueEventManager extends EventManager {
+class NormalizedValueToRawValueEventManager extends EventManager<NormalizedValueToRawValueEvent> {
   constructor(
     dateTimeNormalizedValueToRawValueEventListener: DateTimeNormalizedValueToRawValueEventListener,
     genericNormalizedValueToRawValueEventListener: GenericNormalizedValueToRawValueEventListener,

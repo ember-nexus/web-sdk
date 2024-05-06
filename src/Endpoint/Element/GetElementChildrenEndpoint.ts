@@ -10,6 +10,16 @@ import { Logger } from '~/Service/Logger';
 import { Collection } from '~/Type/Definition/Collection';
 import { Uuid } from '~/Type/Definition/Uuid';
 
+/**
+ * The get element children endpoint retrieves all child nodes of a single parent node.
+ *
+ * The child nodes are paginated. Within each page, all relations between the parent node and the child nodes contained
+ * on the page are returned.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @internal
+ */
 @Service()
 class GetElementChildrenEndpoint {
   constructor(
@@ -18,7 +28,7 @@ class GetElementChildrenEndpoint {
     private collectionParser: CollectionParser,
   ) {}
 
-  async getElementChildren(uuid: Uuid, page: number = 1, pageSize: number = 25): Promise<Collection> {
+  async getElementChildren(parentId: Uuid, page: number = 1, pageSize: number = 25): Promise<Collection> {
     return Promise.resolve()
       .then(() => {
         if (page < 1) {
@@ -27,7 +37,7 @@ class GetElementChildrenEndpoint {
         if (pageSize < 1) {
           return Promise.reject(new ValidationError('Page size must be at least 1.'));
         }
-        const url = this.fetchHelper.buildUrl(`/${uuid}/children?page=${page}&pageSize=${pageSize}`);
+        const url = this.fetchHelper.buildUrl(`/${parentId}/children?page=${page}&pageSize=${pageSize}`);
         this.logger.debug(`Executing HTTP GET request against url ${url} .`);
         return fetch(url, this.fetchHelper.getDefaultGetOptions());
       })

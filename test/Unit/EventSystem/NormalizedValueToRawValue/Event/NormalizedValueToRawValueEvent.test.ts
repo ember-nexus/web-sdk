@@ -7,7 +7,7 @@ describe('NormalizedValueToRawValueEvent tests', () => {
     const normalizedValueToRawValueEvent = new NormalizedValueToRawValueEvent('test');
 
     expect(normalizedValueToRawValueEvent.getNormalizedValue()).to.equal('test');
-    expect(normalizedValueToRawValueEvent.getRawValue()).to.be.undefined;
+    expect(normalizedValueToRawValueEvent.getRawValue()).to.be.null;
     expect(normalizedValueToRawValueEvent.isPropagationStopped()).to.be.false;
   });
 
@@ -24,7 +24,7 @@ describe('NormalizedValueToRawValueEvent tests', () => {
   it("should be able to set the event's raw value", async () => {
     const normalizedValueToRawValueEvent = new NormalizedValueToRawValueEvent('test');
 
-    expect(normalizedValueToRawValueEvent.getRawValue()).to.be.undefined;
+    expect(normalizedValueToRawValueEvent.getRawValue()).to.be.null;
 
     normalizedValueToRawValueEvent.setRawValue('test');
     expect(normalizedValueToRawValueEvent.getRawValue()).to.equal('test');

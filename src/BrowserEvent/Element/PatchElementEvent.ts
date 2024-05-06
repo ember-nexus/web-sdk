@@ -4,25 +4,26 @@ import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type PatchElementEventDetails = {
-  id: Uuid;
+  elementId: Uuid;
   data: Data;
   result: Promise<void> | null;
 };
 
 class PatchElementEvent extends CustomEvent<PatchElementEventDetails> {
-  constructor(id: Uuid, data: Data = {}) {
-    super(EventIdentifier.PatchElement, {
+  public static type = EventIdentifier.PatchElement;
+  constructor(elementId: Uuid, data: Data = {}) {
+    super(PatchElementEvent.type, {
       ...customEventDefaultInit,
       detail: {
-        id: id,
+        elementId: elementId,
         data: data,
         result: null,
       },
     });
   }
 
-  getId(): Uuid {
-    return this.detail.id;
+  getElementId(): Uuid {
+    return this.detail.elementId;
   }
 
   getData(): Data {

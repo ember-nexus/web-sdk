@@ -5,7 +5,7 @@
 
 > [!NOTE]
 > The <span class="method-get">GetElementRelatedEvent</span> internally calls the
-> <span class="method-get">GetElementRelatedEndpoint</span>, which in turn executes a fetch request against the
+> <span class="method-get">GetElementRelatedEndpoint</span>, which in turn executes a fetch request against
 > <a href="https://ember-nexus.github.io/api/#/api-endpoints/element/get-related">Ember Nexus API's get element related endpoint</a>.
 > See their respective documentation for details on failure cases etc.
 

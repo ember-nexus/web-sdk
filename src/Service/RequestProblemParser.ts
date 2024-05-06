@@ -3,6 +3,13 @@ import { Service } from 'typedi';
 import { RequestProblem } from '~/Type/Definition/RequestProblem';
 import { RequestProblemCategory } from '~/Type/Enum/RequestProblemCategory';
 
+/**
+ * Class which helps to parse problem responses.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @internal
+ */
 @Service()
 class RequestProblemParser {
   rawRequestProblemToRequestProblem(problem: object): RequestProblem {

@@ -1,21 +1,23 @@
 import { Data } from '~/Type/Definition/Data';
 import { Token } from '~/Type/Definition/Token';
+import { UniqueUserIdentifier } from '~/Type/Definition/UniqueUserIdentifier';
 import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type PostTokenEventDetails = {
-  user: string;
+  uniqueUserIdentifier: UniqueUserIdentifier;
   password: string;
   data: Data;
   result: Promise<Token> | null;
 };
 
 class PostTokenEvent extends CustomEvent<PostTokenEventDetails> {
-  constructor(user: string, password: string, data: Data = {}) {
-    super(EventIdentifier.PostToken, {
+  public static type = EventIdentifier.PostToken;
+  constructor(uniqueUserIdentifier: UniqueUserIdentifier, password: string, data: Data = {}) {
+    super(PostTokenEvent.type, {
       ...customEventDefaultInit,
       detail: {
-        user: user,
+        uniqueUserIdentifier: uniqueUserIdentifier,
         password: password,
         data: data,
         result: null,
@@ -23,8 +25,8 @@ class PostTokenEvent extends CustomEvent<PostTokenEventDetails> {
     });
   }
 
-  getUser(): string {
-    return this.detail.user;
+  getUniqueUserIdentifier(): UniqueUserIdentifier {
+    return this.detail.uniqueUserIdentifier;
   }
 
   getPassword(): string {

@@ -10,6 +10,19 @@ import { Logger } from '~/Service/Logger';
 import { Collection } from '~/Type/Definition/Collection';
 import { Uuid } from '~/Type/Definition/Uuid';
 
+/**
+ * The get element related endpoint retrieves all related nodes of a single center node.
+ *
+ * The related nodes are paginated. Within each page, all relations between the center node and the related nodes
+ * contained on the page are returned.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @see [Further documentation](https://ember-nexus.github.io/web-sdk/#/endpoints/element?id=getelementrelatedendpoint)
+ * @see [Ember Nexus API: Get Element Related Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/get-related)
+ *
+ * @internal
+ */
 @Service()
 class GetElementRelatedEndpoint {
   constructor(
@@ -18,7 +31,7 @@ class GetElementRelatedEndpoint {
     private collectionParser: CollectionParser,
   ) {}
 
-  async getElementRelated(uuid: Uuid, page: number = 1, pageSize: number = 25): Promise<Collection> {
+  async getElementRelated(centerId: Uuid, page: number = 1, pageSize: number = 25): Promise<Collection> {
     return Promise.resolve()
       .then(() => {
         if (page < 1) {
@@ -27,7 +40,7 @@ class GetElementRelatedEndpoint {
         if (pageSize < 1) {
           return Promise.reject(new ValidationError('Page size must be at least 1.'));
         }
-        const url = this.fetchHelper.buildUrl(`/${uuid}/related?page=${page}&pageSize=${pageSize}`);
+        const url = this.fetchHelper.buildUrl(`/${centerId}/related?page=${page}&pageSize=${pageSize}`);
         this.logger.debug(`Executing HTTP GET request against url ${url} .`);
         return fetch(url, this.fetchHelper.getDefaultGetOptions());
       })

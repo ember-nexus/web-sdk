@@ -7,6 +7,16 @@ import { Logger } from '~/Service/Logger';
 import { Data } from '~/Type/Definition/Data';
 import { Uuid } from '~/Type/Definition/Uuid';
 
+/**
+ * The put element endpoint replaces a single element.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @see [Further documentation](https://ember-nexus.github.io/web-sdk/#/endpoints/element?id=putelementendpoint)
+ * @see [Ember Nexus API: Replace Element Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/put-element)
+ *
+ * @internal
+ */
 @Service()
 class PutElementEndpoint {
   constructor(
@@ -14,13 +24,13 @@ class PutElementEndpoint {
     private fetchHelper: FetchHelper,
   ) {}
 
-  async putElement(uuid: Uuid, data: Data): Promise<void> {
+  async putElement(elementId: Uuid, data: Data): Promise<void> {
     return Promise.resolve()
       .then(() => {
         this.logger.warn(
           'The endpoint put element will be changed in the next major version, expect changed interfaces.',
         );
-        const url = this.fetchHelper.buildUrl(`/${uuid}`);
+        const url = this.fetchHelper.buildUrl(`/${elementId}`);
         this.logger.debug(`Executing HTTP PUT request against url ${url} .`);
         return fetch(url, this.fetchHelper.getDefaultPutOptions(JSON.stringify(data)));
       })

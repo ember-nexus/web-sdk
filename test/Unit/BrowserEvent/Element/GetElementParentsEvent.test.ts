@@ -5,11 +5,15 @@ import { Collection } from '~/Type/Definition/Collection';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
 
 describe('GetElementParentsEvent tests', () => {
+  test('GetElementParentsEvent returns correct type', () => {
+    expect(GetElementParentsEvent.type).to.equal('ember-nexus-get-element-parents');
+  });
+
   it('should return null when no element was set', async () => {
     const uuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc94');
     const getElementParentsEvent = new GetElementParentsEvent(uuid);
 
-    expect(getElementParentsEvent.getUuid()).to.equal(uuid);
+    expect(getElementParentsEvent.getChildId()).to.equal(uuid);
     expect(getElementParentsEvent.getParents()).to.be.null;
   });
 
@@ -36,7 +40,7 @@ describe('GetElementParentsEvent tests', () => {
 
     getElementParentsEvent.setParents(promise);
 
-    expect(getElementParentsEvent.getUuid()).to.equal(uuid);
+    expect(getElementParentsEvent.getChildId()).to.equal(uuid);
     expect(getElementParentsEvent.getParents()).to.equal(promise);
   });
 });

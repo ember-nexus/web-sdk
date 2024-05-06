@@ -32,7 +32,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: ['20', '21']
+        node-version: ['20', '21', '22']
     steps:
       - uses: actions/setup-node@v4
         with:
@@ -59,7 +59,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: ['20', '21']
+        node-version: ['20', '21', '22']
     steps:
       - uses: actions/setup-node@v4
         with:
@@ -86,7 +86,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: ['20', '21']
+        node-version: ['20', '21', '22']
     steps:
       - uses: actions/setup-node@v4
         with:

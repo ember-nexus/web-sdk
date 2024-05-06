@@ -3,8 +3,15 @@ import { Service } from 'typedi';
 import { RawValueToNormalizedValueEvent } from '~/EventSystem/RawValueToNormalizedValue/Event/RawValueToNormalizedValueEvent';
 import { EventListener } from '~/Type/Definition/EventListener';
 
+/**
+ * Skips conversion of primitive data types and sets them directly.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @internal
+ */
 @Service()
-class GenericRawValueToNormalizedValueEventListener implements EventListener {
+class GenericRawValueToNormalizedValueEventListener implements EventListener<RawValueToNormalizedValueEvent> {
   triggerOnEvent(event: RawValueToNormalizedValueEvent): void {
     const rawValue = event.getRawValue();
     if (

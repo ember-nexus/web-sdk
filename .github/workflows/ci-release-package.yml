@@ -13,13 +13,13 @@ jobs:
     steps:
       # Checkout project repository
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Import GPG
       # see also https://github.com/Nautilus-Cyberneering/pygithub
       - name: Import GPG key
         id: import-gpg
-        uses: crazy-max/ghaction-import-gpg@v4
+        uses: crazy-max/ghaction-import-gpg@v6
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
@@ -36,10 +36,10 @@ jobs:
 
       # Setup Node.js environment
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           registry-url: https://registry.npmjs.org/
-          node-version: '19'
+          node-version: '20'
 
       # Configure Git
       - name: Git configuration
@@ -69,7 +69,7 @@ jobs:
 
       # Update changelog unreleased section with new version
       - name: Update changelog
-        uses: superfaceai/release-changelog-action@v1
+        uses: superfaceai/release-changelog-action@v2
         with:
           path-to-changelog: CHANGELOG.md
           version: ${{ env.NEW_VERSION }}
@@ -87,7 +87,7 @@ jobs:
       - name: Build
         run: |
           yarn install --dev
-          yarn build:release
+          yarn build
 
       # Publish version to public repository
       - name: Publish
@@ -105,7 +105,7 @@ jobs:
       # Read version changelog
       - id: get-changelog
         name: Get version changelog
-        uses: superfaceai/release-changelog-action@v1
+        uses: superfaceai/release-changelog-action@v2
         with:
           path-to-changelog: CHANGELOG.md
           version: ${{ env.NEW_VERSION }}
@@ -113,7 +113,7 @@ jobs:
 
       # Update GitHub release with changelog
       - name: Update GitHub release documentation
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.NEW_VERSION }}
           body: ${{ steps.get-changelog.outputs.changelog }}

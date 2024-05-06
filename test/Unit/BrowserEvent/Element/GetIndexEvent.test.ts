@@ -4,6 +4,10 @@ import { GetIndexEvent } from '~/BrowserEvent/Element/GetIndexEvent';
 import { Collection } from '~/Type/Definition/Collection';
 
 describe('GetIndexEvent tests', () => {
+  test('GetIndexEvent returns correct type', () => {
+    expect(GetIndexEvent.type).to.equal('ember-nexus-get-index');
+  });
+
   it('should return null when no element was set', async () => {
     const getIndexEvent = new GetIndexEvent();
 

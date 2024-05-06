@@ -4,25 +4,26 @@ import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
 import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
 
 type PutElementEventDetails = {
-  id: Uuid;
+  elementId: Uuid;
   data: Data;
   result: Promise<void> | null;
 };
 
 class PutElementEvent extends CustomEvent<PutElementEventDetails> {
-  constructor(id: Uuid, data: Data = {}) {
-    super(EventIdentifier.PutElement, {
+  public static type = EventIdentifier.PutElement;
+  constructor(elementId: Uuid, data: Data = {}) {
+    super(PutElementEvent.type, {
       ...customEventDefaultInit,
       detail: {
-        id: id,
+        elementId: elementId,
         data: data,
         result: null,
       },
     });
   }
 
-  getId(): Uuid {
-    return this.detail.id;
+  getElementId(): Uuid {
+    return this.detail.elementId;
   }
 
   getData(): Data {

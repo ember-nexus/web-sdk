@@ -1,6 +1,9 @@
 import { ParseError } from '~/Error/ParseError';
 import { Branded } from '~/Type/Definition/Branded';
 
+/**
+ * Type safe variant of string containing single UUIDv4.
+ */
 type Uuid = Branded<string, 'UUID'>;
 
 const uuidv4Regex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;

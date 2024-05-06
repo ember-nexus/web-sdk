@@ -7,8 +7,9 @@ type GetTokenEventDetails = {
 };
 
 class GetTokenEvent extends CustomEvent<GetTokenEventDetails> {
+  public static type = EventIdentifier.GetToken;
   constructor() {
-    super(EventIdentifier.GetToken, {
+    super(GetTokenEvent.type, {
       ...customEventDefaultInit,
       detail: {
         token: null,

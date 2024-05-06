@@ -7,6 +7,16 @@ import { Logger } from '~/Service/Logger';
 import { Data } from '~/Type/Definition/Data';
 import { Uuid } from '~/Type/Definition/Uuid';
 
+/**
+ * The patch element endpoint updates a single element.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @see [Further documentation](https://ember-nexus.github.io/web-sdk/#/endpoints/element?id=patchelementendpoint)
+ * @see [Ember Nexus API: Update Element Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/patch-element)
+ *
+ * @internal
+ */
 @Service()
 class PatchElementEndpoint {
   constructor(
@@ -14,13 +24,13 @@ class PatchElementEndpoint {
     private fetchHelper: FetchHelper,
   ) {}
 
-  async patchElement(uuid: Uuid, data: Data): Promise<void> {
+  async patchElement(elementId: Uuid, data: Data): Promise<void> {
     return Promise.resolve()
       .then(() => {
         this.logger.warn(
           'The endpoint patch element will be changed in the next major version, expect changed interfaces.',
         );
-        const url = this.fetchHelper.buildUrl(`/${uuid}`);
+        const url = this.fetchHelper.buildUrl(`/${elementId}`);
         this.logger.debug(`Executing HTTP PATCH request against url ${url} .`);
         return fetch(url, this.fetchHelper.getDefaultPatchOptions(JSON.stringify(data)));
       })

@@ -9,6 +9,19 @@ import { FetchHelper } from '~/Service/FetchHelper';
 import { Logger } from '~/Service/Logger';
 import { Collection } from '~/Type/Definition/Collection';
 
+/**
+ * The get index endpoint retrieves all root level nodes.
+ *
+ * The root-level nodes are paginated. No relations are returned, as relations always require a starting node and can
+ * therefore never be root-level elements.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @see [Further documentation](https://ember-nexus.github.io/web-sdk/#/endpoints/element?id=getindexendpoint)
+ * @see [Ember Nexus API: Get Index Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/get-index)
+ *
+ * @internal
+ */
 @Service()
 class GetIndexEndpoint {
   constructor(

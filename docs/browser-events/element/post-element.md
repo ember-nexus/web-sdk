@@ -5,7 +5,7 @@
 
 > [!NOTE]
 > The <span class="method-post">PostElementEvent</span> internally calls the
-> <span class="method-post">PostElementEndpoint</span>, which in turn executes a fetch request against the
+> <span class="method-post">PostElementEndpoint</span>, which in turn executes a fetch request against
 > <a href="https://ember-nexus.github.io/api/#/api-endpoints/element/post-element">Ember Nexus API's post element endpoint</a>.
 > See their respective documentation for details on failure cases etc.
 

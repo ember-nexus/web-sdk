@@ -9,6 +9,16 @@ import { Node } from '~/Type/Definition/Node';
 import { Relation } from '~/Type/Definition/Relation';
 import { Uuid } from '~/Type/Definition/Uuid';
 
+/**
+ * The get element endpoint retrieves a single element.
+ *
+ * **⚠️ Warning**: This is an internal class. You should not use it directly.
+ *
+ * @see [Further documentation](https://ember-nexus.github.io/web-sdk/#/endpoints/element?id=getelementendpoint)
+ * @see [Ember Nexus API: Get Element Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/element/get-element)
+ *
+ * @internal
+ */
 @Service()
 class GetElementEndpoint {
   constructor(
@@ -17,8 +27,8 @@ class GetElementEndpoint {
     private elementParser: ElementParser,
   ) {}
 
-  async getElement(uuid: Uuid): Promise<Node | Relation> {
-    const url = this.fetchHelper.buildUrl(`/${uuid}`);
+  async getElement(elementId: Uuid): Promise<Node | Relation> {
+    const url = this.fetchHelper.buildUrl(`/${elementId}`);
     this.logger.debug(`Executing HTTP GET request against url ${url} .`);
     return fetch(url, this.fetchHelper.getDefaultGetOptions())
       .catch((networkError) => {
