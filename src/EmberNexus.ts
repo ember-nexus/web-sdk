@@ -14,30 +14,30 @@ import { PatchElementEndpoint } from '~/Endpoint/Element/PatchElementEndpoint';
 import { PostElementEndpoint } from '~/Endpoint/Element/PostElementEndpoint';
 import { PostIndexEndpoint } from '~/Endpoint/Element/PostIndexEndpoint';
 import { PutElementEndpoint } from '~/Endpoint/Element/PutElementEndpoint';
+import { DeleteTokenEndpoint } from '~/Endpoint/User/DeleteTokenEndpoint';
+import { GetMeEndpoint } from '~/Endpoint/User/GetMeEndpoint';
+import { GetTokenEndpoint } from '~/Endpoint/User/GetTokenEndpoint';
+import { PostChangePasswordEndpoint } from '~/Endpoint/User/PostChangePasswordEndpoint';
+import { PostRegisterEndpoint } from '~/Endpoint/User/PostRegisterEndpoint';
+import { PostTokenEndpoint } from '~/Endpoint/User/PostTokenEndpoint';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
-import { createChildrenCollectionIdentifier } from '~/Type/Definition/ChildrenCollectionIdentifier';
 import { Collection } from '~/Type/Definition/Collection';
 import { Data } from '~/Type/Definition/Data';
-import { createIndexCollectionIdentifier } from '~/Type/Definition/IndexCollectionIdentifier';
 import { Node } from '~/Type/Definition/Node';
 import { NodeWithOptionalId } from '~/Type/Definition/NodeWithOptionalId';
-import { createParentsCollectionIdentifier } from '~/Type/Definition/ParentsCollectionIdentifier';
-import { createRelatedCollectionIdentifier } from '~/Type/Definition/RelatedCollectionIdentifier';
 import { Relation } from '~/Type/Definition/Relation';
 import { RelationWithOptionalId } from '~/Type/Definition/RelationWithOptionalId';
+import { Token } from '~/Type/Definition/Token';
+import { UniqueUserIdentifier } from '~/Type/Definition/UniqueUserIdentifier';
 import { Uuid } from '~/Type/Definition/Uuid';
 
 class EmberNexus {
   private elementCache: LRUCache<Uuid, Node | Relation>;
-  private collectionCache: LRUCache<string, Collection>;
 
   constructor() {
     this.elementCache = new LRUCache<Uuid, Node | Relation>({
       max: Container.get(WebSdkConfiguration).getElementCacheMaxEntries(),
-    });
-    this.collectionCache = new LRUCache<string, Collection>({
-      max: Container.get(WebSdkConfiguration).getCollectionCacheMaxEntries(),
     });
   }
 
@@ -83,10 +83,7 @@ class EmberNexus {
   /**
    * Returns children nodes and all relations between the specified parent and the returned children.
    *
-   * The collection is directly returned if it is already in the cache. Otherwise, a fetch call against Ember Nexus API
-   * is started.
-   *
-   * **Note**: The browser might also cache the API's response, if it contains an ETag header.
+   * **Note**: The browser might cache the API's response, if it contains an ETag header.
    *
    * @param parentUuid The Uuid of the parent node.
    * @param page The number of the page to be returned. The first page has the number 1.
@@ -106,21 +103,9 @@ class EmberNexus {
     if (pageSize === null) {
       pageSize = Container.get(WebSdkConfiguration).getCollectionPageSize();
     }
-    const collectionCacheKey = createChildrenCollectionIdentifier(parentUuid, page, pageSize);
     return new Promise<Collection>((resolve) => {
-      if (this.collectionCache.has(collectionCacheKey)) {
-        const collection = this.collectionCache.get(collectionCacheKey);
-        if (collection !== undefined) {
-          return resolve(collection);
-        }
-      }
       return resolve(
-        Container.get(GetElementChildrenEndpoint)
-          .getElementChildren(parentUuid, page, pageSize as number)
-          .then((collection) => {
-            this.collectionCache.set(collectionCacheKey, collection);
-            return collection;
-          }),
+        Container.get(GetElementChildrenEndpoint).getElementChildren(parentUuid, page, pageSize as number),
       );
     });
   }
@@ -128,10 +113,7 @@ class EmberNexus {
   /**
    * Returns parent nodes and all relations between the specified child and the returned parents.
    *
-   * The collection is directly returned if it is already in the cache. Otherwise, a fetch call against Ember Nexus API
-   * is started.
-   *
-   * **Note**: The browser might also cache the API's response, if it contains an ETag header.
+   * **Note**: The browser might cache the API's response, if it contains an ETag header.
    *
    * @param childUuid The Uuid of the child node.
    * @param page The number of the page to be returned. The first page has the number 1.
@@ -151,32 +133,15 @@ class EmberNexus {
     if (pageSize === null) {
       pageSize = Container.get(WebSdkConfiguration).getCollectionPageSize();
     }
-    const collectionCacheKey = createParentsCollectionIdentifier(childUuid, page, pageSize);
     return new Promise<Collection>((resolve) => {
-      if (this.collectionCache.has(collectionCacheKey)) {
-        const collection = this.collectionCache.get(collectionCacheKey);
-        if (collection !== undefined) {
-          return resolve(collection);
-        }
-      }
-      return resolve(
-        Container.get(GetElementParentsEndpoint)
-          .getElementParents(childUuid, page, pageSize as number)
-          .then((collection) => {
-            this.collectionCache.set(collectionCacheKey, collection);
-            return collection;
-          }),
-      );
+      return resolve(Container.get(GetElementParentsEndpoint).getElementParents(childUuid, page, pageSize as number));
     });
   }
 
   /**
    * Returns related nodes and all relations between the specified center and the returned nodes.
    *
-   * The collection is directly returned if it is already in the cache. Otherwise, a fetch call against Ember Nexus API
-   * is started.
-   *
-   * **Note**: The browser might also cache the API's response, if it contains an ETag header.
+   * **Note**: The browser might cache the API's response, if it contains an ETag header.
    *
    * @param centerUuid The Uuid of the center node.
    * @param page The number of the page to be returned. The first page has the number 1.
@@ -196,22 +161,8 @@ class EmberNexus {
     if (pageSize === null) {
       pageSize = Container.get(WebSdkConfiguration).getCollectionPageSize();
     }
-    const collectionCacheKey = createRelatedCollectionIdentifier(centerUuid, page, pageSize);
     return new Promise<Collection>((resolve) => {
-      if (this.collectionCache.has(collectionCacheKey)) {
-        const collection = this.collectionCache.get(collectionCacheKey);
-        if (collection !== undefined) {
-          return resolve(collection);
-        }
-      }
-      return resolve(
-        Container.get(GetElementRelatedEndpoint)
-          .getElementRelated(centerUuid, page, pageSize as number)
-          .then((collection) => {
-            this.collectionCache.set(collectionCacheKey, collection);
-            return collection;
-          }),
-      );
+      return resolve(Container.get(GetElementRelatedEndpoint).getElementRelated(centerUuid, page, pageSize as number));
     });
   }
 
@@ -220,10 +171,7 @@ class EmberNexus {
    *
    * As this collection only returns nodes, no relations will be returned.
    *
-   * The collection is directly returned if it is already in the cache. Otherwise, a fetch call against Ember Nexus API
-   * is started.
-   *
-   * **Note**: The browser might also cache the API's response, if it contains an ETag header.
+   * **Note**: The browser might cache the API's response, if it contains an ETag header.
    *
    * @param page The number of the page to be returned. The first page has the number 1.
    * @param pageSize The maximum number of elements one page should contain. If null, the default size is used.
@@ -241,22 +189,8 @@ class EmberNexus {
     if (pageSize === null) {
       pageSize = Container.get(WebSdkConfiguration).getCollectionPageSize();
     }
-    const collectionCacheKey = createIndexCollectionIdentifier(page, pageSize);
     return new Promise<Collection>((resolve) => {
-      if (this.collectionCache.has(collectionCacheKey)) {
-        const collection = this.collectionCache.get(collectionCacheKey);
-        if (collection !== undefined) {
-          return resolve(collection);
-        }
-      }
-      return resolve(
-        Container.get(GetIndexEndpoint)
-          .getIndex(page, pageSize as number)
-          .then((collection) => {
-            this.collectionCache.set(collectionCacheKey, collection);
-            return collection;
-          }),
-      );
+      return resolve(Container.get(GetIndexEndpoint).getIndex(page, pageSize as number));
     });
   }
 
@@ -317,7 +251,6 @@ class EmberNexus {
    */
   postElement(parentUuid: Uuid, element: NodeWithOptionalId): Promise<Uuid> {
     return new Promise<Uuid>((resolve) => {
-      // todo: drop cached collections where created element is included
       return resolve(Container.get(PostElementEndpoint).postElement(parentUuid, element));
     });
   }
@@ -346,7 +279,6 @@ class EmberNexus {
    */
   patchElement(elementUuid: Uuid, data: Data): Promise<void> {
     return new Promise<void>((resolve) => {
-      // todo: drop cached collections where patched element is included
       this.elementCache.delete(elementUuid);
       return resolve(Container.get(PatchElementEndpoint).patchElement(elementUuid, data));
     });
@@ -375,7 +307,6 @@ class EmberNexus {
    */
   putElement(elementUuid: Uuid, data: Data): Promise<void> {
     return new Promise<void>((resolve) => {
-      // todo: drop cached collections where updated element is included
       this.elementCache.delete(elementUuid);
       return resolve(Container.get(PutElementEndpoint).putElement(elementUuid, data));
     });
@@ -398,9 +329,68 @@ class EmberNexus {
    */
   deleteElement(elementUuid: Uuid): Promise<void> {
     return new Promise<void>((resolve) => {
-      // todo: drop cached collections where deleted element is included
       this.elementCache.delete(elementUuid);
       return resolve(Container.get(DeleteElementEndpoint).deleteElement(elementUuid));
+    });
+  }
+
+  postRegister(uniqueUserIdentifier: UniqueUserIdentifier, password: string, data: Data = {}): Promise<Uuid> {
+    return new Promise<Uuid>((resolve) => {
+      return resolve(Container.get(PostRegisterEndpoint).postRegister(uniqueUserIdentifier, password, data));
+    });
+  }
+
+  postChangePassword(
+    uniqueUserIdentifier: UniqueUserIdentifier,
+    currentPassword: string,
+    newPassword: string,
+  ): Promise<void> {
+    return new Promise<void>((resolve) => {
+      return resolve(
+        Container.get(PostChangePasswordEndpoint).postChangePassword(
+          uniqueUserIdentifier,
+          currentPassword,
+          newPassword,
+        ),
+      );
+    });
+  }
+
+  getMe(): Promise<Node> {
+    return new Promise<Node>((resolve) => {
+      return resolve(
+        Container.get(GetMeEndpoint)
+          .getMe()
+          .then((element) => {
+            this.elementCache.set(element.id, element);
+            return element;
+          }),
+      );
+    });
+  }
+
+  postToken(uniqueUserIdentifier: UniqueUserIdentifier, password: string, data: Data = {}): Promise<Token> {
+    return new Promise<Token>((resolve) => {
+      return resolve(Container.get(PostTokenEndpoint).postToken(uniqueUserIdentifier, password, data));
+    });
+  }
+
+  getToken(): Promise<Node> {
+    return new Promise<Node>((resolve) => {
+      return resolve(
+        Container.get(GetTokenEndpoint)
+          .getToken()
+          .then((element) => {
+            this.elementCache.set(element.id, element);
+            return element;
+          }),
+      );
+    });
+  }
+
+  deleteToken(): Promise<void> {
+    return new Promise<void>((resolve) => {
+      return resolve(Container.get(DeleteTokenEndpoint).deleteToken());
     });
   }
 }

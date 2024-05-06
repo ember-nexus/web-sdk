@@ -5,7 +5,6 @@ import { ParseError } from '~/Error/ParseError';
 import { FetchHelper } from '~/Service/FetchHelper';
 import { Logger } from '~/Service/Logger';
 import { UniqueUserIdentifier } from '~/Type/Definition/UniqueUserIdentifier';
-import { Uuid, validateUuidFromString } from '~/Type/Definition/Uuid';
 
 /**
  * The post change password endpoint is used to change the user's password.
@@ -28,7 +27,7 @@ class PostChangePasswordEndpoint {
     uniqueUserIdentifier: UniqueUserIdentifier,
     currentPassword: string,
     newPassword: string,
-  ): Promise<Uuid> {
+  ): Promise<void> {
     return Promise.resolve()
       .then(() => {
         const url = this.fetchHelper.buildUrl(`/change-password`);
@@ -50,11 +49,7 @@ class PostChangePasswordEndpoint {
       })
       .then(async (response: Response) => {
         if (response.ok && response.status == 204) {
-          if (response.headers.has('Location')) {
-            const location = response.headers.get('Location') as string;
-            const rawUuid = location.split('/').at(-1) as string;
-            return Promise.resolve(validateUuidFromString(rawUuid));
-          }
+          return Promise.resolve();
         }
         const contentType = response.headers.get('Content-Type');
         if (contentType == null) {

@@ -4,9 +4,10 @@ import { NetworkError } from '~/Error/NetworkError';
 import { ParseError } from '~/Error/ParseError';
 import { FetchHelper } from '~/Service/FetchHelper';
 import { Logger } from '~/Service/Logger';
+import { TokenParser } from '~/Service/TokenParser';
 import { Data } from '~/Type/Definition/Data';
+import { Token } from '~/Type/Definition/Token';
 import { UniqueUserIdentifier } from '~/Type/Definition/UniqueUserIdentifier';
-import { Uuid, validateUuidFromString } from '~/Type/Definition/Uuid';
 
 /**
  * The post token endpoint is used to create new tokens.
@@ -22,10 +23,11 @@ import { Uuid, validateUuidFromString } from '~/Type/Definition/Uuid';
 class PostTokenEndpoint {
   constructor(
     private logger: Logger,
+    private tokenParser: TokenParser,
     private fetchHelper: FetchHelper,
   ) {}
 
-  async postToken(uniqueUserIdentifier: UniqueUserIdentifier, password: string, data: Data = {}): Promise<Uuid> {
+  async postToken(uniqueUserIdentifier: UniqueUserIdentifier, password: string, data: Data = {}): Promise<Token> {
     return Promise.resolve()
       .then(() => {
         const url = this.fetchHelper.buildUrl(`/token`);
@@ -46,24 +48,25 @@ class PostTokenEndpoint {
         return Promise.reject(new NetworkError(`Experienced generic network error during creating resource.`, error));
       })
       .then(async (response: Response) => {
-        if (response.ok && response.status == 204) {
-          if (response.headers.has('Location')) {
-            const location = response.headers.get('Location') as string;
-            const rawUuid = location.split('/').at(-1) as string;
-            return Promise.resolve(validateUuidFromString(rawUuid));
-          }
-        }
         const contentType = response.headers.get('Content-Type');
         if (contentType == null) {
           return Promise.reject(new ParseError('Response does not contain content type header.'));
         }
-        if (!contentType.includes('application/problem+json')) {
+        if (!(contentType.includes('application/json') || contentType.includes('application/problem+json'))) {
           return Promise.reject(
-            new ParseError("Unable to parse response as content type is not 'application/problem+json'."),
+            new ParseError(
+              "Unable to parse response as content type is neither 'application/json' nor 'application/problem+json'.",
+            ),
           );
         }
         const data = await response.json();
-        return Promise.reject(this.fetchHelper.createResponseErrorFromBadResponse(response, data));
+        if (!response.ok) {
+          return Promise.reject(this.fetchHelper.createResponseErrorFromBadResponse(response, data));
+        }
+        return data;
+      })
+      .then<Token>((jsonResponse) => {
+        return this.tokenParser.rawTokenToToken(jsonResponse);
       })
       .catch((error) => {
         this.logger.error(error.message, error);

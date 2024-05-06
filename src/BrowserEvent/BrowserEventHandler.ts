@@ -10,6 +10,12 @@ import { PatchElementEvent } from '~/BrowserEvent/Element/PatchElementEvent';
 import { PostElementEvent } from '~/BrowserEvent/Element/PostElementEvent';
 import { PostIndexEvent } from '~/BrowserEvent/Element/PostIndexEvent';
 import { PutElementEvent } from '~/BrowserEvent/Element/PutElementEvent';
+import { DeleteTokenEvent } from '~/BrowserEvent/User/DeleteTokenEvent';
+import { GetMeEvent } from '~/BrowserEvent/User/GetMeEvent';
+import { GetTokenEvent } from '~/BrowserEvent/User/GetTokenEvent';
+import { PostChangePasswordEvent } from '~/BrowserEvent/User/PostChangePasswordEvent';
+import { PostRegisterEvent } from '~/BrowserEvent/User/PostRegisterEvent';
+import { PostTokenEvent } from '~/BrowserEvent/User/PostTokenEvent';
 import { EmberNexus } from '~/EmberNexus';
 
 /**
@@ -47,6 +53,13 @@ class BrowserEventHandler {
     this.browserNode.removeEventListener(PutElementEvent.type, this.handlePutElementEvent);
     this.browserNode.removeEventListener(PatchElementEvent.type, this.handlePatchElementEvent);
     this.browserNode.removeEventListener(DeleteElementEvent.type, this.handleDeleteElementEvent);
+
+    this.browserNode.removeEventListener(PostRegisterEvent.type, this.handlePostRegisterEvent);
+    this.browserNode.removeEventListener(PostChangePasswordEvent.type, this.handlePostChangePasswordEvent);
+    this.browserNode.removeEventListener(GetMeEvent.type, this.handleGetMeEvent);
+    this.browserNode.removeEventListener(PostTokenEvent.type, this.handlePostTokenEvent);
+    this.browserNode.removeEventListener(GetTokenEvent.type, this.handleGetTokenEvent);
+    this.browserNode.removeEventListener(DeleteTokenEvent.type, this.handleDeleteTokenEvent);
     this.browserNode = null;
     return this;
   }
@@ -72,6 +85,13 @@ class BrowserEventHandler {
     this.browserNode.addEventListener(PutElementEvent.type, this.handlePutElementEvent);
     this.browserNode.addEventListener(PatchElementEvent.type, this.handlePatchElementEvent);
     this.browserNode.addEventListener(DeleteElementEvent.type, this.handleDeleteElementEvent);
+
+    this.browserNode.addEventListener(PostRegisterEvent.type, this.handlePostRegisterEvent);
+    this.browserNode.addEventListener(PostChangePasswordEvent.type, this.handlePostChangePasswordEvent);
+    this.browserNode.addEventListener(GetMeEvent.type, this.handleGetMeEvent);
+    this.browserNode.addEventListener(PostTokenEvent.type, this.handlePostTokenEvent);
+    this.browserNode.addEventListener(GetTokenEvent.type, this.handleGetTokenEvent);
+    this.browserNode.addEventListener(DeleteTokenEvent.type, this.handleDeleteTokenEvent);
     return this;
   }
 
@@ -209,6 +229,40 @@ class BrowserEventHandler {
    */
   private handleDeleteElementEvent(event: DeleteElementEvent): void {
     event.setResult(Container.get(EmberNexus).deleteElement(event.getElementId()));
+  }
+
+  private handlePostRegisterEvent(event: PostRegisterEvent): void {
+    event.setResult(
+      Container.get(EmberNexus).postRegister(event.getUniqueUserIdentifier(), event.getPassword(), event.getData()),
+    );
+  }
+
+  private handlePostChangePasswordEvent(event: PostChangePasswordEvent): void {
+    event.setResult(
+      Container.get(EmberNexus).postChangePassword(
+        event.getUniqueUserIdentifier(),
+        event.getCurrentPassword(),
+        event.getNewPassword(),
+      ),
+    );
+  }
+
+  private handleGetMeEvent(event: GetMeEvent): void {
+    event.setMe(Container.get(EmberNexus).getMe());
+  }
+
+  private handlePostTokenEvent(event: PostTokenEvent): void {
+    event.setResult(
+      Container.get(EmberNexus).postToken(event.getUniqueUserIdentifier(), event.getPassword(), event.getData()),
+    );
+  }
+
+  private handleGetTokenEvent(event: GetTokenEvent): void {
+    event.setToken(Container.get(EmberNexus).getToken());
+  }
+
+  private handleDeleteTokenEvent(event: DeleteTokenEvent): void {
+    event.setResult(Container.get(EmberNexus).deleteToken());
   }
 }
 
