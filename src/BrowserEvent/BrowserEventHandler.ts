@@ -231,12 +231,30 @@ class BrowserEventHandler {
     event.setResult(Container.get(EmberNexus).deleteElement(event.getElementId()));
   }
 
+  /**
+   * Handles browser events of the type PostRegisterEvent.
+   *
+   * **⚠️ Warning**: This is an internal method. You should not use it directly.
+   *
+   * @param event
+   * @private
+   * @internal
+   */
   private handlePostRegisterEvent(event: PostRegisterEvent): void {
     event.setResult(
       Container.get(EmberNexus).postRegister(event.getUniqueUserIdentifier(), event.getPassword(), event.getData()),
     );
   }
 
+  /**
+   * Handles browser events of the type PostChangePasswordEvent.
+   *
+   * **⚠️ Warning**: This is an internal method. You should not use it directly.
+   *
+   * @param event
+   * @private
+   * @internal
+   */
   private handlePostChangePasswordEvent(event: PostChangePasswordEvent): void {
     event.setResult(
       Container.get(EmberNexus).postChangePassword(
@@ -247,20 +265,56 @@ class BrowserEventHandler {
     );
   }
 
+  /**
+   * Handles browser events of the type GetMeEvent.
+   *
+   * **⚠️ Warning**: This is an internal method. You should not use it directly.
+   *
+   * @param event
+   * @private
+   * @internal
+   */
   private handleGetMeEvent(event: GetMeEvent): void {
     event.setMe(Container.get(EmberNexus).getMe());
   }
 
+  /**
+   * Handles browser events of the type PostTokenEvent.
+   *
+   * **⚠️ Warning**: This is an internal method. You should not use it directly.
+   *
+   * @param event
+   * @private
+   * @internal
+   */
   private handlePostTokenEvent(event: PostTokenEvent): void {
     event.setResult(
       Container.get(EmberNexus).postToken(event.getUniqueUserIdentifier(), event.getPassword(), event.getData()),
     );
   }
 
+  /**
+   * Handles browser events of the type GetTokenEvent.
+   *
+   * **⚠️ Warning**: This is an internal method. You should not use it directly.
+   *
+   * @param event
+   * @private
+   * @internal
+   */
   private handleGetTokenEvent(event: GetTokenEvent): void {
     event.setToken(Container.get(EmberNexus).getToken());
   }
 
+  /**
+   * Handles browser events of the type DeleteTokenEvent.
+   *
+   * **⚠️ Warning**: This is an internal method. You should not use it directly.
+   *
+   * @param event
+   * @private
+   * @internal
+   */
   private handleDeleteTokenEvent(event: DeleteTokenEvent): void {
     event.setResult(Container.get(EmberNexus).deleteToken());
   }
