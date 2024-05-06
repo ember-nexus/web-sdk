@@ -1,6 +1,6 @@
 # Element Endpoints
 
-**Endpoints are internal classes**, which provide a direct mapping to some specific Ember Nexus API endpoint.  
+**Endpoints are internal classes**, which provide a direct mapping to some specific Ember Nexus API endpoint.
 They furthermore take JavaScript objects as their inputs, and are sending JSON to the remote API instance.
 
 Element endpoints in particular are mapping Ember Nexus API element endpoints.
@@ -10,6 +10,7 @@ Element endpoints in particular are mapping Ember Nexus API element endpoints.
 The get index endpoint is used to retrieve all root level nodes.
 
 Links:
+
 - [TypeDoc](https://ember-nexus.github.io/web-sdk/type/classes/Endpoint_Element_GetIndexEndpoint.GetIndexEndpoint.html)
 - [Ember Nexus API](https://ember-nexus.github.io/api/#/api-endpoints/element/get-index)
 
@@ -31,12 +32,12 @@ bla bla bla
 
 <!-- tabs:end -->
 
-
 ## <span class="method-get">GetElementEndpoint</span>
 
 The get element endpoint is used to retrieve data of a specific element, either a node or relation.
 
 Links:
+
 - [TypeDoc](https://ember-nexus.github.io/web-sdk/type/classes/Endpoint_Element_GetElementEndpoint.GetElementEndpoint.html)
 - [Ember Nexus API](https://ember-nexus.github.io/api/#/api-endpoints/element/get-element)
 
@@ -58,12 +59,12 @@ bla bla bla
 
 <!-- tabs:end -->
 
-
 ## <span class="method-get">GetElementParentsEndpoint</span>
 
 The get element parents endpoint is used to retrieve all parent nodes from a node.
 
 Links:
+
 - [TypeDoc](https://ember-nexus.github.io/web-sdk/type/classes/Endpoint_Element_GetElementParentsEndpoint.GetElementParentsEndpoint.html)
 - [Ember Nexus API](https://ember-nexus.github.io/api/#/api-endpoints/element/get-parents)
 
@@ -85,12 +86,12 @@ bla bla bla
 
 <!-- tabs:end -->
 
-
 ## <span class="method-get">GetElementChildrenEndpoint</span>
 
 ...
 
 Links:
+
 - [TypeDoc](https://ember-nexus.github.io/web-sdk/type/classes/Endpoint_Element_GetElementChildrenEndpoint.GetElementChildrenEndpoint.html)
 - [Ember Nexus API](https://ember-nexus.github.io/api/#/api-endpoints/element/get-children)
 
@@ -112,12 +113,12 @@ bla bla bla
 
 <!-- tabs:end -->
 
-
 ## <span class="method-get">GetElementRelatedEndpoint</span>
 
 ...
 
 Links:
+
 - [TypeDoc](https://ember-nexus.github.io/web-sdk/type/classes/Endpoint_Element_GetElementRelatedEndpoint.GetElementRelatedEndpoint.html)
 - [Ember Nexus API](https://ember-nexus.github.io/api/#/api-endpoints/element/get-related)
 
@@ -139,12 +140,12 @@ bla bla bla
 
 <!-- tabs:end -->
 
-
 ## <span class="method-post">PostIndexEndpoint</span>
 
 ...
 
 Links:
+
 - [TypeDoc](https://ember-nexus.github.io/web-sdk/type/classes/Endpoint_Element_PostIndexEndpoint.PostIndexEndpoint.html)
 - [Ember Nexus API](https://ember-nexus.github.io/api/#/api-endpoints/element/post-index)
 
@@ -165,12 +166,12 @@ bla bla bla
 
 <!-- tabs:end -->
 
-
 ## <span class="method-post">PostElementEndpoint</span>
 
 ...
 
 Links:
+
 - [TypeDoc](https://ember-nexus.github.io/web-sdk/type/classes/Endpoint_Element_PostElementEndpoint.PostElementEndpoint.html)
 - [Ember Nexus API](https://ember-nexus.github.io/api/#/api-endpoints/element/post-element)
 
@@ -191,12 +192,12 @@ bla bla bla
 
 <!-- tabs:end -->
 
-
 ## <span class="method-put">PutElementEndpoint</span>
 
 ...
 
 Links:
+
 - [TypeDoc](https://ember-nexus.github.io/web-sdk/type/classes/Endpoint_Element_PutElementEndpoint.PutElementEndpoint.html)
 - [Ember Nexus API](https://ember-nexus.github.io/api/#/api-endpoints/element/put-element)
 
@@ -217,12 +218,12 @@ bla bla bla
 
 <!-- tabs:end -->
 
-
 ## <span class="method-patch">PatchElementEndpoint</span>
 
 ...
 
 Links:
+
 - [TypeDoc](https://ember-nexus.github.io/web-sdk/type/classes/Endpoint_Element_PatchElementEndpoint.PatchElementEndpoint.html)
 - [Ember Nexus API](https://ember-nexus.github.io/api/#/api-endpoints/element/patch-element)
 
@@ -243,12 +244,12 @@ bla bla bla
 
 <!-- tabs:end -->
 
-
 ## <span class="method-delete">DeleteElementEndpoint</span>
 
 ...
 
 Links:
+
 - [TypeDoc](https://ember-nexus.github.io/web-sdk/type/classes/Endpoint_Element_DeleteElementEndpoint.DeleteElementEndpoint.html)
 - [Ember Nexus API](https://ember-nexus.github.io/api/#/api-endpoints/element/delete-element)
 
