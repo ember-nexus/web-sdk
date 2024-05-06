@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Typedoc for SDK documentation.
 - Rebuilt browser events for element and user endpoints.
 - Rebuilt endpoint classes with better error handling and more solid parsing and validation code.
+- Add support for Node.js v22.
 ### Changed
 - Refactor code, tests and documentation.
 - Replace Mocha with Jest to support code coverage.
