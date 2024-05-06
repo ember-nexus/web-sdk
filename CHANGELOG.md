@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Refactor code, tests and documentation.
 - Replace Mocha with Jest to support code coverage.
+- Update release action.
 
 ## 0.0.38 - 2023-07-20
 ### Added
