@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Implement `PutElementEvent`, closes #62.
 - Implement `PatchElementEvent`, closes #59.
 - Implement `DeleteElementEvent`, closes #53.
+- Add module export.
 ### Changed
 - Refactor code, tests and documentation.
 - Replace Mocha with Jest to support code coverage.

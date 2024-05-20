@@ -2,7 +2,7 @@ const path = require('path');
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-  entry: './src/EmberNexus.ts',
+  entry: './src/index.ts',
   mode: "production",
   module: {
     rules: [
@@ -37,6 +37,7 @@ module.exports = {
       type: 'module'
     }
   },
+  devtool: "source-map",
   performance: {
     hints: false
   },
