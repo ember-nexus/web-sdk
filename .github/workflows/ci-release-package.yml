@@ -83,7 +83,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create local package
-        run: yarn pack --filename "ember-nexus-web-sdk-${{ env.RELEASE_TAG }}.tar.gz"
+        run: yarn pack --filename "ember-nexus-web-sdk-${{ env.NEW_VERSION }}.tar.gz"
 
       - name: Push changes to repository
         env:
@@ -107,7 +107,7 @@ jobs:
           prerelease: ${{ startsWith(github.event.inputs.release-type, 'pre') }}
           token: ${{ secrets.RELEASE_TOKEN }}
           files: |
-            "./ember-nexus-web-sdk-${{ env.RELEASE_TAG }}.tar.gz"
+            "./ember-nexus-web-sdk-${{ env.NEW_VERSION }}.tar.gz"
 
 # disabled due to low credits in free tier (5 per month)
 #      - name: Initiate Originstamp certificate
