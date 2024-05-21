@@ -6,23 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+- Add module export.
+- Change release script to upload NPM package to GitHub release.
+
+## 0.0.39 - 2024-05-06
 ### Added
 - Typedoc for SDK documentation.
 - Rebuilt browser events for element and user endpoints.
 - Rebuilt endpoint classes with better error handling and more solid parsing and validation code.
 - Add support for Node.js v22.
-- Implement `GetIndexEvent`, closes #56.
-- Implement `GetElementEvent`, closes #55.
-- Implement `GetParentsEvent`, closes #57.
-- Implement `GetChildrenEvent`, closes #54.
-- Implement `GetRelatedEvent`, closes #58.
-- Implement `PostIndexEvent`, closes #61.
-- Implement `PostElementEvent`, closes #60.
-- Implement `PutElementEvent`, closes #62.
-- Implement `PatchElementEvent`, closes #59.
-- Implement `DeleteElementEvent`, closes #53.
-- Add module export.
-- Change release script to upload NPM package to GitHub release.
+- Implement `GetIndexEvent`, closes [#56].
+- Implement `GetElementEvent`, closes [#55].
+- Implement `GetParentsEvent`, closes [#57].
+- Implement `GetChildrenEvent`, closes [#54].
+- Implement `GetRelatedEvent`, closes [#58].
+- Implement `PostIndexEvent`, closes [#61].
+- Implement `PostElementEvent`, closes [#60].
+- Implement `PutElementEvent`, closes [#62].
+- Implement `PatchElementEvent`, closes [#59].
+- Implement `DeleteElementEvent`, closes [#53].
 ### Changed
 - Refactor code, tests and documentation.
 - Replace Mocha with Jest to support code coverage.
