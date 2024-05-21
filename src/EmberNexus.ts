@@ -1,9 +1,8 @@
 import 'reflect-metadata';
 
 import { LRUCache } from 'lru-cache';
-import { Container } from 'typedi';
+import { Container, Service } from 'typedi';
 
-import { BrowserEventHandler } from '~/BrowserEvent/BrowserEventHandler';
 import { DeleteElementEndpoint } from '~/Endpoint/Element/DeleteElementEndpoint';
 import { GetElementChildrenEndpoint } from '~/Endpoint/Element/GetElementChildrenEndpoint';
 import { GetElementEndpoint } from '~/Endpoint/Element/GetElementEndpoint';
@@ -20,7 +19,6 @@ import { GetTokenEndpoint } from '~/Endpoint/User/GetTokenEndpoint';
 import { PostChangePasswordEndpoint } from '~/Endpoint/User/PostChangePasswordEndpoint';
 import { PostRegisterEndpoint } from '~/Endpoint/User/PostRegisterEndpoint';
 import { PostTokenEndpoint } from '~/Endpoint/User/PostTokenEndpoint';
-import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { Collection } from '~/Type/Definition/Collection';
 import { Data } from '~/Type/Definition/Data';
@@ -32,6 +30,7 @@ import { Token } from '~/Type/Definition/Token';
 import { UniqueUserIdentifier } from '~/Type/Definition/UniqueUserIdentifier';
 import { Uuid } from '~/Type/Definition/Uuid';
 
+@Service()
 class EmberNexus {
   private elementCache: LRUCache<Uuid, Node | Relation>;
 
@@ -395,4 +394,4 @@ class EmberNexus {
   }
 }
 
-export { EmberNexus, Container, WebSdkConfiguration, Logger, BrowserEventHandler };
+export { EmberNexus };

@@ -105,6 +105,10 @@ class BrowserEventHandler {
    * @internal
    */
   private handleGetElementEvent(event: GetElementEvent): void {
+    console.log('Handling event :D');
+    console.log(event);
+    console.log(Container);
+    console.log(Container.get(EmberNexus));
     event.setElement(Container.get(EmberNexus).getElement(event.getElementId()));
   }
 

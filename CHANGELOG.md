@@ -1,10 +1,13 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+- Add module export.
+- Change release script to upload NPM package to GitHub release.
 
 ## 0.0.40 - 2024-05-21
 
@@ -24,7 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Implement `PutElementEvent`, closes [#62].
 - Implement `PatchElementEvent`, closes [#59].
 - Implement `DeleteElementEvent`, closes [#53].
-
 ### Changed
 - Refactor code, tests and documentation.
 - Replace Mocha with Jest to support code coverage.
