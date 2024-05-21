@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 0.0.42 - 2024-05-21
+
 ## 0.0.41 - 2024-05-21
 - Add module export.
 - Change release script to upload NPM package to GitHub release.
