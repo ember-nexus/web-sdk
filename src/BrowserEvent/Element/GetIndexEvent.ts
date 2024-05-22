@@ -1,6 +1,6 @@
-import { Collection } from '~/Type/Definition/Collection';
-import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
-import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
+import { Collection } from '../../Type/Definition/Collection';
+import { EventIdentifier } from '../../Type/Enum';
+import { customEventDefaultInit } from '../../Type/Partial';
 
 type GetIndexEventDetails = {
   page: number;

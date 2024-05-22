@@ -1,12 +1,12 @@
 import { Service } from 'typedi';
 
-import { LogicError } from '~/Error/LogicError';
-import { NetworkError } from '~/Error/NetworkError';
-import { ParseError } from '~/Error/ParseError';
-import { ElementParser } from '~/Service/ElementParser';
-import { FetchHelper } from '~/Service/FetchHelper';
-import { Logger } from '~/Service/Logger';
-import { Node } from '~/Type/Definition/Node';
+import { LogicError } from '../../Error';
+import { NetworkError } from '../../Error';
+import { ParseError } from '../../Error';
+import { ElementParser } from '../../Service';
+import { FetchHelper } from '../../Service';
+import { Logger } from '../../Service';
+import { Node } from '../../Type/Definition/Node';
 
 /**
  * The get token endpoint retrieves the current session's token element.

@@ -1,10 +1,10 @@
 import { Service } from 'typedi';
 
-import { NetworkError } from '~/Error/NetworkError';
-import { ParseError } from '~/Error/ParseError';
-import { FetchHelper } from '~/Service/FetchHelper';
-import { Logger } from '~/Service/Logger';
-import { UniqueUserIdentifier } from '~/Type/Definition/UniqueUserIdentifier';
+import { NetworkError } from '../../Error';
+import { ParseError } from '../../Error';
+import { FetchHelper } from '../../Service';
+import { Logger } from '../../Service';
+import { UniqueUserIdentifier } from '../../Type/Definition';
 
 /**
  * The post change password endpoint is used to change the user's password.

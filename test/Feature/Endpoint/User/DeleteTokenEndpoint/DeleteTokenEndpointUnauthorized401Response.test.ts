@@ -4,12 +4,12 @@ import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
+import { TestLogger } from '../../../TestLogger';
+
 import { DeleteTokenEndpoint } from '~/Endpoint/User/DeleteTokenEndpoint';
 import { Response401UnauthorizedError } from '~/Error/Response401UnauthorizedError';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
-
-import { TestLogger } from '../../../TestLogger';
 
 const mockServer = setupServer(
   http.delete('http://mock-api/token', () => {

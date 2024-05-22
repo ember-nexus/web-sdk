@@ -1,5 +1,5 @@
-import { Node } from '~/Type/Definition/Node';
-import { Relation } from '~/Type/Definition/Relation';
+import { Node } from './Node';
+import { Relation } from './Relation';
 
 type Collection = {
   id: string;

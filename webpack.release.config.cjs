@@ -8,6 +8,7 @@ module.exports = {
     rules: [
       {
         test: /\.ts?$/,
+        exclude: [/node_modules/, /\.d\.ts$/],
         use: [
           {
             loader: 'ts-loader',
@@ -15,22 +16,18 @@ module.exports = {
               configFile: 'tsconfig.release.json'
             }
           }
-        ],
-        exclude: /node_modules/
+        ]
       },
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js'],
-    alias: {
-      '~': path.resolve(__dirname, 'src/'),
-    }
+    extensions: ['.ts', '.js']
   },
   experiments: {
     outputModule: true,
   },
   output: {
-    filename: 'ember-nexus-web-sdk.js',
+    filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
     library: {

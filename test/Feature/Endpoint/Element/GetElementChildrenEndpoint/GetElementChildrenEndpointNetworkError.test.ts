@@ -4,13 +4,13 @@ import { http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
+import { TestLogger } from '../../../TestLogger';
+
 import { GetElementChildrenEndpoint } from '~/Endpoint/Element/GetElementChildrenEndpoint';
 import { NetworkError } from '~/Error/NetworkError';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
-
-import { TestLogger } from '../../../TestLogger';
 
 const mockServer = setupServer(
   http.get('http://mock-api/206114e7-5708-426b-ba25-015d1acada72/children', () => {

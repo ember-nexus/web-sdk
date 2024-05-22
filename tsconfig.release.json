@@ -22,11 +22,9 @@
     "noImplicitThis": false,
     "strictNullChecks": true,
     "declaration": true,
+    "declarationDir": "dist",
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "paths": {
-      "~/*": ["./src/*"]
-    }
+    "experimentalDecorators": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts"]
 }

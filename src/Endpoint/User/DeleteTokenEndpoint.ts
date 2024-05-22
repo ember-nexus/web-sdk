@@ -1,9 +1,9 @@
 import { Service } from 'typedi';
 
-import { NetworkError } from '~/Error/NetworkError';
-import { ParseError } from '~/Error/ParseError';
-import { FetchHelper } from '~/Service/FetchHelper';
-import { Logger } from '~/Service/Logger';
+import { NetworkError } from '../../Error';
+import { ParseError } from '../../Error';
+import { FetchHelper } from '../../Service';
+import { Logger } from '../../Service';
 
 /**
  * The delete token endpoint deletes the currently used token.

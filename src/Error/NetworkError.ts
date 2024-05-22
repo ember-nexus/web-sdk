@@ -1,4 +1,4 @@
-import { EmberNexusError } from '~/Error/EmberNexusError';
+import { EmberNexusError } from '.';
 
 /**
  * Generic network error.

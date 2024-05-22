@@ -1,8 +1,8 @@
-import { NodeWithOptionalId } from '~/Type/Definition/NodeWithOptionalId';
-import { RelationWithOptionalId } from '~/Type/Definition/RelationWithOptionalId';
-import { Uuid } from '~/Type/Definition/Uuid';
-import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
-import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
+import { Uuid } from '../../Type/Definition';
+import { NodeWithOptionalId } from '../../Type/Definition/NodeWithOptionalId';
+import { RelationWithOptionalId } from '../../Type/Definition/RelationWithOptionalId';
+import { EventIdentifier } from '../../Type/Enum';
+import { customEventDefaultInit } from '../../Type/Partial';
 
 type PostElementEventDetails = {
   parentId: Uuid;

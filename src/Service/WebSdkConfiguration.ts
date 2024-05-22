@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
 
-import { Token } from '~/Type/Definition/Token';
+import { Token } from '../Type/Definition';
 
 /**
  * Configuration handler.

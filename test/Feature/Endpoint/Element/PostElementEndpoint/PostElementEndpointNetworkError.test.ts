@@ -4,14 +4,14 @@ import { http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
+import { TestLogger } from '../../../TestLogger';
+
 import { PostElementEndpoint } from '~/Endpoint/Element/PostElementEndpoint';
 import { NetworkError } from '~/Error/NetworkError';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { NodeWithOptionalId } from '~/Type/Definition/NodeWithOptionalId';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
-
-import { TestLogger } from '../../../TestLogger';
 
 const mockServer = setupServer(
   http.post('http://mock-api/c14ea082-135c-42a8-9691-6ea121185e9d', () => {

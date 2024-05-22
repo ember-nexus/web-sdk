@@ -1,9 +1,9 @@
 import { Service } from 'typedi';
 
-import { RawValueToNormalizedValueEvent } from '~/EventSystem/RawValueToNormalizedValue/Event/RawValueToNormalizedValueEvent';
-import { RawValueToNormalizedValueEventManager } from '~/EventSystem/RawValueToNormalizedValue/RawValueToNormalizedValueEventManager';
-import { Logger } from '~/Service/Logger';
-import { Data } from '~/Type/Definition/Data';
+import { Logger } from './Logger';
+import { RawValueToNormalizedValueEventManager } from '../EventSystem/RawValueToNormalizedValue';
+import { RawValueToNormalizedValueEvent } from '../EventSystem/RawValueToNormalizedValue/Event';
+import { Data } from '../Type/Definition/Data';
 
 /**
  * Class which helps to parse values.

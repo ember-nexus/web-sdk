@@ -1,4 +1,4 @@
-import { ResponseError } from '~/Error/ResponseError';
+import { ResponseError } from '.';
 
 /**
  * Wrapper around Ember Nexus API's 404 not found response.

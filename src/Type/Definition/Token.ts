@@ -1,4 +1,4 @@
-import { Branded } from '~/Type/Definition/Branded';
+import { Branded } from './Branded';
 
 /**
  * Type safe variant of string containing single token.

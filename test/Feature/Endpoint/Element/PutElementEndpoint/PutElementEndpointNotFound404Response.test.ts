@@ -4,14 +4,14 @@ import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
+import { TestLogger } from '../../../TestLogger';
+
 import { PutElementEndpoint } from '~/Endpoint/Element/PutElementEndpoint';
 import { Response404NotFoundError } from '~/Error/Response404NotFoundError';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { Data } from '~/Type/Definition/Data';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
-
-import { TestLogger } from '../../../TestLogger';
 
 const mockServer = setupServer(
   http.put('http://mock-api/75c81302-4168-48b5-b12c-588db22303c2', () => {

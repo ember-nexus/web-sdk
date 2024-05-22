@@ -1,7 +1,7 @@
-import { Data } from '~/Type/Definition/Data';
-import { ElementCollection } from '~/Type/Definition/ElementCollection';
-import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
-import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
+import { Data } from '../../Type/Definition/Data';
+import { ElementCollection } from '../../Type/Definition/ElementCollection';
+import { EventIdentifier } from '../../Type/Enum';
+import { customEventDefaultInit } from '../../Type/Partial';
 
 type PostSearchEventDetails = {
   query: Data;

@@ -1,9 +1,10 @@
 import { Service } from 'typedi';
 
-import { ElementParser } from '~/Service/ElementParser';
-import { Collection } from '~/Type/Definition/Collection';
-import { Node } from '~/Type/Definition/Node';
-import { Relation } from '~/Type/Definition/Relation';
+import { Collection } from '../Type/Definition/Collection';
+import { Node } from '../Type/Definition/Node';
+import { Relation } from '../Type/Definition/Relation';
+
+import { ElementParser } from '.';
 
 /**
  * Class which helps to parse collections.

@@ -6,3 +6,4 @@ export * from './RawValueToNormalizedValueHelper';
 export * from './RequestProblemParser';
 export * from './TokenParser';
 export * from './WebSdkConfiguration';
+export * from './EmberNexus';

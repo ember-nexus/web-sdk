@@ -1,7 +1,7 @@
 import { Service } from 'typedi';
 
-import { RequestProblem } from '~/Type/Definition/RequestProblem';
-import { RequestProblemCategory } from '~/Type/Enum/RequestProblemCategory';
+import { RequestProblem } from '../Type/Definition/RequestProblem';
+import { RequestProblemCategory } from '../Type/Enum';
 
 /**
  * Class which helps to parse problem responses.

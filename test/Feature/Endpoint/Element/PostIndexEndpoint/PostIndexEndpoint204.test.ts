@@ -4,12 +4,12 @@ import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
+import { TestLogger } from '../../../TestLogger';
+
 import { PostIndexEndpoint } from '~/Endpoint/Element/PostIndexEndpoint';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { NodeWithOptionalId } from '~/Type/Definition/NodeWithOptionalId';
-
-import { TestLogger } from '../../../TestLogger';
 
 const mockServer = setupServer(
   http.post('http://mock-api/', () => {

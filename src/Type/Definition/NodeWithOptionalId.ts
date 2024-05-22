@@ -1,4 +1,4 @@
-import { Node } from '~/Type/Definition/Node';
+import { Node } from './Node';
 
 /**
  * Node with optional id.

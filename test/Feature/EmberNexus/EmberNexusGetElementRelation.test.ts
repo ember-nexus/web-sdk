@@ -4,12 +4,12 @@ import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
+import { TestLogger } from '../TestLogger';
+
 import { EmberNexus } from '~/EmberNexus';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
-
-import { TestLogger } from '../TestLogger';
 
 const mockServer = setupServer(
   http.get('http://mock-api/eb243613-832b-411a-a161-616cdd75e2f9', () => {

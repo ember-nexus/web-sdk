@@ -4,14 +4,14 @@ import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
+import { TestLogger } from '../../../TestLogger';
+
 import { PatchElementEndpoint } from '~/Endpoint/Element/PatchElementEndpoint';
 import { Response429TooManyRequestsError } from '~/Error/Response429TooManyRequestsError';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { Data } from '~/Type/Definition/Data';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
-
-import { TestLogger } from '../../../TestLogger';
 
 const mockServer = setupServer(
   http.patch('http://mock-api/6b1bf711-655c-406a-bdbf-cbee4a245836', () => {

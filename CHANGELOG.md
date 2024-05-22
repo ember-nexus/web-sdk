@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+### Changed
+- Refactor imports to use relative imports instead of custom alias (broke third party imports).
+- Change file ending of type files from `d.ts` to `.ts` so that they can be exported automatically as well.
+- Brake tests intentionally - will be fixed in a later release.
 
 ## 0.0.46 - 2024-05-21
 

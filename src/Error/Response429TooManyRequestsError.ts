@@ -1,4 +1,4 @@
-import { ResponseError } from '~/Error/ResponseError';
+import { ResponseError } from '.';
 
 /**
  * Wrapper around Ember Nexus API's 429 too many requests response.

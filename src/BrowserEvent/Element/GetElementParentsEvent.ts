@@ -1,7 +1,7 @@
-import { Collection } from '~/Type/Definition/Collection';
-import { Uuid } from '~/Type/Definition/Uuid';
-import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
-import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
+import { Uuid } from '../../Type/Definition';
+import { Collection } from '../../Type/Definition/Collection';
+import { EventIdentifier } from '../../Type/Enum';
+import { customEventDefaultInit } from '../../Type/Partial';
 
 type GetElementParentsEventDetails = {
   childId: Uuid;

@@ -1,13 +1,15 @@
 import { Service } from 'typedi';
 
-import { Response401UnauthorizedError } from '~/Error/Response401UnauthorizedError';
-import { Response403ForbiddenError } from '~/Error/Response403ForbiddenError';
-import { Response404NotFoundError } from '~/Error/Response404NotFoundError';
-import { Response429TooManyRequestsError } from '~/Error/Response429TooManyRequestsError';
-import { ResponseError } from '~/Error/ResponseError';
-import { Logger } from '~/Service/Logger';
-import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
-import { HttpRequestMethod } from '~/Type/Enum/HttpRequestMethod';
+import {
+  Response401UnauthorizedError,
+  Response403ForbiddenError,
+  Response404NotFoundError,
+  Response429TooManyRequestsError,
+  ResponseError,
+} from '../Error';
+import { HttpRequestMethod } from '../Type/Enum';
+
+import { Logger, WebSdkConfiguration } from '.';
 
 /**
  * Collection of different fetch helper methods.

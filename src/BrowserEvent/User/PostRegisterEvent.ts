@@ -1,8 +1,8 @@
-import { Data } from '~/Type/Definition/Data';
-import { UniqueUserIdentifier } from '~/Type/Definition/UniqueUserIdentifier';
-import { Uuid } from '~/Type/Definition/Uuid';
-import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
-import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
+import { UniqueUserIdentifier } from '../../Type/Definition';
+import { Uuid } from '../../Type/Definition';
+import { Data } from '../../Type/Definition/Data';
+import { EventIdentifier } from '../../Type/Enum';
+import { customEventDefaultInit } from '../../Type/Partial';
 
 type PostRegisterEventDetails = {
   uniqueUserIdentifier: UniqueUserIdentifier;

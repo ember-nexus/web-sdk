@@ -1,4 +1,4 @@
-import { Relation } from '~/Type/Definition/Relation';
+import { Relation } from './Relation';
 
 /**
  * Relation with optional id.

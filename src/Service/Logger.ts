@@ -1,8 +1,8 @@
 import { ILogObj, Logger as TsLogger } from 'tslog';
 import { Service } from 'typedi';
 
-import { LoggerFactory } from '~/Factory/LoggerFactory';
-import { LoggerInterface } from '~/Type/Definition/LoggerInterface';
+import { LoggerFactory } from '../Factory';
+import { LoggerInterface } from '../Type/Definition/LoggerInterface';
 
 /**
  * Default logger.

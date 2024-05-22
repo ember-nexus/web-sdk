@@ -1,8 +1,8 @@
-import { Data } from '~/Type/Definition/Data';
-import { Token } from '~/Type/Definition/Token';
-import { UniqueUserIdentifier } from '~/Type/Definition/UniqueUserIdentifier';
-import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
-import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
+import { Token } from '../../Type/Definition';
+import { UniqueUserIdentifier } from '../../Type/Definition';
+import { Data } from '../../Type/Definition/Data';
+import { EventIdentifier } from '../../Type/Enum';
+import { customEventDefaultInit } from '../../Type/Partial';
 
 type PostTokenEventDetails = {
   uniqueUserIdentifier: UniqueUserIdentifier;

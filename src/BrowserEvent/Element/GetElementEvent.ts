@@ -1,8 +1,8 @@
-import type { Node } from '~/Type/Definition/Node';
-import type { Relation } from '~/Type/Definition/Relation';
-import { Uuid } from '~/Type/Definition/Uuid';
-import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
-import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
+import { Uuid } from '../../Type/Definition';
+import type { Node } from '../../Type/Definition/Node';
+import type { Relation } from '../../Type/Definition/Relation';
+import { EventIdentifier } from '../../Type/Enum';
+import { customEventDefaultInit } from '../../Type/Partial';
 
 type GetElementEventDetails = {
   elementId: Uuid;

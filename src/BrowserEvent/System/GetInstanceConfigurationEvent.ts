@@ -1,6 +1,6 @@
-import { InstanceConfiguration } from '~/Type/Definition/InstanceConfiguration';
-import { EventIdentifier } from '~/Type/Enum/EventIdentifier';
-import { customEventDefaultInit } from '~/Type/Partial/CustomEventDefaultInit';
+import { InstanceConfiguration } from '../../Type/Definition/InstanceConfiguration';
+import { EventIdentifier } from '../../Type/Enum';
+import { customEventDefaultInit } from '../../Type/Partial';
 
 type GetInstanceConfigurationEventDetails = {
   result: Promise<InstanceConfiguration> | null;

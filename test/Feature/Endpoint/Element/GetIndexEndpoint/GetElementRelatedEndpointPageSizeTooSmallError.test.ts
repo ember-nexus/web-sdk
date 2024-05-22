@@ -1,11 +1,11 @@
 import { expect } from 'chai';
 import { Container } from 'typedi';
 
+import { TestLogger } from '../../../TestLogger';
+
 import { GetIndexEndpoint } from '~/Endpoint/Element/GetIndexEndpoint';
 import { ValidationError } from '~/Error/ValidationError';
 import { Logger } from '~/Service/Logger';
-
-import { TestLogger } from '../../../TestLogger';
 
 const testLogger: TestLogger = new TestLogger();
 Container.set(Logger, testLogger);

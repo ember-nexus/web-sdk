@@ -5,8 +5,8 @@
   "engines": {
     "node": ">= 20.0"
   },
-  "main": "dist/EmberNexus.js",
-  "types": "dist/EmberNexus.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "rm -rf ./dist && webpack --config webpack.release.config.cjs",
     "cs": "eslint --ext .ts ./src ./test",

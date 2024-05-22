@@ -1,5 +1,5 @@
-import { ParseError } from '~/Error/ParseError';
-import { Branded } from '~/Type/Definition/Branded';
+import { Branded } from './Branded';
+import { ParseError } from '../../Error';
 
 /**
  * Type safe variant of string containing single UUIDv4.

@@ -1,22 +1,26 @@
 import { Container, Service } from 'typedi';
 
-import { DeleteElementEvent } from '~/BrowserEvent/Element/DeleteElementEvent';
-import { GetElementChildrenEvent } from '~/BrowserEvent/Element/GetElementChildrenEvent';
-import { GetElementEvent } from '~/BrowserEvent/Element/GetElementEvent';
-import { GetElementParentsEvent } from '~/BrowserEvent/Element/GetElementParentsEvent';
-import { GetElementRelatedEvent } from '~/BrowserEvent/Element/GetElementRelatedEvent';
-import { GetIndexEvent } from '~/BrowserEvent/Element/GetIndexEvent';
-import { PatchElementEvent } from '~/BrowserEvent/Element/PatchElementEvent';
-import { PostElementEvent } from '~/BrowserEvent/Element/PostElementEvent';
-import { PostIndexEvent } from '~/BrowserEvent/Element/PostIndexEvent';
-import { PutElementEvent } from '~/BrowserEvent/Element/PutElementEvent';
-import { DeleteTokenEvent } from '~/BrowserEvent/User/DeleteTokenEvent';
-import { GetMeEvent } from '~/BrowserEvent/User/GetMeEvent';
-import { GetTokenEvent } from '~/BrowserEvent/User/GetTokenEvent';
-import { PostChangePasswordEvent } from '~/BrowserEvent/User/PostChangePasswordEvent';
-import { PostRegisterEvent } from '~/BrowserEvent/User/PostRegisterEvent';
-import { PostTokenEvent } from '~/BrowserEvent/User/PostTokenEvent';
-import { EmberNexus } from '~/EmberNexus';
+import {
+  DeleteElementEvent,
+  GetElementChildrenEvent,
+  GetElementEvent,
+  GetElementParentsEvent,
+  GetElementRelatedEvent,
+  GetIndexEvent,
+  PatchElementEvent,
+  PostElementEvent,
+  PostIndexEvent,
+  PutElementEvent,
+} from './Element';
+import {
+  DeleteTokenEvent,
+  GetMeEvent,
+  GetTokenEvent,
+  PostChangePasswordEvent,
+  PostRegisterEvent,
+  PostTokenEvent,
+} from './User';
+import { EmberNexus } from '../Service';
 
 /**
  * Class which handles browser event subscriptions.

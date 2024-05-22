@@ -3,32 +3,36 @@ import 'reflect-metadata';
 import { LRUCache } from 'lru-cache';
 import { Container, Service } from 'typedi';
 
-import { DeleteElementEndpoint } from '~/Endpoint/Element/DeleteElementEndpoint';
-import { GetElementChildrenEndpoint } from '~/Endpoint/Element/GetElementChildrenEndpoint';
-import { GetElementEndpoint } from '~/Endpoint/Element/GetElementEndpoint';
-import { GetElementParentsEndpoint } from '~/Endpoint/Element/GetElementParentsEndpoint';
-import { GetElementRelatedEndpoint } from '~/Endpoint/Element/GetElementRelatedEndpoint';
-import { GetIndexEndpoint } from '~/Endpoint/Element/GetIndexEndpoint';
-import { PatchElementEndpoint } from '~/Endpoint/Element/PatchElementEndpoint';
-import { PostElementEndpoint } from '~/Endpoint/Element/PostElementEndpoint';
-import { PostIndexEndpoint } from '~/Endpoint/Element/PostIndexEndpoint';
-import { PutElementEndpoint } from '~/Endpoint/Element/PutElementEndpoint';
-import { DeleteTokenEndpoint } from '~/Endpoint/User/DeleteTokenEndpoint';
-import { GetMeEndpoint } from '~/Endpoint/User/GetMeEndpoint';
-import { GetTokenEndpoint } from '~/Endpoint/User/GetTokenEndpoint';
-import { PostChangePasswordEndpoint } from '~/Endpoint/User/PostChangePasswordEndpoint';
-import { PostRegisterEndpoint } from '~/Endpoint/User/PostRegisterEndpoint';
-import { PostTokenEndpoint } from '~/Endpoint/User/PostTokenEndpoint';
-import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
-import { Collection } from '~/Type/Definition/Collection';
-import { Data } from '~/Type/Definition/Data';
-import { Node } from '~/Type/Definition/Node';
-import { NodeWithOptionalId } from '~/Type/Definition/NodeWithOptionalId';
-import { Relation } from '~/Type/Definition/Relation';
-import { RelationWithOptionalId } from '~/Type/Definition/RelationWithOptionalId';
-import { Token } from '~/Type/Definition/Token';
-import { UniqueUserIdentifier } from '~/Type/Definition/UniqueUserIdentifier';
-import { Uuid } from '~/Type/Definition/Uuid';
+import { WebSdkConfiguration } from './WebSdkConfiguration';
+import {
+  DeleteElementEndpoint,
+  GetElementChildrenEndpoint,
+  GetElementEndpoint,
+  GetElementParentsEndpoint,
+  GetElementRelatedEndpoint,
+  GetIndexEndpoint,
+  PatchElementEndpoint,
+  PostElementEndpoint,
+  PostIndexEndpoint,
+  PutElementEndpoint,
+} from '../Endpoint/Element';
+import {
+  DeleteTokenEndpoint,
+  GetMeEndpoint,
+  GetTokenEndpoint,
+  PostChangePasswordEndpoint,
+  PostRegisterEndpoint,
+  PostTokenEndpoint,
+} from '../Endpoint/User';
+import { Token } from '../Type/Definition';
+import { UniqueUserIdentifier } from '../Type/Definition';
+import { Uuid } from '../Type/Definition';
+import { Collection } from '../Type/Definition/Collection';
+import { Data } from '../Type/Definition/Data';
+import { Node } from '../Type/Definition/Node';
+import { NodeWithOptionalId } from '../Type/Definition/NodeWithOptionalId';
+import { Relation } from '../Type/Definition/Relation';
+import { RelationWithOptionalId } from '../Type/Definition/RelationWithOptionalId';
 
 @Service()
 class EmberNexus {

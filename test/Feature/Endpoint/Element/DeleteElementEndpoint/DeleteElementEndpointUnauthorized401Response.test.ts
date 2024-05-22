@@ -4,13 +4,13 @@ import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
+import { TestLogger } from '../../../TestLogger';
+
 import { DeleteElementEndpoint } from '~/Endpoint/Element/DeleteElementEndpoint';
 import { Response401UnauthorizedError } from '~/Error/Response401UnauthorizedError';
 import { Logger } from '~/Service/Logger';
 import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 import { validateUuidFromString } from '~/Type/Definition/Uuid';
-
-import { TestLogger } from '../../../TestLogger';
 
 const mockServer = setupServer(
   http.delete('http://mock-api/4b67f72a-65f2-43b4-9989-29fc0d86a6db', () => {

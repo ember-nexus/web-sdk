@@ -1,4 +1,4 @@
-import { RequestProblemCategory } from '~/Type/Enum/RequestProblemCategory';
+import { RequestProblemCategory } from '../Enum';
 
 type RequestProblem = {
   category: RequestProblemCategory;

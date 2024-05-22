@@ -1,7 +1,7 @@
 import { Service } from 'typedi';
 
-import { NormalizedValueToRawValueEvent } from '~/EventSystem/NormalizedValueToRawValue/Event/NormalizedValueToRawValueEvent';
-import { EventListener } from '~/Type/Definition/EventListener';
+import { EventListener } from '../../../Type/Definition/EventListener';
+import { NormalizedValueToRawValueEvent } from '../Event';
 
 /**
  * Skips conversion of primitive data types and sets them directly.
