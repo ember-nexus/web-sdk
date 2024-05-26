@@ -9,6 +9,13 @@
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
   "browser": "dist/browser/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "default": "./dist/esm/index.js"
+    }
+  },
   "scripts": {
     "build": "rm -rf ./dist && yarn build:esm && yarn build:browser",
     "build:browser": "webpack --config webpack.config.cjs",
