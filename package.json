@@ -23,6 +23,10 @@
   },
   "author": "Syndesi <info@ember-nexus.dev>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ember-nexus/web-sdk.git"
+  },
   "dependencies": {
     "@types/luxon": "^3.3.4",
     "lru-cache": "^10.0.1",
