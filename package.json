@@ -13,7 +13,8 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/esm/index.js",
       "default": "./dist/esm/index.js"
-    }
+    },
+    "./dist/types/*": "./dist/types/*.d.ts"
   },
   "scripts": {
     "build": "rm -rf ./dist && yarn build:esm && yarn build:browser",
