@@ -21,12 +21,12 @@
     "noImplicitAny": false,
     "noImplicitThis": false,
     "strictNullChecks": true,
-    "declaration": true,
+    "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },
   "include": [
-    "src/**/*",
-    "test/**/*"
-  ]
+    "src/**/*"
+  ],
+  "exclude": ["node_modules"]
 }

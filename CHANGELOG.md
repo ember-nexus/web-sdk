@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.0.47 - 2024-05-22
 ### Changed
+- Refactor build system, inspired by tslog.
+
+## 0.0.47 - 2024-05-22
+### Changed
 - Refactor imports to use relative imports instead of custom alias (broke third party imports).
 - Change file ending of type files from `d.ts` to `.ts` so that they can be exported automatically as well.
 - Brake tests intentionally - will be fixed in a later release.

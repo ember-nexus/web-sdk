@@ -1,13 +1,8 @@
 import { Service } from 'typedi';
 
-import { NetworkError } from '../../Error';
-import { ParseError } from '../../Error';
-import { ElementParser } from '../../Service';
-import { FetchHelper } from '../../Service';
-import { Logger } from '../../Service';
-import { Uuid } from '../../Type/Definition';
-import { Node } from '../../Type/Definition/Node';
-import { Relation } from '../../Type/Definition/Relation';
+import { NetworkError, ParseError } from '../../Error';
+import { ElementParser, FetchHelper, Logger } from '../../Service';
+import { Node, Relation, Uuid } from '../../Type/Definition';
 
 /**
  * The get element endpoint retrieves a single element.
