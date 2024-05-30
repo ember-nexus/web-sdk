@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 
-import { GetTokenEvent } from '~/BrowserEvent/User/GetTokenEvent';
-import { Node } from '~/Type/Definition/Node';
-import { validateUuidFromString } from '~/Type/Definition/Uuid';
+import { GetTokenEvent } from '../../../../src/BrowserEvent/User';
+import { Node } from '../../../../src/Type/Definition';
+import { validateUuidFromString } from '../../../../src/Type/Definition';
 
 describe('GetTokenEvent tests', () => {
   it('should return null after creation', async () => {

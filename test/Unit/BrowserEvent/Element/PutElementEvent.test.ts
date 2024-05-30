@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
-import { PutElementEvent } from '~/BrowserEvent/Element/PutElementEvent';
-import { validateUuidFromString } from '~/Type/Definition/Uuid';
+import { PutElementEvent } from '../../../../src/BrowserEvent/Element';
+import { validateUuidFromString } from '../../../../src/Type/Definition';
 
 describe('PutElementEvent tests', () => {
   test('PutElementEvent returns correct type', () => {

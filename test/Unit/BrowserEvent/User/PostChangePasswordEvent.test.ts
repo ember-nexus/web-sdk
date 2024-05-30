@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
-import { PostChangePasswordEvent } from '~/BrowserEvent/User/PostChangePasswordEvent';
-import { createUniqueUserIdentifierFromString } from '~/Type/Definition/UniqueUserIdentifier';
+import { PostChangePasswordEvent } from '../../../../src/BrowserEvent/User';
+import { createUniqueUserIdentifierFromString } from '../../../../src/Type/Definition';
 
 describe('PostChangePasswordEvent tests', () => {
   it('should return properties set in constructor', async () => {

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
-import { GetIndexEvent } from '~/BrowserEvent/Element/GetIndexEvent';
-import { Collection } from '~/Type/Definition/Collection';
+import { GetIndexEvent } from '../../../../src/BrowserEvent/Element';
+import { Collection } from '../../../../src/Type/Definition';
 
 describe('GetIndexEvent tests', () => {
   test('GetIndexEvent returns correct type', () => {

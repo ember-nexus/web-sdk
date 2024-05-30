@@ -1,4 +1,4 @@
-import { ResponseError } from '.';
+import { ResponseError } from './ResponseError';
 
 /**
  * Wrapper around Ember Nexus API's 401 unauthorized response.

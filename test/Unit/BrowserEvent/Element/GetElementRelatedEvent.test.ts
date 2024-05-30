@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 
-import { GetElementRelatedEvent } from '~/BrowserEvent/Element/GetElementRelatedEvent';
-import { Collection } from '~/Type/Definition/Collection';
-import { validateUuidFromString } from '~/Type/Definition/Uuid';
+import { GetElementRelatedEvent } from '../../../../src/BrowserEvent/Element';
+import { Collection } from '../../../../src/Type/Definition';
+import { validateUuidFromString } from '../../../../src/Type/Definition';
 
 describe('GetElementRelatedEvent tests', () => {
   test('GetElementRelatedEvent returns correct type', () => {

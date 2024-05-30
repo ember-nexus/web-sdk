@@ -1,4 +1,4 @@
-import { EmberNexusError } from '.';
+import { EmberNexusError } from './EmberNexusError';
 
 /**
  * Base class for errors returned by the API.

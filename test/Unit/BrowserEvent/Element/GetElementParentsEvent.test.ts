@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 
-import { GetElementParentsEvent } from '~/BrowserEvent/Element/GetElementParentsEvent';
-import { Collection } from '~/Type/Definition/Collection';
-import { validateUuidFromString } from '~/Type/Definition/Uuid';
+import { GetElementParentsEvent } from '../../../../src/BrowserEvent/Element';
+import { Collection } from '../../../../src/Type/Definition';
+import { validateUuidFromString } from '../../../../src/Type/Definition';
 
 describe('GetElementParentsEvent tests', () => {
   test('GetElementParentsEvent returns correct type', () => {

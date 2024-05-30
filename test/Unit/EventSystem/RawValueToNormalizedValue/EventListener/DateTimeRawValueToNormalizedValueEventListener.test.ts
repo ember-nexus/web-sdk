@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import { DateTime } from 'luxon';
 import { SinonSandbox, createSandbox } from 'sinon';
 
-import { RawValueToNormalizedValueEvent } from '~/EventSystem/RawValueToNormalizedValue/Event/RawValueToNormalizedValueEvent';
-import { DateTimeRawValueToNormalizedValueEventListener } from '~/EventSystem/RawValueToNormalizedValue/EventListener/DateTimeRawValueToNormalizedValueEventListener';
+import { RawValueToNormalizedValueEvent } from '../../../../../src/EventSystem/RawValueToNormalizedValue/Event';
+import { DateTimeRawValueToNormalizedValueEventListener } from '../../../../../src/EventSystem/RawValueToNormalizedValue/EventListener';
 
 describe('DateTimeRawValueToNormalizedValueEventListener tests', () => {
   let sandbox: SinonSandbox;

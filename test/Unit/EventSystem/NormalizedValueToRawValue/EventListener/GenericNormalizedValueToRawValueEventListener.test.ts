@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import { SinonSandbox, createSandbox } from 'sinon';
 
-import { NormalizedValueToRawValueEvent } from '~/EventSystem/NormalizedValueToRawValue/Event/NormalizedValueToRawValueEvent';
-import { GenericNormalizedValueToRawValueEventListener } from '~/EventSystem/NormalizedValueToRawValue/EventListener/GenericNormalizedValueToRawValueEventListener';
+import { NormalizedValueToRawValueEvent } from '../../../../../src/EventSystem/NormalizedValueToRawValue/Event';
+import { GenericNormalizedValueToRawValueEventListener } from '../../../../../src/EventSystem/NormalizedValueToRawValue/EventListener';
 
 describe('GenericNormalizedValueToRawValueEventListener tests', () => {
   let sandbox: SinonSandbox;

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
-import { DeleteElementEvent } from '~/BrowserEvent/Element/DeleteElementEvent';
-import { validateUuidFromString } from '~/Type/Definition/Uuid';
+import { DeleteElementEvent } from '../../../../src/BrowserEvent/Element';
+import { validateUuidFromString } from '../../../../src/Type/Definition';
 
 describe('DeleteElementEvent tests', () => {
   test('DeleteElementEvent returns correct type', () => {

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { NormalizedValueToRawValueEvent } from '~/EventSystem/NormalizedValueToRawValue/Event/NormalizedValueToRawValueEvent';
+import { NormalizedValueToRawValueEvent } from '../../../../../src/EventSystem/NormalizedValueToRawValue/Event';
 
 describe('NormalizedValueToRawValueEvent tests', () => {
   it('should satisfy initial properties', async () => {

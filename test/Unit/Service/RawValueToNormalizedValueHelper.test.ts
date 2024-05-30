@@ -3,9 +3,8 @@ import { DateTime } from 'luxon';
 import { SinonSandbox, SinonStubbedInstance, createSandbox } from 'sinon';
 import { Container } from 'typedi';
 
-import { Logger } from '~/Service/Logger';
-import { RawValueToNormalizedValueHelper } from '~/Service/RawValueToNormalizedValueHelper';
-import { Data } from '~/Type/Definition/Data';
+import { Logger, RawValueToNormalizedValueHelper } from '../../../src/Service';
+import { Data } from '../../../src/Type/Definition';
 
 describe('RawValueToNormalizedValueHelper tests', () => {
   let sandbox: SinonSandbox;

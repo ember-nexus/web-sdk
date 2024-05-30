@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
-import { PatchElementEvent } from '~/BrowserEvent/Element/PatchElementEvent';
-import { validateUuidFromString } from '~/Type/Definition/Uuid';
+import { PatchElementEvent } from '../../../../src/BrowserEvent/Element';
+import { validateUuidFromString } from '../../../../src/Type/Definition';
 
 describe('PatchElementEvent tests', () => {
   test('PatchElementEvent returns correct type', () => {

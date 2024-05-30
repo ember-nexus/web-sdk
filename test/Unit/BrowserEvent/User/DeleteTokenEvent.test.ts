@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { DeleteTokenEvent } from '~/BrowserEvent/User/DeleteTokenEvent';
+import { DeleteTokenEvent } from '../../../../src/BrowserEvent/User';
 
 describe('DeleteTokenEvent tests', () => {
   test('DeleteTokenEvent returns correct type', () => {

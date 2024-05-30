@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 
-import { GetElementEvent } from '~/BrowserEvent/Element/GetElementEvent';
-import type { Node } from '~/Type/Definition/Node';
-import type { Relation } from '~/Type/Definition/Relation';
-import { validateUuidFromString } from '~/Type/Definition/Uuid';
+import { GetElementEvent } from '../../../../src/BrowserEvent/Element';
+import type { Node } from '../../../../src/Type/Definition';
+import type { Relation } from '../../../../src/Type/Definition';
+import { validateUuidFromString } from '../../../../src/Type/Definition';
 
 describe('GetElementEvent tests', () => {
   test('GetElementEvent returns correct type', () => {
