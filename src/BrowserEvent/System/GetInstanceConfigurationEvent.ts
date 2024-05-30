@@ -3,25 +3,28 @@ import { EventIdentifier } from '../../Type/Enum';
 import { customEventDefaultInit } from '../../Type/Partial';
 
 type GetInstanceConfigurationEventDetails = {
-  result: Promise<InstanceConfiguration> | null;
+  instanceConfiguration: Promise<InstanceConfiguration> | null;
 };
 
 class GetInstanceConfigurationEvent extends CustomEvent<GetInstanceConfigurationEventDetails> {
+  public static type = EventIdentifier.GetInstanceConfiguration;
   constructor() {
     super(EventIdentifier.GetInstanceConfiguration, {
       ...customEventDefaultInit,
       detail: {
-        result: null,
+        instanceConfiguration: null,
       },
     });
   }
 
-  getResult(): Promise<InstanceConfiguration> | null {
-    return this.detail.result;
+  getInstanceConfiguration(): Promise<InstanceConfiguration> | null {
+    return this.detail.instanceConfiguration;
   }
 
-  setResult(result: Promise<InstanceConfiguration> | null): GetInstanceConfigurationEvent {
-    this.detail.result = result;
+  setInstanceConfiguration(
+    instanceConfiguration: Promise<InstanceConfiguration> | null,
+  ): GetInstanceConfigurationEvent {
+    this.detail.instanceConfiguration = instanceConfiguration;
     return this;
   }
 }

@@ -4,15 +4,20 @@ import { customEventDefaultInit } from '../../Type/Partial';
 
 type PostSearchEventDetails = {
   query: Data;
+  page: number;
+  pageSize: number | null;
   result: Promise<ElementCollection> | null;
 };
 
 class PostSearchEvent extends CustomEvent<PostSearchEventDetails> {
-  constructor(query: Data = {}) {
+  public static type = EventIdentifier.PostSearch;
+  constructor(query: Data, page = 1, pageSize: number | null = null) {
     super(EventIdentifier.PostSearch, {
       ...customEventDefaultInit,
       detail: {
         query: query,
+        page: page,
+        pageSize: pageSize,
         result: null,
       },
     });
@@ -20,6 +25,14 @@ class PostSearchEvent extends CustomEvent<PostSearchEventDetails> {
 
   getQuery(): Data {
     return this.detail.query;
+  }
+
+  getPage(): number {
+    return this.detail.page;
+  }
+
+  getPageSize(): number | null {
+    return this.detail.pageSize;
   }
 
   getResult(): Promise<ElementCollection> | null {
