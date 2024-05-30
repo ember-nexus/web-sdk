@@ -12,6 +12,8 @@ describe('GetIndexEvent tests', () => {
     const getIndexEvent = new GetIndexEvent();
 
     expect(getIndexEvent.getIndexElements()).to.be.null;
+    expect(getIndexEvent.getPage()).to.equal(1);
+    expect(getIndexEvent.getPageSize()).to.be.null;
   });
 
   it('should return promise when collection was set', async () => {
@@ -37,5 +39,14 @@ describe('GetIndexEvent tests', () => {
     getIndexEvent.setIndexElements(promise);
 
     expect(getIndexEvent.getIndexElements()).to.equal(promise);
+    expect(getIndexEvent.getPage()).to.equal(1);
+    expect(getIndexEvent.getPageSize()).to.be.null;
+  });
+
+  it('should return page and page size if explicitly set', () => {
+    const getIndexEvent = new GetIndexEvent(3, 25);
+
+    expect(getIndexEvent.getPage()).to.equal(3);
+    expect(getIndexEvent.getPageSize()).to.equal(25);
   });
 });

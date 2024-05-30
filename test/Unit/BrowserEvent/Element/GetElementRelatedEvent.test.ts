@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { GetElementRelatedEvent } from '../../../../src/BrowserEvent/Element';
+import {GetElementRelatedEvent} from '../../../../src/BrowserEvent/Element';
 import { Collection } from '../../../../src/Type/Definition';
 import { validateUuidFromString } from '../../../../src/Type/Definition';
 
@@ -15,6 +15,8 @@ describe('GetElementRelatedEvent tests', () => {
 
     expect(getElementRelatedEvent.getCenterId()).to.equal(uuid);
     expect(getElementRelatedEvent.getRelated()).to.be.null;
+    expect(getElementRelatedEvent.getPage()).to.equal(1);
+    expect(getElementRelatedEvent.getPageSize()).to.be.null;
   });
 
   it('should return promise when collection was set', async () => {
@@ -42,5 +44,15 @@ describe('GetElementRelatedEvent tests', () => {
 
     expect(getElementRelatedEvent.getCenterId()).to.equal(uuid);
     expect(getElementRelatedEvent.getRelated()).to.equal(promise);
+    expect(getElementRelatedEvent.getPage()).to.equal(1);
+    expect(getElementRelatedEvent.getPageSize()).to.be.null;
+  });
+
+  it('should return page and page size if explicitly set', () => {
+    const uuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc94');
+    const getElementRelatedEvent = new GetElementRelatedEvent(uuid, 3, 25);
+
+    expect(getElementRelatedEvent.getPage()).to.equal(3);
+    expect(getElementRelatedEvent.getPageSize()).to.equal(25);
   });
 });
