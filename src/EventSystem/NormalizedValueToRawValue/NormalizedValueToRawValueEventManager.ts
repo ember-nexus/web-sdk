@@ -1,9 +1,11 @@
 import { Service } from 'typedi';
 
 import { NormalizedValueToRawValueEvent } from './Event';
-import { DateTimeNormalizedValueToRawValueEventListener } from './EventListener';
-import { GenericNormalizedValueToRawValueEventListener } from './EventListener';
-import { EventManager } from '..';
+import {
+  DateTimeNormalizedValueToRawValueEventListener,
+  GenericNormalizedValueToRawValueEventListener,
+} from './EventListener';
+import { EventManager } from '../EventManager';
 
 /**
  * Event manager for NormalizedValueToRawValueEvent.

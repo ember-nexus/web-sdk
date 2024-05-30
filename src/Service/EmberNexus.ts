@@ -26,13 +26,7 @@ import {
 } from '../Endpoint/User';
 import { Token } from '../Type/Definition';
 import { UniqueUserIdentifier } from '../Type/Definition';
-import { Uuid } from '../Type/Definition';
-import { Collection } from '../Type/Definition/Collection';
-import { Data } from '../Type/Definition/Data';
-import { Node } from '../Type/Definition/Node';
-import { NodeWithOptionalId } from '../Type/Definition/NodeWithOptionalId';
-import { Relation } from '../Type/Definition/Relation';
-import { RelationWithOptionalId } from '../Type/Definition/RelationWithOptionalId';
+import { Collection, Data, Node, NodeWithOptionalId, Relation, RelationWithOptionalId, Uuid } from '../Type/Definition';
 
 @Service()
 class EmberNexus {

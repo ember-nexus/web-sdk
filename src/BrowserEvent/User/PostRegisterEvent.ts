@@ -1,6 +1,4 @@
-import { UniqueUserIdentifier } from '../../Type/Definition';
-import { Uuid } from '../../Type/Definition';
-import { Data } from '../../Type/Definition/Data';
+import { Data, UniqueUserIdentifier, Uuid } from '../../Type/Definition';
 import { EventIdentifier } from '../../Type/Enum';
 import { customEventDefaultInit } from '../../Type/Partial';
 

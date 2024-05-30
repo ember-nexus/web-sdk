@@ -1,12 +1,8 @@
 import { Service } from 'typedi';
 
-import { NetworkError } from '../../Error';
-import { ParseError } from '../../Error';
-import { FetchHelper } from '../../Service';
-import { Logger } from '../../Service';
-import { UniqueUserIdentifier } from '../../Type/Definition';
-import { Uuid, validateUuidFromString } from '../../Type/Definition';
-import { Data } from '../../Type/Definition/Data';
+import { NetworkError, ParseError } from '../../Error';
+import { FetchHelper, Logger } from '../../Service';
+import { Data, UniqueUserIdentifier, Uuid, validateUuidFromString } from '../../Type/Definition';
 
 /**
  * The post register endpoint is used to create new user accounts.

@@ -1,12 +1,8 @@
 import { Service } from 'typedi';
 
-import { NetworkError } from '../../Error';
-import { ParseError } from '../../Error';
-import { FetchHelper } from '../../Service';
-import { Logger } from '../../Service';
-import { Uuid, validateUuidFromString } from '../../Type/Definition';
-import { NodeWithOptionalId } from '../../Type/Definition/NodeWithOptionalId';
-import { RelationWithOptionalId } from '../../Type/Definition/RelationWithOptionalId';
+import { NetworkError, ParseError } from '../../Error';
+import { FetchHelper, Logger } from '../../Service';
+import { NodeWithOptionalId, RelationWithOptionalId, Uuid, validateUuidFromString } from '../../Type/Definition';
 
 /**
  * The post index endpoint creates a single element.

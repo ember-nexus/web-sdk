@@ -1,4 +1,4 @@
-import type { Node } from '../../Type/Definition/Node';
+import type { Node } from '../../Type/Definition';
 import { EventIdentifier } from '../../Type/Enum';
 import { customEventDefaultInit } from '../../Type/Partial';
 

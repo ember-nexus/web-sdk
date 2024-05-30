@@ -1,12 +1,8 @@
 import { Service } from 'typedi';
 
-import { LogicError } from '../../Error';
-import { NetworkError } from '../../Error';
-import { ParseError } from '../../Error';
-import { ElementParser } from '../../Service';
-import { FetchHelper } from '../../Service';
-import { Logger } from '../../Service';
-import { Node } from '../../Type/Definition/Node';
+import { LogicError, NetworkError, ParseError } from '../../Error';
+import { ElementParser, FetchHelper, Logger } from '../../Service';
+import { Node } from '../../Type/Definition';
 
 /**
  * The get me endpoint retrieves the current user's element.

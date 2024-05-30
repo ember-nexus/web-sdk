@@ -1,4 +1,4 @@
-import { StoppableEvent } from '../../../Type/Definition/StoppableEvent';
+import { StoppableEvent } from '../../../Type/Definition';
 
 class RawValueToNormalizedValueEvent implements StoppableEvent {
   private normalizedValue: unknown = null;

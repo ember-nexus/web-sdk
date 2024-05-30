@@ -8,7 +8,7 @@ class ResponseError extends EmberNexusError {
   private _title: string | null = null;
   private _detail: string | null = null;
   private _status: number | null = null;
-  constructor(message) {
+  constructor(message?: string) {
     super(message);
   }
 

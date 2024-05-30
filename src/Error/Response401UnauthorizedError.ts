@@ -6,7 +6,7 @@ import { ResponseError } from './ResponseError';
  * @see [Ember Nexus API: Get Details for Error 401 Unauthorized Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/error/get-401-unauthorized)
  */
 class Response401UnauthorizedError extends ResponseError {
-  constructor(message) {
+  constructor(message?: string) {
     super(message);
     this.name = 'Response401UnauthorizedError';
     this.setStatus(401);

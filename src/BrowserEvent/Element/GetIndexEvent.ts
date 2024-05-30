@@ -1,4 +1,4 @@
-import { Collection } from '../../Type/Definition/Collection';
+import { Collection } from '../../Type/Definition';
 import { EventIdentifier } from '../../Type/Enum';
 import { customEventDefaultInit } from '../../Type/Partial';
 

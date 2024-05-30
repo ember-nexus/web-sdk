@@ -1,14 +1,8 @@
 import { Service } from 'typedi';
 
-import { EmberNexusError } from '../../Error';
-import { NetworkError } from '../../Error';
-import { ParseError } from '../../Error';
-import { ValidationError } from '../../Error';
-import { CollectionParser } from '../../Service';
-import { FetchHelper } from '../../Service';
-import { Logger } from '../../Service';
-import { Uuid } from '../../Type/Definition';
-import { Collection } from '../../Type/Definition/Collection';
+import { EmberNexusError, NetworkError, ParseError, ValidationError } from '../../Error';
+import { CollectionParser, FetchHelper, Logger } from '../../Service';
+import { Collection, Uuid } from '../../Type/Definition';
 
 /**
  * The get element related endpoint retrieves all related nodes of a single center node.

@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
 
-import { RequestProblem } from '../Type/Definition/RequestProblem';
+import { RequestProblem } from '../Type/Definition';
 import { RequestProblemCategory } from '../Type/Enum';
 
 /**

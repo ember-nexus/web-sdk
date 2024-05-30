@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
 
-import { EventListener } from '../../../Type/Definition/EventListener';
+import { EventListener } from '../../../Type/Definition';
 import { RawValueToNormalizedValueEvent } from '../Event';
 
 /**

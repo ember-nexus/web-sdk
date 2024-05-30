@@ -1,5 +1,4 @@
-import { EventListener } from '../Type/Definition/EventListener';
-import { StoppableEvent } from '../Type/Definition/StoppableEvent';
+import { EventListener, StoppableEvent } from '../Type/Definition';
 
 class EventManager<EventType extends StoppableEvent> {
   private eventListeners: [number, EventListener<EventType>][] = [];

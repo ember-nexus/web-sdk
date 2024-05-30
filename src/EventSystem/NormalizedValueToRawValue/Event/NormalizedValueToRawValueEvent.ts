@@ -1,4 +1,4 @@
-import { StoppableEvent } from '../../../Type/Definition/StoppableEvent';
+import { StoppableEvent } from '../../../Type/Definition';
 
 /**
  * Event object for converting JavaScript variables and especially objects to a representation which can be sent to

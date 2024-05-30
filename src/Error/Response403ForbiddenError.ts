@@ -6,7 +6,7 @@ import { ResponseError } from './ResponseError';
  * @see [Ember Nexus API: Get Details for Error 403 Forbidden Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/error/get-403-forbidden)
  */
 class Response403ForbiddenError extends ResponseError {
-  constructor(message) {
+  constructor(message?: string) {
     super(message);
     this.name = 'Response403ForbiddenError';
     this.setStatus(403);

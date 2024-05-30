@@ -1,8 +1,6 @@
 import { Service } from 'typedi';
 
-import { Collection } from '../Type/Definition/Collection';
-import { Node } from '../Type/Definition/Node';
-import { Relation } from '../Type/Definition/Relation';
+import { Collection, Node, Relation } from '../Type/Definition';
 
 import { ElementParser } from '.';
 

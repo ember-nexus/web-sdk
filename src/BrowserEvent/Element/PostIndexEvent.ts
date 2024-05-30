@@ -1,6 +1,4 @@
-import { Uuid } from '../../Type/Definition';
-import { NodeWithOptionalId } from '../../Type/Definition/NodeWithOptionalId';
-import { RelationWithOptionalId } from '../../Type/Definition/RelationWithOptionalId';
+import { NodeWithOptionalId, RelationWithOptionalId, Uuid } from '../../Type/Definition';
 import { EventIdentifier } from '../../Type/Enum';
 import { customEventDefaultInit } from '../../Type/Partial';
 

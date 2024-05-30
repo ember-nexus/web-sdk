@@ -6,7 +6,7 @@ import { ResponseError } from './ResponseError';
  * @todo add link to documentation once 429 errors are returned.
  */
 class Response429TooManyRequestsError extends ResponseError {
-  constructor(message) {
+  constructor(message?: string) {
     super(message);
     this.name = 'Response429TooManyRequestsError';
     this.setStatus(429);

@@ -1,4 +1,4 @@
-import { InstanceConfiguration } from '../../Type/Definition/InstanceConfiguration';
+import { InstanceConfiguration } from '../../Type/Definition';
 import { EventIdentifier } from '../../Type/Enum';
 import { customEventDefaultInit } from '../../Type/Partial';
 

@@ -3,7 +3,7 @@ import { Service } from 'typedi';
 import { Logger } from './Logger';
 import { RawValueToNormalizedValueEventManager } from '../EventSystem/RawValueToNormalizedValue';
 import { RawValueToNormalizedValueEvent } from '../EventSystem/RawValueToNormalizedValue/Event';
-import { Data } from '../Type/Definition/Data';
+import { Data } from '../Type/Definition';
 
 /**
  * Class which helps to parse values.

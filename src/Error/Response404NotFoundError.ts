@@ -6,7 +6,7 @@ import { ResponseError } from './ResponseError';
  * @see [Ember Nexus API: Get Details for Error 404 Not Found Endpoint](https://ember-nexus.github.io/api/#/api-endpoints/error/get-404-not-found)
  */
 class Response404NotFoundError extends ResponseError {
-  constructor(message) {
+  constructor(message?: string) {
     super(message);
     this.name = 'Response404NotFoundError';
     this.setStatus(404);

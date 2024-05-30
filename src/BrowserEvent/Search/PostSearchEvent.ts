@@ -1,5 +1,4 @@
-import { Data } from '../../Type/Definition/Data';
-import { ElementCollection } from '../../Type/Definition/ElementCollection';
+import { Data, ElementCollection } from '../../Type/Definition';
 import { EventIdentifier } from '../../Type/Enum';
 import { customEventDefaultInit } from '../../Type/Partial';
 

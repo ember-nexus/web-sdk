@@ -1,11 +1,8 @@
 import { Service } from 'typedi';
 
-import { NetworkError } from '../../Error';
-import { ParseError } from '../../Error';
-import { FetchHelper } from '../../Service';
-import { Logger } from '../../Service';
-import { Uuid, validateUuidFromString } from '../../Type/Definition';
-import { NodeWithOptionalId } from '../../Type/Definition/NodeWithOptionalId';
+import { NetworkError, ParseError } from '../../Error';
+import { FetchHelper, Logger } from '../../Service';
+import { NodeWithOptionalId, Uuid, validateUuidFromString } from '../../Type/Definition';
 
 /**
  * The post element endpoint creates a single child node.

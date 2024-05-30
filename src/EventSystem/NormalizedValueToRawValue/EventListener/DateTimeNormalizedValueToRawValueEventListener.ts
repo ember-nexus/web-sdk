@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 import { Service } from 'typedi';
 
-import { EventListener } from '../../../Type/Definition/EventListener';
+import { EventListener } from '../../../Type/Definition';
 import { NormalizedValueToRawValueEvent } from '../Event';
 
 /**

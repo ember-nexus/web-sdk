@@ -1,11 +1,8 @@
 import { Service } from 'typedi';
 
-import { NetworkError } from '../../Error';
-import { ParseError } from '../../Error';
-import { FetchHelper } from '../../Service';
-import { Logger } from '../../Service';
-import { Uuid } from '../../Type/Definition';
-import { Data } from '../../Type/Definition/Data';
+import { NetworkError, ParseError } from '../../Error';
+import { FetchHelper, Logger } from '../../Service';
+import { Data, Uuid } from '../../Type/Definition';
 
 /**
  * The patch element endpoint updates a single element.

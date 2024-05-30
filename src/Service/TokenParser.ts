@@ -1,7 +1,6 @@
 import { Service } from 'typedi';
 
-import { Token } from '../Type/Definition';
-import { validateTokenFromString } from '../Type/Definition';
+import { Token, validateTokenFromString } from '../Type/Definition';
 
 /**
  * Class which helps to parse tokens.

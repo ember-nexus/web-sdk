@@ -1,8 +1,6 @@
 import { Service } from 'typedi';
 
-import { validateUuidFromString } from '../Type/Definition';
-import { Node } from '../Type/Definition/Node';
-import { Relation } from '../Type/Definition/Relation';
+import { Node, Relation, validateUuidFromString } from '../Type/Definition';
 
 /**
  * Class which helps to parse elements.
