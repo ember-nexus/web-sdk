@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import { PostSearchEvent } from '../../../../src/BrowserEvent/Search';
-import { Data, ElementCollection, validateUuidFromString} from '../../../../src/Type/Definition';
+import { Data, ElementCollection, validateUuidFromString } from '../../../../src/Type/Definition';
 
 describe('PostSearchEvent tests', () => {
   test('PostSearchEvent returns correct type', () => {
@@ -10,7 +10,7 @@ describe('PostSearchEvent tests', () => {
 
   it('should set attributes to null if not explicitly defined', async () => {
     const query: Data = {
-      "some": "query"
+      some: 'query',
     };
     const postSearchEvent = new PostSearchEvent(query);
 
@@ -22,7 +22,7 @@ describe('PostSearchEvent tests', () => {
 
   it('should return promise if set', async () => {
     const query: Data = {
-      "some": "query"
+      some: 'query',
     };
     const postSearchEvent = new PostSearchEvent(query);
 
@@ -35,7 +35,7 @@ describe('PostSearchEvent tests', () => {
         next: null,
         last: '-',
       },
-      elements: []
+      elements: [],
     };
 
     const promise = new Promise<ElementCollection>((resolve): void => {
@@ -51,7 +51,7 @@ describe('PostSearchEvent tests', () => {
 
   it('should return page and page size if explicitly set', () => {
     const query: Data = {
-      "some": "query"
+      some: 'query',
     };
     const postSearchEvent = new PostSearchEvent(query, 3, 25);
 

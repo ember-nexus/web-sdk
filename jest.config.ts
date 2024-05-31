@@ -99,7 +99,7 @@ const config: Config = {
 
   globals: {
     'ts-jest': {
-      tsConfig: 'tsconfig.test.json'
+      tsconfig: 'tsconfig.test.json'
     }
   },
 

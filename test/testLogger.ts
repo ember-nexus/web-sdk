@@ -1,6 +1,6 @@
 import { Logger } from 'tslog';
 
-import type { LoggerInterface } from '~/Type/Definition/LoggerInterface';
+import type { LoggerInterface } from '../src/Type/Definition';
 
 const testLogger = new Logger({
   name: 'web-sdk',

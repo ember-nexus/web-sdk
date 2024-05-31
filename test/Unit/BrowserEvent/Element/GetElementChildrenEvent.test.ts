@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import {GetElementChildrenEvent} from '../../../../src/BrowserEvent/Element';
+import { GetElementChildrenEvent } from '../../../../src/BrowserEvent/Element';
 import { Collection } from '../../../../src/Type/Definition';
 import { validateUuidFromString } from '../../../../src/Type/Definition';
 

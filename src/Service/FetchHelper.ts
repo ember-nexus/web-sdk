@@ -1,5 +1,6 @@
 import { Service } from 'typedi';
 
+import { WebSdkConfiguration } from './WebSdkConfiguration';
 import {
   Response401UnauthorizedError,
   Response403ForbiddenError,
@@ -9,7 +10,7 @@ import {
 } from '../Error';
 import { HttpRequestMethod } from '../Type/Enum';
 
-import { Logger, WebSdkConfiguration } from '.';
+import { Logger } from '.';
 
 /**
  * Collection of different fetch helper methods.

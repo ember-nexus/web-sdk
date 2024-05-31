@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import { GetInstanceConfigurationEvent } from '../../../../src/BrowserEvent/System';
-import type {InstanceConfiguration} from '../../../../src/Type/Definition';
+import type { InstanceConfiguration } from '../../../../src/Type/Definition';
 
 describe('GetInstanceConfigurationEvent tests', () => {
   test('GetInstanceConfigurationEvent returns correct type', () => {
@@ -18,17 +18,17 @@ describe('GetInstanceConfigurationEvent tests', () => {
     const getInstanceConfigurationEvent = new GetInstanceConfigurationEvent();
 
     const instanceConfiguration: InstanceConfiguration = {
-      version: "version",
+      version: 'version',
       pageSize: {
         min: 5,
         default: 25,
-        max: 100
+        max: 100,
       },
       register: {
         enabled: true,
-        uniqueIdentifier: "email",
-        uniqueIdentifierRegex: false
-      }
+        uniqueIdentifier: 'email',
+        uniqueIdentifierRegex: false,
+      },
     };
 
     const promise = new Promise<InstanceConfiguration>((resolve): void => {
@@ -39,5 +39,4 @@ describe('GetInstanceConfigurationEvent tests', () => {
 
     expect(getInstanceConfigurationEvent.getInstanceConfiguration()).to.equal(promise);
   });
-
 });
