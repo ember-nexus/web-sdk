@@ -39,6 +39,8 @@ test('DeleteElementEndpoint should handle bad response error', async () => {
   mockServer.listen();
   const fetchHelper = Container.get(FetchHelper);
   const buildUrlSpy = sandbox.spy(fetchHelper, 'buildUrl');
+  const getDefaultDeleteOptionsSpy = sandbox.spy(fetchHelper, 'getDefaultDeleteOptions');
+  const createResponseErrorFromBadResponseSpy = sandbox.spy(fetchHelper, 'createResponseErrorFromBadResponse');
 
   const uuid = validateUuidFromString('c653fae2-7f18-4bc9-abfb-929e60b57d72');
   await expect(Container.get(DeleteElementEndpoint).deleteElement(uuid)).to.eventually.be.rejectedWith(
@@ -55,6 +57,8 @@ test('DeleteElementEndpoint should handle bad response error', async () => {
 
   expect(buildUrlSpy.calledOnce).to.be.true;
   expect(buildUrlSpy.getCall(0).args[0]).to.equal('/c653fae2-7f18-4bc9-abfb-929e60b57d72');
+  expect(getDefaultDeleteOptionsSpy.calledOnce).to.be.true;
+  expect(createResponseErrorFromBadResponseSpy.calledOnce).to.be.true;
 
   mockServer.close();
   sandbox.restore();

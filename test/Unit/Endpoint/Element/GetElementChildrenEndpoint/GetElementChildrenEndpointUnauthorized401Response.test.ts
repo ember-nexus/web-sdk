@@ -5,14 +5,14 @@ import { setupServer } from 'msw/node';
 import { createSandbox } from 'sinon';
 import { Container } from 'typedi';
 
-import { DeleteElementEndpoint } from '../../../../../src/Endpoint/Element';
+import { GetElementChildrenEndpoint } from '../../../../../src/Endpoint/Element';
 import { Response401UnauthorizedError } from '../../../../../src/Error';
 import { FetchHelper, Logger, WebSdkConfiguration } from '../../../../../src/Service';
 import { validateUuidFromString } from '../../../../../src/Type/Definition';
 import { TestLogger } from '../../../TestLogger';
 
 const mockServer = setupServer(
-  http.delete('http://mock-api/4b67f72a-65f2-43b4-9989-29fc0d86a6db', () => {
+  http.get('http://mock-api/e2747c35-3882-49a9-9705-efe872500a43/children', () => {
     return HttpResponse.json(
       {
         type: 'http://ember-nexus-api/error/401/unauthorized',
@@ -35,30 +35,30 @@ const testLogger: TestLogger = new TestLogger();
 Container.set(Logger, testLogger);
 Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
 
-test('DeleteElementEndpoint should handle bad response error', async () => {
+test('GetElementChildrenEndpoint should handle bad response error', async () => {
   const sandbox = createSandbox();
   mockServer.listen();
   const fetchHelper = Container.get(FetchHelper);
   const buildUrlSpy = sandbox.spy(fetchHelper, 'buildUrl');
-  const getDefaultDeleteOptionsSpy = sandbox.spy(fetchHelper, 'getDefaultDeleteOptions');
+  const getDefaultGetOptionsSpy = sandbox.spy(fetchHelper, 'getDefaultGetOptions');
   const createResponseErrorFromBadResponseSpy = sandbox.spy(fetchHelper, 'createResponseErrorFromBadResponse');
 
-  const uuid = validateUuidFromString('4b67f72a-65f2-43b4-9989-29fc0d86a6db');
-  await expect(Container.get(DeleteElementEndpoint).deleteElement(uuid)).to.eventually.be.rejectedWith(
+  const uuid = validateUuidFromString('e2747c35-3882-49a9-9705-efe872500a43');
+  await expect(Container.get(GetElementChildrenEndpoint).getElementChildren(uuid)).to.eventually.be.rejectedWith(
     Response401UnauthorizedError,
   );
 
   expect(
     testLogger.assertDebugHappened(
-      'Executing HTTP DELETE request against url http://mock-api/4b67f72a-65f2-43b4-9989-29fc0d86a6db .',
+      'Executing HTTP GET request against url http://mock-api/e2747c35-3882-49a9-9705-efe872500a43/children?page=1&pageSize=25 .',
     ),
   ).to.be.true;
 
   expect(testLogger.assertErrorHappened('Sever returned 401 unauthorized.')).to.be.true;
 
   expect(buildUrlSpy.calledOnce).to.be.true;
-  expect(buildUrlSpy.getCall(0).args[0]).to.equal('/4b67f72a-65f2-43b4-9989-29fc0d86a6db');
-  expect(getDefaultDeleteOptionsSpy.calledOnce).to.be.true;
+  expect(buildUrlSpy.getCall(0).args[0]).to.equal('/e2747c35-3882-49a9-9705-efe872500a43/children?page=1&pageSize=25');
+  expect(getDefaultGetOptionsSpy.calledOnce).to.be.true;
   expect(createResponseErrorFromBadResponseSpy.calledOnce).to.be.true;
 
   mockServer.close();

@@ -1,8 +1,7 @@
 import { Service } from 'typedi';
 
+import { ElementParser } from './ElementParser';
 import { Collection, Node, Relation } from '../Type/Definition';
-
-import { ElementParser } from '.';
 
 /**
  * Class which helps to parse collections.

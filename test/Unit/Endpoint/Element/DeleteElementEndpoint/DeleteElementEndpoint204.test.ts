@@ -27,6 +27,7 @@ test('DeleteElementEndpoint should handle 204 response', async () => {
   mockServer.listen();
   const fetchHelper = Container.get(FetchHelper);
   const buildUrlSpy = sandbox.spy(fetchHelper, 'buildUrl');
+  const getDefaultDeleteOptionsSpy = sandbox.spy(fetchHelper, 'getDefaultDeleteOptions');
 
   const uuid = validateUuidFromString('52965378-8305-43bf-a637-b24d0d29c1c9');
   await Container.get(DeleteElementEndpoint).deleteElement(uuid);
@@ -39,6 +40,7 @@ test('DeleteElementEndpoint should handle 204 response', async () => {
 
   expect(buildUrlSpy.calledOnce).to.be.true;
   expect(buildUrlSpy.getCall(0).args[0]).to.equal('/52965378-8305-43bf-a637-b24d0d29c1c9');
+  expect(getDefaultDeleteOptionsSpy.calledOnce).to.be.true;
 
   mockServer.close();
   sandbox.restore();
