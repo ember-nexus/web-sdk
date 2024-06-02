@@ -4,6 +4,7 @@ import { Container } from 'typedi';
 
 import { BrowserEventHandler } from '../../../src/BrowserEvent';
 import {
+  DeleteElementEvent,
   GetElementChildrenEvent,
   GetElementEvent,
   GetElementParentsEvent,
@@ -14,8 +15,24 @@ import {
   PostIndexEvent,
   PutElementEvent,
 } from '../../../src/BrowserEvent/Element';
+import {
+  DeleteTokenEvent,
+  GetMeEvent,
+  GetTokenEvent,
+  PostChangePasswordEvent,
+  PostRegisterEvent,
+  PostTokenEvent,
+} from '../../../src/BrowserEvent/User';
 import { EmberNexus } from '../../../src/Service';
-import { Collection, Data, Node, NodeWithOptionalId, validateUuidFromString } from '../../../src/Type/Definition';
+import {
+  Collection,
+  Data,
+  Node,
+  NodeWithOptionalId,
+  createUniqueUserIdentifierFromString,
+  validateTokenFromString,
+  validateUuidFromString,
+} from '../../../src/Type/Definition';
 
 class ElementMock {
   eventListeners: object = {};
@@ -314,6 +331,161 @@ describe('BrowserEventHandler tests', () => {
 
     const event = new PatchElementEvent(validateUuidFromString('58a7dc13-ac78-4cac-b786-b09275a60c9e'), {} as Data);
     elementMock.getEventListeners()['ember-nexus-patch-element'](event);
+    await event.getResult();
+
+    browserEventHandler.removeBrowserEventListeners();
+    browserEventHandler.destructor();
+    sandbox.restore();
+  });
+
+  test('BrowserEventHandler handleDeleteElementEvent', async () => {
+    const sandbox = createSandbox();
+    const emberNexus = new EmberNexus();
+    sandbox.stub(emberNexus, 'deleteElement').resolves();
+    Container.set(EmberNexus, emberNexus);
+    const elementMock = new ElementMock();
+    const browserEventHandler = new BrowserEventHandler();
+    // @ts-expect-error force use of partially compatible type without error
+    browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
+
+    const event = new DeleteElementEvent(validateUuidFromString('58a7dc13-ac78-4cac-b786-b09275a60c9e'));
+    elementMock.getEventListeners()['ember-nexus-delete-element'](event);
+    await event.getResult();
+
+    browserEventHandler.removeBrowserEventListeners();
+    browserEventHandler.destructor();
+    sandbox.restore();
+  });
+
+  test('BrowserEventHandler handlePostRegisterEvent', async () => {
+    const sandbox = createSandbox();
+    const uuidToBeReturned = validateUuidFromString('756db94c-4c39-46f2-94e8-c35c6548d157');
+    const emberNexus = new EmberNexus();
+    sandbox.stub(emberNexus, 'postRegister').resolves(uuidToBeReturned);
+    Container.set(EmberNexus, emberNexus);
+    const elementMock = new ElementMock();
+    const browserEventHandler = new BrowserEventHandler();
+    // @ts-expect-error force use of partially compatible type without error
+    browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
+
+    const event = new PostRegisterEvent(createUniqueUserIdentifierFromString('someIdentifier'), 'password', {} as Data);
+    elementMock.getEventListeners()['ember-nexus-post-register'](event);
+    const returnedUuid = await event.getResult();
+    expect(returnedUuid).to.be.equal(uuidToBeReturned);
+
+    browserEventHandler.removeBrowserEventListeners();
+    browserEventHandler.destructor();
+    sandbox.restore();
+  });
+
+  test('BrowserEventHandler handlePostChangePasswordEvent', async () => {
+    const sandbox = createSandbox();
+    const emberNexus = new EmberNexus();
+    sandbox.stub(emberNexus, 'postChangePassword').resolves();
+    Container.set(EmberNexus, emberNexus);
+    const elementMock = new ElementMock();
+    const browserEventHandler = new BrowserEventHandler();
+    // @ts-expect-error force use of partially compatible type without error
+    browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
+
+    const event = new PostChangePasswordEvent(
+      createUniqueUserIdentifierFromString('someIdentifier'),
+      'currentPassword',
+      'newPassword',
+    );
+    elementMock.getEventListeners()['ember-nexus-post-change-password'](event);
+    await event.getResult();
+
+    browserEventHandler.removeBrowserEventListeners();
+    browserEventHandler.destructor();
+    sandbox.restore();
+  });
+
+  test('BrowserEventHandler handleGetMeEvent', async () => {
+    const sandbox = createSandbox();
+    const uuid = validateUuidFromString('b4b64462-e69f-4acb-8126-05b088f82d9c');
+    const elementToBeReturned = {
+      type: 'Data',
+      id: uuid,
+      data: {},
+    } as Node;
+    const emberNexus = new EmberNexus();
+    sandbox.stub(emberNexus, 'getMe').resolves(elementToBeReturned);
+    Container.set(EmberNexus, emberNexus);
+    const elementMock = new ElementMock();
+    const browserEventHandler = new BrowserEventHandler();
+    // @ts-expect-error force use of partially compatible type without error
+    browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
+
+    const event = new GetMeEvent();
+    elementMock.getEventListeners()['ember-nexus-get-me'](event);
+    const returnedElement = await event.getMe();
+    expect(returnedElement).to.be.equal(elementToBeReturned);
+
+    browserEventHandler.removeBrowserEventListeners();
+    browserEventHandler.destructor();
+    sandbox.restore();
+  });
+
+  test('BrowserEventHandler handlePostTokenEvent', async () => {
+    const sandbox = createSandbox();
+    const emberNexus = new EmberNexus();
+    const token = validateTokenFromString('secret-token:something');
+    sandbox.stub(emberNexus, 'postToken').resolves(token);
+    Container.set(EmberNexus, emberNexus);
+    const elementMock = new ElementMock();
+    const browserEventHandler = new BrowserEventHandler();
+    // @ts-expect-error force use of partially compatible type without error
+    browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
+
+    const event = new PostTokenEvent(createUniqueUserIdentifierFromString('someIdentifier'), 'currentPassword');
+    elementMock.getEventListeners()['ember-nexus-post-token'](event);
+    const returnedToken = await event.getResult();
+    expect(returnedToken).to.be.equal(token);
+
+    browserEventHandler.removeBrowserEventListeners();
+    browserEventHandler.destructor();
+    sandbox.restore();
+  });
+
+  test('BrowserEventHandler handleGetTokenEvent', async () => {
+    const sandbox = createSandbox();
+    const uuid = validateUuidFromString('b4b64462-e69f-4acb-8126-05b088f82d9c');
+    const elementToBeReturned = {
+      type: 'Token',
+      id: uuid,
+      data: {},
+    } as Node;
+    const emberNexus = new EmberNexus();
+    sandbox.stub(emberNexus, 'getToken').resolves(elementToBeReturned);
+    Container.set(EmberNexus, emberNexus);
+    const elementMock = new ElementMock();
+    const browserEventHandler = new BrowserEventHandler();
+    // @ts-expect-error force use of partially compatible type without error
+    browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
+
+    const event = new GetTokenEvent();
+    elementMock.getEventListeners()['ember-nexus-get-token'](event);
+    const returnedElement = await event.getToken();
+    expect(returnedElement).to.be.equal(elementToBeReturned);
+
+    browserEventHandler.removeBrowserEventListeners();
+    browserEventHandler.destructor();
+    sandbox.restore();
+  });
+
+  test('BrowserEventHandler handleDeleteTokenEvent', async () => {
+    const sandbox = createSandbox();
+    const emberNexus = new EmberNexus();
+    sandbox.stub(emberNexus, 'deleteToken').resolves();
+    Container.set(EmberNexus, emberNexus);
+    const elementMock = new ElementMock();
+    const browserEventHandler = new BrowserEventHandler();
+    // @ts-expect-error force use of partially compatible type without error
+    browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
+
+    const event = new DeleteTokenEvent();
+    elementMock.getEventListeners()['ember-nexus-delete-token'](event);
     await event.getResult();
 
     browserEventHandler.removeBrowserEventListeners();
