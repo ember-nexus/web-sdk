@@ -6,7 +6,7 @@ type PostTokenEventDetails = {
   uniqueUserIdentifier: UniqueUserIdentifier;
   password: string;
   data: Data;
-  result: Promise<Token> | null;
+  token: Promise<Token> | null;
 };
 
 class PostTokenEvent extends CustomEvent<PostTokenEventDetails> {
@@ -18,7 +18,7 @@ class PostTokenEvent extends CustomEvent<PostTokenEventDetails> {
         uniqueUserIdentifier: uniqueUserIdentifier,
         password: password,
         data: data,
-        result: null,
+        token: null,
       },
     });
   }
@@ -35,12 +35,12 @@ class PostTokenEvent extends CustomEvent<PostTokenEventDetails> {
     return this.detail.data;
   }
 
-  getResult(): Promise<Token> | null {
-    return this.detail.result;
+  getToken(): Promise<Token> | null {
+    return this.detail.token;
   }
 
-  setResult(result: Promise<Token> | null): PostTokenEvent {
-    this.detail.result = result;
+  setToken(token: Promise<Token> | null): PostTokenEvent {
+    this.detail.token = token;
     return this;
   }
 }

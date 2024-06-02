@@ -17,7 +17,7 @@ describe('PostIndexEvent tests', () => {
     const postIndexEvent = new PostIndexEvent(node);
 
     expect(postIndexEvent.getElement()).to.equal(node);
-    expect(postIndexEvent.getResult()).to.be.null;
+    expect(postIndexEvent.getElementId()).to.be.null;
   });
 
   it('should return promise if set', async () => {
@@ -31,8 +31,8 @@ describe('PostIndexEvent tests', () => {
       resolve(validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc95'));
     });
 
-    postIndexEvent.setResult(promise);
+    postIndexEvent.setElementId(promise);
 
-    expect(postIndexEvent.getResult()).to.equal(promise);
+    expect(postIndexEvent.getElementId()).to.equal(promise);
   });
 });

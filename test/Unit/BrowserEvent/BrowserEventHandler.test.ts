@@ -244,7 +244,7 @@ describe('BrowserEventHandler tests', () => {
 
     const event = new GetIndexEvent();
     elementMock.getEventListeners()['ember-nexus-get-index'](event);
-    const returnedCollection = await event.getIndexElements();
+    const returnedCollection = await event.getIndexCollection();
     expect(returnedCollection).to.be.equal(collectionToBeReturned);
 
     browserEventHandler.removeBrowserEventListeners();
@@ -268,7 +268,7 @@ describe('BrowserEventHandler tests', () => {
       data: {},
     } as NodeWithOptionalId);
     elementMock.getEventListeners()['ember-nexus-post-index'](event);
-    const returnedUuid = await event.getResult();
+    const returnedUuid = await event.getElementId();
     expect(returnedUuid).to.be.equal(uuidToBeReturned);
 
     browserEventHandler.removeBrowserEventListeners();
@@ -292,7 +292,7 @@ describe('BrowserEventHandler tests', () => {
       data: {},
     } as NodeWithOptionalId);
     elementMock.getEventListeners()['ember-nexus-post-element'](event);
-    const returnedUuid = await event.getResult();
+    const returnedUuid = await event.getElementId();
     expect(returnedUuid).to.be.equal(uuidToBeReturned);
 
     browserEventHandler.removeBrowserEventListeners();
@@ -370,7 +370,7 @@ describe('BrowserEventHandler tests', () => {
 
     const event = new PostRegisterEvent(createUniqueUserIdentifierFromString('someIdentifier'), 'password', {} as Data);
     elementMock.getEventListeners()['ember-nexus-post-register'](event);
-    const returnedUuid = await event.getResult();
+    const returnedUuid = await event.getUserId();
     expect(returnedUuid).to.be.equal(uuidToBeReturned);
 
     browserEventHandler.removeBrowserEventListeners();
@@ -440,7 +440,7 @@ describe('BrowserEventHandler tests', () => {
 
     const event = new PostTokenEvent(createUniqueUserIdentifierFromString('someIdentifier'), 'currentPassword');
     elementMock.getEventListeners()['ember-nexus-post-token'](event);
-    const returnedToken = await event.getResult();
+    const returnedToken = await event.getToken();
     expect(returnedToken).to.be.equal(token);
 
     browserEventHandler.removeBrowserEventListeners();

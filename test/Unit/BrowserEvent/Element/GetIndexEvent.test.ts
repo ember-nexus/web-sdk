@@ -11,7 +11,7 @@ describe('GetIndexEvent tests', () => {
   it('should return null when no element was set', async () => {
     const getIndexEvent = new GetIndexEvent();
 
-    expect(getIndexEvent.getIndexElements()).to.be.null;
+    expect(getIndexEvent.getIndexCollection()).to.be.null;
     expect(getIndexEvent.getPage()).to.equal(1);
     expect(getIndexEvent.getPageSize()).to.be.null;
   });
@@ -36,9 +36,9 @@ describe('GetIndexEvent tests', () => {
       resolve(collection);
     });
 
-    getIndexEvent.setIndexElements(promise);
+    getIndexEvent.setIndexCollection(promise);
 
-    expect(getIndexEvent.getIndexElements()).to.equal(promise);
+    expect(getIndexEvent.getIndexCollection()).to.equal(promise);
     expect(getIndexEvent.getPage()).to.equal(1);
     expect(getIndexEvent.getPageSize()).to.be.null;
   });

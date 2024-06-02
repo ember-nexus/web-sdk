@@ -167,7 +167,7 @@ class BrowserEventHandler {
    * @internal
    */
   private handleGetIndexEvent(event: GetIndexEvent): void {
-    event.setIndexElements(Container.get(EmberNexus).getIndex(event.getPage(), event.getPageSize()));
+    event.setIndexCollection(Container.get(EmberNexus).getIndex(event.getPage(), event.getPageSize()));
   }
 
   /**
@@ -180,7 +180,7 @@ class BrowserEventHandler {
    * @internal
    */
   private handlePostIndexEvent(event: PostIndexEvent): void {
-    event.setResult(Container.get(EmberNexus).postIndex(event.getElement()));
+    event.setElementId(Container.get(EmberNexus).postIndex(event.getElement()));
   }
 
   /**
@@ -193,7 +193,7 @@ class BrowserEventHandler {
    * @internal
    */
   private handlePostElementEvent(event: PostElementEvent): void {
-    event.setResult(Container.get(EmberNexus).postElement(event.getParentId(), event.getElement()));
+    event.setElementId(Container.get(EmberNexus).postElement(event.getParentId(), event.getElement()));
   }
 
   /**
@@ -245,7 +245,7 @@ class BrowserEventHandler {
    * @internal
    */
   private handlePostRegisterEvent(event: PostRegisterEvent): void {
-    event.setResult(
+    event.setUserId(
       Container.get(EmberNexus).postRegister(event.getUniqueUserIdentifier(), event.getPassword(), event.getData()),
     );
   }
@@ -292,7 +292,7 @@ class BrowserEventHandler {
    * @internal
    */
   private handlePostTokenEvent(event: PostTokenEvent): void {
-    event.setResult(
+    event.setToken(
       Container.get(EmberNexus).postToken(event.getUniqueUserIdentifier(), event.getPassword(), event.getData()),
     );
   }

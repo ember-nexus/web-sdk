@@ -5,7 +5,7 @@ import { customEventDefaultInit } from '../../Type/Partial';
 type GetIndexEventDetails = {
   page: number;
   pageSize: number | null;
-  indexElements: Promise<Collection> | null;
+  indexCollection: Promise<Collection> | null;
 };
 
 class GetIndexEvent extends CustomEvent<GetIndexEventDetails> {
@@ -16,7 +16,7 @@ class GetIndexEvent extends CustomEvent<GetIndexEventDetails> {
       detail: {
         page: page,
         pageSize: pageSize,
-        indexElements: null,
+        indexCollection: null,
       },
     });
   }
@@ -29,12 +29,12 @@ class GetIndexEvent extends CustomEvent<GetIndexEventDetails> {
     return this.detail.pageSize;
   }
 
-  getIndexElements(): Promise<Collection> | null {
-    return this.detail.indexElements;
+  getIndexCollection(): Promise<Collection> | null {
+    return this.detail.indexCollection;
   }
 
-  setIndexElements(indexElements: Promise<Collection>): void {
-    this.detail.indexElements = indexElements;
+  setIndexCollection(indexCollection: Promise<Collection>): void {
+    this.detail.indexCollection = indexCollection;
   }
 }
 

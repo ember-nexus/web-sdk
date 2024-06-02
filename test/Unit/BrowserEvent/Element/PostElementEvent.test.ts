@@ -19,7 +19,7 @@ describe('PostElementEvent tests', () => {
 
     expect(postElementEvent.getParentId()).to.equal(parentUuid);
     expect(postElementEvent.getElement()).to.equal(node);
-    expect(postElementEvent.getResult()).to.be.null;
+    expect(postElementEvent.getElementId()).to.be.null;
   });
 
   it('should return promise if set', async () => {
@@ -34,8 +34,8 @@ describe('PostElementEvent tests', () => {
       resolve(validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc95'));
     });
 
-    postElementEvent.setResult(promise);
+    postElementEvent.setElementId(promise);
 
-    expect(postElementEvent.getResult()).to.equal(promise);
+    expect(postElementEvent.getElementId()).to.equal(promise);
   });
 });

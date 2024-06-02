@@ -6,7 +6,7 @@ type PostRegisterEventDetails = {
   uniqueUserIdentifier: UniqueUserIdentifier;
   password: string;
   data: Data;
-  result: Promise<Uuid> | null;
+  userId: Promise<Uuid> | null;
 };
 
 class PostRegisterEvent extends CustomEvent<PostRegisterEventDetails> {
@@ -18,7 +18,7 @@ class PostRegisterEvent extends CustomEvent<PostRegisterEventDetails> {
         uniqueUserIdentifier: uniqueUserIdentifier,
         password: password,
         data: data,
-        result: null,
+        userId: null,
       },
     });
   }
@@ -35,12 +35,12 @@ class PostRegisterEvent extends CustomEvent<PostRegisterEventDetails> {
     return this.detail.data;
   }
 
-  getResult(): Promise<Uuid> | null {
-    return this.detail.result;
+  getUserId(): Promise<Uuid> | null {
+    return this.detail.userId;
   }
 
-  setResult(result: Promise<Uuid> | null): PostRegisterEvent {
-    this.detail.result = result;
+  setUserId(userId: Promise<Uuid> | null): PostRegisterEvent {
+    this.detail.userId = userId;
     return this;
   }
 }

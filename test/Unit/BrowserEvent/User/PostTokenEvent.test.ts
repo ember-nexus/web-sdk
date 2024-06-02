@@ -14,7 +14,7 @@ describe('PostTokenEvent tests', () => {
     expect(postTokenEvent.getUniqueUserIdentifier()).to.equal(uniqueUserIdentifier);
     expect(postTokenEvent.getPassword()).to.equal(password);
     expect(postTokenEvent.getData()).to.be.empty;
-    expect(postTokenEvent.getResult()).to.be.null;
+    expect(postTokenEvent.getToken()).to.be.null;
   });
 
   it('should return attributes if explicitly defined', async () => {
@@ -28,7 +28,7 @@ describe('PostTokenEvent tests', () => {
     expect(postTokenEvent.getUniqueUserIdentifier()).to.equal(uniqueUserIdentifier);
     expect(postTokenEvent.getPassword()).to.equal(password);
     expect(postTokenEvent.getData().some).to.equal('data');
-    expect(postTokenEvent.getResult()).to.be.null;
+    expect(postTokenEvent.getToken()).to.be.null;
   });
 
   it('should return promise if set', async () => {
@@ -43,8 +43,8 @@ describe('PostTokenEvent tests', () => {
       resolve(validateTokenFromString('secret-token:some-token'));
     });
 
-    postTokenEvent.setResult(promise);
+    postTokenEvent.setToken(promise);
 
-    expect(postTokenEvent.getResult()).to.equal(promise);
+    expect(postTokenEvent.getToken()).to.equal(promise);
   });
 });

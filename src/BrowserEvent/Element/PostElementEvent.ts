@@ -5,7 +5,7 @@ import { customEventDefaultInit } from '../../Type/Partial';
 type PostElementEventDetails = {
   parentId: Uuid;
   element: NodeWithOptionalId | RelationWithOptionalId;
-  result: Promise<Uuid> | null;
+  elementId: Promise<Uuid> | null;
 };
 
 class PostElementEvent extends CustomEvent<PostElementEventDetails> {
@@ -16,7 +16,7 @@ class PostElementEvent extends CustomEvent<PostElementEventDetails> {
       detail: {
         parentId: parentId,
         element: element,
-        result: null,
+        elementId: null,
       },
     });
   }
@@ -29,12 +29,12 @@ class PostElementEvent extends CustomEvent<PostElementEventDetails> {
     return this.detail.element;
   }
 
-  getResult(): Promise<Uuid> | null {
-    return this.detail.result;
+  getElementId(): Promise<Uuid> | null {
+    return this.detail.elementId;
   }
 
-  setResult(result: Promise<Uuid> | null): PostElementEvent {
-    this.detail.result = result;
+  setElementId(elementId: Promise<Uuid> | null): PostElementEvent {
+    this.detail.elementId = elementId;
     return this;
   }
 }
