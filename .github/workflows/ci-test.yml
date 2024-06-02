@@ -106,7 +106,7 @@ jobs:
 
   test-unit-coverage:
     runs-on: ubuntu-latest
-    name: 'Unit tests @ Node v22'
+    name: 'Unit test coverage'
     needs:
       - test-unit
     steps:
