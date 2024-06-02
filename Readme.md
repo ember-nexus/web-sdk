@@ -5,7 +5,7 @@
 ![NPM Downloads](https://img.shields.io/npm/dm/%40ember-nexus%2Fweb-sdk)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/ember-nexus/web-sdk/ci-test.yml?label=CI)
 [![codecov](https://codecov.io/gh/ember-nexus/web-sdk/branch/main/graph/badge.svg?token=N4U7IE0DK0)](https://codecov.io/gh/ember-nexus/web-sdk)
-[![Discord](https://img.shields.io/discord/1135243882360221787?logo=discord&color=%235865f2)](https://discord.gg/qbQFBrJrRC)
+[![Discord](https://img.shields.io/discord/1135243882360221787?logo=discord&label=Discord&color=%235865f2)](https://discord.gg/qbQFBrJrRC)
 
 The Web SDK is a library intended to make working with the [Ember Nexus API](https://github.com/ember-nexus/api)
 easier.  
