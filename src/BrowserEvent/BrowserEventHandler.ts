@@ -27,7 +27,7 @@ import { EmberNexus } from '../Service';
  */
 @Service()
 class BrowserEventHandler {
-  private browserNode: null | Node = null;
+  private htmlElement: null | HTMLElement = null;
 
   constructor() {}
 
@@ -44,27 +44,27 @@ class BrowserEventHandler {
    * Removes all event subscriptions.
    */
   removeBrowserEventListeners(): BrowserEventHandler {
-    if (this.browserNode === null) {
+    if (this.htmlElement === null) {
       return this;
     }
-    this.browserNode.removeEventListener(GetElementEvent.type, this.handleGetElementEvent);
-    this.browserNode.removeEventListener(GetElementChildrenEvent.type, this.handleGetElementChildrenEvent);
-    this.browserNode.removeEventListener(GetElementParentsEvent.type, this.handleGetElementParentsEvent);
-    this.browserNode.removeEventListener(GetElementRelatedEvent.type, this.handleGetElementRelatedEvent);
-    this.browserNode.removeEventListener(GetIndexEvent.type, this.handleGetIndexEvent);
-    this.browserNode.removeEventListener(PostIndexEvent.type, this.handlePostIndexEvent);
-    this.browserNode.removeEventListener(PostElementEvent.type, this.handlePostElementEvent);
-    this.browserNode.removeEventListener(PutElementEvent.type, this.handlePutElementEvent);
-    this.browserNode.removeEventListener(PatchElementEvent.type, this.handlePatchElementEvent);
-    this.browserNode.removeEventListener(DeleteElementEvent.type, this.handleDeleteElementEvent);
+    this.htmlElement.removeEventListener(GetElementEvent.type, this.handleGetElementEvent);
+    this.htmlElement.removeEventListener(GetElementChildrenEvent.type, this.handleGetElementChildrenEvent);
+    this.htmlElement.removeEventListener(GetElementParentsEvent.type, this.handleGetElementParentsEvent);
+    this.htmlElement.removeEventListener(GetElementRelatedEvent.type, this.handleGetElementRelatedEvent);
+    this.htmlElement.removeEventListener(GetIndexEvent.type, this.handleGetIndexEvent);
+    this.htmlElement.removeEventListener(PostIndexEvent.type, this.handlePostIndexEvent);
+    this.htmlElement.removeEventListener(PostElementEvent.type, this.handlePostElementEvent);
+    this.htmlElement.removeEventListener(PutElementEvent.type, this.handlePutElementEvent);
+    this.htmlElement.removeEventListener(PatchElementEvent.type, this.handlePatchElementEvent);
+    this.htmlElement.removeEventListener(DeleteElementEvent.type, this.handleDeleteElementEvent);
 
-    this.browserNode.removeEventListener(PostRegisterEvent.type, this.handlePostRegisterEvent);
-    this.browserNode.removeEventListener(PostChangePasswordEvent.type, this.handlePostChangePasswordEvent);
-    this.browserNode.removeEventListener(GetMeEvent.type, this.handleGetMeEvent);
-    this.browserNode.removeEventListener(PostTokenEvent.type, this.handlePostTokenEvent);
-    this.browserNode.removeEventListener(GetTokenEvent.type, this.handleGetTokenEvent);
-    this.browserNode.removeEventListener(DeleteTokenEvent.type, this.handleDeleteTokenEvent);
-    this.browserNode = null;
+    this.htmlElement.removeEventListener(PostRegisterEvent.type, this.handlePostRegisterEvent);
+    this.htmlElement.removeEventListener(PostChangePasswordEvent.type, this.handlePostChangePasswordEvent);
+    this.htmlElement.removeEventListener(GetMeEvent.type, this.handleGetMeEvent);
+    this.htmlElement.removeEventListener(PostTokenEvent.type, this.handlePostTokenEvent);
+    this.htmlElement.removeEventListener(GetTokenEvent.type, this.handleGetTokenEvent);
+    this.htmlElement.removeEventListener(DeleteTokenEvent.type, this.handleDeleteTokenEvent);
+    this.htmlElement = null;
     return this;
   }
 
@@ -76,26 +76,26 @@ class BrowserEventHandler {
    *
    * @param node The DOM node which should receive the event listeners.
    */
-  addBrowserEventListeners(node: Node): BrowserEventHandler {
+  addBrowserEventListeners(node: HTMLElement): BrowserEventHandler {
     this.removeBrowserEventListeners();
-    this.browserNode = node;
-    this.browserNode.addEventListener(GetElementEvent.type, this.handleGetElementEvent);
-    this.browserNode.addEventListener(GetElementChildrenEvent.type, this.handleGetElementChildrenEvent);
-    this.browserNode.addEventListener(GetElementParentsEvent.type, this.handleGetElementParentsEvent);
-    this.browserNode.addEventListener(GetElementRelatedEvent.type, this.handleGetElementRelatedEvent);
-    this.browserNode.addEventListener(GetIndexEvent.type, this.handleGetIndexEvent);
-    this.browserNode.addEventListener(PostIndexEvent.type, this.handlePostIndexEvent);
-    this.browserNode.addEventListener(PostElementEvent.type, this.handlePostElementEvent);
-    this.browserNode.addEventListener(PutElementEvent.type, this.handlePutElementEvent);
-    this.browserNode.addEventListener(PatchElementEvent.type, this.handlePatchElementEvent);
-    this.browserNode.addEventListener(DeleteElementEvent.type, this.handleDeleteElementEvent);
+    this.htmlElement = node;
+    this.htmlElement.addEventListener(GetElementEvent.type, this.handleGetElementEvent);
+    this.htmlElement.addEventListener(GetElementChildrenEvent.type, this.handleGetElementChildrenEvent);
+    this.htmlElement.addEventListener(GetElementParentsEvent.type, this.handleGetElementParentsEvent);
+    this.htmlElement.addEventListener(GetElementRelatedEvent.type, this.handleGetElementRelatedEvent);
+    this.htmlElement.addEventListener(GetIndexEvent.type, this.handleGetIndexEvent);
+    this.htmlElement.addEventListener(PostIndexEvent.type, this.handlePostIndexEvent);
+    this.htmlElement.addEventListener(PostElementEvent.type, this.handlePostElementEvent);
+    this.htmlElement.addEventListener(PutElementEvent.type, this.handlePutElementEvent);
+    this.htmlElement.addEventListener(PatchElementEvent.type, this.handlePatchElementEvent);
+    this.htmlElement.addEventListener(DeleteElementEvent.type, this.handleDeleteElementEvent);
 
-    this.browserNode.addEventListener(PostRegisterEvent.type, this.handlePostRegisterEvent);
-    this.browserNode.addEventListener(PostChangePasswordEvent.type, this.handlePostChangePasswordEvent);
-    this.browserNode.addEventListener(GetMeEvent.type, this.handleGetMeEvent);
-    this.browserNode.addEventListener(PostTokenEvent.type, this.handlePostTokenEvent);
-    this.browserNode.addEventListener(GetTokenEvent.type, this.handleGetTokenEvent);
-    this.browserNode.addEventListener(DeleteTokenEvent.type, this.handleDeleteTokenEvent);
+    this.htmlElement.addEventListener(PostRegisterEvent.type, this.handlePostRegisterEvent);
+    this.htmlElement.addEventListener(PostChangePasswordEvent.type, this.handlePostChangePasswordEvent);
+    this.htmlElement.addEventListener(GetMeEvent.type, this.handleGetMeEvent);
+    this.htmlElement.addEventListener(PostTokenEvent.type, this.handlePostTokenEvent);
+    this.htmlElement.addEventListener(GetTokenEvent.type, this.handleGetTokenEvent);
+    this.htmlElement.addEventListener(DeleteTokenEvent.type, this.handleDeleteTokenEvent);
     return this;
   }
 
@@ -109,10 +109,6 @@ class BrowserEventHandler {
    * @internal
    */
   private handleGetElementEvent(event: GetElementEvent): void {
-    console.log('Handling event :D');
-    console.log(event);
-    console.log(Container);
-    console.log(Container.get(EmberNexus));
     event.setElement(Container.get(EmberNexus).getElement(event.getElementId()));
   }
 
