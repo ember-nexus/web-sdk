@@ -8,7 +8,7 @@
 [![Discord](https://img.shields.io/discord/1135243882360221787?logo=discord&color=%235865f2)](https://discord.gg/qbQFBrJrRC)
 
 The Web SDK is a library intended to make working with the [Ember Nexus API](https://github.com/ember-nexus/api)
-easier.
+easier.  
 It is programmed in a framework-agnostic way.
 
 ## Quick Links

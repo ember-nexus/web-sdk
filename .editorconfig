@@ -8,6 +8,7 @@ insert_final_newline = true
 
 [*.md]
 insert_final_newline = false
+trim_trailing_whitespace = false
 
 [*.{js,json,ts,mts,yml,yaml}]
 indent_size = 2
