@@ -1,9 +1,12 @@
 import { expect } from 'chai';
 
 import { PostRegisterEvent } from '../../../../src/BrowserEvent/User';
-import { Data } from '../../../../src/Type/Definition';
-import { createUniqueUserIdentifierFromString } from '../../../../src/Type/Definition';
-import { Uuid, validateUuidFromString } from '../../../../src/Type/Definition';
+import {
+  Data,
+  Uuid,
+  createUniqueUserIdentifierFromString,
+  validateUuidFromString,
+} from '../../../../src/Type/Definition';
 
 describe('PostRegisterEvent tests', () => {
   it('should set attributes to null if not explicitly defined', async () => {

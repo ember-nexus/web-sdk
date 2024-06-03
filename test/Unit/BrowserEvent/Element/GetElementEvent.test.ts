@@ -1,8 +1,7 @@
 import { expect } from 'chai';
 
 import { GetElementEvent } from '../../../../src/BrowserEvent/Element';
-import type { Node, Relation } from '../../../../src/Type/Definition';
-import { validateUuidFromString } from '../../../../src/Type/Definition';
+import { Node, Relation, validateUuidFromString } from '../../../../src/Type/Definition';
 
 describe('GetElementEvent tests', () => {
   test('GetElementEvent returns correct type', () => {

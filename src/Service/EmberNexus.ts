@@ -24,9 +24,17 @@ import {
   PostRegisterEndpoint,
   PostTokenEndpoint,
 } from '../Endpoint/User';
-import { Token } from '../Type/Definition';
-import { UniqueUserIdentifier } from '../Type/Definition';
-import { Collection, Data, Node, NodeWithOptionalId, Relation, RelationWithOptionalId, Uuid } from '../Type/Definition';
+import {
+  Collection,
+  Data,
+  Node,
+  NodeWithOptionalId,
+  Relation,
+  RelationWithOptionalId,
+  Token,
+  UniqueUserIdentifier,
+  Uuid,
+} from '../Type/Definition';
 
 @Service()
 class EmberNexus {

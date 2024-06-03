@@ -1,8 +1,7 @@
 import { expect } from 'chai';
 
 import { PostElementEvent } from '../../../../src/BrowserEvent/Element';
-import { NodeWithOptionalId } from '../../../../src/Type/Definition';
-import { Uuid, validateUuidFromString } from '../../../../src/Type/Definition';
+import { NodeWithOptionalId, Uuid, validateUuidFromString } from '../../../../src/Type/Definition';
 
 describe('PostElementEvent tests', () => {
   test('PostElementEvent returns correct type', () => {

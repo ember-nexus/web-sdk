@@ -1,9 +1,12 @@
 import { expect } from 'chai';
 
 import { PostTokenEvent } from '../../../../src/BrowserEvent/User';
-import { Data } from '../../../../src/Type/Definition';
-import { Token, validateTokenFromString } from '../../../../src/Type/Definition';
-import { createUniqueUserIdentifierFromString } from '../../../../src/Type/Definition';
+import {
+  Data,
+  Token,
+  createUniqueUserIdentifierFromString,
+  validateTokenFromString,
+} from '../../../../src/Type/Definition';
 
 describe('PostTokenEvent tests', () => {
   it('should set attributes to null if not explicitly defined', async () => {

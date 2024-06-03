@@ -4,8 +4,7 @@ import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
-import { EmberNexus } from '../../../src/Service';
-import { Logger, WebSdkConfiguration } from '../../../src/Service';
+import { EmberNexus, Logger, WebSdkConfiguration } from '../../../src/Service';
 import { validateUuidFromString } from '../../../src/Type/Definition';
 import { TestLogger } from '../TestLogger';
 
