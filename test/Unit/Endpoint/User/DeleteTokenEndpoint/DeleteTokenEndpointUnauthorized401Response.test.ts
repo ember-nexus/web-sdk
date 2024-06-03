@@ -4,15 +4,13 @@ import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
+import { DeleteTokenEndpoint } from '../../../../../src/Endpoint/User';
+import { Response401UnauthorizedError } from '../../../../../src/Error';
+import { Logger, WebSdkConfiguration } from '../../../../../src/Service';
 import { TestLogger } from '../../../TestLogger';
 
-import { GetMeEndpoint } from '~/Endpoint/User/GetMeEndpoint';
-import { Response401UnauthorizedError } from '~/Error/Response401UnauthorizedError';
-import { Logger } from '~/Service/Logger';
-import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
-
 const mockServer = setupServer(
-  http.get('http://mock-api/me', () => {
+  http.delete('http://mock-api/token', () => {
     return HttpResponse.json(
       {
         type: 'http://ember-nexus-api/error/401/unauthorized',
@@ -35,11 +33,14 @@ const testLogger: TestLogger = new TestLogger();
 Container.set(Logger, testLogger);
 Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
 
-test('GetMeEndpoint should handle bad response error', async () => {
+test('DeleteTokenEndpoint should handle bad response error', async () => {
   mockServer.listen();
-  await expect(Container.get(GetMeEndpoint).getMe()).to.eventually.be.rejectedWith(Response401UnauthorizedError);
+  await expect(Container.get(DeleteTokenEndpoint).deleteToken()).to.eventually.be.rejectedWith(
+    Response401UnauthorizedError,
+  );
 
-  expect(testLogger.assertDebugHappened('Executing HTTP GET request against url http://mock-api/me .')).to.be.true;
+  expect(testLogger.assertDebugHappened('Executing HTTP DELETE request against url http://mock-api/token .')).to.be
+    .true;
 
   expect(testLogger.assertErrorHappened('Sever returned 401 unauthorized.')).to.be.true;
 

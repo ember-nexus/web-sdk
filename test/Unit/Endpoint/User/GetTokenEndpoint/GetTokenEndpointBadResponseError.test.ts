@@ -4,15 +4,13 @@ import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
+import { GetTokenEndpoint } from '../../../../../src/Endpoint/User';
+import { ParseError } from '../../../../../src/Error';
+import { Logger, WebSdkConfiguration } from '../../../../../src/Service';
 import { TestLogger } from '../../../TestLogger';
 
-import { GetMeEndpoint } from '~/Endpoint/User/GetMeEndpoint';
-import { ParseError } from '~/Error/ParseError';
-import { Logger } from '~/Service/Logger';
-import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
-
 const mockServer = setupServer(
-  http.get('http://mock-api/me', () => {
+  http.get('http://mock-api/token', () => {
     return HttpResponse.text('Some content which can not be interpreted as JSON.', {
       status: 200,
       headers: {
@@ -26,11 +24,11 @@ const testLogger: TestLogger = new TestLogger();
 Container.set(Logger, testLogger);
 Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
 
-test('GetMeEndpoint should handle bad response error', async () => {
+test('GetTokenEndpoint should handle bad response error', async () => {
   mockServer.listen();
-  await expect(Container.get(GetMeEndpoint).getMe()).to.eventually.be.rejectedWith(ParseError);
+  await expect(Container.get(GetTokenEndpoint).getToken()).to.eventually.be.rejectedWith(ParseError);
 
-  expect(testLogger.assertDebugHappened('Executing HTTP GET request against url http://mock-api/me .')).to.be.true;
+  expect(testLogger.assertDebugHappened('Executing HTTP GET request against url http://mock-api/token .')).to.be.true;
 
   expect(
     testLogger.assertErrorHappened(

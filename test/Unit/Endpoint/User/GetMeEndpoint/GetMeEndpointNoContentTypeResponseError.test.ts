@@ -4,12 +4,10 @@ import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
+import { GetMeEndpoint } from '../../../../../src/Endpoint/User';
+import { ParseError } from '../../../../../src/Error';
+import { Logger, WebSdkConfiguration } from '../../../../../src/Service';
 import { TestLogger } from '../../../TestLogger';
-
-import { GetMeEndpoint } from '~/Endpoint/User/GetMeEndpoint';
-import { ParseError } from '~/Error/ParseError';
-import { Logger } from '~/Service/Logger';
-import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 
 const mockServer = setupServer(
   http.get('http://mock-api/me', () => {

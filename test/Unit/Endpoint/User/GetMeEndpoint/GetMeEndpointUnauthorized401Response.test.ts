@@ -4,24 +4,23 @@ import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
+import { GetMeEndpoint } from '../../../../../src/Endpoint/User';
+import { Response401UnauthorizedError } from '../../../../../src/Error';
+import { Logger, WebSdkConfiguration } from '../../../../../src/Service';
 import { TestLogger } from '../../../TestLogger';
-
-import { GetMeEndpoint } from '~/Endpoint/User/GetMeEndpoint';
-import { Response429TooManyRequestsError } from '~/Error/Response429TooManyRequestsError';
-import { Logger } from '~/Service/Logger';
-import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
 
 const mockServer = setupServer(
   http.get('http://mock-api/me', () => {
     return HttpResponse.json(
       {
-        type: 'http://ember-nexus-api/error/429/too-many-requests',
+        type: 'http://ember-nexus-api/error/401/unauthorized',
         title: 'Unauthorized',
-        status: 429,
-        detail: 'wip',
+        status: 401,
+        detail:
+          "Authorization for the request failed due to possible problems with the token (incorrect or expired), password (incorrect or changed), the user's unique identifier, or the user's status (e.g., missing, blocked, or deleted).",
       },
       {
-        status: 429,
+        status: 401,
         headers: {
           'Content-Type': 'application/problem+json; charset=utf-8',
         },
@@ -36,11 +35,11 @@ Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
 
 test('GetMeEndpoint should handle bad response error', async () => {
   mockServer.listen();
-  await expect(Container.get(GetMeEndpoint).getMe()).to.eventually.be.rejectedWith(Response429TooManyRequestsError);
+  await expect(Container.get(GetMeEndpoint).getMe()).to.eventually.be.rejectedWith(Response401UnauthorizedError);
 
   expect(testLogger.assertDebugHappened('Executing HTTP GET request against url http://mock-api/me .')).to.be.true;
 
-  expect(testLogger.assertErrorHappened('Sever returned 429 too many requests.')).to.be.true;
+  expect(testLogger.assertErrorHappened('Sever returned 401 unauthorized.')).to.be.true;
 
   mockServer.close();
 });

@@ -4,15 +4,13 @@ import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
+import { GetMeEndpoint } from '../../../../../src/Endpoint/User';
+import { Response429TooManyRequestsError } from '../../../../../src/Error';
+import { Logger, WebSdkConfiguration } from '../../../../../src/Service';
 import { TestLogger } from '../../../TestLogger';
 
-import { DeleteTokenEndpoint } from '~/Endpoint/User/DeleteTokenEndpoint';
-import { Response429TooManyRequestsError } from '~/Error/Response429TooManyRequestsError';
-import { Logger } from '~/Service/Logger';
-import { WebSdkConfiguration } from '~/Service/WebSdkConfiguration';
-
 const mockServer = setupServer(
-  http.delete('http://mock-api/token', () => {
+  http.get('http://mock-api/me', () => {
     return HttpResponse.json(
       {
         type: 'http://ember-nexus-api/error/429/too-many-requests',
@@ -34,15 +32,11 @@ const testLogger: TestLogger = new TestLogger();
 Container.set(Logger, testLogger);
 Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
 
-test('DeleteTokenEndpoint should handle bad response error', async () => {
+test('GetMeEndpoint should handle bad response error', async () => {
   mockServer.listen();
+  await expect(Container.get(GetMeEndpoint).getMe()).to.eventually.be.rejectedWith(Response429TooManyRequestsError);
 
-  await expect(Container.get(DeleteTokenEndpoint).deleteToken()).to.eventually.be.rejectedWith(
-    Response429TooManyRequestsError,
-  );
-
-  expect(testLogger.assertDebugHappened('Executing HTTP DELETE request against url http://mock-api/token .')).to.be
-    .true;
+  expect(testLogger.assertDebugHappened('Executing HTTP GET request against url http://mock-api/me .')).to.be.true;
 
   expect(testLogger.assertErrorHappened('Sever returned 429 too many requests.')).to.be.true;
 
