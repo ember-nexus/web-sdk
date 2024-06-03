@@ -1,4 +1,4 @@
-import { LoggerInterface } from '~/Type/Definition/LoggerInterface';
+import { LoggerInterface } from '../../src/Type/Definition';
 
 class TestLogger implements LoggerInterface {
   private debugCalls: unknown[][] = [];
