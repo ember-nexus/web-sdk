@@ -1,3 +1,3 @@
-export * as Event from './Event';
-export * as EventListener from './EventListener';
-export * from './RawValueToNormalizedValueEventManager';
+export * as Event from './Event/index.js';
+export * as EventListener from './EventListener/index.js';
+export * from './RawValueToNormalizedValueEventManager.js';

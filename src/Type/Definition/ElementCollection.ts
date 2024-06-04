@@ -1,5 +1,5 @@
-import { Node } from './Node';
-import { Relation } from './Relation';
+import { Node } from './Node.js';
+import { Relation } from './Relation.js';
 
 type ElementCollection = {
   id: string;

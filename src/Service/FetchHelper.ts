@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
 
-import { WebSdkConfiguration } from './WebSdkConfiguration';
+import { WebSdkConfiguration } from './WebSdkConfiguration.js';
 import {
   Response401UnauthorizedError,
   Response403ForbiddenError,
@@ -8,9 +8,9 @@ import {
   Response429TooManyRequestsError,
   ResponseError,
 } from '../Error';
-import { HttpRequestMethod } from '../Type/Enum';
+import { HttpRequestMethod } from '../Type/Enum/index.js';
 
-import { Logger } from '.';
+import { Logger } from './Logger.js';
 
 /**
  * Collection of different fetch helper methods.

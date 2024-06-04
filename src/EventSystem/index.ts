@@ -1,3 +1,3 @@
-export * as NormalizedValueToRawValue from './NormalizedValueToRawValue';
-export * as RawValueToNormalizedValue from './RawValueToNormalizedValue';
-export * from './EventManager';
+export * as NormalizedValueToRawValue from './NormalizedValueToRawValue/index.js';
+export * as RawValueToNormalizedValue from './RawValueToNormalizedValue/index.js';
+export * from './EventManager.js';

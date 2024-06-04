@@ -1,4 +1,4 @@
-import { EmberNexusError } from './EmberNexusError';
+import { EmberNexusError } from './EmberNexusError.js';
 
 /**
  * Logic error class.

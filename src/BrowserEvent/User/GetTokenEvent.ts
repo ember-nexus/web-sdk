@@ -1,6 +1,6 @@
-import type { Node } from '../../Type/Definition';
-import { EventIdentifier } from '../../Type/Enum';
-import { customEventDefaultInit } from '../../Type/Partial';
+import type { Node } from '../../Type/Definition/index.js';
+import { EventIdentifier } from '../../Type/Enum/index.js';
+import { customEventDefaultInit } from '../../Type/Partial/index.js';
 
 type GetTokenEventDetails = {
   token: Promise<Node> | null;

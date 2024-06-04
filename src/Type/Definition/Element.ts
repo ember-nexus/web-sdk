@@ -1,5 +1,5 @@
-import { Data } from './Data';
-import { Uuid } from './Uuid';
+import { Data } from './Data.js';
+import { Uuid } from './Uuid.js';
 
 type Element = {
   type: string;

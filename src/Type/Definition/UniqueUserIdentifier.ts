@@ -1,4 +1,4 @@
-import { Branded } from './Branded';
+import { Branded } from './Branded.js';
 
 /**
  * Type safe variant of string containing single user unique identifier, usually the user's email address.

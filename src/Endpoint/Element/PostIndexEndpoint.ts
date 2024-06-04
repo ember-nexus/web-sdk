@@ -1,8 +1,8 @@
 import { Service } from 'typedi';
 
-import { NetworkError, ParseError } from '../../Error';
-import { FetchHelper, Logger } from '../../Service';
-import { NodeWithOptionalId, RelationWithOptionalId, Uuid, validateUuidFromString } from '../../Type/Definition';
+import { NetworkError, ParseError } from '../../Error/index.js';
+import { FetchHelper, Logger } from '../../Service/index.js';
+import { NodeWithOptionalId, RelationWithOptionalId, Uuid, validateUuidFromString } from '../../Type/Definition/index.js';
 
 /**
  * The post index endpoint creates a single element.

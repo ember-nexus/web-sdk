@@ -1,8 +1,8 @@
 import { Service } from 'typedi';
 
-import { NetworkError, ParseError } from '../../Error';
-import { ElementParser, FetchHelper, Logger } from '../../Service';
-import { Node, Relation, Uuid } from '../../Type/Definition';
+import { NetworkError, ParseError } from '../../Error/index.js';
+import { ElementParser, FetchHelper, Logger } from '../../Service/index.js';
+import { Node, Relation, Uuid } from '../../Type/Definition/index.js';
 
 /**
  * The get element endpoint retrieves a single element.

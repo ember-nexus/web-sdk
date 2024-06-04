@@ -1,8 +1,8 @@
 import { Service } from 'typedi';
 
-import { NetworkError, ParseError } from '../../Error';
-import { FetchHelper, Logger, TokenParser } from '../../Service';
-import { Data, Token, UniqueUserIdentifier } from '../../Type/Definition';
+import { NetworkError, ParseError } from '../../Error/index.js';
+import { FetchHelper, Logger, TokenParser } from '../../Service/index.js';
+import { Data, Token, UniqueUserIdentifier } from '../../Type/Definition/index.js';
 
 /**
  * The post token endpoint is used to create new tokens.

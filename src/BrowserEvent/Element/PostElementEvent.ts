@@ -1,6 +1,6 @@
-import { NodeWithOptionalId, RelationWithOptionalId, Uuid } from '../../Type/Definition';
-import { EventIdentifier } from '../../Type/Enum';
-import { customEventDefaultInit } from '../../Type/Partial';
+import { NodeWithOptionalId, RelationWithOptionalId, Uuid } from '../../Type/Definition/index.js';
+import { EventIdentifier } from '../../Type/Enum/index.js';
+import { customEventDefaultInit } from '../../Type/Partial/index.js';
 
 type PostElementEventDetails = {
   parentId: Uuid;

@@ -1,5 +1,5 @@
-import { EventIdentifier } from '../../Type/Enum';
-import { customEventDefaultInit } from '../../Type/Partial';
+import { EventIdentifier } from '../../Type/Enum/index.js';
+import { customEventDefaultInit } from '../../Type/Partial/index.js';
 
 type DeleteTokenEventDetails = {
   result: Promise<void> | null;

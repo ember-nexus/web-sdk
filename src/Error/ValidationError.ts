@@ -1,4 +1,4 @@
-import { EmberNexusError } from './EmberNexusError';
+import { EmberNexusError } from './EmberNexusError.js';
 
 /**
  * Validation error class.

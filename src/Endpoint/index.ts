@@ -1,4 +1,4 @@
-export * as Element from './Element';
-// export * as File from "./File";
-export * as User from './User';
-// export * as WebDAV from "./WebDAV";
+export * as Element from './Element/index.js';
+// export * as File from "./File/index.js";
+export * as User from './User/index.js';
+// export * as WebDAV from "./WebDAV/index.js";

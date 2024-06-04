@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
 
-import { Token } from '../Type/Definition';
+import { Token } from '../Type/Definition/index.js';
 
 /**
  * Configuration handler.

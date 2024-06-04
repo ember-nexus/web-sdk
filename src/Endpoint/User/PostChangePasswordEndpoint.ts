@@ -1,8 +1,8 @@
 import { Service } from 'typedi';
 
-import { NetworkError, ParseError } from '../../Error';
-import { FetchHelper, Logger } from '../../Service';
-import { UniqueUserIdentifier } from '../../Type/Definition';
+import { NetworkError, ParseError } from '../../Error/index.js';
+import { FetchHelper, Logger } from '../../Service/index.js';
+import { UniqueUserIdentifier } from '../../Type/Definition/index.js';
 
 /**
  * The post change password endpoint is used to change the user's password.

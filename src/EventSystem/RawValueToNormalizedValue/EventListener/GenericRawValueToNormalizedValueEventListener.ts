@@ -1,7 +1,7 @@
 import { Service } from 'typedi';
 
-import { EventListener } from '../../../Type/Definition';
-import { RawValueToNormalizedValueEvent } from '../Event';
+import { EventListener } from '../../../Type/Definition/index.js';
+import { RawValueToNormalizedValueEvent } from '../Event/index.js';
 
 /**
  * Skips conversion of primitive data types and sets them directly.

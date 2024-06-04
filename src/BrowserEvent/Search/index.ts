@@ -1,1 +1,1 @@
-export * from './PostSearchEvent';
+export * from './PostSearchEvent.js';

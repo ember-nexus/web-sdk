@@ -1,8 +1,8 @@
 import { Service } from 'typedi';
 
-import { EmberNexusError, NetworkError, ParseError, ValidationError } from '../../Error';
-import { CollectionParser, FetchHelper, Logger } from '../../Service';
-import { Collection } from '../../Type/Definition';
+import { EmberNexusError, NetworkError, ParseError, ValidationError } from '../../Error/index.js';
+import { CollectionParser, FetchHelper, Logger } from '../../Service/index.js';
+import { Collection } from '../../Type/Definition/index.js';
 
 /**
  * The get index endpoint retrieves all root level nodes.

@@ -1,4 +1,4 @@
-import { Element } from './Element';
+import { Element } from './Element.js';
 
 type Node = Element;
 export { Node };

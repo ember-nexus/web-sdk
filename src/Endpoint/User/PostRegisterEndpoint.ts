@@ -1,8 +1,8 @@
 import { Service } from 'typedi';
 
-import { NetworkError, ParseError } from '../../Error';
-import { FetchHelper, Logger } from '../../Service';
-import { Data, UniqueUserIdentifier, Uuid, validateUuidFromString } from '../../Type/Definition';
+import { NetworkError, ParseError } from '../../Error/index.js';
+import { FetchHelper, Logger } from '../../Service/index.js';
+import { Data, UniqueUserIdentifier, Uuid, validateUuidFromString } from '../../Type/Definition/index.js';
 
 /**
  * The post register endpoint is used to create new user accounts.

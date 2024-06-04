@@ -1,1 +1,1 @@
-export * from './GetInstanceConfigurationEvent';
+export * from './GetInstanceConfigurationEvent.js';

@@ -1,1 +1,1 @@
-export * from './CustomEventDefaultInit';
+export * from './CustomEventDefaultInit.js';

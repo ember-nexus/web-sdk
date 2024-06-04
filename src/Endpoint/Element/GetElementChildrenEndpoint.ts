@@ -1,8 +1,8 @@
 import { Service } from 'typedi';
 
-import { EmberNexusError, NetworkError, ParseError, ValidationError } from '../../Error';
-import { CollectionParser, FetchHelper, Logger } from '../../Service';
-import { Collection, Uuid } from '../../Type/Definition';
+import { EmberNexusError, NetworkError, ParseError, ValidationError } from '../../Error/index.js';
+import { CollectionParser, FetchHelper, Logger } from '../../Service/index.js';
+import { Collection, Uuid } from '../../Type/Definition/index.js';
 
 /**
  * The get element children endpoint retrieves all child nodes of a single parent node.

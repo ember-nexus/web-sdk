@@ -1,4 +1,4 @@
-import { EmberNexusError } from './EmberNexusError';
+import { EmberNexusError } from './EmberNexusError.js';
 
 /**
  * Parse error class.

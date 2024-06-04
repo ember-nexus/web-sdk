@@ -1,4 +1,4 @@
-import { Relation } from './Relation';
+import { Relation } from './Relation.js';
 
 /**
  * Relation with optional id.

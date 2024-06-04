@@ -95,6 +95,9 @@ const config: Config = {
   // "moduleNameMapper": {
   //   "^~(.*)$": "<rootDir>/src/$1"
   // },
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
 
 
   globals: {

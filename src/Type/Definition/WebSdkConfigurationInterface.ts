@@ -1,4 +1,4 @@
-import { Token } from './Token';
+import { Token } from './Token.js';
 
 interface WebSdkConfigurationInterface {
   hasToken(): boolean;

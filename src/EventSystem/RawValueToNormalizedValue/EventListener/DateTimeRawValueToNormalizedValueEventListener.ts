@@ -1,7 +1,7 @@
 import { Service } from 'typedi';
 
-import { EventListener } from '../../../Type/Definition';
-import { RawValueToNormalizedValueEvent } from '../Event';
+import { EventListener } from '../../../Type/Definition/index.js';
+import { RawValueToNormalizedValueEvent } from '../Event/index.js';
 
 /**
  * Checks if a string returned by Ember Nexus API matches the date time format and tries to convert it to a date object.

@@ -1,4 +1,4 @@
-import { RequestProblemCategory } from '../Enum';
+import { RequestProblemCategory } from '../Enum/index.js';
 
 type RequestProblem = {
   category: RequestProblemCategory;

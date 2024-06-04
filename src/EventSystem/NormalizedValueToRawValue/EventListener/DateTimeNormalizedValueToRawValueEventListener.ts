@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon';
 import { Service } from 'typedi';
 
-import { EventListener } from '../../../Type/Definition';
-import { NormalizedValueToRawValueEvent } from '../Event';
+import { EventListener } from '../../../Type/Definition/index.js';
+import { NormalizedValueToRawValueEvent } from '../Event/index.js';
 
 /**
  * Converts JavaScript date objects to the time representation Ember Nexus API can understand.

@@ -1,4 +1,4 @@
-import { EventListener, StoppableEvent } from '../Type/Definition';
+import { EventListener, StoppableEvent } from '../Type/Definition/index.js';
 
 class EventManager<EventType extends StoppableEvent> {
   private eventListeners: [number, EventListener<EventType>][] = [];

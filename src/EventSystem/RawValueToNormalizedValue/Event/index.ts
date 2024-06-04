@@ -1,1 +1,1 @@
-export * from './RawValueToNormalizedValueEvent';
+export * from './RawValueToNormalizedValueEvent.js';

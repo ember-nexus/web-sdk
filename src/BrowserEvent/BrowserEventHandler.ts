@@ -11,7 +11,7 @@ import {
   PostElementEvent,
   PostIndexEvent,
   PutElementEvent,
-} from './Element';
+} from './Element/index.js';
 import {
   DeleteTokenEvent,
   GetMeEvent,
@@ -19,8 +19,8 @@ import {
   PostChangePasswordEvent,
   PostRegisterEvent,
   PostTokenEvent,
-} from './User';
-import { EmberNexus } from '../Service';
+} from './User/index.js';
+import { EmberNexus } from '../Service/index.js';
 
 /**
  * Class which handles browser event subscriptions.

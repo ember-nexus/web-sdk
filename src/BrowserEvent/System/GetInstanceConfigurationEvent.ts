@@ -1,6 +1,6 @@
-import { InstanceConfiguration } from '../../Type/Definition';
-import { EventIdentifier } from '../../Type/Enum';
-import { customEventDefaultInit } from '../../Type/Partial';
+import { InstanceConfiguration } from '../../Type/Definition/index.js';
+import { EventIdentifier } from '../../Type/Enum/index.js';
+import { customEventDefaultInit } from '../../Type/Partial/index.js';
 
 type GetInstanceConfigurationEventDetails = {
   instanceConfiguration: Promise<InstanceConfiguration> | null;

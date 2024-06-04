@@ -1,5 +1,5 @@
-import { Branded } from './Branded';
-import { ParseError } from '../../Error';
+import { Branded } from './Branded.js';
+import { ParseError } from '../../Error/index.js';
 
 /**
  * Type safe variant of string containing single UUIDv4.

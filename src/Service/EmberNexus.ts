@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import { LRUCache } from 'lru-cache';
 import { Container, Service } from 'typedi';
 
-import { WebSdkConfiguration } from './WebSdkConfiguration';
+import { WebSdkConfiguration } from './WebSdkConfiguration.js';
 import {
   DeleteElementEndpoint,
   GetElementChildrenEndpoint,
@@ -15,7 +15,7 @@ import {
   PostElementEndpoint,
   PostIndexEndpoint,
   PutElementEndpoint,
-} from '../Endpoint/Element';
+} from '../Endpoint/Element/index.js';
 import {
   DeleteTokenEndpoint,
   GetMeEndpoint,
@@ -23,7 +23,7 @@ import {
   PostChangePasswordEndpoint,
   PostRegisterEndpoint,
   PostTokenEndpoint,
-} from '../Endpoint/User';
+} from '../Endpoint/User/index.js';
 import {
   Collection,
   Data,
@@ -34,7 +34,7 @@ import {
   Token,
   UniqueUserIdentifier,
   Uuid,
-} from '../Type/Definition';
+} from '../Type/Definition/index.js';
 
 @Service()
 class EmberNexus {

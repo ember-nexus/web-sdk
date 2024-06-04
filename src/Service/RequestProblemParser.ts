@@ -1,7 +1,7 @@
 import { Service } from 'typedi';
 
-import { RequestProblem } from '../Type/Definition';
-import { RequestProblemCategory } from '../Type/Enum';
+import { RequestProblem } from '../Type/Definition/index.js';
+import { RequestProblemCategory } from '../Type/Enum/index.js';
 
 /**
  * Class which helps to parse problem responses.

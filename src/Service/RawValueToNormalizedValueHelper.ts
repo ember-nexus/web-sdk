@@ -1,9 +1,9 @@
 import { Service } from 'typedi';
 
-import { Logger } from './Logger';
-import { RawValueToNormalizedValueEventManager } from '../EventSystem/RawValueToNormalizedValue';
-import { RawValueToNormalizedValueEvent } from '../EventSystem/RawValueToNormalizedValue/Event';
-import { Data } from '../Type/Definition';
+import { Logger } from './Logger.js';
+import { RawValueToNormalizedValueEventManager } from '../EventSystem/RawValueToNormalizedValue/index.js';
+import { RawValueToNormalizedValueEvent } from '../EventSystem/RawValueToNormalizedValue/Event/index.js';
+import { Data } from '../Type/Definition/index.js';
 
 /**
  * Class which helps to parse values.
