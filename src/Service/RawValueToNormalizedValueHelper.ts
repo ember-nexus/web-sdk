@@ -1,8 +1,8 @@
 import { Service } from 'typedi';
 
 import { Logger } from './Logger.js';
-import { RawValueToNormalizedValueEventManager } from '../EventSystem/RawValueToNormalizedValue/index.js';
 import { RawValueToNormalizedValueEvent } from '../EventSystem/RawValueToNormalizedValue/Event/index.js';
+import { RawValueToNormalizedValueEventManager } from '../EventSystem/RawValueToNormalizedValue/index.js';
 import { Data } from '../Type/Definition/index.js';
 
 /**
