@@ -1,4 +1,4 @@
-import { Service } from 'typedi';
+import { Container, Service } from 'typedi';
 
 import { Logger } from './Logger.js';
 import { WebSdkConfiguration } from './WebSdkConfiguration.js';
@@ -20,10 +20,7 @@ import { HttpRequestMethod } from '../Type/Enum/index.js';
  */
 @Service()
 class FetchHelper {
-  constructor(
-    private logger: Logger,
-    private sdkConfiguration: WebSdkConfiguration,
-  ) {}
+  constructor(private logger: Logger) {}
 
   createResponseErrorFromBadResponse(response: Response, data: Record<string, unknown>): ResponseError {
     let errorInstance: ResponseError | null = null;
@@ -60,8 +57,8 @@ class FetchHelper {
   }
 
   addAuthorizationHeader(headers: HeadersInit): void {
-    if (this.sdkConfiguration.hasToken()) {
-      headers['Authorization'] = `Bearer ${this.sdkConfiguration.getToken()}`;
+    if (Container.get(WebSdkConfiguration).hasToken()) {
+      headers['Authorization'] = `Bearer ${Container.get(WebSdkConfiguration).getToken()}`;
     }
   }
 
@@ -140,11 +137,11 @@ class FetchHelper {
   }
 
   buildUrl(url: string): string {
-    return `${this.sdkConfiguration.getApiHost()}${url}`;
+    return `${Container.get(WebSdkConfiguration).getApiHost()}${url}`;
   }
 
   runWrappedFetch(url: string, init?: RequestInit | undefined): Promise<Response> {
-    url = `${this.sdkConfiguration.getApiHost()}${url}`;
+    url = `${Container.get(WebSdkConfiguration).getApiHost()}${url}`;
     this.logger.debug(`Executing HTTP ${init?.method ?? '-'} request against url ${url} .`);
     return fetch(url, init);
   }
