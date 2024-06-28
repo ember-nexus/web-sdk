@@ -26,16 +26,16 @@ class FetchHelper {
     let errorInstance: ResponseError | null = null;
 
     if (response.status == 401) {
-      errorInstance = new Response401UnauthorizedError('Sever returned 401 unauthorized.');
+      errorInstance = new Response401UnauthorizedError('Server returned 401 unauthorized.');
     }
     if (response.status == 403) {
-      errorInstance = new Response403ForbiddenError('Sever returned 403 forbidden.');
+      errorInstance = new Response403ForbiddenError('Server returned 403 forbidden.');
     }
     if (response.status == 404) {
-      errorInstance = new Response404NotFoundError('Sever returned 404 not found.');
+      errorInstance = new Response404NotFoundError('Server returned 404 not found.');
     }
     if (response.status == 429) {
-      errorInstance = new Response429TooManyRequestsError('Sever returned 429 too many requests.');
+      errorInstance = new Response429TooManyRequestsError('Server returned 429 too many requests.');
     }
 
     if (errorInstance == null) errorInstance = new ResponseError('Generic response error.');
