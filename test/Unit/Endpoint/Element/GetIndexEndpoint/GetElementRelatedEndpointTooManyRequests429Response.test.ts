@@ -41,7 +41,7 @@ test('GetIndexEndpoint should handle bad response error', async () => {
   expect(testLogger.assertDebugHappened('Executing HTTP GET request against url http://mock-api/?page=1&pageSize=25 .'))
     .to.be.true;
 
-  expect(testLogger.assertErrorHappened('Sever returned 429 too many requests.')).to.be.true;
+  expect(testLogger.assertErrorHappened('Server returned 429 too many requests.')).to.be.true;
 
   mockServer.close();
 });

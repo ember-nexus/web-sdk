@@ -54,7 +54,7 @@ test('DeleteElementEndpoint should handle bad response error', async () => {
     ),
   ).to.be.true;
 
-  expect(testLogger.assertErrorHappened('Sever returned 401 unauthorized.')).to.be.true;
+  expect(testLogger.assertErrorHappened('Server returned 401 unauthorized.')).to.be.true;
 
   expect(buildUrlSpy.calledOnce).to.be.true;
   expect(buildUrlSpy.getCall(0).args[0]).to.equal('/4b67f72a-65f2-43b4-9989-29fc0d86a6db');

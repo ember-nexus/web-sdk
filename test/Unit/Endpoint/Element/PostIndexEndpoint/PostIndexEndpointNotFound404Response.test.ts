@@ -48,7 +48,7 @@ test('PostIndexEndpoint should handle bad response error', async () => {
 
   expect(testLogger.assertDebugHappened('Executing HTTP POST request against url http://mock-api/ .')).to.be.true;
 
-  expect(testLogger.assertErrorHappened('Sever returned 404 not found.')).to.be.true;
+  expect(testLogger.assertErrorHappened('Server returned 404 not found.')).to.be.true;
 
   mockServer.close();
 });
