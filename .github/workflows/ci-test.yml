@@ -110,6 +110,7 @@ jobs:
     name: 'Unit test coverage'
     needs:
       - test-unit
+    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/setup-node@v4
         with:

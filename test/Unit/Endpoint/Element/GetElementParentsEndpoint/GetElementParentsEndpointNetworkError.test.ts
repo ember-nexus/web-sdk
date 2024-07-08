@@ -1,6 +1,5 @@
 import { expect } from 'chai';
 import { http } from 'msw';
-// eslint-disable-next-line import/no-unresolved
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
