@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Fix typo.
 - Fix package.json.
+- Remove unnecessary dependencies.
+- Upgrade dependencies, especially eslint and typescript.
 
 ## 0.0.57 - 2024-06-06
 
