@@ -63,30 +63,30 @@ describe('BrowserEventHandler tests', () => {
     expect(eventListenerKeys).to.have.length(16);
 
     // user
-    expect(eventListenerKeys).to.include('ember-nexus-post-register');
-    expect(eventListenerKeys).to.include('ember-nexus-post-change-password');
-    expect(eventListenerKeys).to.include('ember-nexus-get-me');
-    expect(eventListenerKeys).to.include('ember-nexus-post-token');
-    expect(eventListenerKeys).to.include('ember-nexus-get-token');
-    expect(eventListenerKeys).to.include('ember-nexus-delete-token');
+    expect(eventListenerKeys).to.include('ember-nexus-sdk-post-register');
+    expect(eventListenerKeys).to.include('ember-nexus-sdk-post-change-password');
+    expect(eventListenerKeys).to.include('ember-nexus-sdk-get-me');
+    expect(eventListenerKeys).to.include('ember-nexus-sdk-post-token');
+    expect(eventListenerKeys).to.include('ember-nexus-sdk-get-token');
+    expect(eventListenerKeys).to.include('ember-nexus-sdk-delete-token');
 
     // element
-    expect(eventListenerKeys).to.include('ember-nexus-get-index');
-    expect(eventListenerKeys).to.include('ember-nexus-get-element');
-    expect(eventListenerKeys).to.include('ember-nexus-get-element-parents');
-    expect(eventListenerKeys).to.include('ember-nexus-get-element-children');
-    expect(eventListenerKeys).to.include('ember-nexus-get-element-related');
-    expect(eventListenerKeys).to.include('ember-nexus-post-index');
-    expect(eventListenerKeys).to.include('ember-nexus-post-element');
-    expect(eventListenerKeys).to.include('ember-nexus-put-element');
-    expect(eventListenerKeys).to.include('ember-nexus-patch-element');
-    expect(eventListenerKeys).to.include('ember-nexus-delete-element');
+    expect(eventListenerKeys).to.include('ember-nexus-sdk-get-index');
+    expect(eventListenerKeys).to.include('ember-nexus-sdk-get-element');
+    expect(eventListenerKeys).to.include('ember-nexus-sdk-get-element-parents');
+    expect(eventListenerKeys).to.include('ember-nexus-sdk-get-element-children');
+    expect(eventListenerKeys).to.include('ember-nexus-sdk-get-element-related');
+    expect(eventListenerKeys).to.include('ember-nexus-sdk-post-index');
+    expect(eventListenerKeys).to.include('ember-nexus-sdk-post-element');
+    expect(eventListenerKeys).to.include('ember-nexus-sdk-put-element');
+    expect(eventListenerKeys).to.include('ember-nexus-sdk-patch-element');
+    expect(eventListenerKeys).to.include('ember-nexus-sdk-delete-element');
 
     // search
-    // expect(eventListenerKeys).to.include('ember-nexus-post-search');
+    // expect(eventListenerKeys).to.include('ember-nexus-sdk-post-search');
 
     // system
-    // expect(eventListenerKeys).to.include('ember-nexus-get-instance-configuration');
+    // expect(eventListenerKeys).to.include('ember-nexus-sdk-get-instance-configuration');
 
     browserEventHandler.removeBrowserEventListeners();
 
@@ -112,7 +112,7 @@ describe('BrowserEventHandler tests', () => {
     browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
 
     const event = new GetElementEvent(uuid);
-    elementMock.getEventListeners()['ember-nexus-get-element'](event);
+    elementMock.getEventListeners()['ember-nexus-sdk-get-element'](event);
     const returnedElement = await event.getElement();
     expect(returnedElement).to.be.equal(elementToBeReturned);
 
@@ -145,7 +145,7 @@ describe('BrowserEventHandler tests', () => {
     browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
 
     const event = new GetElementChildrenEvent(uuid);
-    elementMock.getEventListeners()['ember-nexus-get-element-children'](event);
+    elementMock.getEventListeners()['ember-nexus-sdk-get-element-children'](event);
     const returnedCollection = await event.getChildren();
     expect(returnedCollection).to.be.equal(collectionToBeReturned);
 
@@ -178,7 +178,7 @@ describe('BrowserEventHandler tests', () => {
     browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
 
     const event = new GetElementParentsEvent(uuid);
-    elementMock.getEventListeners()['ember-nexus-get-element-parents'](event);
+    elementMock.getEventListeners()['ember-nexus-sdk-get-element-parents'](event);
     const returnedCollection = await event.getParents();
     expect(returnedCollection).to.be.equal(collectionToBeReturned);
 
@@ -211,7 +211,7 @@ describe('BrowserEventHandler tests', () => {
     browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
 
     const event = new GetElementRelatedEvent(uuid);
-    elementMock.getEventListeners()['ember-nexus-get-element-related'](event);
+    elementMock.getEventListeners()['ember-nexus-sdk-get-element-related'](event);
     const returnedCollection = await event.getRelated();
     expect(returnedCollection).to.be.equal(collectionToBeReturned);
 
@@ -243,7 +243,7 @@ describe('BrowserEventHandler tests', () => {
     browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
 
     const event = new GetIndexEvent();
-    elementMock.getEventListeners()['ember-nexus-get-index'](event);
+    elementMock.getEventListeners()['ember-nexus-sdk-get-index'](event);
     const returnedCollection = await event.getIndexCollection();
     expect(returnedCollection).to.be.equal(collectionToBeReturned);
 
@@ -267,7 +267,7 @@ describe('BrowserEventHandler tests', () => {
       type: 'Data',
       data: {},
     } as NodeWithOptionalId);
-    elementMock.getEventListeners()['ember-nexus-post-index'](event);
+    elementMock.getEventListeners()['ember-nexus-sdk-post-index'](event);
     const returnedUuid = await event.getElementId();
     expect(returnedUuid).to.be.equal(uuidToBeReturned);
 
@@ -291,7 +291,7 @@ describe('BrowserEventHandler tests', () => {
       type: 'Data',
       data: {},
     } as NodeWithOptionalId);
-    elementMock.getEventListeners()['ember-nexus-post-element'](event);
+    elementMock.getEventListeners()['ember-nexus-sdk-post-element'](event);
     const returnedUuid = await event.getElementId();
     expect(returnedUuid).to.be.equal(uuidToBeReturned);
 
@@ -311,7 +311,7 @@ describe('BrowserEventHandler tests', () => {
     browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
 
     const event = new PutElementEvent(validateUuidFromString('58a7dc13-ac78-4cac-b786-b09275a60c9e'), {} as Data);
-    elementMock.getEventListeners()['ember-nexus-put-element'](event);
+    elementMock.getEventListeners()['ember-nexus-sdk-put-element'](event);
     await event.getResult();
 
     browserEventHandler.removeBrowserEventListeners();
@@ -330,7 +330,7 @@ describe('BrowserEventHandler tests', () => {
     browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
 
     const event = new PatchElementEvent(validateUuidFromString('58a7dc13-ac78-4cac-b786-b09275a60c9e'), {} as Data);
-    elementMock.getEventListeners()['ember-nexus-patch-element'](event);
+    elementMock.getEventListeners()['ember-nexus-sdk-patch-element'](event);
     await event.getResult();
 
     browserEventHandler.removeBrowserEventListeners();
@@ -349,7 +349,7 @@ describe('BrowserEventHandler tests', () => {
     browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
 
     const event = new DeleteElementEvent(validateUuidFromString('58a7dc13-ac78-4cac-b786-b09275a60c9e'));
-    elementMock.getEventListeners()['ember-nexus-delete-element'](event);
+    elementMock.getEventListeners()['ember-nexus-sdk-delete-element'](event);
     await event.getResult();
 
     browserEventHandler.removeBrowserEventListeners();
@@ -369,7 +369,7 @@ describe('BrowserEventHandler tests', () => {
     browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
 
     const event = new PostRegisterEvent(createUniqueUserIdentifierFromString('someIdentifier'), 'password', {} as Data);
-    elementMock.getEventListeners()['ember-nexus-post-register'](event);
+    elementMock.getEventListeners()['ember-nexus-sdk-post-register'](event);
     const returnedUuid = await event.getUserId();
     expect(returnedUuid).to.be.equal(uuidToBeReturned);
 
@@ -393,7 +393,7 @@ describe('BrowserEventHandler tests', () => {
       'currentPassword',
       'newPassword',
     );
-    elementMock.getEventListeners()['ember-nexus-post-change-password'](event);
+    elementMock.getEventListeners()['ember-nexus-sdk-post-change-password'](event);
     await event.getResult();
 
     browserEventHandler.removeBrowserEventListeners();
@@ -418,7 +418,7 @@ describe('BrowserEventHandler tests', () => {
     browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
 
     const event = new GetMeEvent();
-    elementMock.getEventListeners()['ember-nexus-get-me'](event);
+    elementMock.getEventListeners()['ember-nexus-sdk-get-me'](event);
     const returnedElement = await event.getMe();
     expect(returnedElement).to.be.equal(elementToBeReturned);
 
@@ -439,7 +439,7 @@ describe('BrowserEventHandler tests', () => {
     browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
 
     const event = new PostTokenEvent(createUniqueUserIdentifierFromString('someIdentifier'), 'currentPassword');
-    elementMock.getEventListeners()['ember-nexus-post-token'](event);
+    elementMock.getEventListeners()['ember-nexus-sdk-post-token'](event);
     const returnedToken = await event.getToken();
     expect(returnedToken).to.be.equal(token);
 
@@ -465,7 +465,7 @@ describe('BrowserEventHandler tests', () => {
     browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
 
     const event = new GetTokenEvent();
-    elementMock.getEventListeners()['ember-nexus-get-token'](event);
+    elementMock.getEventListeners()['ember-nexus-sdk-get-token'](event);
     const returnedElement = await event.getToken();
     expect(returnedElement).to.be.equal(elementToBeReturned);
 
@@ -485,7 +485,7 @@ describe('BrowserEventHandler tests', () => {
     browserEventHandler.addBrowserEventListeners(elementMock as HTMLElement);
 
     const event = new DeleteTokenEvent();
-    elementMock.getEventListeners()['ember-nexus-delete-token'](event);
+    elementMock.getEventListeners()['ember-nexus-sdk-delete-token'](event);
     await event.getResult();
 
     browserEventHandler.removeBrowserEventListeners();

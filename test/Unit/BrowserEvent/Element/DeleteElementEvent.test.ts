@@ -5,7 +5,7 @@ import { validateUuidFromString } from '../../../../src/Type/Definition';
 
 describe('DeleteElementEvent tests', () => {
   test('DeleteElementEvent returns correct type', () => {
-    expect(DeleteElementEvent.type).to.equal('ember-nexus-delete-element');
+    expect(DeleteElementEvent.type).to.equal('ember-nexus-sdk-delete-element');
   });
 
   it('should return null when no result was set', async () => {

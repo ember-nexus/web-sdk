@@ -5,7 +5,7 @@ import { Collection, validateUuidFromString } from '../../../../src/Type/Definit
 
 describe('GetElementChildrenEvent tests', () => {
   test('GetElementChildrenEvent returns correct type', () => {
-    expect(GetElementChildrenEvent.type).to.equal('ember-nexus-get-element-children');
+    expect(GetElementChildrenEvent.type).to.equal('ember-nexus-sdk-get-element-children');
   });
 
   it('should return null when no element was set', async () => {

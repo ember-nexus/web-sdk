@@ -5,7 +5,7 @@ import { Collection } from '../../../../src/Type/Definition';
 
 describe('GetIndexEvent tests', () => {
   test('GetIndexEvent returns correct type', () => {
-    expect(GetIndexEvent.type).to.equal('ember-nexus-get-index');
+    expect(GetIndexEvent.type).to.equal('ember-nexus-sdk-get-index');
   });
 
   it('should return null when no element was set', async () => {
