@@ -4,7 +4,7 @@ import { DeleteTokenEvent } from '../../../../src/BrowserEvent/User';
 
 describe('DeleteTokenEvent tests', () => {
   test('DeleteTokenEvent returns correct type', () => {
-    expect(DeleteTokenEvent.type).to.equal('ember-nexus-delete-token');
+    expect(DeleteTokenEvent.type).to.equal('ember-nexus-sdk-delete-token');
   });
 
   it('should return null when no result was set', async () => {

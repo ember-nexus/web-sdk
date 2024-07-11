@@ -5,7 +5,7 @@ import { validateUuidFromString } from '../../../../src/Type/Definition';
 
 describe('PatchElementEvent tests', () => {
   test('PatchElementEvent returns correct type', () => {
-    expect(PatchElementEvent.type).to.equal('ember-nexus-patch-element');
+    expect(PatchElementEvent.type).to.equal('ember-nexus-sdk-patch-element');
   });
 
   it('should set attributes to null if not explicitly defined', async () => {

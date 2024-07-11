@@ -5,7 +5,7 @@ import { NodeWithOptionalId, Uuid, validateUuidFromString } from '../../../../sr
 
 describe('PostIndexEvent tests', () => {
   test('PostIndexEvent returns correct type', () => {
-    expect(PostIndexEvent.type).to.equal('ember-nexus-post-index');
+    expect(PostIndexEvent.type).to.equal('ember-nexus-sdk-post-index');
   });
 
   it('should set attributes to null if not explicitly defined', async () => {

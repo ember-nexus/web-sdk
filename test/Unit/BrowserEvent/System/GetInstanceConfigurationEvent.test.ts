@@ -5,7 +5,7 @@ import type { InstanceConfiguration } from '../../../../src/Type/Definition';
 
 describe('GetInstanceConfigurationEvent tests', () => {
   test('GetInstanceConfigurationEvent returns correct type', () => {
-    expect(GetInstanceConfigurationEvent.type).to.equal('ember-nexus-get-instance-configuration');
+    expect(GetInstanceConfigurationEvent.type).to.equal('ember-nexus-sdk-get-instance-configuration');
   });
 
   it('should return null when no result was set', async () => {

@@ -5,7 +5,7 @@ import { Data, ElementCollection, validateUuidFromString } from '../../../../src
 
 describe('PostSearchEvent tests', () => {
   test('PostSearchEvent returns correct type', () => {
-    expect(PostSearchEvent.type).to.equal('ember-nexus-post-search');
+    expect(PostSearchEvent.type).to.equal('ember-nexus-sdk-post-search');
   });
 
   it('should set attributes to null if not explicitly defined', async () => {

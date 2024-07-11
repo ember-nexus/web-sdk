@@ -5,7 +5,7 @@ import { validateUuidFromString } from '../../../../src/Type/Definition';
 
 describe('PutElementEvent tests', () => {
   test('PutElementEvent returns correct type', () => {
-    expect(PutElementEvent.type).to.equal('ember-nexus-put-element');
+    expect(PutElementEvent.type).to.equal('ember-nexus-sdk-put-element');
   });
 
   it('should set attributes to null if not explicitly defined', async () => {
