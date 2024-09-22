@@ -8,7 +8,7 @@ import {
   Response404NotFoundError,
   Response429TooManyRequestsError,
   ResponseError,
-} from '../Error';
+} from '../Error/index.js';
 import { HttpRequestMethod } from '../Type/Enum/index.js';
 
 /**
