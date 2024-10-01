@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 0.0.62 - 2024-10-01
+
 ## 0.0.61 - 2024-09-22
 ### Fixed
 - Fix bug where import without `index.js` led to downstream issues, closes [#90].
