@@ -11,10 +11,11 @@ import {FlatCompat} from "@eslint/eslintrc";
 import tseslint from "@eslint/js";
 import jest from "eslint-plugin-jest";
 import pluginPromise from 'eslint-plugin-promise';
+import compat from "eslint-plugin-compat";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
+const flatCompat = new FlatCompat({
   baseDirectory: __dirname,
   recommendedConfig: js.configs.recommended,
   allConfig: js.configs.all
@@ -25,7 +26,8 @@ export default [
     ignores: ["dist/*", "**/*.js"],
   },
   pluginPromise.configs['flat/recommended'],
-  ...compat.extends(
+  compat.configs["flat/recommended"],
+  ...flatCompat.extends(
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",

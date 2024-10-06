@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Added
 - Remaining unit tests for user endpoints.
+### Changed
+- Improve code quality through more eslint rules and plugins, closes #98.
 ### Fixed
 - Fix bug in register endpoint, where successful responses could not be parsed, closes #93.
 
