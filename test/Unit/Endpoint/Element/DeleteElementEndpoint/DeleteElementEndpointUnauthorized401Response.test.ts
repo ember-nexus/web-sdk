@@ -34,7 +34,7 @@ const testLogger: TestLogger = new TestLogger();
 Container.set(Logger, testLogger);
 Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
 
-test('DeleteElementEndpoint should handle bad response error', async () => {
+test('DeleteElementEndpoint should handle unauthorized response error', async () => {
   const sandbox = createSandbox();
   mockServer.listen();
   const fetchHelper = Container.get(FetchHelper);

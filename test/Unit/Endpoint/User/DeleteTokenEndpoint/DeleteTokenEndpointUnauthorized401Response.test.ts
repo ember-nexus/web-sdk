@@ -32,7 +32,7 @@ const testLogger: TestLogger = new TestLogger();
 Container.set(Logger, testLogger);
 Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
 
-test('DeleteTokenEndpoint should handle bad response error', async () => {
+test('DeleteTokenEndpoint should handle unauthorized response error', async () => {
   mockServer.listen();
   await expect(Container.get(DeleteTokenEndpoint).deleteToken()).to.eventually.be.rejectedWith(
     Response401UnauthorizedError,

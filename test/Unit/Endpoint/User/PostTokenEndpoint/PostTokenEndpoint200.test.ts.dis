@@ -4,7 +4,6 @@ import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
 import { GetTokenEndpoint } from '../../../../../src/Endpoint/User';
-import { Response401UnauthorizedError } from '../../../../../src/Error';
 import { Logger, WebSdkConfiguration } from '../../../../../src/Service';
 import { TestLogger } from '../../../TestLogger';
 
@@ -12,16 +11,18 @@ const mockServer = setupServer(
   http.get('http://mock-api/token', () => {
     return HttpResponse.json(
       {
-        type: 'http://ember-nexus-api/error/401/unauthorized',
-        title: 'Unauthorized',
-        status: 401,
-        detail:
-          "Authorization for the request failed due to possible problems with the token (incorrect or expired), password (incorrect or changed), the user's unique identifier, or the user's status (e.g., missing, blocked, or deleted).",
+        type: 'Token',
+        id: '7040618a-f73f-4468-ab54-1da8dee5a551',
+        data: {
+          created: '2023-12-10T14:34:21+00:00',
+          updated: '2023-12-10T14:34:21+00:00',
+          state: 'ACTIVE',
+        },
       },
       {
-        status: 401,
+        status: 200,
         headers: {
-          'Content-Type': 'application/problem+json; charset=utf-8',
+          'Content-Type': 'application/json; charset=utf-8',
         },
       },
     );
@@ -32,13 +33,18 @@ const testLogger: TestLogger = new TestLogger();
 Container.set(Logger, testLogger);
 Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
 
-test('GetTokenEndpoint should handle unauthorized response error', async () => {
+test('GetTokenEndpoint should handle node response', async () => {
   mockServer.listen();
-  await expect(Container.get(GetTokenEndpoint).getToken()).to.eventually.be.rejectedWith(Response401UnauthorizedError);
+  const node = await Container.get(GetTokenEndpoint).getToken();
 
   expect(testLogger.assertDebugHappened('Executing HTTP GET request against url http://mock-api/token .')).to.be.true;
 
-  expect(testLogger.assertErrorHappened('Server returned 401 unauthorized.')).to.be.true;
+  expect(node).to.have.keys('id', 'type', 'data');
+  expect(node).to.not.have.keys('start', 'end');
+  expect(node.type).to.equal('Token');
+  expect(node.data.created).to.be.instanceof(Date);
+  expect(node.data.updated).to.be.instanceof(Date);
+  expect(Object.keys(node.data)).to.have.lengthOf(3);
 
   mockServer.close();
 });
