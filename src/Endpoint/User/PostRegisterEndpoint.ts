@@ -42,7 +42,7 @@ class PostRegisterEndpoint {
         return Promise.reject(new NetworkError(`Experienced generic network error during creating resource.`, error));
       })
       .then(async (response: Response) => {
-        if (response.ok && response.status == 204) {
+        if (response.ok && response.status == 201) {
           if (response.headers.has('Location')) {
             const location = response.headers.get('Location') as string;
             const rawUuid = location.split('/').at(-1) as string;
