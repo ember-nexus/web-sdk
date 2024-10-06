@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
 
-import { Logger } from './Logger';
+import { Logger } from './Logger.js';
 import { Token } from '../Type/Definition/index.js';
 
 /**
