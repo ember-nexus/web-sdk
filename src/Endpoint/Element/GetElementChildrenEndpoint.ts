@@ -22,14 +22,14 @@ class GetElementChildrenEndpoint {
     private collectionParser: CollectionParser,
   ) {}
 
-  async getElementChildren(parentId: Uuid, page: number = 1, pageSize: number = 25): Promise<Collection> {
+  getElementChildren(parentId: Uuid, page: number = 1, pageSize: number = 25): Promise<Collection> {
     return Promise.resolve()
       .then(() => {
         if (page < 1) {
-          return Promise.reject(new ValidationError('Page number must be at least 1.'));
+          throw new ValidationError('Page number must be at least 1.');
         }
         if (pageSize < 1) {
-          return Promise.reject(new ValidationError('Page size must be at least 1.'));
+          throw new ValidationError('Page size must be at least 1.');
         }
         const url = this.fetchHelper.buildUrl(`/${parentId}/children?page=${page}&pageSize=${pageSize}`);
         this.logger.debug(`Executing HTTP GET request against url ${url} .`);
@@ -37,25 +37,23 @@ class GetElementChildrenEndpoint {
       })
       .catch((error) => {
         if (error instanceof EmberNexusError) {
-          return Promise.reject(error);
+          throw error;
         }
-        return Promise.reject(new NetworkError(`Experienced generic network error during fetching resource.`, error));
+        throw new NetworkError(`Experienced generic network error during fetching resource.`, error);
       })
       .then(async (response: Response) => {
         const contentType = response.headers.get('Content-Type');
-        if (contentType == null) {
-          return Promise.reject(new ParseError('Response does not contain content type header.'));
+        if (contentType === null) {
+          throw new ParseError('Response does not contain content type header.');
         }
         if (!(contentType.includes('application/json') || contentType.includes('application/problem+json'))) {
-          return Promise.reject(
-            new ParseError(
-              "Unable to parse response as content type is neither 'application/json' nor 'application/problem+json'.",
-            ),
+          throw new ParseError(
+            "Unable to parse response as content type is neither 'application/json' nor 'application/problem+json'.",
           );
         }
         const data = await response.json();
         if (!response.ok) {
-          return Promise.reject(this.fetchHelper.createResponseErrorFromBadResponse(response, data));
+          throw this.fetchHelper.createResponseErrorFromBadResponse(response, data);
         }
         return data;
       })
@@ -64,7 +62,7 @@ class GetElementChildrenEndpoint {
       })
       .catch((error) => {
         this.logger.error(error.message, error);
-        return Promise.reject(error);
+        throw error;
       });
   }
 }

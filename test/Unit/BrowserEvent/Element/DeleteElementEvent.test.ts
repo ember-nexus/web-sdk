@@ -8,7 +8,7 @@ describe('DeleteElementEvent tests', () => {
     expect(DeleteElementEvent.type).to.equal('ember-nexus-sdk-delete-element');
   });
 
-  it('should return null when no result was set', async () => {
+  it('should return null when no result was set', () => {
     const uuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc94');
     const deleteElementEvent = new DeleteElementEvent(uuid);
 
@@ -16,7 +16,7 @@ describe('DeleteElementEvent tests', () => {
     expect(deleteElementEvent.getResult()).to.be.null;
   });
 
-  it('should return promise when result was set', async () => {
+  it('should return promise when result was set', () => {
     const uuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc94');
     const deleteElementEvent = new DeleteElementEvent(uuid);
 

@@ -8,7 +8,7 @@ describe('GetIndexEvent tests', () => {
     expect(GetIndexEvent.type).to.equal('ember-nexus-sdk-get-index');
   });
 
-  it('should return null when no element was set', async () => {
+  it('should return null when no element was set', () => {
     const getIndexEvent = new GetIndexEvent();
 
     expect(getIndexEvent.getIndexCollection()).to.be.null;
@@ -16,7 +16,7 @@ describe('GetIndexEvent tests', () => {
     expect(getIndexEvent.getPageSize()).to.be.null;
   });
 
-  it('should return promise when collection was set', async () => {
+  it('should return promise when collection was set', () => {
     const getIndexEvent = new GetIndexEvent();
 
     const collection: Collection = {

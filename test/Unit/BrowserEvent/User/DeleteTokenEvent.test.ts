@@ -7,13 +7,13 @@ describe('DeleteTokenEvent tests', () => {
     expect(DeleteTokenEvent.type).to.equal('ember-nexus-sdk-delete-token');
   });
 
-  it('should return null when no result was set', async () => {
+  it('should return null when no result was set', () => {
     const deleteTokenEvent = new DeleteTokenEvent();
 
     expect(deleteTokenEvent.getResult()).to.be.null;
   });
 
-  it('should return promise when result was set', async () => {
+  it('should return promise when result was set', () => {
     const deleteTokenEvent = new DeleteTokenEvent();
 
     const promise = new Promise<void>((resolve): void => {

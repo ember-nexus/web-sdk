@@ -4,13 +4,13 @@ import { GetMeEvent } from '../../../../src/BrowserEvent/User';
 import { Node, validateUuidFromString } from '../../../../src/Type/Definition';
 
 describe('GetMeEvent tests', () => {
-  it('should return null after creation', async () => {
+  it('should return null after creation', () => {
     const getMeEvent = new GetMeEvent();
 
     expect(getMeEvent.getMe()).to.be.null;
   });
 
-  it('should return user when it was set', async () => {
+  it('should return user when it was set', () => {
     const getMeEvent = new GetMeEvent();
 
     const user: Node = {

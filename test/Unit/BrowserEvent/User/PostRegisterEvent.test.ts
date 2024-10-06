@@ -9,7 +9,7 @@ import {
 } from '../../../../src/Type/Definition';
 
 describe('PostRegisterEvent tests', () => {
-  it('should set attributes to null if not explicitly defined', async () => {
+  it('should set attributes to null if not explicitly defined', () => {
     const uniqueUserIdentifier = createUniqueUserIdentifierFromString('user@localhost.dev');
     const password = '1234';
     const postRegisterEvent = new PostRegisterEvent(uniqueUserIdentifier, password);
@@ -20,7 +20,7 @@ describe('PostRegisterEvent tests', () => {
     expect(postRegisterEvent.getUserId()).to.be.null;
   });
 
-  it('should return attributes if explicitly defined', async () => {
+  it('should return attributes if explicitly defined', () => {
     const uniqueUserIdentifier = createUniqueUserIdentifierFromString('user@localhost.dev');
     const password = '1234';
     const data: Data = {
@@ -34,7 +34,7 @@ describe('PostRegisterEvent tests', () => {
     expect(postRegisterEvent.getUserId()).to.be.null;
   });
 
-  it('should return promise if set', async () => {
+  it('should return promise if set', () => {
     const uniqueUserIdentifier = createUniqueUserIdentifierFromString('user@localhost.dev');
     const password = '1234';
     const data: Data = {

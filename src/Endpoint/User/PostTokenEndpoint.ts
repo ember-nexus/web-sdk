@@ -22,7 +22,7 @@ class PostTokenEndpoint {
     private fetchHelper: FetchHelper,
   ) {}
 
-  async postToken(uniqueUserIdentifier: UniqueUserIdentifier, password: string, data: Data = {}): Promise<Token> {
+  postToken(uniqueUserIdentifier: UniqueUserIdentifier, password: string, data: Data = {}): Promise<Token> {
     return Promise.resolve()
       .then(() => {
         const url = this.fetchHelper.buildUrl(`/token`);
@@ -40,23 +40,21 @@ class PostTokenEndpoint {
         );
       })
       .catch((error) => {
-        return Promise.reject(new NetworkError(`Experienced generic network error during creating resource.`, error));
+        throw new NetworkError(`Experienced generic network error during creating resource.`, error);
       })
       .then(async (response: Response) => {
         const contentType = response.headers.get('Content-Type');
-        if (contentType == null) {
-          return Promise.reject(new ParseError('Response does not contain content type header.'));
+        if (contentType === null) {
+          throw new ParseError('Response does not contain content type header.');
         }
         if (!(contentType.includes('application/json') || contentType.includes('application/problem+json'))) {
-          return Promise.reject(
-            new ParseError(
-              "Unable to parse response as content type is neither 'application/json' nor 'application/problem+json'.",
-            ),
+          throw new ParseError(
+            "Unable to parse response as content type is neither 'application/json' nor 'application/problem+json'.",
           );
         }
         const data = await response.json();
         if (!response.ok) {
-          return Promise.reject(this.fetchHelper.createResponseErrorFromBadResponse(response, data));
+          throw this.fetchHelper.createResponseErrorFromBadResponse(response, data);
         }
         return data;
       })
@@ -65,7 +63,7 @@ class PostTokenEndpoint {
       })
       .catch((error) => {
         this.logger.error(error.message, error);
-        return Promise.reject(error);
+        throw error;
       });
   }
 }

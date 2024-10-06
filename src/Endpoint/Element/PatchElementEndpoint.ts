@@ -21,7 +21,7 @@ class PatchElementEndpoint {
     private fetchHelper: FetchHelper,
   ) {}
 
-  async patchElement(elementId: Uuid, data: Data): Promise<void> {
+  patchElement(elementId: Uuid, data: Data): Promise<void> {
     return Promise.resolve()
       .then(() => {
         this.logger.warn(
@@ -32,27 +32,25 @@ class PatchElementEndpoint {
         return fetch(url, this.fetchHelper.getDefaultPatchOptions(JSON.stringify(data)));
       })
       .catch((error) => {
-        return Promise.reject(new NetworkError(`Experienced generic network error during patching resource.`, error));
+        throw new NetworkError(`Experienced generic network error during patching resource.`, error);
       })
       .then(async (response: Response) => {
-        if (response.ok && response.status == 204) {
-          return Promise.resolve();
+        if (response.ok && response.status === 204) {
+          return;
         }
         const contentType = response.headers.get('Content-Type');
-        if (contentType == null) {
-          return Promise.reject(new ParseError('Response does not contain content type header.'));
+        if (contentType === null) {
+          throw new ParseError('Response does not contain content type header.');
         }
         if (!contentType.includes('application/problem+json')) {
-          return Promise.reject(
-            new ParseError("Unable to parse response as content type is not 'application/problem+json'."),
-          );
+          throw new ParseError("Unable to parse response as content type is not 'application/problem+json'.");
         }
         const data = await response.json();
-        return Promise.reject(this.fetchHelper.createResponseErrorFromBadResponse(response, data));
+        throw this.fetchHelper.createResponseErrorFromBadResponse(response, data);
       })
       .catch((error) => {
         this.logger.error(error.message, error);
-        return Promise.reject(error);
+        throw error;
       });
   }
 }

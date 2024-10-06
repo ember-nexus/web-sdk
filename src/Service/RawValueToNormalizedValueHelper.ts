@@ -22,13 +22,15 @@ class RawValueToNormalizedValueHelper {
   parseRawData(rawData: Data): Data {
     const data: Data = {};
     for (const key in rawData) {
-      const event = new RawValueToNormalizedValueEvent(rawData[key]);
-      this.rawValueToNormalizedValueEventManager.handleEvent(event);
-      if (!event.isPropagationStopped()) {
-        this.logger.warn('Unable to normalize the following data property.', { key: key, data: rawData[key] });
-        continue;
+      if (Object.prototype.hasOwnProperty.call(rawData, key)) {
+        const event = new RawValueToNormalizedValueEvent(rawData[key]);
+        this.rawValueToNormalizedValueEventManager.handleEvent(event);
+        if (!event.isPropagationStopped()) {
+          this.logger.warn('Unable to normalize the following data property.', { key: key, data: rawData[key] });
+          continue;
+        }
+        data[key] = event.getNormalizedValue();
       }
-      data[key] = event.getNormalizedValue();
     }
 
     return data;

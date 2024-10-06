@@ -4,7 +4,7 @@ import { PostChangePasswordEvent } from '../../../../src/BrowserEvent/User';
 import { createUniqueUserIdentifierFromString } from '../../../../src/Type/Definition';
 
 describe('PostChangePasswordEvent tests', () => {
-  it('should return properties set in constructor', async () => {
+  it('should return properties set in constructor', () => {
     const uniqueUserIdentifier = createUniqueUserIdentifierFromString('user@localhost.dev');
     const currentPassword = '1234';
     const newPassword = '5678';
@@ -16,7 +16,7 @@ describe('PostChangePasswordEvent tests', () => {
     expect(postChangePasswordEvent.getResult()).to.be.null;
   });
 
-  it('should return promise if set', async () => {
+  it('should return promise if set', () => {
     const uniqueUserIdentifier = createUniqueUserIdentifierFromString('user@localhost.dev');
     const currentPassword = '1234';
     const newPassword = '5678';

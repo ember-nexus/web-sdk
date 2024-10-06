@@ -4,13 +4,13 @@ class EventManager<EventType extends StoppableEvent> {
   private eventListeners: [number, EventListener<EventType>][] = [];
 
   registerEventListener(eventListener: EventListener<EventType>, priority: number = 0): void {
-    if (this.eventListeners.length == 0) {
+    if (this.eventListeners.length === 0) {
       this.eventListeners.push([priority, eventListener]);
       return;
     }
 
     for (let index = 0; index < this.eventListeners.length; index++) {
-      if (index == this.eventListeners.length - 1) {
+      if (index === this.eventListeners.length - 1) {
         this.eventListeners.push([priority, eventListener]);
         return;
       }

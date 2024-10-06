@@ -8,7 +8,7 @@ describe('PostSearchEvent tests', () => {
     expect(PostSearchEvent.type).to.equal('ember-nexus-sdk-post-search');
   });
 
-  it('should set attributes to null if not explicitly defined', async () => {
+  it('should set attributes to null if not explicitly defined', () => {
     const query: Data = {
       some: 'query',
     };
@@ -20,7 +20,7 @@ describe('PostSearchEvent tests', () => {
     expect(postSearchEvent.getPageSize()).to.be.null;
   });
 
-  it('should return promise if set', async () => {
+  it('should return promise if set', () => {
     const query: Data = {
       some: 'query',
     };

@@ -22,7 +22,7 @@ describe('WebSdkConfiguration tests', () => {
     Container.reset();
   });
 
-  it('should return default values', async () => {
+  it('should return default values', () => {
     const webSdkConfiguration = Container.get(WebSdkConfiguration);
 
     expect(webSdkConfiguration.getToken()).to.be.null;
@@ -32,7 +32,7 @@ describe('WebSdkConfiguration tests', () => {
     expect(webSdkConfiguration.getCollectionPageSize()).to.be.equal(25);
   });
 
-  it('should correctly save the token', async () => {
+  it('should correctly save the token', () => {
     const webSdkConfiguration = Container.get(WebSdkConfiguration);
     const token = validateTokenFromString('secret-token:someToken');
 
@@ -41,7 +41,7 @@ describe('WebSdkConfiguration tests', () => {
     expect(webSdkConfiguration.getToken()).to.be.equal(token);
   });
 
-  it('should correctly save the api host', async () => {
+  it('should correctly save the api host', () => {
     const webSdkConfiguration = Container.get(WebSdkConfiguration);
     const apiHost = 'https://localhost';
 
@@ -50,7 +50,7 @@ describe('WebSdkConfiguration tests', () => {
     expect(webSdkConfiguration.getApiHost()).to.be.equal(apiHost);
   });
 
-  it('should warn if the api host has a trailing slash', async () => {
+  it('should warn if the api host has a trailing slash', () => {
     const webSdkConfiguration = Container.get(WebSdkConfiguration);
     const apiHost = 'https://localhost/';
 
@@ -65,7 +65,7 @@ describe('WebSdkConfiguration tests', () => {
     ).to.be.true;
   });
 
-  it('should warn if the api host has multiple trailing slashes', async () => {
+  it('should warn if the api host has multiple trailing slashes', () => {
     const webSdkConfiguration = Container.get(WebSdkConfiguration);
     const apiHost = 'https://localhost///';
 
@@ -80,7 +80,7 @@ describe('WebSdkConfiguration tests', () => {
     ).to.be.true;
   });
 
-  it('should correctly save the element cache max entries', async () => {
+  it('should correctly save the element cache max entries', () => {
     const webSdkConfiguration = Container.get(WebSdkConfiguration);
     const elementCacheMaxEntries = 999;
 
@@ -89,7 +89,7 @@ describe('WebSdkConfiguration tests', () => {
     expect(webSdkConfiguration.getElementCacheMaxEntries()).to.be.equal(elementCacheMaxEntries);
   });
 
-  it('should correctly save the collection cache max entries', async () => {
+  it('should correctly save the collection cache max entries', () => {
     const webSdkConfiguration = Container.get(WebSdkConfiguration);
     const collectionCacheMaxEntries = 999;
 
@@ -98,7 +98,7 @@ describe('WebSdkConfiguration tests', () => {
     expect(webSdkConfiguration.getCollectionCacheMaxEntries()).to.be.equal(collectionCacheMaxEntries);
   });
 
-  it('should correctly save the collection page size', async () => {
+  it('should correctly save the collection page size', () => {
     const webSdkConfiguration = Container.get(WebSdkConfiguration);
     const collectionPageSize = 999;
 
