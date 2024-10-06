@@ -1,92 +1,104 @@
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
 import prettier from "eslint-plugin-prettier";
 import _import from "eslint-plugin-import";
-import { fixupPluginRules } from "@eslint/compat";
+import {fixupPluginRules} from "@eslint/compat";
 import globals from "globals";
 import tsParser from "@typescript-eslint/parser";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import {fileURLToPath} from "node:url";
 import js from "@eslint/js";
-import { FlatCompat } from "@eslint/eslintrc";
+import {FlatCompat} from "@eslint/eslintrc";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all
 });
 
 export default [{
-    ignores: ["dist/*", "**/*.js"],
+  ignores: ["dist/*", "**/*.js"],
 }, ...compat.extends(
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
+  "eslint:recommended",
+  "plugin:@typescript-eslint/recommended",
+  "plugin:prettier/recommended",
 ).map(config => ({
-    ...config,
-    files: ["**/*.ts"],
+  ...config,
+  files: ["**/*.ts"],
 })), {
-    files: ["**/*.ts"],
+  files: ["**/*.ts"],
 
-    plugins: {
-        "@typescript-eslint": typescriptEslint,
-        prettier,
-        import: fixupPluginRules(_import),
+  plugins: {
+    "@typescript-eslint": typescriptEslint,
+    prettier,
+    import: fixupPluginRules(_import),
+  },
+
+  languageOptions: {
+    globals: {
+      ...Object.fromEntries(Object.entries(globals.browser).map(([key]) => [key, "off"])),
+      ...globals.node,
     },
 
-    languageOptions: {
-        globals: {
-            ...Object.fromEntries(Object.entries(globals.browser).map(([key]) => [key, "off"])),
-            ...globals.node,
-        },
+    parser: tsParser,
+    ecmaVersion: 2020,
+    sourceType: "module",
 
-        parser: tsParser,
-        ecmaVersion: 2020,
-        sourceType: "module",
-
-        parserOptions: {
-            project: "tsconfig.test.json",
-        },
+    parserOptions: {
+      project: "tsconfig.test.json",
     },
+  },
 
-    settings: {
-        "import/resolver": {
-            typescript: {
-                project: "./tsconfig.test.json",
-            },
-        },
+  settings: {
+    "import/resolver": {
+      typescript: {
+        project: "./tsconfig.test.json",
+      },
+      "node": true,
     },
+  },
 
-    rules: {
-        "@typescript-eslint/explicit-function-return-type": "warn",
+  rules: {
+    "@typescript-eslint/explicit-function-return-type": "warn",
+    "@typescript-eslint/no-unused-expressions": "off",
+    "@typescript-eslint/no-require-imports": "off",
 
-        "sort-imports": ["error", {
-            ignoreCase: false,
-            ignoreDeclarationSort: true,
-            ignoreMemberSort: false,
-            memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
-            allowSeparatedGroups: true,
-        }],
+    "sort-imports": ["error", {
+      ignoreCase: false,
+      ignoreDeclarationSort: true,
+      ignoreMemberSort: false,
+      memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
+      allowSeparatedGroups: true,
+    }],
 
-        "import/no-unresolved": "error",
+    "import/no-unresolved": "error",
 
-        "import/order": ["error", {
-            groups: [
-                "builtin",
-                "external",
-                "internal",
-                ["sibling", "parent"],
-                "index",
-                "unknown",
-            ],
+    "import/order": ["error", {
+      groups: [
+        "builtin",
+        "external",
+        "internal",
+        ["sibling", "parent"],
+        "index",
+        "unknown",
+      ],
 
-            "newlines-between": "always",
+      "newlines-between": "always",
 
-            alphabetize: {
-                order: "asc",
-                caseInsensitive: true,
-            },
-        }],
-    },
+      alphabetize: {
+        order: "asc",
+        caseInsensitive: true,
+      },
+    }],
+    'import/no-dynamic-require': 'warn',
+    'import/no-nodejs-modules': 'warn',
+    'import/no-cycle': 'warn',
+    'import/no-useless-path-segments': 'warn',
+    'import/exports-last': 'warn',
+    'import/first': 'warn',
+    'import/group-exports': 'warn',
+    'import/newline-after-import': 'warn',
+    'import/no-default-export': 'warn'
+  },
 }];

@@ -6,8 +6,8 @@ const testLogger = new Logger({
   name: 'web-sdk',
   // type: "json"
   type: 'pretty',
-});
+}) as LoggerInterface | typeof testLogger;
 // testLogger.settings.minLevel = 2;
 testLogger.settings.minLevel = 6;
 
-export default testLogger as LoggerInterface | typeof testLogger;
+export { testLogger };
