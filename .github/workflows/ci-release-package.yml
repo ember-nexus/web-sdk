@@ -45,7 +45,7 @@ jobs:
       - name: Bump release version
         if: startsWith(github.event.inputs.release-type, 'pre') != true
         run: |
-          echo "NEW_VERSION=$(npm --no-git-tag-version version $RELEASE_TYPE)" >> $GITHUB_ENV
+          echo "NEW_VERSION=$(npm --no-git-tag-version --tag-version-prefix= version $RELEASE_TYPE)" >> $GITHUB_ENV
           echo "RELEASE_TAG=latest" >> $GITHUB_ENV
         env:
           RELEASE_TYPE: ${{ github.event.inputs.release-type }}
@@ -53,13 +53,13 @@ jobs:
       - name: Bump pre-release version
         if: startsWith(github.event.inputs.release-type, 'pre')
         run: |
-          echo "NEW_VERSION=$(npm --no-git-tag-version --preid=beta version $RELEASE_TYPE
+          echo "NEW_VERSION=$(npm --no-git-tag-version --tag-version-prefix= --preid=beta version $RELEASE_TYPE
           echo "RELEASE_TAG=beta" >> $GITHUB_ENV
         env:
           RELEASE_TYPE: ${{ github.event.inputs.release-type }}
 
       - name: Update changelog
-        uses: superfaceai/release-changelog-action@v2
+        uses: superfaceai/release-changelog-action@v3
         with:
           path-to-changelog: CHANGELOG.md
           version: ${{ env.NEW_VERSION }}
@@ -96,7 +96,7 @@ jobs:
 
       - id: get-changelog
         name: Get version changelog
-        uses: superfaceai/release-changelog-action@v2
+        uses: superfaceai/release-changelog-action@v3
         with:
           path-to-changelog: CHANGELOG.md
           version: ${{ env.NEW_VERSION }}
