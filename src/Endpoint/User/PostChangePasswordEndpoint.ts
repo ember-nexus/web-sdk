@@ -21,7 +21,7 @@ class PostChangePasswordEndpoint {
     private fetchHelper: FetchHelper,
   ) {}
 
-  async postChangePassword(
+  postChangePassword(
     uniqueUserIdentifier: UniqueUserIdentifier,
     currentPassword: string,
     newPassword: string,
@@ -46,11 +46,11 @@ class PostChangePasswordEndpoint {
         return Promise.reject(new NetworkError(`Experienced generic network error during creating resource.`, error));
       })
       .then(async (response: Response) => {
-        if (response.ok && response.status == 204) {
+        if (response.ok && response.status === 204) {
           return Promise.resolve();
         }
         const contentType = response.headers.get('Content-Type');
-        if (contentType == null) {
+        if (contentType === null) {
           return Promise.reject(new ParseError('Response does not contain content type header.'));
         }
         if (!contentType.includes('application/problem+json')) {

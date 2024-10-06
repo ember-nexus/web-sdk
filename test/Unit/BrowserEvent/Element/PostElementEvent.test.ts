@@ -8,7 +8,7 @@ describe('PostElementEvent tests', () => {
     expect(PostElementEvent.type).to.equal('ember-nexus-sdk-post-element');
   });
 
-  it('should set attributes to null if not explicitly defined', async () => {
+  it('should set attributes to null if not explicitly defined', () => {
     const parentUuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc93');
     const node: NodeWithOptionalId = {
       type: 'someType',
@@ -21,7 +21,7 @@ describe('PostElementEvent tests', () => {
     expect(postElementEvent.getElementId()).to.be.null;
   });
 
-  it('should return promise if set', async () => {
+  it('should return promise if set', () => {
     const parentUuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc93');
     const node: NodeWithOptionalId = {
       type: 'someType',

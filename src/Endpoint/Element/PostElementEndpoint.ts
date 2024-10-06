@@ -21,7 +21,7 @@ class PostElementEndpoint {
     private fetchHelper: FetchHelper,
   ) {}
 
-  async postElement(parentId: Uuid, element: NodeWithOptionalId): Promise<Uuid> {
+  postElement(parentId: Uuid, element: NodeWithOptionalId): Promise<Uuid> {
     return Promise.resolve()
       .then(() => {
         const url = this.fetchHelper.buildUrl(`/${parentId}`);
@@ -32,7 +32,7 @@ class PostElementEndpoint {
         return Promise.reject(new NetworkError(`Experienced generic network error during creating resource.`, error));
       })
       .then(async (response: Response) => {
-        if (response.ok && response.status == 204) {
+        if (response.ok && response.status === 204) {
           if (response.headers.has('Location')) {
             const location = response.headers.get('Location') as string;
             const rawUuid = location.split('/').at(-1) as string;
@@ -40,7 +40,7 @@ class PostElementEndpoint {
           }
         }
         const contentType = response.headers.get('Content-Type');
-        if (contentType == null) {
+        if (contentType === null) {
           return Promise.reject(new ParseError('Response does not contain content type header.'));
         }
         if (!contentType.includes('application/problem+json')) {

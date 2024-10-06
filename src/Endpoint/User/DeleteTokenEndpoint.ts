@@ -20,7 +20,7 @@ class DeleteTokenEndpoint {
     private fetchHelper: FetchHelper,
   ) {}
 
-  async deleteToken(): Promise<void> {
+  deleteToken(): Promise<void> {
     const url = this.fetchHelper.buildUrl(`/token`);
     this.logger.debug(`Executing HTTP DELETE request against url ${url} .`);
     return fetch(url, this.fetchHelper.getDefaultDeleteOptions())
@@ -30,11 +30,11 @@ class DeleteTokenEndpoint {
         );
       })
       .then(async (response: Response) => {
-        if (response.ok && response.status == 204) {
+        if (response.ok && response.status === 204) {
           return Promise.resolve();
         }
         const contentType = response.headers.get('Content-Type');
-        if (contentType == null) {
+        if (contentType === null) {
           return Promise.reject(new ParseError('Response does not contain content type header.'));
         }
         if (!contentType.includes('application/problem+json')) {

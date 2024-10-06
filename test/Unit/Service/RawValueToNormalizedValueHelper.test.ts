@@ -22,7 +22,7 @@ describe('RawValueToNormalizedValueHelper tests', () => {
     Container.reset();
   });
 
-  it('should normalize raw data', async () => {
+  it('should normalize raw data', () => {
     const rawData: Data = {
       string: 'some string',
       int: 1234,

@@ -15,7 +15,7 @@ describe('GenericNormalizedValueToRawValueEventListener tests', () => {
     sandbox.restore();
   });
 
-  it('should denormalize a string', async () => {
+  it('should denormalize a string', () => {
     const genericNormalizedValueToRawValueEventListener = new GenericNormalizedValueToRawValueEventListener();
 
     const input = 'Hello world';
@@ -29,7 +29,7 @@ describe('GenericNormalizedValueToRawValueEventListener tests', () => {
     expect(normalizedValueToRawValueEvent.getRawValue()).to.equal('Hello world');
   });
 
-  it('should denormalize a number', async () => {
+  it('should denormalize a number', () => {
     const genericNormalizedValueToRawValueEventListener = new GenericNormalizedValueToRawValueEventListener();
 
     const input = 1234;
@@ -43,7 +43,7 @@ describe('GenericNormalizedValueToRawValueEventListener tests', () => {
     expect(normalizedValueToRawValueEvent.getRawValue()).to.equal(1234);
   });
 
-  it('should denormalize a boolean', async () => {
+  it('should denormalize a boolean', () => {
     const genericNormalizedValueToRawValueEventListener = new GenericNormalizedValueToRawValueEventListener();
 
     const input = true;
@@ -57,7 +57,7 @@ describe('GenericNormalizedValueToRawValueEventListener tests', () => {
     expect(normalizedValueToRawValueEvent.getRawValue()).to.equal(true);
   });
 
-  it('should denormalize null', async () => {
+  it('should denormalize null', () => {
     const genericNormalizedValueToRawValueEventListener = new GenericNormalizedValueToRawValueEventListener();
 
     const input = null;
@@ -71,7 +71,7 @@ describe('GenericNormalizedValueToRawValueEventListener tests', () => {
     expect(normalizedValueToRawValueEvent.getRawValue()).to.be.null;
   });
 
-  it('should denormalize an array', async () => {
+  it('should denormalize an array', () => {
     const genericNormalizedValueToRawValueEventListener = new GenericNormalizedValueToRawValueEventListener();
 
     const input = [1, 4, 3];
@@ -85,7 +85,7 @@ describe('GenericNormalizedValueToRawValueEventListener tests', () => {
     expect(normalizedValueToRawValueEvent.getRawValue()).to.deep.equal([1, 4, 3]);
   });
 
-  it('should not denormalize an object', async () => {
+  it('should not denormalize an object', () => {
     const genericNormalizedValueToRawValueEventListener = new GenericNormalizedValueToRawValueEventListener();
 
     const input = { hello: 'world' };

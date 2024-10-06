@@ -25,7 +25,7 @@ class GetElementParentsEndpoint {
     private collectionParser: CollectionParser,
   ) {}
 
-  async getElementParents(childId: Uuid, page: number = 1, pageSize: number = 25): Promise<Collection> {
+  getElementParents(childId: Uuid, page: number = 1, pageSize: number = 25): Promise<Collection> {
     return Promise.resolve()
       .then(() => {
         if (page < 1) {
@@ -46,7 +46,7 @@ class GetElementParentsEndpoint {
       })
       .then(async (response: Response) => {
         const contentType = response.headers.get('Content-Type');
-        if (contentType == null) {
+        if (contentType === null) {
           return Promise.reject(new ParseError('Response does not contain content type header.'));
         }
         if (!(contentType.includes('application/json') || contentType.includes('application/problem+json'))) {

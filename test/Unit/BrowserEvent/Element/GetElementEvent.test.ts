@@ -8,7 +8,7 @@ describe('GetElementEvent tests', () => {
     expect(GetElementEvent.type).to.equal('ember-nexus-sdk-get-element');
   });
 
-  it('should return null when no element was set', async () => {
+  it('should return null when no element was set', () => {
     const uuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc94');
     const getElementEvent = new GetElementEvent(uuid);
 
@@ -16,7 +16,7 @@ describe('GetElementEvent tests', () => {
     expect(getElementEvent.getElement()).to.be.null;
   });
 
-  it('should return promise when node was set', async () => {
+  it('should return promise when node was set', () => {
     const uuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc94');
     const getElementEvent = new GetElementEvent(uuid);
 
@@ -38,7 +38,7 @@ describe('GetElementEvent tests', () => {
     expect(getElementEvent.getElement()).to.equal(promise);
   });
 
-  it('should return promise when relation was set', async () => {
+  it('should return promise when relation was set', () => {
     const uuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc94');
     const getElementEvent = new GetElementEvent(uuid);
 

@@ -22,7 +22,7 @@ class GetElementEndpoint {
     private elementParser: ElementParser,
   ) {}
 
-  async getElement(elementId: Uuid): Promise<Node | Relation> {
+  getElement(elementId: Uuid): Promise<Node | Relation> {
     const url = this.fetchHelper.buildUrl(`/${elementId}`);
     this.logger.debug(`Executing HTTP GET request against url ${url} .`);
     return fetch(url, this.fetchHelper.getDefaultGetOptions())
@@ -33,7 +33,7 @@ class GetElementEndpoint {
       })
       .then(async (response: Response) => {
         const contentType = response.headers.get('Content-Type');
-        if (contentType == null) {
+        if (contentType === null) {
           return Promise.reject(new ParseError('Response does not contain content type header.'));
         }
         if (!(contentType.includes('application/json') || contentType.includes('application/problem+json'))) {

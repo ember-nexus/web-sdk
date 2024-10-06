@@ -4,13 +4,13 @@ import { GetTokenEvent } from '../../../../src/BrowserEvent/User';
 import { Node, validateUuidFromString } from '../../../../src/Type/Definition';
 
 describe('GetTokenEvent tests', () => {
-  it('should return null after creation', async () => {
+  it('should return null after creation', () => {
     const getTokenEvent = new GetTokenEvent();
 
     expect(getTokenEvent.getToken()).to.be.null;
   });
 
-  it('should return token when it was set', async () => {
+  it('should return token when it was set', () => {
     const getTokenEvent = new GetTokenEvent();
 
     const user: Node = {

@@ -21,7 +21,7 @@ class PostRegisterEndpoint {
     private fetchHelper: FetchHelper,
   ) {}
 
-  async postRegister(uniqueUserIdentifier: UniqueUserIdentifier, password: string, data: Data = {}): Promise<Uuid> {
+  postRegister(uniqueUserIdentifier: UniqueUserIdentifier, password: string, data: Data = {}): Promise<Uuid> {
     return Promise.resolve()
       .then(() => {
         const url = this.fetchHelper.buildUrl(`/register`);
@@ -42,7 +42,7 @@ class PostRegisterEndpoint {
         return Promise.reject(new NetworkError(`Experienced generic network error during creating resource.`, error));
       })
       .then(async (response: Response) => {
-        if (response.ok && response.status == 201) {
+        if (response.ok && response.status === 201) {
           if (response.headers.has('Location')) {
             const location = response.headers.get('Location') as string;
             const rawUuid = location.split('/').at(-1) as string;
@@ -50,7 +50,7 @@ class PostRegisterEndpoint {
           }
         }
         const contentType = response.headers.get('Content-Type');
-        if (contentType == null) {
+        if (contentType === null) {
           return Promise.reject(new ParseError('Response does not contain content type header.'));
         }
         if (!contentType.includes('application/problem+json')) {

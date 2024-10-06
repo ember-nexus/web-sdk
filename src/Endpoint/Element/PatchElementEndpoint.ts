@@ -21,7 +21,7 @@ class PatchElementEndpoint {
     private fetchHelper: FetchHelper,
   ) {}
 
-  async patchElement(elementId: Uuid, data: Data): Promise<void> {
+  patchElement(elementId: Uuid, data: Data): Promise<void> {
     return Promise.resolve()
       .then(() => {
         this.logger.warn(
@@ -35,11 +35,11 @@ class PatchElementEndpoint {
         return Promise.reject(new NetworkError(`Experienced generic network error during patching resource.`, error));
       })
       .then(async (response: Response) => {
-        if (response.ok && response.status == 204) {
+        if (response.ok && response.status === 204) {
           return Promise.resolve();
         }
         const contentType = response.headers.get('Content-Type');
-        if (contentType == null) {
+        if (contentType === null) {
           return Promise.reject(new ParseError('Response does not contain content type header.'));
         }
         if (!contentType.includes('application/problem+json')) {

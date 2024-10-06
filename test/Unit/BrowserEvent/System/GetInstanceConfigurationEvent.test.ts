@@ -8,13 +8,13 @@ describe('GetInstanceConfigurationEvent tests', () => {
     expect(GetInstanceConfigurationEvent.type).to.equal('ember-nexus-sdk-get-instance-configuration');
   });
 
-  it('should return null when no result was set', async () => {
+  it('should return null when no result was set', () => {
     const getInstanceConfigurationEvent = new GetInstanceConfigurationEvent();
 
     expect(getInstanceConfigurationEvent.getInstanceConfiguration()).to.be.null;
   });
 
-  it('should return promise when result was set', async () => {
+  it('should return promise when result was set', () => {
     const getInstanceConfigurationEvent = new GetInstanceConfigurationEvent();
 
     const instanceConfiguration: InstanceConfiguration = {

@@ -8,7 +8,7 @@ describe('GetElementRelatedEvent tests', () => {
     expect(GetElementRelatedEvent.type).to.equal('ember-nexus-sdk-get-element-related');
   });
 
-  it('should return null when no element was set', async () => {
+  it('should return null when no element was set', () => {
     const uuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc94');
     const getElementRelatedEvent = new GetElementRelatedEvent(uuid);
 
@@ -18,7 +18,7 @@ describe('GetElementRelatedEvent tests', () => {
     expect(getElementRelatedEvent.getPageSize()).to.be.null;
   });
 
-  it('should return promise when collection was set', async () => {
+  it('should return promise when collection was set', () => {
     const uuid = validateUuidFromString('3c47a37c-6d6b-48d8-aac0-c6bc0d0ecc94');
     const getElementRelatedEvent = new GetElementRelatedEvent(uuid);
 

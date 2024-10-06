@@ -22,7 +22,7 @@ class PostTokenEndpoint {
     private fetchHelper: FetchHelper,
   ) {}
 
-  async postToken(uniqueUserIdentifier: UniqueUserIdentifier, password: string, data: Data = {}): Promise<Token> {
+  postToken(uniqueUserIdentifier: UniqueUserIdentifier, password: string, data: Data = {}): Promise<Token> {
     return Promise.resolve()
       .then(() => {
         const url = this.fetchHelper.buildUrl(`/token`);
@@ -44,7 +44,7 @@ class PostTokenEndpoint {
       })
       .then(async (response: Response) => {
         const contentType = response.headers.get('Content-Type');
-        if (contentType == null) {
+        if (contentType === null) {
           return Promise.reject(new ParseError('Response does not contain content type header.'));
         }
         if (!(contentType.includes('application/json') || contentType.includes('application/problem+json'))) {

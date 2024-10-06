@@ -22,7 +22,7 @@ class GetMeEndpoint {
     private elementParser: ElementParser,
   ) {}
 
-  async getMe(): Promise<Node> {
+  getMe(): Promise<Node> {
     const url = this.fetchHelper.buildUrl(`/me`);
     this.logger.debug(`Executing HTTP GET request against url ${url} .`);
     return fetch(url, this.fetchHelper.getDefaultGetOptions())
@@ -33,7 +33,7 @@ class GetMeEndpoint {
       })
       .then(async (response: Response) => {
         const contentType = response.headers.get('Content-Type');
-        if (contentType == null) {
+        if (contentType === null) {
           return Promise.reject(new ParseError('Response does not contain content type header.'));
         }
         if (!(contentType.includes('application/json') || contentType.includes('application/problem+json'))) {

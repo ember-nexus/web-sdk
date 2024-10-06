@@ -15,7 +15,7 @@ describe('DateTimeNormalizedValueToRawValueEventListener tests', () => {
     sandbox.restore();
   });
 
-  it('should denormalize a date', async () => {
+  it('should denormalize a date', () => {
     const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener();
 
     const input = new Date('2023-11-21T16:20:19+00:00');
@@ -29,7 +29,7 @@ describe('DateTimeNormalizedValueToRawValueEventListener tests', () => {
     expect(normalizedValueToRawValueEvent.getRawValue()).to.equal('2023-11-21T16:20:19+00:00');
   });
 
-  it('should not denormalize a string', async () => {
+  it('should not denormalize a string', () => {
     const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener();
 
     const input = 'test';
@@ -43,7 +43,7 @@ describe('DateTimeNormalizedValueToRawValueEventListener tests', () => {
     expect(normalizedValueToRawValueEvent.getRawValue()).to.be.null;
   });
 
-  it('should not denormalize a number', async () => {
+  it('should not denormalize a number', () => {
     const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener();
 
     const input = 1234;
@@ -57,7 +57,7 @@ describe('DateTimeNormalizedValueToRawValueEventListener tests', () => {
     expect(normalizedValueToRawValueEvent.getRawValue()).to.be.null;
   });
 
-  it('should not denormalize a boolean', async () => {
+  it('should not denormalize a boolean', () => {
     const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener();
 
     const input = true;
@@ -71,7 +71,7 @@ describe('DateTimeNormalizedValueToRawValueEventListener tests', () => {
     expect(normalizedValueToRawValueEvent.getRawValue()).to.be.null;
   });
 
-  it('should not denormalize null', async () => {
+  it('should not denormalize null', () => {
     const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener();
 
     const input = null;
@@ -85,7 +85,7 @@ describe('DateTimeNormalizedValueToRawValueEventListener tests', () => {
     expect(normalizedValueToRawValueEvent.getRawValue()).to.be.null;
   });
 
-  it('should not denormalize an array', async () => {
+  it('should not denormalize an array', () => {
     const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener();
 
     const input = [1, 2, 3];
@@ -99,7 +99,7 @@ describe('DateTimeNormalizedValueToRawValueEventListener tests', () => {
     expect(normalizedValueToRawValueEvent.getRawValue()).to.be.null;
   });
 
-  it('should not denormalize an object', async () => {
+  it('should not denormalize an object', () => {
     const dateTimeNormalizedValueToRawValueEventListener = new DateTimeNormalizedValueToRawValueEventListener();
 
     const input = { hello: 'world' };

@@ -21,7 +21,7 @@ class PutElementEndpoint {
     private fetchHelper: FetchHelper,
   ) {}
 
-  async putElement(elementId: Uuid, data: Data): Promise<void> {
+  putElement(elementId: Uuid, data: Data): Promise<void> {
     return Promise.resolve()
       .then(() => {
         this.logger.warn(
@@ -35,11 +35,11 @@ class PutElementEndpoint {
         return Promise.reject(new NetworkError(`Experienced generic network error during updating resource.`, error));
       })
       .then(async (response: Response) => {
-        if (response.ok && response.status == 204) {
+        if (response.ok && response.status === 204) {
           return Promise.resolve();
         }
         const contentType = response.headers.get('Content-Type');
-        if (contentType == null) {
+        if (contentType === null) {
           return Promise.reject(new ParseError('Response does not contain content type header.'));
         }
         if (!contentType.includes('application/problem+json')) {

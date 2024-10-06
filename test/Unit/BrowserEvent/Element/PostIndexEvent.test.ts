@@ -8,7 +8,7 @@ describe('PostIndexEvent tests', () => {
     expect(PostIndexEvent.type).to.equal('ember-nexus-sdk-post-index');
   });
 
-  it('should set attributes to null if not explicitly defined', async () => {
+  it('should set attributes to null if not explicitly defined', () => {
     const node: NodeWithOptionalId = {
       type: 'someType',
       data: {},
@@ -19,7 +19,7 @@ describe('PostIndexEvent tests', () => {
     expect(postIndexEvent.getElementId()).to.be.null;
   });
 
-  it('should return promise if set', async () => {
+  it('should return promise if set', () => {
     const node: NodeWithOptionalId = {
       type: 'someType',
       data: {},
