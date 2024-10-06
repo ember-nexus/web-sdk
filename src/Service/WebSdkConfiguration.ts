@@ -1,5 +1,6 @@
 import { Service } from 'typedi';
 
+import { Logger } from './Logger';
 import { Token } from '../Type/Definition/index.js';
 
 /**
@@ -13,7 +14,7 @@ class WebSdkConfiguration {
   private collectionCacheMaxEntries: number;
   private collectionPageSize: number;
 
-  constructor() {
+  constructor(private logger: Logger) {
     this.token = null;
     this.apiHost = '';
     this.elementCacheMaxEntries = 100;
@@ -36,6 +37,12 @@ class WebSdkConfiguration {
     return this.apiHost;
   }
   setApiHost(apiHost: string): WebSdkConfiguration {
+    if (apiHost.endsWith('/')) {
+      this.logger.warn(
+        'Removed trailing slash from API host configuration due to internal requirement. Please check if trailing slash can be directly removed.',
+      );
+      apiHost = apiHost.replace(/\/+$/, '');
+    }
     this.apiHost = apiHost;
     return this;
   }
