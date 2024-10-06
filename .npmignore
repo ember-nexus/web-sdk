@@ -5,8 +5,7 @@ src
 node_modules
 coverage
 .editorconfig
-.eslintignore
-.eslintrc.json
+eslint.config.mjs
 .mocharc.json
 .prettierrc
 jest.config.ts
