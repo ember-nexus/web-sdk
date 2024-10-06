@@ -33,7 +33,7 @@ const testLogger: TestLogger = new TestLogger();
 Container.set(Logger, testLogger);
 Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
 
-test('PostElementEndpoint should handle bad response error', async () => {
+test('PostElementEndpoint should handle unauthorized response error', async () => {
   mockServer.listen();
   const parentUuid = validateUuidFromString('0cadf906-f607-4952-afbc-05d85e613bd7');
   const element: NodeWithOptionalId = {

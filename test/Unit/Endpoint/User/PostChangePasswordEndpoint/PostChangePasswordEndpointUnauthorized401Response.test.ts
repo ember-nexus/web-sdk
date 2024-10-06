@@ -3,13 +3,14 @@ import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { Container } from 'typedi';
 
-import { GetMeEndpoint } from '../../../../../src/Endpoint/User';
+import { PostChangePasswordEndpoint } from '../../../../../src/Endpoint/User';
 import { Response401UnauthorizedError } from '../../../../../src/Error';
 import { Logger, WebSdkConfiguration } from '../../../../../src/Service';
+import { createUniqueUserIdentifierFromString } from '../../../../../src/Type/Definition';
 import { TestLogger } from '../../../TestLogger';
 
 const mockServer = setupServer(
-  http.get('http://mock-api/me', () => {
+  http.post('http://mock-api/change-password', () => {
     return HttpResponse.json(
       {
         type: 'http://ember-nexus-api/error/401/unauthorized',
@@ -32,11 +33,19 @@ const testLogger: TestLogger = new TestLogger();
 Container.set(Logger, testLogger);
 Container.get(WebSdkConfiguration).setApiHost('http://mock-api');
 
-test('GetMeEndpoint should handle unauthorized response error', async () => {
+test('PostChangePasswordEndpoint should handle unauthorized response error', async () => {
   mockServer.listen();
-  await expect(Container.get(GetMeEndpoint).getMe()).to.eventually.be.rejectedWith(Response401UnauthorizedError);
 
-  expect(testLogger.assertDebugHappened('Executing HTTP GET request against url http://mock-api/me .')).to.be.true;
+  const uniqueUserIdentifier = createUniqueUserIdentifierFromString('test@localhost.dev');
+  const currentPassword = '1234';
+  const newPassword = '4321';
+
+  await expect(
+    Container.get(PostChangePasswordEndpoint).postChangePassword(uniqueUserIdentifier, currentPassword, newPassword),
+  ).to.eventually.be.rejectedWith(Response401UnauthorizedError);
+
+  expect(testLogger.assertDebugHappened('Executing HTTP POST request against url http://mock-api/change-password .')).to
+    .be.true;
 
   expect(testLogger.assertErrorHappened('Server returned 401 unauthorized.')).to.be.true;
 
