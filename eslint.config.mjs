@@ -10,6 +10,7 @@ import js from "@eslint/js";
 import {FlatCompat} from "@eslint/eslintrc";
 import tseslint from "@eslint/js";
 import jest from "eslint-plugin-jest";
+import pluginPromise from 'eslint-plugin-promise';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,6 +24,7 @@ export default [
   {
     ignores: ["dist/*", "**/*.js"],
   },
+  pluginPromise.configs['flat/recommended'],
   ...compat.extends(
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -38,7 +40,7 @@ export default [
       "@typescript-eslint": typescriptEslint,
       prettier,
       import: fixupPluginRules(_import),
-      jest
+      jest,
     },
 
     languageOptions: {
@@ -89,6 +91,7 @@ export default [
       "prefer-arrow-callback": "error",
       "prefer-const": "error",
       "require-await": "error",
+      "eqeqeq": ["error", "always"],
       ...tseslint.configs.strict,
       "jest/no-disabled-tests": "warn",
       "jest/no-focused-tests": "error",
@@ -120,7 +123,19 @@ export default [
           caseInsensitive: true,
         },
       }],
-      "eqeqeq": ["error", "always"]
+      "promise/always-return": "error",
+      "promise/no-return-wrap": "error",
+      "promise/param-names": "error",
+      "promise/catch-or-return": "error",
+      "promise/no-native": "off",
+      "promise/no-nesting": "warn",
+      "promise/no-promise-in-callback": "warn",
+      "promise/no-callback-in-promise": "warn",
+      "promise/avoid-new": "off",
+      "promise/no-new-statics": "error",
+      "promise/no-return-in-finally": "warn",
+      "promise/valid-params": "warn",
+      "promise/no-multiple-resolved": "error"
     },
   }
 ];

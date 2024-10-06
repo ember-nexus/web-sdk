@@ -39,31 +39,29 @@ class PostRegisterEndpoint {
         );
       })
       .catch((error) => {
-        return Promise.reject(new NetworkError(`Experienced generic network error during creating resource.`, error));
+        throw new NetworkError(`Experienced generic network error during creating resource.`, error);
       })
       .then(async (response: Response) => {
         if (response.ok && response.status === 201) {
           if (response.headers.has('Location')) {
             const location = response.headers.get('Location') as string;
             const rawUuid = location.split('/').at(-1) as string;
-            return Promise.resolve(validateUuidFromString(rawUuid));
+            return validateUuidFromString(rawUuid);
           }
         }
         const contentType = response.headers.get('Content-Type');
         if (contentType === null) {
-          return Promise.reject(new ParseError('Response does not contain content type header.'));
+          throw new ParseError('Response does not contain content type header.');
         }
         if (!contentType.includes('application/problem+json')) {
-          return Promise.reject(
-            new ParseError("Unable to parse response as content type is not 'application/problem+json'."),
-          );
+          throw new ParseError("Unable to parse response as content type is not 'application/problem+json'.");
         }
         const data = await response.json();
-        return Promise.reject(this.fetchHelper.createResponseErrorFromBadResponse(response, data));
+        throw this.fetchHelper.createResponseErrorFromBadResponse(response, data);
       })
       .catch((error) => {
         this.logger.error(error.message, error);
-        return Promise.reject(error);
+        throw error;
       });
   }
 }

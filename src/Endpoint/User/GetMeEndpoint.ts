@@ -27,41 +27,34 @@ class GetMeEndpoint {
     this.logger.debug(`Executing HTTP GET request against url ${url} .`);
     return fetch(url, this.fetchHelper.getDefaultGetOptions())
       .catch((networkError) => {
-        return Promise.reject(
-          new NetworkError(`Experienced generic network error during fetching resource.`, networkError),
-        );
+        throw new NetworkError(`Experienced generic network error during fetching resource.`, networkError);
       })
       .then(async (response: Response) => {
         const contentType = response.headers.get('Content-Type');
         if (contentType === null) {
-          return Promise.reject(new ParseError('Response does not contain content type header.'));
+          throw new ParseError('Response does not contain content type header.');
         }
         if (!(contentType.includes('application/json') || contentType.includes('application/problem+json'))) {
-          return Promise.reject(
-            new ParseError(
-              "Unable to parse response as content type is neither 'application/json' nor 'application/problem+json'.",
-            ),
+          throw new ParseError(
+            "Unable to parse response as content type is neither 'application/json' nor 'application/problem+json'.",
           );
         }
         const data = await response.json();
         if (!response.ok) {
-          return Promise.reject(this.fetchHelper.createResponseErrorFromBadResponse(response, data));
+          throw this.fetchHelper.createResponseErrorFromBadResponse(response, data);
         }
         return data;
       })
       .then<Node>((jsonResponse) => {
         const element = this.elementParser.rawElementToNodeOrRelation(jsonResponse);
-        // if (!(element instanceof Node)) {
-        //   return Promise.reject(new LogicError('Expected node response from GET /me, got relation.'));
-        // }
         if (element.type !== 'User') {
-          return Promise.reject(new LogicError("Expected node to be of type 'User'."));
+          throw new LogicError("Expected node to be of type 'User'.");
         }
         return element;
       })
       .catch((error) => {
         this.logger.error(error.message, error);
-        return Promise.reject(error);
+        throw error;
       });
   }
 }
