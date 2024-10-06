@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Print warning if trailing slashes in API host configuration are found, and automatically removes them, closes #92.
 ### Fixed
 - Fixed deprecated ts-jest configuration under globals keyword, "Define `ts-jest` config under `globals` is deprecated.".
+- Removed trailing `v` from version number, fixes #88.
 
 ## 0.0.62 - 2024-10-01
 
