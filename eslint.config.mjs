@@ -27,6 +27,7 @@ export default [
   },
   pluginPromise.configs['flat/recommended'],
   compat.configs["flat/recommended"],
+  ...flatCompat.plugins('require-extensions'),
   ...flatCompat.extends(
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -68,7 +69,6 @@ export default [
         },
       },
     },
-
     rules: {
       ...js.configs.recommended.rules,
       "no-unused-vars": "off",
@@ -139,5 +139,12 @@ export default [
       "promise/valid-params": "warn",
       "promise/no-multiple-resolved": "error"
     },
-  }
+  },
+  {
+    files: ["src/**/*.ts"],
+    rules: {
+      "require-extensions/require-extensions": 'error',
+      "require-extensions/require-index": 'error'
+    }
+  },
 ];
